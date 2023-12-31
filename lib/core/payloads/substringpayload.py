@@ -17,3 +17,9 @@ def sub_string_sql_inj(column=random.choice(column for column in common_column()
  """
         retval = payload
         return retval
+
+rows = sub_string_sql_inj().split("\n") 
+sorted_rows = sorted(rows) 
+sorted_payload = "\n".join(sorted_rows)
+for _sorted in sorted_payload.split("\n"):
+    pass

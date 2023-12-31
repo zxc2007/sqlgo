@@ -7,7 +7,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store_true", help="Enable verbose mode")
         self.add_argument("--url","-u",help="Give the program url of the target",required=True)
-        self.add_argument("--port","-p",help="Specify the port for the injection",required=False)
+        self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
         self.add_argument("--table","-T",help="Specify the database possible table",required=False)
@@ -24,6 +24,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--dump-user",help="Dump the users",required=False,action="store_true")
         self.add_argument("--dump-password",help="Dump the passwords",required=False,action="store_true")
         self.add_argument("--time-out",help="Set timeout amount",type=int,required=False)
+        self.add_argument("--attack",help="Specify the attack type",default="normal",type=str,required=False)
 
 
 
@@ -61,6 +62,7 @@ def extract():
     dump_user = args.dump_user
     dump_password = args.dump_password
     time_out = args.time_out
+    attack = args.attack
     return (
         output,
         verbose,
@@ -81,7 +83,8 @@ def extract():
         dump_column,
         dump_user,
         dump_password,
-        time_out
+        time_out,
+        attack
     )
 
 result = extract()
@@ -105,6 +108,7 @@ dump_column = result[16]
 dump_user = result[17]
 dump_password = result[18]
 time_out = result[19]
+attack = result[20]
 
 
 

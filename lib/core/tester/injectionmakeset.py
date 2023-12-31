@@ -3,11 +3,14 @@ import sys
 sys.path.append(os.getcwd())
 from lib.core.request.POSt.post import SubData
 from lib.core.payloads.makesetsqlpayload import _sorted as make_set_payload
+from lib.core.parser.cmdline import url as _url
+from lib.core.parser.cmdline import port as _port
+from lib.core.parser.cmdline import attack
 
 
 
 class Tester_make_set_sql:
-    def __init__(self, url, data, port) -> None:
+    def __init__(self,data, url= _url,  port=_port) -> None:
         self.url = url
         self.data = data if data is not None else make_set_payload
         self.port = port
@@ -18,4 +21,8 @@ class Tester_make_set_sql:
 
 # test = Tester(url="http://testfire.net/login.jsp",port=80,data=None)
 # test.test()
-    
+
+def run_attack_make_set():
+    if attack == "make_set":
+        test = Tester_make_set_sql(data=None)
+        test.test()

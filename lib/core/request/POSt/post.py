@@ -14,27 +14,21 @@ class SubData:
         self.port = port
         
     def submit_data(self,url, data):
-        # Parse the URL to extract host and path information
         host, path = self.parse_url(url)
 
         # Construct the POST request headers and body
         headers = f"POST {path} HTTP/1.1\r\nHost: {host}\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: {len(data)}\r\n\r\n"
         request = headers + data
 
-        # Create a TCP socket
         s = socket_init()
 
-        # Connect to the server
         s.connect((host, self.port if self.port is not None else 80))
 
-        # Send the request
         s.sendall(request.encode())
 
-        # Receive and print the response
         response = s.recv(4096)
-        logger.info(response.decode())
+        # logger.info(response.decode())
 
-        # Close the connection
         s.close()
 
     def parse_url(self,url):
@@ -47,11 +41,4 @@ class SubData:
     
 
 
-# Define the URL and data to be submitted
-# url = "http://testfire.net/login.jsp"
-# data = "ke"
 
-# sub = SubData(url,data)
-# sub.submit_data(url,data)
-
-# Submit the data
