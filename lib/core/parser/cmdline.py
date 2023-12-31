@@ -1,5 +1,6 @@
 import argparse
 
+
 class Cmdline(argparse.ArgumentParser):
     def __init__(self):
         super().__init__(description="sqlgo")
