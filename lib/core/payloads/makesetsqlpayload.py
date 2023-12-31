@@ -8,3 +8,10 @@ AND MAKE_SET(YOLO<ascii(substring(concat(login,password),POS,1))
     return payload
 
 
+rows = make_set_sql_payload().split("\n") 
+sorted_rows = sorted(rows) 
+sorted_payload = "\n".join(sorted_rows)
+for _sorted in sorted_payload.split("\n"):
+    pass
+
+
