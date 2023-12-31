@@ -7,6 +7,7 @@ sys.path.append(os.getcwd())
 
 from lib.core.request.inits.TCP._init import socket_init
 from lib.logger.log import logger
+from lib.core.Exceptions.exceptions import SQLgoWrongUrlException
 
 class SubData:
     def __init__(self,host,port) -> None:
@@ -30,14 +31,19 @@ class SubData:
         # logger.info(response.decode())
 
         s.close()
+        return response.decode()
 
     def parse_url(self,url):
         # Extract the host and path from the URL
         # Example: http://example.com/path -> ("example.com", "/path")
-        url_parts = url.split("/", 3)
-        host = url_parts[2]
-        path = "/" + url_parts[3] if len(url_parts) > 3 else "/"
-        return host, path
+        try:
+            url_parts = url.split("/", 3)
+            host = url_parts[2]
+            path = "/" + url_parts[3] if len(url_parts) > 3 else "/"
+            return host, path
+        
+        except IndexError:
+            raise SQLgoWrongUrlException
     
 
 
