@@ -4,8 +4,11 @@ import sys
 sys.path.append(os.getcwd())
 import random
 from lib.core.common.column.commoncolumn import common_column
+_column = common_column()
+for column in _column:
+      pass
 
-def sub_string_sql_inj(column=random.choice(column for column in common_column())):
+def sub_string_sql_inj(column=random.choice(column)):
         payload = f"""
 ?{column}=1 and substring(version(),1,1)=5
 ?{column}=1 and right(left(version(),1),1)=5
