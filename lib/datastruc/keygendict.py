@@ -24,6 +24,8 @@ class Keygendict(dict):
     *get capacity of the dict
     >>> keygen.dict_capacity_calculation()
     NOTE: read the methods docstring to see the order of returns
+    >>> keygen.is_double()
+    *return the duplicated keys
 
 
     """
