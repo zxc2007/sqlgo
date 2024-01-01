@@ -26,6 +26,7 @@ class Keygendict(dict):
     NOTE: read the methods docstring to see the order of returns
     >>> keygen.is_double()
     *return the duplicated keys
+    
 
 
     """
