@@ -11,6 +11,22 @@ from lib.core.Exceptions.exceptions import SQLgoKeyGenDictKeyException
 from lib.core._Warnings.warnings_ import KeyKeptTooLongWarning
 
 class Keygendict(dict):
+    """
+    *Usage:
+    setting some key and values
+    >>> keygen = Keygendict()
+    >>> keygen.add_cap('key1','value1')
+    >>> keygen.add_cap('key2','value2')
+    *Getting data
+    >>> keygen.get_all_data()
+    {'key1': 'value1', 'key2': 'value2'}
+    NOTE: it is not recommended to remove the key and values by hand, instead the dict will remove the None key and values auto,however we have __delitem__ method but it might not work most of time
+    *get capacity of the dict
+    >>> keygen.dict_capacity_calculation()
+    NOTE: read the methods docstring to see the order of returns
+
+
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.caps = {}
@@ -18,6 +34,8 @@ class Keygendict(dict):
         self._valuesum = None
         self._capacity = None
         self._start = time.monotonic()
+        self.duplicate_keys = set()
+        self.seen = set(key for key,_ in self.caps.items())
 
     def _rm_None(self):
         keys_to_remove = []
@@ -51,12 +69,14 @@ class Keygendict(dict):
     def __delitem__(self,key) -> None:
         if key in self.caps:
             del self.caps[key]
+            self.dict_capacity_calculation()  
         else:
             raise SQLgoKeyGenDictKeyException
         
     def __getitem__(self,key):
-        if key in self.items:
-            return self.caps[key]
+        value = self.caps.get(key)
+        if value is not None:
+            return value
         else:
             raise SQLgoKeyGenDictKeyException
     
@@ -86,6 +106,21 @@ class Keygendict(dict):
         else:
             if self._calculate_time_of_key_value() > 100:
                 warnings.warn("You have kept the key too long in the Keygen dict, it is not recommended",category=KeyKeptTooLongWarning)
+    
+    def _identify_duplicated(self):
+        for key in self.caps:
+            if key in self.seen:
+                self.duplicate_keys.add(key)
+                return self.duplicate_keys
+            else:
+                self.seen.add(key)
+                return self.seen
+    
+    def is_double(self):
+        return self._identify_duplicated()
+            
+    def get_all_data(self):
+        return self.caps
 
             
     
@@ -97,7 +132,11 @@ class Keygendict(dict):
 diction = Keygendict()
 
 
-diction.add_cap("A",None)
-diction.add_cap("B",45)
+diction.add_cap("A",2)
+diction.add_cap("R","Hello")
+diction.add_cap("B",1)
+diction.add_cap("C",None)
 
-print(diction._calculate_time_of_key_value())
+
+
+print(diction.dict_capacity_calculation())
