@@ -1,5 +1,7 @@
 import os
 import sys
+import time
+
 
 sys.path.append(os.getcwd())
 
@@ -13,6 +15,7 @@ class Keygendict(dict):
         self._keysum = None
         self._valuesum = None
         self._capacity = None
+        self._start = time.monotonic()
 
     def _rm_None(self):
         keys_to_remove = []
@@ -55,7 +58,7 @@ class Keygendict(dict):
         else:
             raise SQLgoKeyGenDictKeyException
     
-    def _dict_capacity_calculation(self):
+    def dict_capacity_calculation(self):
         """
         NOTE:capacity,keysum,valuesum
         """
@@ -68,6 +71,13 @@ class Keygendict(dict):
                 self._valuesum)
         return _retval
     
+    def _calculate_time_of_key_value(self):
+        if self._start is not None:
+            duration = time.monotonic() - self._start
+            return duration
+        else:
+            return -1
+
             
     
 
@@ -81,4 +91,4 @@ diction = Keygendict()
 diction.add_cap("A",None)
 diction.add_cap("B",45)
 
-print(diction._dict_capacity_calculation())
+print(diction._calculate_time_of_key_value())
