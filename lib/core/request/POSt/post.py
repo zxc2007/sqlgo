@@ -1,21 +1,23 @@
 import socket
 import os
 import sys
-import re
 
 sys.path.append(os.getcwd())
 
 from lib.core.request.inits.TCP._init import socket_init
 from lib.logger.log import logger
 from lib.core.Exceptions.exceptions import SQLgoWrongUrlException
+from lib.core.parser.cmdline import url as _url
+from lib.core.parser.cmdline import port as _port
 
 class SubData:
-    def __init__(self,host,port) -> None:
+    def __init__(self, host=_url, port=_port) -> None:
         self.host = host
         self.port = port
-        
-    def submit_data(self,url, data):
-        host, path = self.parse_url(url)
+        self.response = None  # Initialize response attribute
+
+    def submit_data(self, data="X"):
+        host, path = self.parse_url(self.host)
 
         # Construct the POST request headers and body
         headers = f"POST {path} HTTP/1.1\r\nHost: {host}\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: {len(data)}\r\n\r\n"
@@ -27,13 +29,20 @@ class SubData:
 
         s.sendall(request.encode())
 
-        response = s.recv(4096)
-        # logger.info(response.decode())
+        response = b""
+        while True:
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            response += chunk
 
         s.close()
-        return response.decode()
+        
+        self.response = response.decode()  # Store the response as an attribute
+        return self.response
 
-    def parse_url(self,url):
+    def parse_url(self, url):
+        url = self.host
         # Extract the host and path from the URL
         # Example: http://example.com/path -> ("example.com", "/path")
         try:
@@ -41,10 +50,8 @@ class SubData:
             host = url_parts[2]
             path = "/" + url_parts[3] if len(url_parts) > 3 else "/"
             return host, path
-        
+
         except IndexError:
             raise SQLgoWrongUrlException
-    
 
-
-
+subber = SubData()
