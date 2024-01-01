@@ -6,3 +6,9 @@ class SQLgoNoParameterFoundException(SQlgoBasicException):
 
 class SQLgoWrongUrlException(SQlgoBasicException):
     pass
+
+class SQLgoNoneKeyException(SQlgoBasicException):
+    pass
+
+class SQLgoKeyGenDictKeyException(SQlgoBasicException):
+    pass
