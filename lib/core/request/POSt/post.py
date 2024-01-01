@@ -1,6 +1,7 @@
 import socket
 import os
 import sys
+import time
 
 sys.path.append(os.getcwd())
 
@@ -9,12 +10,15 @@ from lib.logger.log import logger
 from lib.core.Exceptions.exceptions import SQLgoWrongUrlException
 from lib.core.parser.cmdline import url as _url
 from lib.core.parser.cmdline import port as _port
+from lib.core.parser.cmdline import time_out
 
 class SubData:
-    def __init__(self, host=_url, port=_port) -> None:
+    def __init__(self, host=_url, port=_port,timeout=time_out) -> None:
         self.host = host
         self.port = port
-        self.response = None  # Initialize response attribute
+        self.response = None  
+        self._timeout = timeout
+        socket.setdefaulttimeout(self._timeout if isinstance(self._timeout,int) else 10)
 
     def submit_data(self, data="X"):
         host, path = self.parse_url(self.host)
