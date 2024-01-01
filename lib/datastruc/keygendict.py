@@ -129,14 +129,14 @@ class Keygendict(dict):
 
     
 
-diction = Keygendict()
+# diction = Keygendict()
 
 
-diction.add_cap("A",2)
-diction.add_cap("R","Hello")
-diction.add_cap("B",1)
-diction.add_cap("C",None)
+# diction.add_cap("A",2)
+# diction.add_cap("R","Hello")
+# diction.add_cap("B",1)
+# diction.add_cap("C",None)
 
 
 
-print(diction.dict_capacity_calculation())
+# print(diction.dict_capacity_calculation())
