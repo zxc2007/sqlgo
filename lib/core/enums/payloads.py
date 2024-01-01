@@ -6,4 +6,6 @@ from utilis.colorago.colorago import Fore
 
 class Payload(Enum):
     UNION_ALL_SELECT = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}UNION all select query{"\033[0m"}{Fore.RESET}'"
+    MAKE_SET = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}MAKE SET query{"\033[0m"}{Fore.RESET}'"
+    SUBSTRING = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}SUBSTRING query{"\033[0m"}{Fore.RESET}'"
 

@@ -19,7 +19,10 @@ def sub_string_sql_inj(column=random.choice(common_columns_list)):
 ?{column}=1 AND SELECT SUBSTR(table_name,1,1) FROM information_schema.tables > 'A'
 ?{column}=1 AND SELECT SUBSTR(column_name,1,1) FROM information_schema.columns > 'A'
  """
-        retval = payload
+        rows = payload.split("\n") 
+        sorted_rows = sorted(rows) 
+        sorted_payload = "\n".join(sorted_rows)
+        retval = sorted_payload
         return retval
 
 rows = sub_string_sql_inj().split("\n") 

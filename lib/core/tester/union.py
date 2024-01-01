@@ -8,6 +8,7 @@ from lib.logger.log import logger
 from utilis._regex.extractparam import replace_url_parameter
 from lib.core.parser.cmdline import url
 from lib.core.enums.payloads import Payload
+from lib.datastruc.keygendict import Keygendict
 
 
 def union():
@@ -39,6 +40,9 @@ def union():
             index = _pattern.end()
             words_after = re.findall(r"\b\w+\b", subber.response[index:index+100])
             logger.info(words_after)
+    
+    else:
+        logger.info("Finished:%s fluently,moving to next one."%Payload.UNION_ALL_SELECT.value)
 def union_man():
     for payload in union_payload().split("\n"):
         rep = (replace_url_parameter(url=url,new_value=payload))
