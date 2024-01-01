@@ -1,0 +1,2 @@
+class KeyKeptTooLongWarning(UserWarning):
+    pass

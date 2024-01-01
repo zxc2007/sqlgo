@@ -1,12 +1,14 @@
 import os
 import sys
 import time
+import warnings
 
 
 sys.path.append(os.getcwd())
 
 from lib.core.Exceptions.exceptions import SQLgoNoneKeyException
 from lib.core.Exceptions.exceptions import SQLgoKeyGenDictKeyException
+from lib.core._Warnings.warnings_ import KeyKeptTooLongWarning
 
 class Keygendict(dict):
     def __init__(self, *args, **kwargs):
@@ -77,6 +79,13 @@ class Keygendict(dict):
             return duration
         else:
             return -1
+    
+    def _trigger_warning_for_key(self):
+        if self._calculate_time_of_key_value() == -1:
+            pass
+        else:
+            if self._calculate_time_of_key_value() > 100:
+                warnings.warn("You have kept the key too long in the Keygen dict, it is not recommended",category=KeyKeptTooLongWarning)
 
             
     
