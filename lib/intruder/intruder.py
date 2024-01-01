@@ -10,8 +10,9 @@ from lib.core.request.POSt.post import SubData
 from lib.core.request.GET.get import Get
 from lib.logger.log import logger
 from  lib.core.parser.cmdline import time_out
+from lib.core.payloads.substringpayload import _sorted
 
-class Intruder(
+class Intruder_substring(
     threading.Thread
 ):
 
@@ -31,30 +32,15 @@ class Intruder(
             sorted_rows = sorted(rows) 
             sorted_payload = "\n".join(sorted_rows)
             self.payload = sorted_payload
+            # print(self.payload)
         
-        for _ in self.payload:
+        for payload in self.payload.split("\n"):
             req = self.datasub.submit_data(self.host,self.payload)
             self.result.append(self.datasub)
-            # logger.info(self.result)
+            logger.info("testing:%s"%payload)
     
     def _send_substring_payload_requests_lib(self):
-        try:
-            import requests
-            if self.payload is None:
-                rows = sub_string_sql_inj().split("\n") 
-                sorted_rows = sorted(rows) 
-                sorted_payload = "\n".join(sorted_rows)
-                self.payload = sorted_payload
-            
-            for _ in self.payload:
-                if self.payload_url is None:
-                    self.payload_url,_ = replace_url_parameter(url=self.host,new_value=self.payload)
-                req = requests.get(self.payload_url)
-                msg = "Testing:%s"%self.payload_url
-                logger.info(msg)
-        
-        except Exception as e:
-            logger.error(str(e))
+        pass
     
     def run_substring(self):
         threads = [
@@ -65,12 +51,37 @@ class Intruder(
             _thread = threading.Thread(target=_)
             _thread.start()
             _thread.join()
+    
                 
 
 
-obj = Intruder("http://testfire.net/index.jsp?content=business_deposit.htm",8080)
-obj.run_substring()
+# obj = Intruder("http://testfire.net/index.jsp?content=business_deposit.htm",8080)
+# obj.run_substring()
         
+class MakeSet:
+
+    def __init__(self,host,port):
+        self.host = host
+        self.port = port
+        self.payload = None
+        self.result = []
+        self.datasub = SubData(self.host,self.port)
+        self.payload_url = None
+        self.timeout = socket.setdefaulttimeout(time_out if time_out is not None else 10)
+
+
+    def _send_payload_make_set(self):
+        if self.payload is None:
+            rows = make_set_sql_payload().split("\n") 
+            sorted_rows = sorted(rows) 
+            sorted_payload = "\n".join(sorted_rows)
+            self.payload = sorted_payload
+            # print(self.payload)
+        
+        for payload in self.payload.split("\n"):
+            req = self.datasub.submit_data(self.host,self.payload)
+            self.result.append(self.datasub)
+            logger.info(f"testing {payload} ")
         
 
 

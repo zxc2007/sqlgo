@@ -1,12 +1,13 @@
 import socket
 import sys
-
+import time
 
 class Get:
     def __init__(self, host, port):
         self.host = host
         self.port = port
         self._socket = None
+        self.start = time.time()
 
     def _header_prep(self):
         header = f"GET / HTTP/1.1\r\nHost: {self.host}\r\n\r\n"
@@ -26,11 +27,10 @@ class Get:
     def _response(self):
         _response = b""
         s = self._connect()
-        while True:
-            chunk = s.recv(4096)
-            if not chunk:
-                break
-            _response += chunk
+        chunk = s.recv(4096)
+        if not chunk:
+            pass
+        _response += chunk
         s.close()
         return _response
 

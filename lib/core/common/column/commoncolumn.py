@@ -17,4 +17,12 @@ def common_column():
                 continue
 
             yield column
+        
+
+ls = []
+COMMON_COLUMNS = common_column()
+for column in COMMON_COLUMNS:
+    ls.append(column)
+    common_columns_list = ls
+    
 
