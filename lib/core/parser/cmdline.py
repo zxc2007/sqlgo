@@ -12,7 +12,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
         self.add_argument("--table","-T",help="Specify the database possible table",required=False)
-        self.add_argument("--dbms",help="Specify the DBMS of the server",required=False)
+        self.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str)
         self.add_argument("--db","-d",help="Specify the database name",required=False,action="store_true")
         self.add_argument("-dbs",help="Enumerate the DBMS databases",required=False,action="store_true")
         self.add_argument("-tables",help="Enumerate the DBMS tables",required=False,action="store_true")
