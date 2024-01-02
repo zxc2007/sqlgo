@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.getcwd())
 from lib.core.Exceptions.exceptions import SQLgoNoParameterFoundException
 from lib.core.payloads.makesetsqlpayload import classify,_sorted
+from utilis.colorago.colorago import Fore
 
 def replace_url_parameter(url, new_value):
     """
@@ -16,10 +17,10 @@ def replace_url_parameter(url, new_value):
     """
     pattern = r"(\?|\&)([^=]+)=[^&]*"
     replaced_url = re.sub(pattern, rf"\1\2={new_value}", url)
-    extracted_value = re.search(pattern, url)
+    extracted_value = re.search(pattern, url).group()
     if not replace_url_parameter:
         raise SQLgoNoParameterFoundException
-    return replaced_url,extracted_value
+    return replaced_url,Fore.BRIGHT_CYAN+str(extracted_value)+Fore.RESET
 
 #http://testfire.net/index.jsp?content=business_deposit.htm
 

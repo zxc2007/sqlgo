@@ -9,6 +9,7 @@ from lib.logger.log import logger
 from lib.core.tester.timebased import time_based
 from lib.core.request.connection import test_connection
 from lib.core.request.cookies.cookies import extract_cookies
+from lib.core.tester.prompts import prompt_parameter
 
 
 
@@ -16,6 +17,7 @@ def main():
     try:
         test_connection()
         extract_cookies()
+        prompt_parameter()
         threads = [
             union(),
             substring(),
