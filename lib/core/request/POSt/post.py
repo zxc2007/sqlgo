@@ -18,7 +18,7 @@ class SubData:
         self.port = port
         self.response = None  
         self._timeout = timeout
-        socket.setdefaulttimeout(self._timeout if isinstance(self._timeout,int) else 10)
+        socket.setdefaulttimeout(self._timeout if isinstance(self._timeout,int) else 5)
 
     def submit_data(self, data="X"):
         host, path = self.parse_url(self.host)
