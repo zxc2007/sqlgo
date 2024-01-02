@@ -11,7 +11,13 @@ from lib.core.request.connection import test_connection
 from lib.core.request.cookies.cookies import extract_cookies
 from lib.core.tester.prompts import prompt_parameter
 from lib.core.tester.errorb import error_based
+from lib.core.XSS.xss import XSS
+from lib.core.parser.cmdline import install_dep
+from extra.installdep import install_dependent
 def gather_exploit():
+    if install_dep:
+        install_dependent()
+        raise SystemExit
     try:
         test_connection()
         extract_cookies()
@@ -20,7 +26,8 @@ def gather_exploit():
             union(),
             substring(),
             time_based(),
-            error_based()
+            error_based(),
+            XSS()
         ]
 
         thread_objects = []

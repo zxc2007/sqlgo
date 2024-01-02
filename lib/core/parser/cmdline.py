@@ -26,19 +26,13 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--dump-password",help="Dump the passwords",required=False,action="store_true")
         self.add_argument("--time-out",help="Set timeout amount",type=int,required=False)
         self.add_argument("--attack",help="Specify the attack type",default="normal",type=str,required=False)
+        self.add_argument("--install-dependent",help="install the required modules for sqlgo to be executed",action="store_true",required=False)
 
 
 
     
 
-# if __name__ == "__main__":
-#     parser = Cmdline()
-#     args = parser.parse_args()
-    
-#     # Use the parsed arguments as needed
-#     print(args.file)
-#     print(args.output)
-#     print(args.verbose)
+
 
 def extract():
     obj = Cmdline()
@@ -64,6 +58,7 @@ def extract():
     dump_password = args.dump_password
     time_out = args.time_out
     attack = args.attack
+    install = args.install_dependent
     return (
         output,
         verbose,
@@ -85,7 +80,8 @@ def extract():
         dump_user,
         dump_password,
         time_out,
-        attack
+        attack,
+        install
     )
 
 result = extract()
@@ -110,6 +106,7 @@ dump_user = result[17]
 dump_password = result[18]
 time_out = result[19]
 attack = result[20]
+install_dep = result[21]
 
 
 
