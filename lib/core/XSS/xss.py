@@ -3,7 +3,9 @@ import sys
 from pprint import pprint
 from urllib.parse import urljoin
 sys.path.append(os.getcwd())
-from thirdparty.bs4 import BeautifulSoup as bs
+import thirdparty.lxml
+import thirdparty.html5lib
+from bs4 import BeautifulSoup as bs
 from lib.logger.log import logger
 from utilis._regex.isphp import isphp
 import thirdparty.requests as requests
@@ -11,7 +13,8 @@ from lib.core.parser.cmdline import url as _url
 
 def get_all_forms(url):
     """Given a `url`, it returns all forms from the HTML content"""
-    soup = bs(requests.get(url).content, "html.parser")
+    soup = bs(requests.get(url).content,"html.parser")
+    #NOTE : wemight need to use "html.parser"
     return soup.find_all("form")
 
 def get_form_details(form):
