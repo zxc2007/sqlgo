@@ -28,7 +28,7 @@ def union():
             _infomsg = "Some ORDER BY statement weaknesses leaked in the response"
             logger.info(_infomsg)
         
-        elif re.search("SELECT * [^ ]+\Z",subber.response):
+        elif re.search(r"SELECT * [^ ]+\Z",subber.response):
             msg = "SELECT *"
             msg += "founded in the response"
             logger.debug(msg)
@@ -41,8 +41,7 @@ def union():
             words_after = re.findall(r"\b\w+\b", subber.response[index:index+100])
             logger.info(words_after)
     
-    else:
-        logger.info("Finished:%s fluently,moving to next one."%Payload.UNION_ALL_SELECT.value)
+
 def union_man():
     for payload in union_payload().split("\n"):
         rep = (replace_url_parameter(url=url,new_value=payload))
