@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: html-parser
+Version: 0.2
+Author: Maciej Walerczuk
+Requires-Dist: ply
+

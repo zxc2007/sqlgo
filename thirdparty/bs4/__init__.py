@@ -34,12 +34,16 @@ import warnings
 if sys.version_info.major < 3:
     raise ImportError('You are trying to use a Python 3-specific version of Beautiful Soup under Python 2. This will not work. The final version of Beautiful Soup to support Python 2 was 4.9.3.')
 
-from .builder import (
-    builder_registry,
-    ParserRejectedMarkup,
-    XMLParsedAsHTMLWarning,
-    HTMLTreeBuilder
-)
+try:
+    from .builder import (
+        builder_registry,
+        ParserRejectedMarkup,
+        XMLParsedAsHTMLWarning,
+        HTMLParserTreeBuilder
+    )
+
+except:
+    pass
 from .dammit import UnicodeDammit
 from .element import (
     CData,
@@ -387,7 +391,7 @@ class BeautifulSoup(Tag):
         elif not self.builder:
             # We don't know which builder was used to build this
             # parse tree, so use a default we know is always available.
-            self.builder = HTMLTreeBuilder()
+            self.builder = HTMLParserTreeBuilder()
         self.builder.soup = self
         self.reset()
         self._feed()
