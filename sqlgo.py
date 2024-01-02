@@ -8,12 +8,14 @@ from lib.core.tester.substring import substring
 from lib.logger.log import logger
 from lib.core.tester.timebased import time_based
 from lib.core.request.connection import test_connection
+from lib.core.request.cookies.cookies import extract_cookies
 
 
 
 def main():
     try:
         test_connection()
+        extract_cookies()
         threads = [
             union(),
             substring(),
