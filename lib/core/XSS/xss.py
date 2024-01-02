@@ -1,12 +1,13 @@
-import requests
 import os
 import sys
 from pprint import pprint
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
 sys.path.append(os.getcwd())
+from thirdparty.bs4 import *
 from lib.logger.log import logger
 from utilis._regex.isphp import isphp
+import thirdparty.requests as requests
 from lib.core.parser.cmdline import url as _url
 
 def get_all_forms(url):
