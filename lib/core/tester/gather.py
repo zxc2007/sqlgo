@@ -14,10 +14,14 @@ from lib.core.tester.errorb import error_based
 from lib.core.XSS.xss import XSS
 from lib.core.parser.cmdline import install_dep
 from extra.installdep import install_dependent
+from lib.core.parser.cmdline import warning_disable
+import urllib3
 def gather_exploit():
     if install_dep:
         install_dependent()
         raise SystemExit
+    if warning_disable:
+        urllib3.disable_warnings()
     try:
         test_connection()
         extract_cookies()
