@@ -9,4 +9,5 @@ class Payload(Enum):
     MAKE_SET = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}MAKE SET MYSQL query{"\033[0m"}{Fore.RESET}'"
     SUBSTRING = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}SUBSTRING MYSQL query{"\033[0m"}{Fore.RESET}'"
     TIME_BASED = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}TIME BASED MYSQL query{"\033[0m"}{Fore.RESET}'"
+    ERROR_BASED = f"'{Fore.WHITE}{'\033[2m'}{'\033[1m'}ERROR BASED MYSQL query{"\033[0m"}{Fore.RESET}'"
 
