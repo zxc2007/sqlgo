@@ -7,11 +7,13 @@ from lib.core.tester.union import union
 from lib.core.tester.substring import substring
 from lib.logger.log import logger
 from lib.core.tester.timebased import time_based
+from lib.core.request.connection import test_connection
 
 
 
 def main():
     try:
+        test_connection()
         threads = [
             union(),
             substring(),
