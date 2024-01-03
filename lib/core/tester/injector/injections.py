@@ -13,6 +13,15 @@ def host_injection_func():
 def error_based_INJECTION():
     error_based_injection(url)
 
+def union_based_injection_function():
+    union_based_injection(url)
+
+def mysql_blind_based_function():
+    mysql_blind_based_injection(url=url)
+
+def postgre_sql_function():
+    postgre_sql_blind_injection(url=url)
+
 
 
 

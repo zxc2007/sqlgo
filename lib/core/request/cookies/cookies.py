@@ -17,9 +17,9 @@ def extract_cookies(url=_url):
 
         logger.info("cookies from %s"%url)
         for cookie in cookies.values():
-            logger.info(f"Name: {cookie.key}, Value: {cookie.value}")
+            logger.info(f"Cookie name: {cookie.key}, cookie value by the server: {cookie.value}")
 
-        user_input = input(f"{Fore.BRIGHT_GREEN}Do you want to continue(your cookies has not been set or accepted by the server)? (y/n): {Fore.RESET}").lower()
+        user_input = input(f"{Fore.BRIGHT_GREEN}you have not declared any cookies while the server want to use the above cookies.do you want to continue(y,n)? (y/n): {Fore.RESET}").lower()
         if user_input != 'y':
             logger.error("Canceled by the user.")
             raise SystemExit

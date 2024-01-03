@@ -1076,4 +1076,24 @@ ALERT = False
 USE_PCRE_E_MODIFIER = None
 PCRE_MODIFIER = "/e"
 
+INJECTABLE_ARES_ON_THE_FORM = [
+  "username",
+  "password",
+  "name",
+  "input",
+  "id",
+  "host",
+  "user",
+  "key",
+  "value",
+  "email",
+  "username",
+  "user_name",
+  "login",
+  "passwd",
+  "pwd",
+  "text",
+  "pass",
+]
+
 # eof

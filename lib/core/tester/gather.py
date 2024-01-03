@@ -17,7 +17,14 @@ from extra.installdep import install_dependent
 from lib.core.parser.cmdline import warning_disable
 from lib.core.tester.injector._requests import error_based_injection
 from lib.core.tester.injector._requests import make_set_sql_injection
-from lib.core.tester.injector.injections import make_set_injection_func,time_based_injection_func,host_injection,error_based_INJECTION
+from lib.core.tester.injector.injections import make_set_injection_func
+from lib.core.tester.injector.injections import time_based_inejction
+from lib.core.tester.injector.injections import host_injection
+from lib.core.tester.injector.injections import error_based_INJECTION
+from lib.core.tester.injector.injections import time_based_injection_func
+from lib.core.tester.injector.injections import postgre_sql_function
+from lib.core.tester.injector.injections import mysql_blind_based_function
+from lib.core.tester.injector.injections import union_based_injection_function
 
 import urllib3
 def gather_exploit():
@@ -39,6 +46,10 @@ def gather_exploit():
             make_set_injection_func(),
             time_based_injection_func(),
             error_based_INJECTION(),
+            union_based_injection_function(),
+            postgre_sql_function(),
+            mysql_blind_based_function(),
+            
         ]
 
         thread_objects = []
