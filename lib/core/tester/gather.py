@@ -1,5 +1,4 @@
 import threading
-from lib.core.parser.cmdline import attack
 from lib.core.tester.maintestcheck import main_exploit
 from lib.intruder.intruder import Intruder_substring,MakeSet
 from lib.core.request.POSt.post import subber
@@ -12,6 +11,7 @@ from lib.core.request.cookies.cookies import extract_cookies
 from lib.core.tester.prompts import prompt_parameter
 from lib.core.tester.errorb import error_based
 from lib.core.XSS.xss import XSS
+from lib.core.parser.cmdline import url
 from lib.core.parser.cmdline import install_dep
 from extra.installdep import install_dependent
 from lib.core.parser.cmdline import warning_disable
@@ -35,10 +35,10 @@ def gather_exploit():
             substring(),
             time_based(),
             error_based(),
-            XSS(),make_set_injection_func(),
-            host_injection(),
+            XSS(),
+            make_set_injection_func(),
             time_based_injection_func(),
-            error_based_INJECTION()
+            error_based_INJECTION(),
         ]
 
         thread_objects = []

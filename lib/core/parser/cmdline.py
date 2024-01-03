@@ -29,7 +29,9 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--install-dependent",help="install the required modules for sqlgo to be executed",action="store_true",required=False)
         self.add_argument("--disable-warning",help="disable the ssl warning",action="store_true",required=False)
         self.add_argument("--payload",help="send you own payload",required=False,action="store_true")
-
+        self.add_argument("--proxy-server",help="specify the proxyserver",type=str,required=False)
+        self.add_argument("--proxy-port",help="specify proxy port ",action="store",type=int,required=False)
+        self.add_argument("--proxy",help="use proxy servers",required=False,action="store_true")
 
 
     
@@ -63,6 +65,9 @@ def extract():
     install = args.install_dependent
     warning_dis = args.disable_warning
     payload = args.payload
+    Proxy_server = args.proxy_server
+    Proxy_port = args.proxy_port
+    user_proxy = args.proxy
     return (
         output,
         verbose,
@@ -87,7 +92,10 @@ def extract():
         attack,
         install,
         warning_dis,
-        payload
+        payload,
+        Proxy_server,
+        Proxy_port,
+        user_proxy
     )
 
 result = extract()
@@ -115,6 +123,10 @@ attack = result[20]
 install_dep = result[21]
 warning_disable = result[22]
 payload = result[23]
+proxy_server = result[24]
+proxy_port = result[25]
+user_proxy = result[26]
+
 
 
 

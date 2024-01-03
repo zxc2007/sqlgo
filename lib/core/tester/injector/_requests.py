@@ -22,8 +22,12 @@ from lib.core.tester.XSSfuns import get_form_details,submit_form
 from extra.bs4funs import get_form_from_response
 from lib.core.request.parameters import get_url_part
 from lib.core.request.agent import header
+from lib.core.request.proxy.proxy import use_proxy,set_proxy
+from lib.core.parser.cmdline import proxy_port
+from lib.core.parser.cmdline import proxy_server
+from lib.core.parser.cmdline import user_proxy
 
-def host_injection(vuln_parameter, payload, url):
+def host_injection(url,vuln_parameter="", payload="" ):
 
     payload = urlparse(url).netloc + payload
 
@@ -56,10 +60,21 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                     request = urllib.request.Request(url,data=_payload.encode(),method=REQUESTS.POST)
                     response = urllib.request.urlopen(request)
                     if addheader:
-                        request.add_header(settings.CUSTOM_HEADER_NAME, settings.CUSTOM_HEADER_VALUE.replace(settings.TESTABLE_VALUE + settings.INJECT_TAG, settings.INJECT_TAG).replace(settings.INJECT_TAG, payload))
-                        response = urllib.request.urlopen(request,timeout=settings.DEFAULT_TIME_OUT)
-                        _content = response.read()
+                        try:
+                            request.add_header(settings.CUSTOM_HEADER_NAME, settings.CUSTOM_HEADER_VALUE.replace(settings.TESTABLE_VALUE + settings.INJECT_TAG, settings.INJECT_TAG).replace(settings.INJECT_TAG, payload))
+                            response = urllib.request.urlopen(request,timeout=settings.DEFAULT_TIME_OUT)
+                            _content = response.read()
+                            return _content
+                        
+                        except:
+                            pass
+                    
+                    if user_proxy:
+                        url_proxy = set_proxy(proxy_server,proxy_port)
+                        result_use_general_proxy = use_proxy(request, proxy=url_proxy)
+                        _content = result_use_general_proxy.read()
                         return _content
+
 
                     
                     else:
@@ -71,6 +86,7 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
         traceback.print_exc()
 
 def time_based_inejction(url,payload=True,isauto=True):
+    _ = 0
     _retval = None
 
     try:
@@ -100,8 +116,11 @@ def time_based_inejction(url,payload=True,isauto=True):
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
                 else:
-                    logger.critical("No injectable areas found on the target")
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    if _ < 1:
+                        logger.critical("No injectable areas found on the target")
+                        sql_injection_basic_detection(form_in_response, form_details)
+                        _ += 1
+
 
 
                 return form_in_response
@@ -131,6 +150,7 @@ def is_sql_injection_vulnerable(response):
 
 def make_set_sql_injection(url,random_header=False):
     _retval = None
+    _ = 0
     try:
         url = get_url_part(url=url)
         forms = get_all_forms(url)
@@ -172,8 +192,10 @@ def make_set_sql_injection(url,random_header=False):
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
                 else:
-                    logger.critical("No SQL injection detected on the target")
-                    logger.debug("using payload:%s"%_payload)
+                    if _ < 1:
+                        logger.critical("No SQL injection detected on the target")
+                        logger.debug("using payload:%s"%_payload)
+                        _ += 1
                     
     
     except Exception as e:
