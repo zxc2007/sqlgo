@@ -26,6 +26,10 @@ from lib.core.tester.injector.injections import postgre_sql_function
 from lib.core.tester.injector.injections import mysql_blind_based_function
 from lib.core.tester.injector.injections import union_based_injection_function
 from lib.core.controler.controller import heuristic_injection_test_union_based
+from lib.core.controler.controller import error_based_heuristic_tests
+from lib.core.controler.controller import heuristic_time_based_tests
+from lib.core.controler.controller import heuristic_time_based_tests
+from lib.core.controler.controller import substring_heuristic_basic_injections
 from lib.core.parser.cmdline import level
 
 import urllib3
@@ -40,7 +44,11 @@ def gather_exploit():
         extract_cookies()
         prompt_parameter()
         basic_threads = [
-            heuristic_injection_test_union_based(url)
+            heuristic_injection_test_union_based(url),
+            heuristic_time_based_tests(url),
+            substring_heuristic_basic_injections(url),
+            error_based_heuristic_tests(url),
+            heuristic_time_based_tests(url)
         ]
         for _thread_ in basic_threads:
             _thread_ = threading.Thread(target=_thread_)
