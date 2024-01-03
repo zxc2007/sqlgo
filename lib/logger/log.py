@@ -3,7 +3,10 @@ import os
 import sys
 
 sys.path.append(os.getcwd())
-from utilis.colorago.colorago import Fore
+from thirdparty.colorama import Fore,init
+from lib.core.parser.cmdline import verbose
+
+init()
 
 class ColoredFormatter(logging.Formatter):
     COLORS = {
@@ -23,7 +26,21 @@ class ColoredFormatter(logging.Formatter):
         return colored_message
 
 logger = logging.getLogger('sqlgo_log')
-logger.setLevel(level=logging.INFO)
+
+if verbose == 1:
+    logger.setLevel(level=logging.INFO)
+
+elif verbose == 2:
+    logger.setLevel(level=logging.WARNING)
+
+elif verbose == 3:
+    logger.setLevel(level=logging.ERROR)
+
+elif verbose == 4:
+    logger.setLevel(level=logging.CRITICAL)
+
+elif verbose == 5:
+    logger.setLevel(level=logging.DEBUG)
 
 formatter = ColoredFormatter(
     "[%(asctime)s] [%(levelname)s] %(message)s",

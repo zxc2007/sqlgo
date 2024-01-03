@@ -6,7 +6,7 @@ class Cmdline(argparse.ArgumentParser):
         super().__init__(description="sqlgo")
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
-        self.add_argument("--verbose", action="store_true", help="Enable verbose mode")
+        self.add_argument("--verbose", action="store", help="Enable verbose mode adn set the range of(default is 1)",type=int,required=False,default=1)
         self.add_argument("--url","-u",help="Give the program url of the target",required=False)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)

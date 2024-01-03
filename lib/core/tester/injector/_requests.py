@@ -34,20 +34,22 @@ def host_injection(url,vuln_parameter="", payload="" ):
     payload = urlparse(url).netloc + payload
 
     def inject_host(url, vuln_parameter, payload):
-
-        http = urllib3.PoolManager()  # Use PoolManager to manage connections
+        http = urllib3.PoolManager()  
+        logger.debug(settings.SESSION_HANDLER_CREATED%url)
 
         url = url.partition('?')[0]
         headers = {'Host': payload}
 
         try:
             response = http.request('GET', url, headers=headers)
-            return response.data.decode('utf-8')  # Convert bytes to string
+            logger.debug(settings.RESPONSE_RECIEVED_FROM_HOST%url%response)
+            return response.data.decode('utf-8')  
         except Exception as err_msg:
             return str(err_msg)
 
     try:
         response = inject_host(url, vuln_parameter, payload)
+        logger.debug(settings.RESPONSE_SENT_TO_BE_INSPECTED_FOR_SQL_VULN%url)
     except Exception as err_msg:
         response = str(err_msg)
 
@@ -61,9 +63,11 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                 for _payload in error_based().split("\n"):
                     request = urllib.request.Request(url,data=_payload.encode(),method=REQUESTS.POST)
                     response = urllib.request.urlopen(request)
+                    logger.debug(settings.CONNECTION_ESTABLISHED_WITH_TARGET%url)
                     if addheader:
                         try:
                             request.add_header(settings.CUSTOM_HEADER_NAME, settings.CUSTOM_HEADER_VALUE.replace(settings.TESTABLE_VALUE + settings.INJECT_TAG, settings.INJECT_TAG).replace(settings.INJECT_TAG, payload))
+                            logger.debug(settings.HEADERS_ADDED_TO_THE_REQUEST)
                             response = urllib.request.urlopen(request,timeout=settings.DEFAULT_TIME_OUT)
                             _content = response.read()
                             return _content
@@ -75,6 +79,7 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                         url_proxy = set_proxy(proxy_server,proxy_port)
                         result_use_general_proxy = use_proxy(request, proxy=url_proxy)
                         _content = result_use_general_proxy.read()
+                        logger.debug(settings.USING_PRXOY%url_proxy)
                         return _content
 
 
@@ -98,26 +103,30 @@ def time_based_inejction(url,payload=True,isauto=True):
             form_data = {}
             for input_field in form.find_all('input'):
                 form_data[input_field.get('name')] = input_field.get('value', '')
+                logger.debug(settings.CTREATED_FROM_FOR_INJECTION%input_field)
 
             for _payload in time_based_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                    logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%line)
                     form_data_copy = form_data.copy()
-                    payload_field_name = line  # Replace with the actual name
+                    payload_field_name = line  
                     form_data_copy[payload_field_name] = _payload
 
                     # Make the POST request
                     request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                     response = urllib.request.urlopen(request)
+                    logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
 
                     response_content = response.read()
 
                     form_in_response = get_form_from_response(response_content)
                     form_details = get_form_details(form_in_response)
+                    logger.debug(settings.READING_FORM_OF_HTML)
 
                     if is_sql_injection_vulnerable(response_content):
                         logger.warning("Potential sql injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
                         sql_injection_basic_detection(form_in_response, form_details)
+                        logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION%url)
                     else:
                         if _ < 1:
                             logger.critical("No injectable areas found on the target")
@@ -142,9 +151,7 @@ def is_sql_injection_vulnerable(response):
     try:
         # Decode the response content to string
         response_text = response.decode('utf-8')
-
-        # Customize this function based on the characteristics of a vulnerable response
-        # For simplicity, it just checks if the response contains an error message
+        logger.debug(settings.DECODING_RESPONSE)
         error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning"]
         return any(keyword in response_text.lower() for keyword in error_keywords)
     except Exception as e:
@@ -157,44 +164,49 @@ def make_set_sql_injection(url,random_header=False):
     try:
         url = get_url_part(url=url)
         forms = get_all_forms(url)
+        logger.debug(settings.CTREATED_FROM_FOR_INJECTION%forms)
 
         for form in forms:
             form_data = {}
             for input_field in form.find_all('input'):
                 form_data[input_field.get('name')] = input_field.get('value', '')
+                logger.debug(settings.GOT_INPUT_FIELD%input_field)
 
             for _payload in make_set_sql_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     form_data_copy = form_data.copy()
-                    payload_field_name = line  # Replace with the actual name
+                    payload_field_name = line  
                     form_data_copy[payload_field_name] = _payload
+                    logger.debug(settings.SUBMITED_PAYLOAD_ON_FORM%_payload)
 
                     request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                     if random_header is True:
                         if settings.CUSTOM_HEADER_INJECTION:
+                            logger.debug(settings.PREAPARING_HEADERS)
                             custom_header_name = settings.CUSTOM_HEADER_NAME
                             custom_header_value = settings.CUSTOM_HEADER_VALUE
 
                             if custom_header_name and custom_header_value:
                                 request.add_header(custom_header_name, custom_header_value)
                             else:
-                                print("Skipping invalid header name or value.")
+                                logger.info("Skipping invalid header name or value.")
                         else:
                             logger.warning("header injection disabled.")
 
 
 
                     response = urllib.request.urlopen(request)
-
+                    logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
                     response_content = response.read()
 
                     form_in_response = get_form_from_response(response_content)
                     form_details = get_form_details(form_in_response)
+                    logger.debug(settings.READING_FORM_OF_HTML+settings.CRAFTING_FORM_IN_DETAILS)
 
                     if is_sql_injection_vulnerable(response_content):
                         logger.warning("Potential SQL injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
                         sql_injection_basic_detection(form_in_response, form_details)
+                        logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION+"sql injection vulnerability already exists in the url %s"%url)
                     else:
                         if _ < 1:
                             logger.critical("No SQL injection detected on the target")
@@ -214,7 +226,7 @@ def union_based_injection(url):
     for __ in union_payload().split("\n"):
         try:
             forms = get_all_forms(url)
-
+            logger.debug(settings.CTREATED_FROM_FOR_INJECTION%""+"testing possible parameters on the received form.")
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -223,12 +235,14 @@ def union_based_injection(url):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                         logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
                         form_data_copy = form_data.copy()
-                        payload_field_name = line  # Replace with the actual name
+                        payload_field_name = line  
                         form_data_copy[payload_field_name] = _payload
+                        logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%_payload)
 
                         # Make the POST request
                         request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                         response = urllib.request.urlopen(request)
+                        logger.debug(settings.CRAFTED_REQUEST_TO_BE_SENT%url)
 
                         response_content = response.read()
 

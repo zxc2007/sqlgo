@@ -1079,6 +1079,30 @@ ALERT = False
 USE_PCRE_E_MODIFIER = None
 PCRE_MODIFIER = "/e"
 
+RESPONSE_RECIEVED_FROM_HOST = "Could recive the reposne %s from host:%s"
+SESSION_HANDLER_CREATED = "Created session handler with the target:%s"
+TIME_OUT_ERROR = "Got time out error when interacting with the host:%s"
+PORT_FOUND_OPEN = "Port %d is oppened and could establish connection with the target via that."
+CONNECTION_FAILURE = "Failed to connect to the target: %s on port%d"
+RESPONSE_SENT_TO_BE_INSPECTED_FOR_SQL_VULN = "We sent the response from %s to the inspector to be inspected"
+CONNECTION_ESTABLISHED_WITH_TARGET = "Could establish connectoin with the host %s"
+HEADERS_ADDED_TO_THE_REQUEST = "Added headers to the request"
+USING_PRXOY = "Using proxy url %s"
+CTREATED_FROM_FOR_INJECTION = "Created a bs4 form for the html response recieved %s"
+TESTING_INJECTABLE_AREAS_ON_HTML_FORM = "testing injectable area on the %s from html response."
+SENT_REQUEST_TO_TARGET = "send the crafted request to the target: %s"
+READING_FORM_OF_HTML = "Reading the from of html response"
+PERFORMING_SQL_INJECTION_DETECTION = "performing sql injection detection on %s"
+DECODING_RESPONSE = "decoding the response"
+GOT_INPUT_FIELD = "could get the input field %s"
+SUBMITED_PAYLOAD_ON_FORM = "submited payload %s on the form to be sent"
+PREAPARING_HEADERS = "preparing some headers...."
+CRAFTING_FORM_IN_DETAILS = "crafting form in details"
+CRAFTED_REQUEST_TO_BE_SENT = "crafted request to be sent to the url %s"
+
+
+
+
 INJECTABLE_ARES_ON_THE_FORM = [
   "username",
   "password",
