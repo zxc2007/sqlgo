@@ -7,7 +7,7 @@ class Cmdline(argparse.ArgumentParser):
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store_true", help="Enable verbose mode")
-        self.add_argument("--url","-u",help="Give the program url of the target",required=True)
+        self.add_argument("--url","-u",help="Give the program url of the target",required=False)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)

@@ -25,6 +25,7 @@ from lib.core.request.agent import header
 from lib.core.request.proxy.proxy import use_proxy,set_proxy
 from lib.core.parser.cmdline import proxy_port
 from lib.core.parser.cmdline import proxy_server
+from lib.core.enums.payloads import Payload
 from lib.core.parser.cmdline import user_proxy
 
 def host_injection(url,vuln_parameter="", payload="" ):
@@ -202,6 +203,54 @@ def make_set_sql_injection(url,random_header=False):
         logger.error(f"Error: {str(e)}")
         traceback.print_exc()
         # Handle the exception as needed
+
+
+def union_based_injection(url):
+    _ = 0
+    _retval = None
+    for __ in union_payload().split("\n"):
+        try:
+            forms = get_all_forms(url)
+
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                for _payload in union_payload().split("\n"):
+                    logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
+                    form_data_copy = form_data.copy()
+                    payload_field_name = 'username'  # Replace with the actual name
+                    form_data_copy[payload_field_name] = _payload
+
+                    # Make the POST request
+                    request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
+                    response = urllib.request.urlopen(request)
+
+                    response_content = response.read()
+
+                    form_in_response = get_form_from_response(response_content)
+                    form_details = get_form_details(form_in_response)
+
+                    if is_sql_injection_vulnerable(response_content):
+                        logger.warning("Potential sql injection detected!!!")
+                        # Call sql_injection_basic_detection with both parameters
+                        sql_injection_basic_detection(form_in_response, form_details)
+                    else:
+                        if _ < 1:
+                            logger.critical("No injectable areas found on the target via payload%s"%_payload)
+                            sql_injection_basic_detection(form_in_response, form_details)
+                            _ += 1
+
+
+
+                # return form_in_response
+
+        except ValueError:
+            continue
+
+        except Exception as e:
+            logger.error(e)
+            traceback.print_exc()
 
 
 
