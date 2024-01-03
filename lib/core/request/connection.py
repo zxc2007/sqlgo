@@ -8,9 +8,12 @@ from lib.logger.log import logger
 from lib.core.parser.cmdline import url as _url
 from lib.core.parser.cmdline import port as _port
 from urllib.parse import urlparse
+import thirdparty.requests as requests
 
 def test_connection(url=_url, port=_port):
     logger.warning(f"Testing connection to the target URL: {url}")
+    req = requests.get()
+    logger.debug("status code of the response code %s"%req)
 
     # Extract host and path from the URL
     parsed_url = urlparse(url)
@@ -38,6 +41,7 @@ def test_connection(url=_url, port=_port):
         logger.info("Connection established with the target.")
 
         sock.close()
+        logger.debug("Closing the test connection socket...")
         
     except socket.error as e:
         logger.critical("Got error%s"%str(e))

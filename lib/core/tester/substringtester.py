@@ -6,6 +6,8 @@ from lib.core.parser.cmdline import url as _url
 from lib.core.parser.cmdline import port as _port
 from lib.core.parser.cmdline import attack
 from lib.core.request.POSt.post import SubData
+import lib.core.setting.setting as settings
+from lib.logger.log import logger
 
 class SubstringTester:
     def __init__(self,data, url= _url,  port=_port) -> None:
@@ -16,6 +18,7 @@ class SubstringTester:
 
     def test(self):
         self.sub.submit_data(self.url, self.data)
+        logger.debug("submitting the data on the server %s"%self.url)
 
 
 

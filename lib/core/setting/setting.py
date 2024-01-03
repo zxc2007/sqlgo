@@ -1099,7 +1099,11 @@ SUBMITED_PAYLOAD_ON_FORM = "submited payload %s on the form to be sent"
 PREAPARING_HEADERS = "preparing some headers...."
 CRAFTING_FORM_IN_DETAILS = "crafting form in details"
 CRAFTED_REQUEST_TO_BE_SENT = "crafted request to be sent to the url %s"
-
+INCLUDING_FORMS = "including the forms: %s"
+SENT_POST_REQUEST = "sending post request %s to the target"
+ORDER_BY_PARAMETER = "Could find order bu parameter"
+SELECT_PARAMETER_FOUND = "Could find SELECT statemtement "
+ID_PARAMETER = "could find ID parameter in response"
 
 
 

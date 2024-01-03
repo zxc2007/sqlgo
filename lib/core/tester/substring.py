@@ -24,6 +24,7 @@ def substring():
             logger.debug(_dmdg)
             _caps.add_cap(key=f"IDcap{random.choice(string.ascii_letters)}{random.randint(0,100)}")
             _demerite +=1
+            
         
         elif re.search(r"SELECT[^ ]+\Z",subber.response):
             _dmdg = "Found SELECT for some values in html response."

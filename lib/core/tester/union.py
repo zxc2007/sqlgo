@@ -9,6 +9,7 @@ from utilis._regex.extractparam import replace_url_parameter
 from lib.core.parser.cmdline import url
 from lib.core.enums.payloads import Payload
 from lib.datastruc.keygendict import Keygendict
+import lib.core.setting.setting as settings
 
 
 def union():
@@ -27,6 +28,7 @@ def union():
             logger.debug(msg)
             _infomsg = "Some ORDER BY statement weaknesses leaked in the response"
             logger.info(_infomsg)
+            logger.debug(settings.ORDER_BY_PARAMETER)
         
         elif re.search(r"SELECT * [^ ]+\Z",subber.response):
             msg = "SELECT *"
@@ -34,12 +36,14 @@ def union():
             logger.debug(msg)
             _infomsg = "Some possible SELECT statement leaks in the response"
             logger.info(_infomsg)
+            logger.debug(settings.SELECT_PARAMETER_FOUND)
         
         elif re.search(r"\bid",subber.response):
             _pattern = re.search(r"\bid",subber.response)
             index = _pattern.end()
             words_after = re.findall(r"\b\w+\b", subber.response[index:index+100])
             logger.info(words_after)
+            logger.debug(settings.ID_PARAMETER)
     
 
 def union_man():
