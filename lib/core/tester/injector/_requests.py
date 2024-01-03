@@ -230,16 +230,16 @@ def union_based_injection(url):
 
                     form_in_response = get_form_from_response(response_content)
                     form_details = get_form_details(form_in_response)
+                    sql_injection_basic_detection(form_in_response, form_details)
 
                     if is_sql_injection_vulnerable(response_content):
                         logger.warning("Potential sql injection detected!!!")
                         # Call sql_injection_basic_detection with both parameters
                         sql_injection_basic_detection(form_in_response, form_details)
                     else:
-                        if _ < 1:
-                            logger.critical("No injectable areas found on the target via payload%s"%_payload)
-                            sql_injection_basic_detection(form_in_response, form_details)
-                            _ += 1
+                        logger.debug("No injectable areas found on the target via payload%s"%_payload)
+                        sql_injection_basic_detection(form_in_response, form_details)
+
 
 
 

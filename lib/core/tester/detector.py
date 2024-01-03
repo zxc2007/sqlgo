@@ -5,6 +5,7 @@ import sys
 sys.path.append(os.getcwd())
 
 from lib.core.tester.vuln import *
+from lib.logger.log import logger
 def sql_injection_basic_detection(form_soup, form_details):
     for i in "\"'":
         data = {}
@@ -20,10 +21,10 @@ def sql_injection_basic_detection(form_soup, form_details):
             res = requests.get(form_details["action"], params=data)
         
         if vulnerable(res):
-            print("Basic tests show that the target might be injectable to SQL injection.")
+            logger.warning("Basic tests show that the target might be injectable to SQL injection.")
             return True
     
-    print("Basic tests show that the target might not be injectable to SQL injection.")
+    logger.warning("Basic tests show that the target might not be injectable to SQL injection.")
     return False
 
 # Example usage
