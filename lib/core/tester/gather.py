@@ -15,6 +15,10 @@ from lib.core.XSS.xss import XSS
 from lib.core.parser.cmdline import install_dep
 from extra.installdep import install_dependent
 from lib.core.parser.cmdline import warning_disable
+from lib.core.tester.injector._requests import error_based_injection
+from lib.core.tester.injector._requests import make_set_sql_injection
+from lib.core.tester.injector.injections import make_set_injection_func,time_based_injection_func,host_injection,error_based_INJECTION
+
 import urllib3
 def gather_exploit():
     if install_dep:
@@ -31,7 +35,10 @@ def gather_exploit():
             substring(),
             time_based(),
             error_based(),
-            XSS()
+            XSS(),make_set_injection_func(),
+            host_injection(),
+            time_based_injection_func(),
+            error_based_INJECTION()
         ]
 
         thread_objects = []
@@ -47,3 +54,5 @@ def gather_exploit():
     
     except Exception as e:
         logger.error(e)
+
+

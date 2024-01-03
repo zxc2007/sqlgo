@@ -28,6 +28,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--attack",help="Specify the attack type",default="normal",type=str,required=False)
         self.add_argument("--install-dependent",help="install the required modules for sqlgo to be executed",action="store_true",required=False)
         self.add_argument("--disable-warning",help="disable the ssl warning",action="store_true",required=False)
+        self.add_argument("--payload",help="send you own payload",required=False,action="store_true")
 
 
 
@@ -61,6 +62,7 @@ def extract():
     attack = args.attack
     install = args.install_dependent
     warning_dis = args.disable_warning
+    payload = args.payload
     return (
         output,
         verbose,
@@ -84,7 +86,8 @@ def extract():
         time_out,
         attack,
         install,
-        warning_dis
+        warning_dis,
+        payload
     )
 
 result = extract()
@@ -111,6 +114,7 @@ time_out = result[19]
 attack = result[20]
 install_dep = result[21]
 warning_disable = result[22]
+payload = result[23]
 
 
 
