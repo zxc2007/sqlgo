@@ -25,6 +25,8 @@ from lib.core.tester.injector.injections import time_based_injection_func
 from lib.core.tester.injector.injections import postgre_sql_function
 from lib.core.tester.injector.injections import mysql_blind_based_function
 from lib.core.tester.injector.injections import union_based_injection_function
+from lib.core.controler.controller import heuristic_injection_test_union_based
+from lib.core.parser.cmdline import level
 
 import urllib3
 def gather_exploit():
@@ -37,31 +39,41 @@ def gather_exploit():
         test_connection()
         extract_cookies()
         prompt_parameter()
-        threads = [
-            union(),
-            substring(),
-            time_based(),
-            error_based(),
-            XSS(),
-            make_set_injection_func(),
-            time_based_injection_func(),
-            error_based_INJECTION(),
-            union_based_injection_function(),
-            postgre_sql_function(),
-            mysql_blind_based_function(),
-            
+        basic_threads = [
+            heuristic_injection_test_union_based(url)
         ]
+        for _thread_ in basic_threads:
+            _thread_ = threading.Thread(target=_thread_)
+            _thread_.start()
+            _thread_.join()
+        
+        if level >= 3:
+            subber
+            threads = [
+                union(),
+                substring(),
+                time_based(),
+                error_based(),
+                XSS(),
+                make_set_injection_func(),
+                time_based_injection_func(),
+                error_based_INJECTION(),
+                union_based_injection_function(),
+                postgre_sql_function(),
+                mysql_blind_based_function(),
+                
+            ]
 
-        thread_objects = []
+            thread_objects = []
 
-        for thread_func in threads:
-            _thread = threading.Thread(target=thread_func)
-            _thread.start()
-            thread_objects.append(_thread)
+            for thread_func in threads:
+                _thread = threading.Thread(target=thread_func)
+                _thread.start()
+                thread_objects.append(_thread)
 
-        # Wait for all threads to finish
-        for _thread in thread_objects:
-            _thread.join()
+            # Wait for all threads to finish
+            for _thread in thread_objects:
+                _thread.join()
     
     except Exception as e:
         logger.error(e)

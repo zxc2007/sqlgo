@@ -20,7 +20,7 @@ def replace_url_parameter(url, new_value):
     extracted_value = re.search(pattern, url).group()
     if not replace_url_parameter:
         raise SQLgoNoParameterFoundException
-    return replaced_url,Fore.BRIGHT_CYAN+str(extracted_value)+Fore.RESET
+    return replaced_url,Fore.BRIGHT_CYAN+str(extracted_value)
 
 #http://testfire.net/index.jsp?content=business_deposit.htm
 

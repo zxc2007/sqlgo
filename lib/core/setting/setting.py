@@ -29,7 +29,7 @@ from thirdparty.colorama import *
 The global variables.
 """
 # About
-APPLICATION = "commix"
+APPLICATION = "sqlgo"
 DESCRIPTION_FULL = "Automated All-in-One OS Command Injection Exploitation Tool"
 DESCRIPTION = "The command injection exploiter"
 AUTHOR  = "Anastasios Stasinopoulos"
@@ -93,6 +93,9 @@ USER_DEFINED_PYTHON_DIR = False
 LINUX_PYTHON_INTERPRETER = "python3"
 LINUX_CUSTOM_PYTHON_INTERPRETER = "python27"
 USER_DEFINED_PYTHON_INTERPRETER = False
+
+
+UNION_BASED_VULN_RETURNS = r"UNION|SELECT|PAYLOAD|FROM|WHERE|HAVING|ORDER BY|UNION ALL SELECT"
 
 CMD_NUL = ""
 
@@ -1095,5 +1098,19 @@ INJECTABLE_ARES_ON_THE_FORM = [
   "text",
   "pass",
 ]
+
+
+def print_time():
+  return datetime.now()
+
+def print_term():
+  return "[" + Fore.LIGHTBLUE_EX  + datetime.now().strftime("%H:%M:%S") + Style.RESET_ALL + "] "
+
+
+def print_payload(payload):
+  result = print_time() + str(payload) + Style.RESET_ALL
+  return result
+
+  
 
 # eof

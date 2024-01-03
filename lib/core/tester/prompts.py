@@ -8,6 +8,6 @@ from lib.core.parser.cmdline import url as _url
 
 def prompt_parameter(url=_url):
     _,param = replace_url_parameter(url,new_value=None)
-    logger.info("testing of %s is vulnerable to SQL injection."%param)
+    logger.info("testing if %s is injectable."%param)
     time.sleep(5)
 
