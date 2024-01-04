@@ -28,11 +28,8 @@ from lib.core.parser.cmdline import proxy_server
 from lib.core.enums.payloads import Payload
 from lib.core.parser.cmdline import user_proxy
 from lib.core.payloads.blindbased import BlindBased
-import tamper.base64
-import tamper.printf2cho
-import tamper.space2plus
-import tamper.printf2cho
-import tamper.space2space
+from tamper.maintamper import apply_tamper
+from lib.core.parser.cmdline import tamper
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -112,6 +109,8 @@ def time_based_inejction(url,payload=True,isauto=True):
 
             for _payload in time_based_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                    _payload = apply_tamper(_payload if tamper is not None else None)
+
                     logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%line)
                     form_data_copy = form_data.copy()
                     payload_field_name = line  
@@ -178,6 +177,8 @@ def make_set_sql_injection(url,random_header=False):
                 logger.debug(settings.GOT_INPUT_FIELD%input_field)
 
             for _payload in make_set_sql_payload().split("\n"):
+                _payload = apply_tamper(_payload if tamper is not None else None)
+                logger.info("testing %s"%Payload.MAKE_SET.value)
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     form_data_copy = form_data.copy()
                     payload_field_name = line  
@@ -241,6 +242,7 @@ def union_based_injection(url):
                 for _payload in union_payload().split("\n"):
 
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                        _payload = apply_tamper(_payload if tamper is not None else None)
 
                         logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
                         form_data_copy = form_data.copy()
@@ -344,6 +346,8 @@ def postgre_sql_blind_injection(url):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in BlindBased.postgre_sql_payload_version_query().split("\n"):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+                        _payload = apply_tamper(_payload if tamper is not None else None)
+
                         logger.info(f"testing {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
                         form_data_copy = form_data.copy()
                         payload_field_name = line  # Replace with the actual name
@@ -382,4 +386,4 @@ def postgre_sql_blind_injection(url):
             traceback.print_exc()
 
 
-# make_set_sql_injection("http://testfire.net/index.jsp?content=business_deposit.htm",random_header=True)
+# make_set_sql_injection("http://testfire.net/index.jsp?content=business_deposit.htm")
