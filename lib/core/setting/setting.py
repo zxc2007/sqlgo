@@ -1106,6 +1106,7 @@ SENT_POST_REQUEST = "sending post request %s to the target"
 ORDER_BY_PARAMETER = "Could find order bu parameter"
 SELECT_PARAMETER_FOUND = "Could find SELECT statemtement "
 ID_PARAMETER = "could find ID parameter in response"
+TAMPING_PAYLOAD = "tampring payload: %s"
 
 
 
@@ -1133,6 +1134,7 @@ INJECTABLE_ARES_ON_THE_FORM = [
 IS_SPACE2COMMENT = _tamper == "space2comment"
 IS_SPACE2PLUS = _tamper == "space2plus"
 IS_PRINTFECHO = _tamper == "printfehco"
+IS_BASE64 = _tamper == "base64"
 
 
 def print_time():

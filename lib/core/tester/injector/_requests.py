@@ -28,6 +28,11 @@ from lib.core.parser.cmdline import proxy_server
 from lib.core.enums.payloads import Payload
 from lib.core.parser.cmdline import user_proxy
 from lib.core.payloads.blindbased import BlindBased
+import tamper.base64
+import tamper.printf2cho
+import tamper.space2plus
+import tamper.printf2cho
+import tamper.space2space
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -222,6 +227,8 @@ def make_set_sql_injection(url,random_header=False):
 
 def union_based_injection(url):
     _ = 0
+    _tamreq = None
+    _tresponse = None
     _retval = None
     for __ in union_payload().split("\n"):
         try:
@@ -232,7 +239,9 @@ def union_based_injection(url):
                 for input_field in form.find_all('input'):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in union_payload().split("\n"):
+
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+
                         logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
                         form_data_copy = form_data.copy()
                         payload_field_name = line  
