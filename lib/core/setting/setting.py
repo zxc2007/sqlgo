@@ -24,6 +24,7 @@ from datetime import date
 from datetime import datetime
 sys.path.append(os.getcwd())
 from thirdparty.colorama import *
+from lib.core.parser.cmdline import tamper as _tamper
 
 """
 The global variables.
@@ -314,7 +315,7 @@ COOKIE_INJECTION_LEVEL = 2
 HTTP_HEADER_INJECTION_LEVEL = 3
 USER_SUPPLIED_LEVEL = DEFAULT_INJECTION_LEVEL
 PERFORM_BASIC_SCANS = True
-
+ 
 # Default Temp Directory
 TMP_PATH = ""
 
@@ -837,7 +838,8 @@ TAMPER_SCRIPTS = {
                   "uninitializedvariable": False,
                   "slash2env":False,
                   "backticks":False,
-                  "rev":False
+                  "rev":False,
+                  "space2comment":False
                  }
 
 UNIX_NOT_SUPPORTED_TAMPER_SCRIPTS = [
@@ -1126,6 +1128,11 @@ INJECTABLE_ARES_ON_THE_FORM = [
   "text",
   "pass",
 ]
+
+
+IS_SPACE2COMMENT = _tamper == "space2comment"
+IS_SPACE2PLUS = _tamper == "space2plus"
+IS_PRINTFECHO = _tamper == "printfehco"
 
 
 def print_time():

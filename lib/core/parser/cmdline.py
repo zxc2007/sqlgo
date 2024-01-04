@@ -33,6 +33,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--proxy-port",help="specify proxy port ",action="store",type=int,required=False)
         self.add_argument("--proxy",help="use proxy servers",required=False,action="store_true")
         self.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
+        self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
 
 
     
@@ -70,6 +71,7 @@ def extract():
     Proxy_port = args.proxy_port
     user_proxy = args.proxy
     level = args.level
+    tamper = args.tamper
     return (
         output,
         verbose,
@@ -98,7 +100,8 @@ def extract():
         Proxy_server,
         Proxy_port,
         user_proxy,
-        level
+        level,
+        tamper
     )
 
 result = extract()
@@ -130,6 +133,7 @@ proxy_server = result[24]
 proxy_port = result[25]
 user_proxy = result[26]
 level = result[27]
+tamper = result[28]
 
 
 
