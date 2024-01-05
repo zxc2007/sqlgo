@@ -25,16 +25,17 @@ from datetime import datetime
 sys.path.append(os.getcwd())
 from thirdparty.colorama import *
 from lib.core.parser.cmdline import tamper as _tamper
+from lib.core.parser.cmdline import time_based_tres
 
 """
 The global variables.
 """
 # About
 APPLICATION = "sqlgo"
-DESCRIPTION_FULL = "Automated All-in-One OS Command Injection Exploitation Tool"
-DESCRIPTION = "The command injection exploiter"
-AUTHOR  = "Anastasios Stasinopoulos"
-VERSION_NUM = "3.9"
+DESCRIPTION_FULL = "Automated SQL Injection Exploitation Tool"
+DESCRIPTION = "The SQL injection exploiter"
+AUTHOR  = "ali mirmohammad"
+VERSION_NUM = "1.0.0"
 REVISION = "42"
 STABLE_RELEASE = False
 VERSION = "v"
@@ -45,16 +46,16 @@ else:
   VERSION = VERSION + VERSION_NUM + "-dev#" + REVISION
   COLOR_VERSION =  Fore.WHITE + VERSION + Style.RESET_ALL
 
-YEAR = "2014-2023"
-AUTHOR_TWITTER = "@ancst"
-APPLICATION_URL = "https://commixproject.com"
-APPLICATION_TWITTER = "@commixproject"
+YEAR = "2023"
+AUTHOR_TWITTER = ""
+APPLICATION_URL = ""
+APPLICATION_TWITTER = ""
 
 # Default User-Agent
 DEFAULT_USER_AGENT = APPLICATION + "/" + VERSION + " (" + APPLICATION_URL + ")"
 
 # Legal Disclaimer
-LEGAL_DISCLAIMER_MSG = "Usage of " + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
+LEGAL_DISCLAIMER_MSG = "[!]Usage of " + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
                        "It is the end user's responsibility to obey all applicable local, state and federal laws. " + \
                        "Developers assume no liability and are not responsible for any misuse or damage caused by this program.\n"
 
@@ -1107,6 +1108,16 @@ ORDER_BY_PARAMETER = "Could find order bu parameter"
 SELECT_PARAMETER_FOUND = "Could find SELECT statemtement "
 ID_PARAMETER = "could find ID parameter in response"
 TAMPING_PAYLOAD = "tampring payload: %s"
+TESTING_TIME_BASED_ADVANCED_AGAINST = "testing advanced time based injection checks against : %s"
+TESTING_TIME_BASED_PAYLOAD = "testing time based payload: %s"
+ADVANCED_TESTS_SHOWS_THAT_TARGET_MIGHT_BE_INJECTABLE = "advanced testing shows that the target %s \n might be injectable to the time based injections.\n PAYLOAD: %s "
+
+
+
+
+
+ADVANCED_TIME_BASED_TRESHOLD = time_based_tres if time_based_tres is not None else 0.5
+USER_SKIPPED_ADVANCED_TIME_BASED_TESTS = False
 
 
 

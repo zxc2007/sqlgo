@@ -2,6 +2,7 @@ from lib.logger.log import logger
 from lib.core.tester.gather import gather_exploit
 from extra.disclaimer import disclaimer
 from extra.logo import logo
+import lib.core.setting.setting as settings
 
 
 
@@ -9,7 +10,7 @@ from extra.logo import logo
 def main():
     try:
         print(logo)
-        disclaimer()
+        print(settings.LEGAL_DISCLAIMER_MSG)
         gather_exploit()
     except Exception as e:
         logger.error(e)

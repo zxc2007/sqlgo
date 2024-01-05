@@ -41,4 +41,14 @@ def vuln_GET_param(url):
 
     return vuln_parameter
 
-# print(vuln_GET_param("http://testfire.net/index.jsp?content=business_deposit.htm"))
+
+def get_parameter_sections(url):
+    o = urllib.parse.urlparse(url)
+    url_part = o.scheme + "://" + o.netloc + o.path
+    return url_part
+
+
+
+
+
+# print(get_parameter_sections("http://testfire.net/index.jsp?content=business_deposit.htm"))

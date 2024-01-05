@@ -31,6 +31,8 @@ from lib.core.controler.controller import heuristic_time_based_tests
 from lib.core.controler.controller import heuristic_time_based_tests
 from lib.core.controler.controller import substring_heuristic_basic_injections
 from lib.core.parser.cmdline import level
+import lib.core.setting.setting as settings
+from lib.core.tester.injector.timebased.tb_injector import injection_test_is_vuln_time_based
 
 import urllib3
 def gather_exploit():
@@ -81,6 +83,15 @@ def gather_exploit():
 
             # Wait for all threads to finish
             for _thread in thread_objects:
+                _thread.join()
+        
+        if level >= 4:
+            threads = [
+                injection_test_is_vuln_time_based()
+            ]
+            for _thread in threads:
+                _thread = threading.Thread(target=_thread)
+                _thread.start()
                 _thread.join()
     
     except Exception as e:

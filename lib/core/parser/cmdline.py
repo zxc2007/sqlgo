@@ -34,6 +34,8 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--proxy",help="use proxy servers",required=False,action="store_true")
         self.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
         self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
+        self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
+
 
 
     
@@ -72,6 +74,7 @@ def extract():
     user_proxy = args.proxy
     level = args.level
     tamper = args.tamper
+    time_based_treshold = args.time_based_t
     return (
         output,
         verbose,
@@ -101,7 +104,8 @@ def extract():
         Proxy_port,
         user_proxy,
         level,
-        tamper
+        tamper,
+        time_based_treshold
     )
 
 result = extract()
@@ -134,6 +138,7 @@ proxy_port = result[25]
 user_proxy = result[26]
 level = result[27]
 tamper = result[28]
+time_based_tres = result[29]
 
 
 
