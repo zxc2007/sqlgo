@@ -38,5 +38,5 @@ def find_os(url):
         logger.info("Invalid URL format.")
 
     return _retval
-logger.info(find_os("https://scanme.org/"))
+# logger.info(find_os("https://scanme.org/"))
 # Provide a sample URL for testing
