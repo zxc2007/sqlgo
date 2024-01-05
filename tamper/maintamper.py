@@ -6,6 +6,9 @@ import tamper.printf2cho
 import tamper.space2comment 
 import tamper.space2plus
 import tamper.space2space
+import tamper.uppercase
+import tamper.lowercase
+import tamper.space2slash
 from lib.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -19,6 +22,12 @@ def apply_tamper(payload):
         return tamper.space2plus.tamper(payload)
     elif _tamper == "space2space":
         return tamper.space2space.tamper(payload)
+    elif _tamper == "uppercase":
+        return tamper.uppercase.tamper(payload)
+    elif _tamper == "lowercase":
+        return tamper.lowercase.tamper(payload)
+    elif _tamper == "space2slash":
+        return tamper.space2slash.tamper(payload)
     elif _tamper is None:
         return payload
     else:
