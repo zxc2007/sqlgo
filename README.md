@@ -12,7 +12,7 @@ make sure you have git installed on your system.
 - bs4 library (that is the only library where you need to install,the other libraries are installed on the thirdparty directory)
 ```pip install bs4```
 ```pip3 install bs4```
-**windows**
+**w for window OS**
 ```python -m pip install bs4```
 ```python3 -m pip install bs4```
-**unix based systems**
+**for unix based systems**
