@@ -16,3 +16,6 @@ make sure you have git installed on your system.
 ```python -m pip install bs4```
 ```python3 -m pip install bs4```
 **for unix based systems**
+
+
+```python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> ```
