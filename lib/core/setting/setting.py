@@ -12,6 +12,29 @@ the Free Software Foundation, either version 3 of the License, or
 
 For more see the file 'readme/COPYING' for copying permission.
 """
+"""
+sqlgo - SQL injection Tool
+
+This project includes a portion of the Commix project, which is distributed
+under the terms of the GNU General Public License (GPL) version 3.0.
+
+Original Commix License:
+
+    Commix - Automated All-in-One OS Command Injection and Exploitation Tool
+    Copyright (C) 2014 - 2022 Anastasios Stasinopoulos (@ancst)
+    Website: https://github.com/commixproject/commix
+    License: GPL-3.0
+
+The Commix code in this project is used in accordance with the GPL license,
+and the author's docstring has not been removed to emphasize the importance
+of copyright and give proper credit to the original work.
+
+
+For more details on the Commix project, visit: https://github.com/commixproject/commix
+"""
+
+# Your SQLgo code follows...
+
 
 import re
 import os
