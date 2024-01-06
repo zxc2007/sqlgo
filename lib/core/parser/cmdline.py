@@ -1,12 +1,16 @@
 import argparse
-
+import os
+import sys
+sys.path.append(os.getcwd())
+import extra.version
 
 class Cmdline(argparse.ArgumentParser):
     def __init__(self):
         super().__init__(description="sqlgo")
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
-        self.add_argument("--verbose", action="store", help="Enable verbose mode adn set the range of(default is 1)",type=int,required=False,default=1)
+        self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
+        self.add_argument("--version",action="version",version="SQLgo version: "+extra.version.VERSION)
         self.add_argument("--url","-u",help="Give the program url of the target",required=False)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
@@ -35,6 +39,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
         self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
         self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
+        
 
 
 

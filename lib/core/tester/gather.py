@@ -95,6 +95,7 @@ def gather_exploit():
                 _thread.join()
     
     except Exception as e:
-        logger.error(e)
+        logger.debug(e)
+        raise
 
 

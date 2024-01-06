@@ -58,7 +58,7 @@ APPLICATION = "sqlgo"
 DESCRIPTION_FULL = "Automated SQL Injection Exploitation Tool"
 DESCRIPTION = "The SQL injection exploiter"
 AUTHOR  = "ali mirmohammad"
-VERSION_NUM = "1.0.0"
+VERSION_NUM = "1.0.1"
 REVISION = "42"
 STABLE_RELEASE = False
 VERSION = "v"
@@ -73,6 +73,9 @@ YEAR = "2023"
 AUTHOR_TWITTER = ""
 APPLICATION_URL = ""
 APPLICATION_TWITTER = ""
+
+
+
 
 # Default User-Agent
 DEFAULT_USER_AGENT = APPLICATION + "/" + VERSION + " (" + APPLICATION_URL + ")"
