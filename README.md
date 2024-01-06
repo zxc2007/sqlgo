@@ -19,3 +19,7 @@ make sure you have git installed on your system.
 
 
 ```python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> ```
+
+
+**How do i report the bugs?**
+bugs will be accepted if they exists and you can report it from the github page of sqlgo.
