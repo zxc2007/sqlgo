@@ -19,10 +19,10 @@ def get_form_details(form):
     This function extracts all possible useful information about an HTML `form`
     """
     details = {}
-    action = form.attrs.get("action", "").lower()
-    method = form.attrs.get("method", "get").lower()
+    action = form.attrs.get("action", "").lower() if hasattr(form, 'attrs') else ""
+    method = form.attrs.get("method", "get").lower() if hasattr(form, 'attrs') else ""
     inputs = []
-    for input_tag in form.find_all("input"):
+    for input_tag in form.find_all("input") if hasattr(form, 'find_all') else []:
         input_type = input_tag.attrs.get("type", "text")
         input_name = input_tag.attrs.get("name")
         input_value = input_tag.attrs.get("value", "")  # Handle the case where "value" is not present
@@ -63,7 +63,9 @@ def scan_xss(url):
             is_vulnerable = True
     return is_vulnerable
 
+res = None
 def sql_injection_basic_detection(url):
+    global res
     forms = get_all_forms(url)
     print(len(forms))
     for form in forms:

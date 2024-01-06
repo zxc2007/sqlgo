@@ -33,6 +33,9 @@ from lib.core.controler.controller import substring_heuristic_basic_injections
 from lib.core.parser.cmdline import level
 import lib.core.setting.setting as settings
 from lib.core.tester.injector.timebased.tb_injector import injection_test_is_vuln_time_based
+from lib.core.parser.cmdline import crawl
+from lib.core.tester.useragentparam.useragent import crawler
+from lib.core.tester.injector._requests import user_agent_injection
 
 import urllib3
 def gather_exploit():
@@ -56,7 +59,6 @@ def gather_exploit():
             _thread_ = threading.Thread(target=_thread_)
             _thread_.start()
             _thread_.join()
-        
         if level >= 3:
             subber
             threads = [
@@ -73,6 +75,8 @@ def gather_exploit():
                 mysql_blind_based_function(),
                 
             ]
+        
+
 
             thread_objects = []
 
@@ -93,6 +97,15 @@ def gather_exploit():
                 _thread = threading.Thread(target=_thread)
                 _thread.start()
                 _thread.join()
+        
+        if crawl:
+            crawl_t = [
+                user_agent_injection(url)
+            ]
+            for _threads_c in crawl_t:
+                _threads_c = threading.Thread(target=_threads_c)
+                _threads_c.start()
+                _threads_c.join()
     
     except Exception as e:
         logger.debug(e)

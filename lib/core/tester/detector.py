@@ -4,9 +4,12 @@ import os
 import sys
 sys.path.append(os.getcwd())
 
+res = None
+
 from lib.core.tester.vuln import *
 from lib.logger.log import logger
 def sql_injection_basic_detection(form_soup, form_details):
+    global res
     for i in "\"'":
         data = {}
         for input_flag in form_details["inputs"]:

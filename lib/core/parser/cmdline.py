@@ -39,6 +39,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
         self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
         self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
+        self.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
         
 
 
@@ -80,6 +81,7 @@ def extract():
     level = args.level
     tamper = args.tamper
     time_based_treshold = args.time_based_t
+    crawl = args.crawl
     return (
         output,
         verbose,
@@ -110,7 +112,8 @@ def extract():
         user_proxy,
         level,
         tamper,
-        time_based_treshold
+        time_based_treshold,
+        crawl
     )
 
 result = extract()
@@ -144,6 +147,7 @@ user_proxy = result[26]
 level = result[27]
 tamper = result[28]
 time_based_tres = result[29]
+crawl = result[30]
 
 
 

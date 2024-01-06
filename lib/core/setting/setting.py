@@ -48,7 +48,8 @@ from datetime import datetime
 sys.path.append(os.getcwd())
 from thirdparty.colorama import *
 from lib.core.parser.cmdline import tamper as _tamper
-from lib.core.parser.cmdline import time_based_tres
+from lib.core.parser.cmdline import time_based_tres,crawl
+from lib.core.parser.cmdline import time_out
 
 """
 The global variables.
@@ -221,7 +222,7 @@ EVAL_BASED_STATE = False
 TIME_BASED_STATE = False
 FILE_BASED_STATE = False
 TEMPFILE_BASED_STATE = False
-TIME_RELATIVE_ATTACK = False
+TIME_RELATIVE_ATTACK = True if crawl is True or crawl is not None else False
 
 # Stored applied techniques
 SESSION_APPLIED_TECHNIQUES = ""
@@ -837,7 +838,7 @@ class AUTH_TYPE(object):
   BEARER = "bearer"
 
 # HTTP Headers
-HTTP_HEADERS = [ "user-agent", "referer", "host" ]
+HTTP_HEADERS = [ "user-agent", "Referer", "host" ]
 
 RAW_HTTP_HEADERS = ""
 
@@ -962,7 +963,7 @@ CLI_HISTORY = ""
 MULTI_ENCODED_PAYLOAD = []
 
 # Default Timeout (Seconds to wait before timeout connection)
-TIMEOUT = 30
+TIMEOUT =time_out if time_out is not None else  30
 
 # Retries when the connection timeouts (Default: 3).
 MAX_RETRIES = 3
@@ -1138,12 +1139,14 @@ TESTING_TIME_BASED_ADVANCED_AGAINST = "testing advanced time based injection che
 TESTING_TIME_BASED_PAYLOAD = "testing time based payload: %s"
 ADVANCED_TESTS_SHOWS_THAT_TARGET_MIGHT_BE_INJECTABLE = "advanced testing shows that the target %s \n might be injectable to the time based injections.\n PAYLOAD: %s "
 
+CRAWLING_TESTS_SHOWS_THAT_PARAMETER_MIGHT_NOT_BE_INJECTABLE = "Crawling tests shows that %s parameter might not be injectable."
 
-
-
+CRAWLING_SHOWS_THAT_PARAMETER_MIGHT_BE_INJECTABLE = "crawling tests shows that %s parameter might be injectable"
 
 ADVANCED_TIME_BASED_TRESHOLD = time_based_tres if time_based_tres is not None else 0.5
 USER_SKIPPED_ADVANCED_TIME_BASED_TESTS = False
+
+
 
 
 
