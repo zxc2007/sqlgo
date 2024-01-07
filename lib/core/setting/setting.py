@@ -1146,7 +1146,10 @@ CRAWLING_SHOWS_THAT_PARAMETER_MIGHT_BE_INJECTABLE = "crawling tests shows that %
 ADVANCED_TIME_BASED_TRESHOLD = time_based_tres if time_based_tres is not None else 0.5
 USER_SKIPPED_ADVANCED_TIME_BASED_TESTS = False
 
+TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE = "testing if %s parameter is injectable"
 
+
+CRAWLING_TEST_RESPONSE = "response from target: %s"
 
 
 

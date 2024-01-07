@@ -393,6 +393,7 @@ def user_agent_injection(url, vuln_parameter, payload):
     _responses = []
     def inject_user_agent(url, vuln_parameter, payload):
         nonlocal _responses
+        logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"User-agent")
 
         request = urllib.request.Request(url)
         url = get_url_part(url)
@@ -401,7 +402,7 @@ def user_agent_injection(url, vuln_parameter, payload):
         request.add_header('User-Agent', payload)
         try:
             response = urllib.request.urlopen(request, timeout=settings.TIMEOUT)
-            logger.debug(response)
+            logger.debug(settings.CRAWLING_TEST_RESPONSE%str(response))
         except ValueError:
             pass
 
@@ -428,9 +429,11 @@ def user_agent_injection(url, vuln_parameter, payload):
 
 
 def referer_injection(url, vuln_parameter, payload):
+    logger.info(settings.REFERER_INJECTION)
     _responses = []
     def inject(url, vuln_parameter, payload):
         nonlocal _responses
+        logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"Referer")
 
         request = urllib.request.Request(url)
         url = get_url_part(url)
@@ -439,7 +442,7 @@ def referer_injection(url, vuln_parameter, payload):
         request.add_header("Referer", payload)
         try:
             response = urllib.request.urlopen(request, timeout=settings.TIMEOUT)
-            return response
+            logger.debug(settings.CRAWLING_TEST_RESPONSE%str(response))
         except ValueError:
             pass
 
