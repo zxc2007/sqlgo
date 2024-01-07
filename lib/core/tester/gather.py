@@ -36,6 +36,7 @@ from lib.core.tester.injector.timebased.tb_injector import injection_test_is_vul
 from lib.core.parser.cmdline import crawl
 from lib.core.tester.useragentparam.useragent import crawler
 from lib.core.tester.injector._requests import user_agent_injection
+from lib.core.tester.injector.injections import crawler_threads
 
 import urllib3
 def gather_exploit():
@@ -99,13 +100,7 @@ def gather_exploit():
                 _thread.join()
         
         if crawl:
-            crawl_t = [
-                user_agent_injection(url)
-            ]
-            for _threads_c in crawl_t:
-                _threads_c = threading.Thread(target=_threads_c)
-                _threads_c.start()
-                _threads_c.join()
+            crawler_threads()
     
     except Exception as e:
         logger.debug(e)

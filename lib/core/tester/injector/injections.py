@@ -1,5 +1,8 @@
 from lib.core.tester.injector._requests import *
 from lib.core.parser.cmdline import url
+import threading
+import lib.core.setting.setting as settings
+
 
 def make_set_injection_func():
     make_set_sql_injection(url)
@@ -22,6 +25,12 @@ def mysql_blind_based_function():
 def postgre_sql_function():
     postgre_sql_blind_injection(url=url)
 
+def crawler_threads():
+    for payload in time_based_payload().split("\n"):
+        for line in settings.INJECTABLE_ARES_ON_THE_FORM:
+            referer_injection(url=url,payload=payload,vuln_parameter=line),
+            user_agent_injection(url=url,payload=payload,vuln_parameter=line)
+                
 
 
 

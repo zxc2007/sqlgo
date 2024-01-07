@@ -33,6 +33,7 @@ from lib.core.parser.cmdline import tamper
 from lib.core.tester.injector.checks import newline_fixation
 from lib.core.tester.injector.parameters import get_url_part
 from extra.averagetime import average_response
+from lib.core.parser.cmdline import url as _url
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -400,7 +401,7 @@ def user_agent_injection(url, vuln_parameter, payload):
         request.add_header('User-Agent', payload)
         try:
             response = urllib.request.urlopen(request, timeout=settings.TIMEOUT)
-            return response
+            logger.debug(response)
         except ValueError:
             pass
 
@@ -411,6 +412,44 @@ def user_agent_injection(url, vuln_parameter, payload):
 
     try:
         response = inject_user_agent(url, vuln_parameter, payload)
+    except Exception as err_msg:
+        response = str(err_msg)
+        logger.debug(response)
+
+    if settings.TIME_RELATIVE_ATTACK:
+        end = time.monotonic()
+        how_long = float(end - start)
+        _responses.append(how_long)
+        _avres = average_response(_responses)
+        return how_long,_avres
+
+    else:
+        return response
+
+
+def referer_injection(url, vuln_parameter, payload):
+    _responses = []
+    def inject(url, vuln_parameter, payload):
+        nonlocal _responses
+
+        request = urllib.request.Request(url)
+        url = get_url_part(url)
+        request = urllib.request.Request(url)
+        payload = newline_fixation(payload)
+        request.add_header("Referer", payload)
+        try:
+            response = urllib.request.urlopen(request, timeout=settings.TIMEOUT)
+            return response
+        except ValueError:
+            pass
+
+    if settings.TIME_RELATIVE_ATTACK or True:
+        start = 0
+        end = 0
+        start = time.monotonic()
+
+    try:
+        response = inject(url, vuln_parameter, payload)
     except Exception as err_msg:
         response = str(err_msg)
         logger.info(response)
@@ -424,7 +463,6 @@ def user_agent_injection(url, vuln_parameter, payload):
 
     else:
         return response
-
 # from lib.core.parser.cmdline import crawl 
 
 # crawl = True
