@@ -13,7 +13,8 @@ import thirdparty.requests as requests
 def test_connection(url=_url, port=_port):
     logger.warning(f"Testing connection to the target URL: {url}")
     req = requests.get(url)
-    logger.debug("status code of the response code %s"%req)
+    _ = req.status_code
+    logger.debug("current status code of the response code is:|%s|"%_)
 
     # Extract host and path from the URL
     parsed_url = urlparse(url)
