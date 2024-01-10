@@ -32,6 +32,12 @@ def main():
             print(errmsg)
             raise SystemExit
         
+        elif "ValueError: unknown url type: 'None'" in errmsg:
+            _msg = "no url has been set for testing connection to the url,at least url should be given by : -u/--url\n"
+            logger.critical(_msg)
+            raise SystemExit
+        
+        
         elif any(["Invalid URL" in errmsg,"No scheme supplied" in errmsg]):
             _msg = "no scheme has been set for the target url, try using http:// https://\n on the url and then parse it."
             logger.critical(_msg)

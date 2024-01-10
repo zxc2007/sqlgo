@@ -63,5 +63,11 @@ class Crawler:
 
 # obj = Crawler("http://altoro.testfire.net/index.jsp?content=jobs/20061023.htm")
 # obj.referer_parameter()
-    
-crawler = Crawler(_url)
+
+if _url is not None:
+    crawler = Crawler(_url)
+else:
+    _msg = "No url has been set for sqlgo to test the injection\n"
+    _msg += "\nEXITING!!!"
+    logger.critical(_msg)
+    raise SystemExit
