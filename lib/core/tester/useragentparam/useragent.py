@@ -13,6 +13,7 @@ import random
 from extra.useragents import useragents
 from thirdparty.colorama import Fore,init
 from lib.core.parser.cmdline import url as _url
+import socket
 
 init()
 
@@ -64,10 +65,17 @@ class Crawler:
 # obj = Crawler("http://altoro.testfire.net/index.jsp?content=jobs/20061023.htm")
 # obj.referer_parameter()
 
-if _url is not None:
-    crawler = Crawler(_url)
-else:
-    _msg = "No url has been set for sqlgo to test the injection\n"
+try:
+    if _url is not None and socket.gethostbyname_ex(_url)[0] != "":
+        crawler = Crawler(_url)
+    else:
+        _msg = "No url has been set for sqlgo to test the injection\n"
+        _msg += "\nEXITING!!!"
+        logger.critical(_msg)
+        raise SystemExit
+
+except socket.gaierror:
+    _msg = "Invalid url has been set : %s\n"%_url
     _msg += "\nEXITING!!!"
     logger.critical(_msg)
     raise SystemExit
