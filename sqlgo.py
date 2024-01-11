@@ -5,6 +5,9 @@ from extra.logo import logo
 import lib.core.setting.setting as settings
 from lib.core.parser.cmdline import url as _url
 import traceback
+import threading
+import os
+import sys
 
 
 
@@ -59,6 +62,12 @@ if __name__ == "__main__":
 
     except:
         traceback.print_exc()
+    finally:
+        if threading.active_count() > 1:
+            sys.exit(0)
+        else:
+            os._exit(0)
+            
 
 
         
