@@ -42,6 +42,7 @@ def main():
             _msg = "no scheme has been set for the target url, try using http:// https://\n on the url and then parse it."
             logger.critical(_msg)
             raise SystemExit
+        
             
 
     
