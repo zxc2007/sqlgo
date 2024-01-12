@@ -46,6 +46,12 @@ def main():
             logger.critical(_msg)
             raise SystemExit
         
+        elif any(["Errno 8] nodename nor servname provided, or not known" in errmsg,".HTTPConnection object at" in errmsg]):
+            _msg = "invalid host has been set for testing.\n"
+            _msg += "QUITTING!!!"
+            logger.critical(_msg)
+            raise SystemExit
+        
             
 
     
