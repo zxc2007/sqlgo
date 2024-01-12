@@ -66,14 +66,19 @@ class Crawler:
 # obj = Crawler("http://altoro.testfire.net/index.jsp?content=jobs/20061023.htm")
 # obj.referer_parameter()
 
+try:
+    _req = requests.get(_url)
+    if _url is not None and _req.status_code == 200:
+        crawler = Crawler(_url)
+    else:
+        _msg = "No url has been set for sqlgo to test the injection\n"
+        _msg += "\nEXITING!!!"
+        logger.critical(_msg)
+        raise SystemExit
 
-_req = requests.get(_url)
-if _url is not None and _req.status_code == 200:
-    crawler = Crawler(_url)
-else:
-    _msg = "No url has been set for sqlgo to test the injection\n"
+except requests.exceptions.MissingSchema:
+    _msg = "No url has been set for sqlgo to test the injection,\n or having messing schema.make sure you include http://| https:// in url."
     _msg += "\nEXITING!!!"
     logger.critical(_msg)
     raise SystemExit
-
 
