@@ -1152,6 +1152,12 @@ TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE = "testing if %s parameter is inject
 CRAWLING_TEST_RESPONSE = "response from target: %s"
 
 
+# Get the major and minor version components
+major_version = sys.version_info.major
+minor_version = sys.version_info.minor
+
+# Combine major and minor version components into a single integer
+PYTHON_VERSION= int(f"{major_version}{minor_version}")
 
 INJECTABLE_ARES_ON_THE_FORM = [
   "username",

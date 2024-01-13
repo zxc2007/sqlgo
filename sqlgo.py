@@ -1,5 +1,6 @@
 from lib.logger.log import logger
 from lib.core.tester.gather import gather_exploit
+from lib.checker.checks import check_version
 from extra.disclaimer import disclaimer
 from extra.logo import logo
 import lib.core.setting.setting as settings
@@ -16,6 +17,7 @@ def main():
     try:
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)
+        check_version()
         gather_exploit()
     
     except KeyboardInterrupt:
