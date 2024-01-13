@@ -37,6 +37,8 @@ from lib.core.parser.cmdline import crawl
 from lib.core.tester.useragentparam.useragent import crawler
 from lib.core.tester.injector._requests import user_agent_injection
 from lib.core.tester.injector.injections import crawler_threads
+from lib.core.tester.injector.vernosesresponses import Verbose
+
 
 import urllib3
 def gather_exploit():
@@ -60,6 +62,8 @@ def gather_exploit():
             _thread_ = threading.Thread(target=_thread_)
             _thread_.start()
             _thread_.join()
+        
+
         if level >= 3:
             subber
             threads = [
@@ -101,6 +105,8 @@ def gather_exploit():
         
         if crawl:
             crawler_threads()
+        
+        Verbose.verbose_response()
     
     except Exception as e:
         logger.debug(e)

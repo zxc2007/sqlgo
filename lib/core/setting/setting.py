@@ -1179,6 +1179,8 @@ IS_SPACE2PLUS = _tamper == "space2plus"
 IS_PRINTFECHO = _tamper == "printfehco"
 IS_BASE64 = _tamper == "base64"
 
+TREE_PREFIX = "__|"
+
 
 def print_time():
   return datetime.now()

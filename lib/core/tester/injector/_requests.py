@@ -34,12 +34,15 @@ from lib.core.tester.injector.checks import newline_fixation
 from lib.core.tester.injector.parameters import get_url_part
 from extra.averagetime import average_response
 from lib.core.parser.cmdline import url as _url
+from lib.datastruc.tree import root
+from lib.datastruc.tree import Tree
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
     payload = urlparse(url).netloc + payload
 
     def inject_host(url, vuln_parameter, payload):
+
         http = urllib3.PoolManager()  
         logger.debug(settings.SESSION_HANDLER_CREATED%url)
 
@@ -63,6 +66,7 @@ def host_injection(url,vuln_parameter="", payload="" ):
 
 def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True):
     try:
+        _error_based = Tree("error_based")
         _content = None
         if isauto:
             if payload:
@@ -76,7 +80,7 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                             logger.debug(settings.HEADERS_ADDED_TO_THE_REQUEST)
                             response = urllib.request.urlopen(request,timeout=settings.DEFAULT_TIME_OUT)
                             _content = response.read()
-                            return _content
+                            _error_based.add_child(Tree(_content),Tree(response))
                         
                         except:
                             pass
@@ -86,21 +90,22 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                         result_use_general_proxy = use_proxy(request, proxy=url_proxy)
                         _content = result_use_general_proxy.read()
                         logger.debug(settings.USING_PRXOY%url_proxy)
-                        return _content
+                        _error_based.add_child(Tree(_content))
 
 
                     
                     else:
                         _content = response.read()
-                        return _content
+                        _error_based.add_child(str(Tree(_content if not isinstance(_content,bytes) else str(bytes.decode()))))
     
     except Exception as e:
-        logger.error(str(e))
-        traceback.print_exc()
+        logger.debug(str(e))
+        return
 
 def time_based_inejction(url,payload=True,isauto=True):
     _ = 0
     _retval = None
+    _time_based = Tree("time_based")
 
     try:
         forms = get_all_forms(url)
@@ -126,6 +131,8 @@ def time_based_inejction(url,payload=True,isauto=True):
                     logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
 
                     response_content = response.read()
+                    _time_based.add_child(Tree(response),Tree(response_content))
+
 
                     form_in_response = get_form_from_response(response_content)
                     form_details = get_form_details(form_in_response)
@@ -143,15 +150,14 @@ def time_based_inejction(url,payload=True,isauto=True):
 
 
 
-                    return form_in_response
+                    return form_in_response,_time_based
 
     except ValueError:
         pass
 
     except Exception as e:
-        logger.error(e)
-        traceback.print_exc()
-
+        logger.debug(e)
+        return
 
 
 
@@ -168,6 +174,7 @@ def is_sql_injection_vulnerable(response):
 
 def make_set_sql_injection(url,random_header=False):
     _retval = None
+    _make_set = Tree("make_set")
     _ = 0
     try:
         url = get_url_part(url=url)
@@ -208,6 +215,7 @@ def make_set_sql_injection(url,random_header=False):
                     response = urllib.request.urlopen(request)
                     logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
                     response_content = response.read()
+                    _make_set.add_child(Tree(response))
 
                     form_in_response = get_form_from_response(response_content)
                     form_details = get_form_details(form_in_response)
@@ -222,11 +230,13 @@ def make_set_sql_injection(url,random_header=False):
                             logger.critical("No SQL injection detected on the target")
                             logger.debug("using payload:%s"%_payload)
                             _ += 1
+
+                return form_in_response,_make_set
                     
     
     except Exception as e:
         logger.error(f"Error: {str(e)}")
-        traceback.print_exc()
+        return
         # Handle the exception as needed
 
 
@@ -235,6 +245,7 @@ def union_based_injection(url):
     _tamreq = None
     _tresponse = None
     _retval = None
+    _union_based = Tree("union_based")
     for __ in union_payload().split("\n"):
         try:
             forms = get_all_forms(url)
@@ -260,6 +271,7 @@ def union_based_injection(url):
                         logger.debug(settings.CRAFTED_REQUEST_TO_BE_SENT%url)
 
                         response_content = response.read()
+                        _union_based.add_child(Tree(response_content),Tree(response))
 
                         form_in_response = get_form_from_response(response_content)
                         form_details = get_form_details(form_in_response)
@@ -272,6 +284,9 @@ def union_based_injection(url):
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
                             sql_injection_basic_detection(form_in_response, form_details)
+                    
+                    return _union_based
+                
 
 
 
@@ -283,12 +298,13 @@ def union_based_injection(url):
 
         except Exception as e:
             logger.error(e)
-            traceback.print_exc()
+            return
 
 
 def mysql_blind_based_injection(url):
     _ = 0
     _retval = None
+    _blind_based = Tree("blind_based")
     for __ in BlindBased.mysql_version_query().split("\n"):
         try:
             forms = get_all_forms(url)
@@ -312,6 +328,8 @@ def mysql_blind_based_injection(url):
                         response = urllib.request.urlopen(request)
 
                         response_content = response.read()
+                        _blind_based.add_child(Tree(response_content))
+
 
                         form_in_response = get_form_from_response(response_content)
                         form_details = get_form_details(form_in_response)
@@ -324,9 +342,8 @@ def mysql_blind_based_injection(url):
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
                             sql_injection_basic_detection(form_in_response, form_details)
-
-
-
+                    
+                    return _blind_based
 
                 # return form_in_response
 
@@ -334,12 +351,13 @@ def mysql_blind_based_injection(url):
             continue
 
         except Exception as e:
-            logger.error(e)
-            traceback.print_exc()
+            logger.debug(e)
+            return
 
 def postgre_sql_blind_injection(url):
     _ = 0
     _retval = None
+    _postgre = Tree("postgre")
     for __ in BlindBased.postgre_sql_payload_version_query().split("\n"):
         try:
             forms = get_all_forms(url)
@@ -363,6 +381,7 @@ def postgre_sql_blind_injection(url):
                         response = urllib.request.urlopen(request)
 
                         response_content = response.read()
+                        _postgre.add_child(Tree(response_content))
                         logger.debug(settings.SENT_POST_REQUEST%url)
 
                         form_in_response = get_form_from_response(response_content)
@@ -376,6 +395,9 @@ def postgre_sql_blind_injection(url):
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
                             sql_injection_basic_detection(form_in_response, form_details)
+                    
+                    return _postgre
+                
 
 
 
@@ -387,7 +409,7 @@ def postgre_sql_blind_injection(url):
 
         except Exception as e:
             logger.error(e)
-            traceback.print_exc()
+            return
 
 def user_agent_injection(url, vuln_parameter, payload):
     _responses = []

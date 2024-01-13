@@ -5,25 +5,32 @@ import lib.core.setting.setting as settings
 
 
 def make_set_injection_func():
-    make_set_sql_injection(url)
+    _ = make_set_sql_injection(url)
+    return _
 
 def time_based_injection_func():
-    time_based_inejction(url)
+    _ = time_based_inejction(url)
+    return _
 
 def host_injection_func():
-    host_injection(url)
+    _ = host_injection(url)
+    return _
 
 def error_based_INJECTION():
-    error_based_injection(url)
+    _ = error_based_injection(url)
+    return _
 
 def union_based_injection_function():
-    union_based_injection(url)
+    _ = union_based_injection(url)
+    return _
 
 def mysql_blind_based_function():
-    mysql_blind_based_injection(url=url)
+    _ = mysql_blind_based_injection(url=url)
+    return _
 
 def postgre_sql_function():
-    postgre_sql_blind_injection(url=url)
+    _ = postgre_sql_blind_injection(url=url)
+    return _
 
 def crawler_threads():
     for payload in time_based_payload().split("\n"):
