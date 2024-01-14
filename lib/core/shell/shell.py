@@ -7,6 +7,7 @@ from extra.logo import logo
 from extra.options import OPTIONS
 from extra.options import AVAIAIBLE_INFO
 import thirdparty.requests as requests
+from lib.core.tester.injector._requests import error_based_injection
 
 def shell_handler():
     _url = None

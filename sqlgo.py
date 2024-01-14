@@ -1,6 +1,7 @@
 from lib.core.parser.cmdline import shell
 if shell:
     __import__("lib.core.tester.shells")
+    raise SystemExit
 from lib.logger.log import logger
 from lib.core.tester.gather import gather_exploit
 from lib.checker.checks import check_version
@@ -78,9 +79,9 @@ if __name__ == "__main__":
         traceback.print_exc()
     finally:
         if threading.active_count() > 1:
-            sys.exit(0)
-        else:
             os._exit(0)
+        else:
+            sys.exit(0)
             
 
 
