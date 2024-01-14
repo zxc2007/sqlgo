@@ -40,6 +40,10 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
         self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
         self.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
+        self.add_argument("--shell", help="execute sqlgo in shell environment", required=False,action="store_true")
+        self.add_argument("--update", help="update sqlgo", required=False)
+        self.add_argument("--beep", help="beep when vulnerability info appeared.", required=False)
+        self.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False)
         
 
 
@@ -82,6 +86,10 @@ def extract():
     tamper = args.tamper
     time_based_treshold = args.time_based_t
     crawl = args.crawl
+    shell = args.shell
+    update = args.update
+    beep = args.beep
+    no_prompt = args.no_prompt
     return (
         output,
         verbose,
@@ -113,7 +121,11 @@ def extract():
         level,
         tamper,
         time_based_treshold,
-        crawl
+        crawl,
+        shell,
+        update,
+        beep,
+        no_prompt
     )
 
 result = extract()
@@ -148,6 +160,10 @@ level = result[27]
 tamper = result[28]
 time_based_tres = result[29]
 crawl = result[30]
+shell = result[31]
+update = result[32]
+beep = result[33]
+no_prompt = result[34]
 
 
 

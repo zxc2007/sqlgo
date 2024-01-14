@@ -1,3 +1,6 @@
+from lib.core.parser.cmdline import shell
+if shell:
+    __import__("lib.core.tester.shells")
 from lib.logger.log import logger
 from lib.core.tester.gather import gather_exploit
 from lib.checker.checks import check_version
@@ -5,10 +8,13 @@ from extra.disclaimer import disclaimer
 from extra.logo import logo
 import lib.core.setting.setting as settings
 from lib.core.parser.cmdline import url as _url
+from lib.core.shell.shell import shell_handler
+from lib.core.tester.shells import check_shell
 import traceback
 import threading
 import os
 import sys
+
 
 
 
