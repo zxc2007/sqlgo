@@ -11,7 +11,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
         self.add_argument("--version",action="version",version="SQLgo version: "+extra.version.VERSION)
-        self.add_argument("--url","-u",help="Give the program url of the target",required=False)
+        self.add_argument("--url","-u",help="Give the program url of the target",required=False,default=3306)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
@@ -41,9 +41,9 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
         self.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
         self.add_argument("--shell", help="execute sqlgo in shell environment", required=False,action="store_true")
-        self.add_argument("--update", help="update sqlgo", required=False)
-        self.add_argument("--beep", help="beep when vulnerability info appeared.", required=False)
-        self.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False)
+        self.add_argument("--update", help="update sqlgo", required=False,action="store_true")
+        self.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
+        self.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False,action="store_true")
         
 
 
