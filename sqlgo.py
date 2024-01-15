@@ -10,7 +10,6 @@ from extra.logo import logo
 import lib.core.setting.setting as settings
 from lib.core.parser.cmdline import url as _url
 from lib.core.shell.shell import shell_handler
-from lib.core.tester.shells import check_shell
 import traceback
 import threading
 import os

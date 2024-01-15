@@ -8,48 +8,60 @@ from lib.core.parser.cmdline import verbose
 
 init()
 
-class ColoredFormatter(logging.Formatter):
+import logging
+from thirdparty.termcolor import colored
+
+class CustomColoredFormatter(logging.Formatter):
     COLORS = {
-        'DEBUG': f'{Fore.CYAN}',          # Cyan
-        'INFO': '\033[1;32m',          # Bold Green
-        'WARNING': f'{Fore.YELLOW}',         # Yellow
-        'ERROR': f'{Fore.RED}',         # Bold Red
-        'CRITICAL': '\033[1;37;41m',   # White on Red (Bold)
-        'DIM': '\033[2m',              # Dim text
-        'RESET': '\033[0m'             # Reset color
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red',
     }
 
     def format(self, record):
-        log_level = record.levelname
-        log_message = super().format(record)
-        colored_message = f"{self.COLORS.get(log_level, '')}{log_message}{self.COLORS['DIM']}{self.COLORS['RESET']}"
-        return colored_message
+        log_level_color = self.COLORS.get(record.levelname, 'white')
+        log_level_name = colored(record.levelname, log_level_color)
 
-logger = logging.getLogger('sqlgo_log')
+        timestamp = self.formatTime(record, self.datefmt)
+        timestamp_colored = colored(timestamp, 'blue')
 
-if verbose == 1:
-    logger.setLevel(level=logging.INFO)
+        record.log_level = log_level_name  # Add a custom log level field
+        record.timestamp_colored = timestamp_colored  # Add a custom timestamp field
 
-elif verbose == 2:
-    logger.setLevel(level=logging.WARNING)
+        return super().format(record)
 
-elif verbose == 3:
-    logger.setLevel(level=logging.ERROR)
+def setup_logger():
+    # Create a logger
+    logger = logging.getLogger("sqlgo_logger")
+    if verbose == 5:
+        logger.setLevel(logging.DEBUG)
+    
+    else:
+        logger.setLevel(logging.INFO)
 
-elif verbose == 4:
-    logger.setLevel(level=logging.CRITICAL)
+    # Create a console handler and set the level to debug
+    console_handler = logging.StreamHandler()
+    if verbose == 5:
+        console_handler.setLevel(logging.DEBUG)
+    
+    else:
+        console_handler.setLevel(logging.DEBUG)
 
-elif verbose == 5:
-    logger.setLevel(level=logging.DEBUG)
+    # Create a colored formatter and add it to the handler
+    formatter = CustomColoredFormatter(
+        "%(timestamp_colored)s [%(log_level)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+    console_handler.setFormatter(formatter)
 
-formatter = ColoredFormatter(
-    "[%(asctime)s] [%(levelname)s] %(message)s",
-    datefmt="%H:%M:%S"
-)
+    # Add the handler to the logger
+    logger.addHandler(console_handler)
 
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(formatter)
+    return logger
 
-logger.addHandler(console_handler)
+# Example usage
+logger = setup_logger()
 
-# Log an info message with the default message
+

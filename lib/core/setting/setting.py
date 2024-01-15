@@ -54,6 +54,8 @@ from lib.core.parser.cmdline import time_out
 """
 The global variables.
 """
+
+#NOTE:some of the variables in this code are part of the commix project which wont be used and have been kept for copy right and code sustainability
 # About
 APPLICATION = "sqlgo"
 DESCRIPTION_FULL = "Automated SQL Injection Exploitation Tool"
