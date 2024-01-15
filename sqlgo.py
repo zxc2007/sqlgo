@@ -10,6 +10,8 @@ from extra.logo import logo
 import lib.core.setting.setting as settings
 from lib.core.parser.cmdline import url as _url
 from lib.core.shell.shell import shell_handler
+from datetime import datetime
+import lib.core.setting.setting as settings
 import traceback
 import threading
 import os
@@ -19,10 +21,12 @@ import sys
 
 
 
+
 def main():
     try:
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)
+        print(f"starting @ {settings.formatted_datetime}")
         check_version()
         gather_exploit()
     
@@ -77,10 +81,14 @@ if __name__ == "__main__":
     except:
         traceback.print_exc()
     finally:
-        if threading.active_count() > 1:
-            os._exit(0)
-        else:
-            sys.exit(0)
+        try:
+            if threading.active_count() > 1:
+                os._exit(0)
+            else:
+                sys.exit(0)
+        
+        finally:
+            print(f"ending @ {settings.formatted_datetime}")
             
 
 

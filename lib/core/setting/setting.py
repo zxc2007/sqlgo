@@ -1189,6 +1189,9 @@ IS_BASE64 = _tamper == "base64"
 
 TREE_PREFIX = "__|"
 
+current_datetime = datetime.now()
+formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+
 
 def print_time():
   return datetime.now()

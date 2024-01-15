@@ -451,7 +451,8 @@ def user_agent_injection(url, vuln_parameter, payload):
 
 
 def referer_injection(url, vuln_parameter, payload):
-    logger.info(settings.REFERER_INJECTION)
+    if settings.REFERER_INJECTION is not None:
+        logger.info(settings.REFERER_INJECTION)
     _responses = []
     def inject(url, vuln_parameter, payload):
         nonlocal _responses
@@ -477,7 +478,7 @@ def referer_injection(url, vuln_parameter, payload):
         response = inject(url, vuln_parameter, payload)
     except Exception as err_msg:
         response = str(err_msg)
-        logger.info(response)
+        logger.info(response if response is not None else "")
 
     if settings.TIME_RELATIVE_ATTACK:
         end = time.monotonic()
