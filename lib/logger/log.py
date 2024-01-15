@@ -51,7 +51,7 @@ def setup_logger():
 
     # Create a colored formatter and add it to the handler
     formatter = CustomColoredFormatter(
-        "%(timestamp_colored)s [%(log_level)s] %(message)s",
+        "[%(timestamp_colored)s] [%(log_level)s] %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     console_handler.setFormatter(formatter)
@@ -61,7 +61,6 @@ def setup_logger():
 
     return logger
 
-# Example usage
 logger = setup_logger()
 
 
