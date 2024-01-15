@@ -12,3 +12,6 @@ class SQLgoNoneKeyException(SQlgoBasicException):
 
 class SQLgoKeyGenDictKeyException(SQlgoBasicException):
     pass
+
+class SQLGOBeepSoundException(SQlgoBasicException):
+    pass
