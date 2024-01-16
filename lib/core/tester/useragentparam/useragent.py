@@ -82,3 +82,8 @@ except requests.exceptions.MissingSchema:
     logger.critical(_msg)
     raise SystemExit
 
+except UnicodeError:
+    _msg = "entered domain is wrong or does not exists.please check your domain.\n"
+    logger.critical(_msg)
+    raise SystemExit
+

@@ -64,6 +64,12 @@ def main():
             logger.critical(_msg)
             raise SystemExit
         
+        elif any(["UnicodeError: encoding with 'idna' codec failed (UnicodeError: label empty or too long)" in errmsg,"UnicodeError: encoding with 'idna' " in errmsg]):
+            _msg = "entered domain is wrong or does not exists.please check your domain.\n"
+            _msg += "QUITTING!!!"
+            logger.critical(_msg)
+            raise SystemExit
+        
             
 
     
