@@ -9,6 +9,11 @@ from lib.core.tester.injector.injections import mysql_blind_based_function
 from lib.core.tester.injector.injections import postgre_sql_function
 from lib.logger.log import logger
 from lib.datastruc.magiclist import Magiclist
+from lib.core.enums.devstatus import DevStatus
+from lib.core.enums.priority import PRIORITY
+
+__status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
+__priority__ = PRIORITY.NORMAL
 
 
 

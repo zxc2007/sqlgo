@@ -8,6 +8,12 @@ from extra.options import OPTIONS
 from extra.options import AVAIAIBLE_INFO
 import thirdparty.requests as requests
 from lib.core.tester.injector._requests import error_based_injection
+from lib.core.enums.devstatus import DevStatus
+from lib.core.enums.priority import PRIORITY
+
+
+__status__ = DevStatus.NOT_READY_FOR_PRODUCTION_NOT_SAFE_USAGE
+__priority__ = PRIORITY.NORMAL
 
 def shell_handler():
     _url = None
@@ -22,6 +28,7 @@ def shell_handler():
         match_port = re.match(r'^set\s+port\s+(.+)$', command)
         match_payload = re.match(r'^set\s+payload\s+(.+)$', command)
         match_attack = re.match(r'^set\s+attack\s+(.+)$', command)
+        match_tamper = re.match(r'^set\s+tamper\s+(.+)$', command)
 
         run = command == "exploit" or  command == "run"
         
@@ -29,20 +36,22 @@ def shell_handler():
             _url = match.group(1)
             print(f"[*] url has been set on :{_url}...")
         
-        if match_port:
+        elif match_port:
             _port = match_port.group(1)
             print("[*] port has been set to %d"%int(_port))
         
-        if command == "run" or command == "exploit" and match:
+        
+        elif command == "run" or command == "exploit" and match:
             req = requests.get(_url)
             print(req.status_code)
         
-        if command == "show":
+        elif command == "show":
             print(
                 AVAIAIBLE_INFO%(_url if _url is not None else "url has not been set.",int(_port) if _port is not None else "port has not been set",None,None)
             )
+
         
-        if command == "exit":
+        elif command == "exit":
             raise SystemExit
         
 

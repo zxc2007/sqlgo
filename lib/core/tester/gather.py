@@ -105,6 +105,7 @@ def gather_exploit():
         
         if crawl:
             crawler_threads()
+            host_injection(url)
         
         Verbose.verbose_response()
     

@@ -37,6 +37,11 @@ from lib.core.parser.cmdline import url as _url
 from lib.datastruc.tree import root
 from lib.datastruc.tree import Tree
 from lib.core.parser.cmdline import beep
+from lib.core.enums.devstatus import DevStatus
+from lib.core.enums.priority import PRIORITY
+
+__status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
+__priority__ = PRIORITY.VERY_HIGH
 
 def host_injection(url,vuln_parameter="", payload="" ):
 

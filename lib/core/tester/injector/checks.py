@@ -1,5 +1,13 @@
 import re
+import os
+import sys
+sys.path.append(os.getcwd())
 import urllib.parse
+from lib.core.enums.devstatus import DevStatus
+from lib.core.enums.priority import PRIORITY
+
+__status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
+__priority__ = PRIORITY.NORMAL
 def newline_fixation(payload):
     payload = urllib.parse.unquote(payload)
     if "\n" in payload:

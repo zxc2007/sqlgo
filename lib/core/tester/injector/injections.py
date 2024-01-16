@@ -2,7 +2,14 @@ from lib.core.tester.injector._requests import *
 from lib.core.parser.cmdline import url
 import threading
 import lib.core.setting.setting as settings
+import os
+import sys
+sys.path.append(os.getcwd())
+from lib.core.enums.devstatus import DevStatus
+from lib.core.enums.priority import PRIORITY
 
+__status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
+__priority__ = PRIORITY.VERY_HIGH
 
 def make_set_injection_func():
     _ = make_set_sql_injection(url)
