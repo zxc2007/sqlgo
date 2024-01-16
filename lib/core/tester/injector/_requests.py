@@ -36,6 +36,7 @@ from extra.averagetime import average_response
 from lib.core.parser.cmdline import url as _url
 from lib.datastruc.tree import root
 from lib.datastruc.tree import Tree
+from lib.core.parser.cmdline import beep
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -278,6 +279,8 @@ def union_based_injection(url):
                         sql_injection_basic_detection(form_in_response, form_details)
 
                         if is_sql_injection_vulnerable(response_content):
+                            if beep:
+                                __import__("extrac.beep.beep")
                             logger.warning("Potential sql injection detected!!!")
                             # Call sql_injection_basic_detection with both parameters
                             sql_injection_basic_detection(form_in_response, form_details)

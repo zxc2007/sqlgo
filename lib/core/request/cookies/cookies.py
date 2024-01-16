@@ -6,6 +6,7 @@ sys.path.append(os.getcwd())
 from lib.core.parser.cmdline import url as _url
 from lib.logger.log import logger
 from utilis.colorago.colorago import Fore
+from lib.core.parser.cmdline import beep
 
 def extract_cookies(url=_url):
     user_input = ""
@@ -17,6 +18,8 @@ def extract_cookies(url=_url):
 
         logger.info("cookies from %s"%url)
         for cookie in cookies.values():
+            if beep:
+                __import__("extra.beep.beep")
             logger.info(f"Cookie name: {cookie.key}, cookie value by the server: {cookie.value}")
 
         user_input = input(f"{Fore.BRIGHT_GREEN}you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: {Fore.RESET}").lower()

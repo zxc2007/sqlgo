@@ -9,6 +9,7 @@ from extra.disclaimer import disclaimer
 from extra.logo import logo
 import lib.core.setting.setting as settings
 from lib.core.parser.cmdline import url as _url
+from lib.core.parser.cmdline import beep
 from lib.core.shell.shell import shell_handler
 from datetime import datetime
 import lib.core.setting.setting as settings
@@ -95,6 +96,8 @@ if __name__ == "__main__":
         
         finally:
             print(f"ending @ {settings.formatted_datetime}")
+            if beep:
+                __import__("extra.beep.beep")
             
 
 
