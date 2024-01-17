@@ -15,3 +15,6 @@ class SQLgoKeyGenDictKeyException(SQlgoBasicException):
 
 class SQLGOBeepSoundException(SQlgoBasicException):
     pass
+
+class SQLGOStreamHandlerException(SQlgoBasicException):
+    pass
