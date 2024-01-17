@@ -9,6 +9,8 @@ from lib.logger.log import logger
 from lib.core.Exceptions.exceptions import SQLGOStreamHandlerException
 from lib.core.common.common import IsListLike
 import lib.core.setting.setting as settings
+from lib.datastruc.tree import Tree
+
 
 class Dump(object):
 
@@ -93,7 +95,22 @@ class Dump(object):
     
     def dbs(self,dbs):
         self.lister("available databases",dbs,content_type=settings.ContentType.TABLE)
+    
+    def DBTables(self,table):
+        if isinstance(table,dict):
+            for table_name in table.keys():
+                self._write("Table: %s | count %d"%(table_name,_ for _ in range(10000,0,-1)))
+                return
         
+        elif isinstance(table,Tree):
+            #TODO:need to be improved
+            for table_name in table.print_child():
+                self._write("Table: %s | count %d"%(table_name,_ for _ in range(10000,0,-1)))
+                return
+    
+        self._write("Table: %s | count %d"%(table_name,_ for _ in range(10000,0,-1)))
+        
+
 # Instantiate Dump class
 # dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")  
 # print(dumper._write("hello "))
