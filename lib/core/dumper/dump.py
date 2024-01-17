@@ -193,9 +193,53 @@ class Dump(object):
 
         except Exception as e:
             logger.error(e)
+    
+    def DbTableCount(self,dbtables):
+        if isinstance(dbtables,dict) and len(dbtables) != 0:
+            self._write(dbtables)
+        
+        maxLength1 = len("Table")
+        maxlength2 = len("Entries")
+
+        for ctables in dbtables.values():
+            if isinstance(ctables,dict):
+                for tables in ctables.values():
+                    for table in tables:
+                        maxLength1 = max(maxLength1,table)
+        
+        for db,counts in dbtables.items():
+            self._write("Database: %s"%(db))
+            lines1 = "-" * (maxLength1 + 2)
+            blank1 = " " * (maxLength1 - len("Table"))
+            lines2 = "-" * (maxlength2 + 2)
+            blank2 = " " * (maxlength2 - len("Entries"))
+            self._write("+%s+%s+" % (lines1, lines2))
+            self._write("| Table%s | Entries%s |" % (blank1, blank2))
+            self._write("+%s+%s+" % (lines1, lines2))
+
+            sortedCounts = list(counts.keys() if isinstance(counts,dict) else "1")
+            sortedCounts.sort(reverse=True)
+
+            for count in sortedCounts:
+                tables = counts[count]
+
+                if count is None:
+                    count = "Unknown"
+
+                tables.sort(key=lambda _: _.lower() if hasattr(_, "lower") else _)
+
+                for table in tables:
+                    blank1 = " " * (maxLength1 - len(table))
+                    blank2 = " " * (maxlength2 - len(str(count)))
+                    self._write("| %s%s | %d%s |" % (table, blank1, count, blank2))
+
+            self._write("+%s+%s+\n" % (lines1, lines2))
+        else:
+            logger.error("unable to retrieve the number of entries for any table")
+
 
 
 
 # Instantiate Dump class
-# dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")
-# print(dumper.dbTableColumn({"table": "hello world!"}))
+dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")
+print(dumper.DbTableCount({"table": "hello world!"}))
