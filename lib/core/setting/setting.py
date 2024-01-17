@@ -133,6 +133,26 @@ CMD_NUL = ""
 class HEURISTIC_TEST(object):
   POSITIVE = True
 
+class ContentType:
+  TEXT = 1
+  BINARY = 2
+  DBS = 3
+  TABLE = 4
+  COLUMN = 5
+  USER = 6
+  PASSWORD = 7
+  SQL = 8
+  HTML = 9
+  JSON = 10
+  XML = 11
+  FORM = 12
+  COOKIE = 13
+  HEADER = 14
+  FILE = 15
+  IMAGE = 16
+  OTHER = 17
+  
+
 #Basic heuristic checks for command injections
 RAND_A = random.randint(1,10000)
 RAND_B = random.randint(1,10000)
@@ -1089,6 +1109,7 @@ CRAWLED_SKIPPED_URLS_NUM = 0
 CRAWLED_URLS_NUM = 0
 CRAWLED_URLS_INJECTED = []
 SKIP_VULNERABLE_HOST = None
+
 
 # Skipped crawled hrefs
 HREF_SKIPPED = []
