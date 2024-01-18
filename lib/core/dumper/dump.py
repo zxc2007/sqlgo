@@ -12,10 +12,12 @@ import lib.core.setting.setting as settings
 from lib.datastruc.tree import Tree
 from lib.logger.log import logger
 
+cwd = os.getcwd()
+
 
 class Dump(object):
 
-    def __init__(self, file_path, write_line=False, sensitive=False):
+    def __init__(self, file_path=cwd+"/extra/capture.txt", write_line=False, sensitive=False):
         self._lock = threading.Lock()
         self.file_path = os.path.abspath(file_path)
         self.write_line = write_line
@@ -217,7 +219,7 @@ class Dump(object):
             self._write("| Table%s | Entries%s |" % (blank1, blank2))
             self._write("+%s+%s+" % (lines1, lines2))
 
-            sortedCounts = list(counts.keys() if isinstance(counts,dict) else "1")
+            sortedCounts = list(counts.keys() if isinstance(counts,dict) else "")
             sortedCounts.sort(reverse=True)
 
             for count in sortedCounts:
@@ -236,10 +238,66 @@ class Dump(object):
             self._write("+%s+%s+\n" % (lines1, lines2))
         else:
             logger.error("unable to retrieve the number of entries for any table")
+    
+    def dbColumns(self, dbColumnsDict, colConsider, dbs):
+        self._write(dbColumnsDict)
+
+        for column in dbColumnsDict.keys():
+            if colConsider == "1":
+                colConsiderStr = "s LIKE '%s' were" % column
+                logger.debug(colConsiderStr)
+            else:
+                colConsiderStr = " '%s' was" % column
+                logger.debug(colConsiderStr)
+
+
+            found = {}
+            for db, tblData in dbs.items():
+                for tbl, colData in tblData.items():
+                    for col, dataType in colData.items():
+                        if column.lower() in col.lower():
+                            if db in found:
+                                if tbl in found[db]:
+                                    found[db][tbl][col] = dataType
+                                else:
+                                    found[db][tbl] = {col: dataType}
+                            else:
+                                found[db] = {}
+                                found[db][tbl] = {col: dataType}
+
+                            continue
+
+            if found:
+                msg = "column%s found in the " % colConsiderStr
+                msg += "following databases:"
+                self._write(msg)
+
+                self.dbTableColumn(found)
 
 
 
 
 # Instantiate Dump class
-dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")
-print(dumper.DbTableCount({"table": "hello world!"}))
+# dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")
+# print(dumper.DbTableCount({"table": "hello world!"}))
+# Instantiate Dump class
+dumper = Dump()
+
+# # Define databases
+# databases = {
+#     'Database1': {
+#         'Table1': {'Column1': 'DataType1', 'Column2': 'DataType2'},
+#         'Table2': {'Column3': 'DataType3', 'Column4': 'DataType4'}
+#     },
+#     'Database2': {
+#         'Table3': {'Column5': 'DataType5', 'Column6': 'DataType6'},
+#         'Table4': {'Column7': 'DataType7', 'Column8': 'DataType8'}
+#     }
+# }
+
+# # Define dbColumnsDict and colConsider
+# dbColumnsDict = {'Column1': 'Value1', 'Column2': 'Value2'}
+# colConsider = "1"
+
+# # Call dbColumns method
+# print(dumper.dbColumns(dbColumnsDict, colConsider, databases))
