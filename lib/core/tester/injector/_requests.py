@@ -285,7 +285,7 @@ def union_based_injection(url):
 
                         if is_sql_injection_vulnerable(response_content):
                             if beep:
-                                __import__("extrac.beep.beep")
+                                __import__("extra.beep.beep")
                             logger.warning("Potential sql injection detected!!!")
                             # Call sql_injection_basic_detection with both parameters
                             sql_injection_basic_detection(form_in_response, form_details)
