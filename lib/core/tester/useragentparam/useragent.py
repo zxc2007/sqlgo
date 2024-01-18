@@ -15,6 +15,7 @@ from thirdparty.colorama import Fore,init
 from lib.core.parser.cmdline import url as _url
 import socket
 import thirdparty.requests as requests
+from extra.logo import logo
 
 init()
 
@@ -71,12 +72,21 @@ try:
     if _url is not None and _req.status_code == 200:
         crawler = Crawler(_url)
     else:
+        print(logo)
+        print()
+        print()
+        print()
         _msg = "No url has been set for sqlgo to test the injection\n"
         _msg += "\nEXITING!!!"
         logger.critical(_msg)
         raise SystemExit
 
 except requests.exceptions.MissingSchema:
+    print(logo)
+    print()
+    print()
+    print()
+    print()
     _msg = "No url has been set for sqlgo to test the injection,\n or having messing schema.make sure you include http://| https:// in url."
     _msg += "\nEXITING!!!"
     logger.critical(_msg)
