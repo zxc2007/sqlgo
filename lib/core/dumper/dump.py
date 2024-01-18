@@ -273,7 +273,7 @@ class Dump(object):
                 self._write(msg)
 
                 self.dbTableColumn(found)
-
+    
 
 
 

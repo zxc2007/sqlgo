@@ -38,7 +38,8 @@ from lib.core.tester.useragentparam.useragent import crawler
 from lib.core.tester.injector._requests import user_agent_injection
 from lib.core.tester.injector.injections import crawler_threads
 from lib.core.tester.injector.vernosesresponses import Verbose
-
+from lib.core.dumper.dumpresults import dumping
+from lib.core.parser.cmdline import dump
 
 import urllib3
 def gather_exploit():
@@ -106,6 +107,9 @@ def gather_exploit():
         if crawl:
             crawler_threads()
             host_injection(url)
+        
+        if dump:
+            dumping()
         
         Verbose.verbose_response()
     
