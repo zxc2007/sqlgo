@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup as bs
 from lib.logger.log import logger
 from utilis._regex.isphp import isphp
 import thirdparty.requests as requests
-from lib.core.parser.cmdline import url as _url
+from lib.core.parser.cmdline import url as _url,beep
 
 def get_all_forms(url):
     """Given a `url`, it returns all forms from the HTML content"""
@@ -63,6 +63,8 @@ def submit_form(form_details, url, value):
             # then add them to the data of form submission
             data[input_name] = input_value
 
+    if beep:
+        __import__("extra.beep.beep")
     logger.info(f"[+] Submitting malicious payload to {target_url}")
     logger.info(f"[+] Data: {data}")
     if form_details["method"] == "post":
@@ -88,6 +90,8 @@ def scan_xss(url):
         form_details = get_form_details(form)
         content = submit_form(form_details, url, js_script).content.decode()
         if js_script in content:
+            if beep:
+                __import__("extra.beep.beep")
             logger.warning(f"[+] XSS Detected on {url}")
             logger.info(f"[*] Form details:")
             logger.info(form_details)

@@ -113,7 +113,7 @@ def gather_exploit():
             dumping()
         
         Verbose.verbose_response()
-        # print(extract_injection())
+        # extract_injection()
     
     except Exception as e:
         logger.debug(e)

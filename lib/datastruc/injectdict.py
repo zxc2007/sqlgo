@@ -162,4 +162,4 @@ injeciondict = InjectionDict()
 # print(injection_data.data.example)  # Output: example_data
 
 def extract_injection():
-    return injeciondict.data.example
+    print(injeciondict.data.example)

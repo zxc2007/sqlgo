@@ -105,7 +105,7 @@ def error_based_heuristic_tests(url):
                         if __ < 1:
                             __ += 1
                             _,param = replace_url_parameter(url,new_value=None)
-                            _msg = "heuristic tests shows that parameter %s might not be vulnerable to union based sql injection."%param
+                            _msg = "heuristic tests shows that parameter %s might not be vulnerable to error based sql injection."%param
                             _msg +="\n you can skip the rest of the tests for the vulnerabilities if you wish."
                             logger.warning(_msg)
                             time.sleep(3)
@@ -149,7 +149,7 @@ def heuristic_time_based_tests(url):
                         if __< 1:
                             __+= 1
                         _,param = replace_url_parameter(url,new_value=None)
-                        _msg = "heuristic tests shows that parameter %s might be vulnerable to union based sql injection."%param
+                        _msg = "heuristic tests shows that parameter %s might be vulnerable to time based sql injection."%param
                         _msg +="\n you can skip the rest of the tests for the vulnerabilities if you wish."
                         logger.info(_msg)
                         time.sleep(3)
@@ -202,7 +202,7 @@ def substring_heuristic_basic_injections(url):
                         if __< 1:
                             __+= 1
                         _,param = replace_url_parameter(url,new_value=None)
-                        _msg = "heuristic tests shows that parameter %s might be vulnerable to union based sql injection."%param
+                        _msg = "heuristic tests shows that parameter %s might be vulnerable to substring based sql injection."%param
                         _msg +="\n you can skip the rest of the tests for the vulnerabilities if you wish."
                         logger.info(_msg)
                         time.sleep(3)

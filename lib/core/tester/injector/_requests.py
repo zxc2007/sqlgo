@@ -360,6 +360,8 @@ def mysql_blind_based_injection(url):
                         sql_injection_basic_detection(form_in_response, form_details)
 
                         if is_sql_injection_vulnerable(response_content):
+                            if beep:
+                                __import__("extra.beep.beep")
                             logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION%url)
                             logger.warning("Potential sql injection detected!!!")
                             sql_injection_basic_detection(form_in_response, form_details)
@@ -417,6 +419,8 @@ def postgre_sql_blind_injection(url):
                         sql_injection_basic_detection(form_in_response, form_details)
                         logger.debug("inspecting injection on %s"%form_details)
                         if is_sql_injection_vulnerable(response_content):
+                            if beep:
+                                __import__("extra.beep.beep")
                             logger.warning("Potential sql injection detected!!!")
                             # Call sql_injection_basic_detection with both parameters
                             sql_injection_basic_detection(form_in_response, form_details)
