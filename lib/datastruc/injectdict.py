@@ -94,6 +94,19 @@ class AttribDict(dict):
         return retVal
 
 class InjectionDict(AttribDict):
+    """
+    >>> foo = AttribDict()
+    >>> foo.bar = 1
+    >>> print(foo.bar)  # Output: 1
+
+    # Creating an instance of InjectionDict
+    >>> injection_data = InjectionDict()
+    >>> injection_data.place = "example"
+    >>> injection_data.parameter = "param"
+    >>> injection_data.data.example = "example_data"
+    >>> print(injection_data.place)  # Output: example
+    >>> print(injection_data.data.example)  # Output: example_data
+    """
     def __init__(self):
         AttribDict.__init__(self)
 
@@ -130,7 +143,10 @@ class InjectionDict(AttribDict):
         self.dbms = Magiclist()
         for arg in args:
             self.data.extra.append(arg)
-        
+    
+
+injeciondict = InjectionDict()
+
 
 # # Creating an instance of AttribDict
 # foo = AttribDict()
@@ -144,3 +160,6 @@ class InjectionDict(AttribDict):
 # injection_data.data.example = "example_data"
 # print(injection_data.place)  # Output: example
 # print(injection_data.data.example)  # Output: example_data
+
+def extract_injection():
+    return injeciondict.data.example

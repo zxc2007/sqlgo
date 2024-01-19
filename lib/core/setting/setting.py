@@ -50,6 +50,9 @@ from thirdparty.colorama import *
 from lib.core.parser.cmdline import tamper as _tamper
 from lib.core.parser.cmdline import time_based_tres,crawl
 from lib.core.parser.cmdline import time_out
+import warnings
+
+warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 """
 The global variables.
@@ -276,6 +279,8 @@ OUTPUT_FILE = OUTPUT_FILE_NAME + OUTPUT_FILE_EXT
 
 # Max Length for command execution output.
 MAXLEN = 10000
+
+DEFAULT_TIME_OUT = 30
 
 STDIN_PARSING = False
 
@@ -1113,6 +1118,16 @@ SKIP_VULNERABLE_HOST = None
 
 # Skipped crawled hrefs
 HREF_SKIPPED = []
+
+########################
+
+POSTGRE_RESPONSE_IN_INJ_DICT = "postgre response:"
+BLIND_BASED_INJ_RESPONSE = "blind based injection response:"
+UNION_BASED_INJ_RESPONSE = "union based injection response:"
+MAKE_SET_INJ_RESPONSE = "make set injection:"
+TIME_BASED_INJ_RESPONSE = "time based response:"
+ERROR_BASED_INJ_RESPONSE = "error based response:"
+########################
 
 # Default crawling depth
 DEFAULT_CRAWLING_DEPTH = 1

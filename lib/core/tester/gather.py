@@ -40,6 +40,7 @@ from lib.core.tester.injector.injections import crawler_threads
 from lib.core.tester.injector.vernosesresponses import Verbose
 from lib.core.dumper.dumpresults import dumping
 from lib.core.parser.cmdline import dump
+from lib.datastruc.injectdict import extract_injection
 
 import urllib3
 def gather_exploit():
@@ -112,6 +113,7 @@ def gather_exploit():
             dumping()
         
         Verbose.verbose_response()
+        # print(extract_injection())
     
     except Exception as e:
         logger.debug(e)

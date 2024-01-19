@@ -39,6 +39,7 @@ from lib.datastruc.tree import Tree
 from lib.core.parser.cmdline import beep
 from lib.core.enums.devstatus import DevStatus
 from lib.core.enums.priority import PRIORITY
+from lib.datastruc.injectdict import injeciondict
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
@@ -80,6 +81,8 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                     request = urllib.request.Request(url,data=_payload.encode(),method=REQUESTS.POST)
                     response = urllib.request.urlopen(request)
                     logger.debug(settings.CONNECTION_ESTABLISHED_WITH_TARGET%url)
+                    injeciondict.place = settings.ERROR_BASED_INJ_RESPONSE
+                    injeciondict.parameter = str(response) if not isinstance(response,str) else response
                     if addheader:
                         try:
                             request.add_header(settings.CUSTOM_HEADER_NAME, settings.CUSTOM_HEADER_VALUE.replace(settings.TESTABLE_VALUE + settings.INJECT_TAG, settings.INJECT_TAG).replace(settings.INJECT_TAG, payload))
@@ -125,6 +128,7 @@ def time_based_inejction(url,payload=True,isauto=True):
             for _payload in time_based_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     _payload = apply_tamper(_payload if tamper is not None else None)
+ 
 
                     logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%line)
                     form_data_copy = form_data.copy()
@@ -135,6 +139,8 @@ def time_based_inejction(url,payload=True,isauto=True):
                     request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                     response = urllib.request.urlopen(request)
                     logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
+                    injeciondict.place = settings.TIME_BASED_INJ_RESPONSE
+                    injeciondict.parameter = str(response) if not isinstance(response,str) else response
 
                     response_content = response.read()
                     _time_based.add_child(Tree(response),Tree(response_content))
@@ -220,6 +226,8 @@ def make_set_sql_injection(url,random_header=False):
 
                     response = urllib.request.urlopen(request)
                     logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
+                    injeciondict.place = settings.MAKE_SET_INJ_RESPONSE
+                    injeciondict.parameter = str(response) if not isinstance(response,str) else response
                     response_content = response.read()
                     _make_set.add_child(Tree(response))
 
@@ -274,6 +282,10 @@ def union_based_injection(url):
                         # Make the POST request
                         request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                         response = urllib.request.urlopen(request)
+
+                        logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
+                        injeciondict.place = settings.UNION_BASED_INJ_RESPONSE
+                        injeciondict.parameter = str(response) if not isinstance(response,str) else response
                         logger.debug(settings.CRAFTED_REQUEST_TO_BE_SENT%url)
 
                         response_content = response.read()
@@ -335,6 +347,10 @@ def mysql_blind_based_injection(url):
                         request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                         response = urllib.request.urlopen(request)
 
+                        logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
+                        injeciondict.place = settings.BLIND_BASED_INJ_RESPONSE
+                        injeciondict.parameter = str(response) if not isinstance(response,str) else response
+
                         response_content = response.read()
                         _blind_based.add_child(Tree(response_content))
 
@@ -387,6 +403,10 @@ def postgre_sql_blind_injection(url):
                         # Make the POST request
                         request = urllib.request.Request(url, data=urllib.parse.urlencode(form_data_copy).encode(), method='POST')
                         response = urllib.request.urlopen(request)
+
+                        logger.debug(settings.SENT_REQUEST_TO_TARGET%url)
+                        injeciondict.place = settings.POSTGRE_RESPONSE_IN_INJ_DICT
+                        injeciondict.parameter = str(response) if not isinstance(response,str) else response
 
                         response_content = response.read()
                         _postgre.add_child(Tree(response_content))
