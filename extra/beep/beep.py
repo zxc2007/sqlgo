@@ -3,7 +3,11 @@ import os
 import sys
 sys.path.append(os.getcwd())
 from lib.core.Exceptions.exceptions import SQLGOBeepSoundException
-import thirdparty.pygame as pygame
+try:
+    import thirdparty.pygame as pygame
+
+except:
+    import pygame
 
 def find_beep_wav():
     module_directory = os.path.dirname(os.path.abspath(__file__))
