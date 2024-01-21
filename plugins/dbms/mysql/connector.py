@@ -8,8 +8,9 @@ from lib.core.parser.cmdline import time_out as _timeout
 import logging
 try:
     import pymysql
-except ImportError:
+except:
     pass
+
 
 class Connector(GenericConnector):
     def __init__(self,*args,**kwargs):
@@ -60,8 +61,8 @@ class Connector(GenericConnector):
                     use_unicode=True
                 )
             self.cursor = self.connector.cursor()
-            self.cursor.execute(query)
-            retVal = True
+            _ = self.cursor.execute(query)
+            retVal = str(_)
         except (pymysql.OperationalError, pymysql.ProgrammingError) as ex:
             logger.error(str(ex))
         except pymysql.InternalError as ex:

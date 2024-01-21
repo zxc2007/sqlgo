@@ -295,3 +295,5 @@ class Backend(object):
     @staticmethod
     def isOs(os):
         return Backend.getOs() is not None and Backend.getOs().lower() == os.lower()
+    
+

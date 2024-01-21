@@ -17,7 +17,7 @@ cwd = os.getcwd()
 
 class Dump(object):
 
-    def __init__(self, file_path=cwd+"/extra/capture.txt", write_line=False, sensitive=False):
+    def __init__(self, file_path=cwd+"/extra/capture.txt", write_line=True, sensitive=False):
         self._lock = threading.Lock()
         self.file_path = os.path.abspath(file_path)
         self.write_line = write_line
@@ -198,6 +198,7 @@ class Dump(object):
     
     def DbTableCount(self,dbtables):
         if isinstance(dbtables,dict) and len(dbtables) != 0:
+            print(1)
             self._write(dbtables)
         
         maxLength1 = len("Table")

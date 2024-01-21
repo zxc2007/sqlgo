@@ -305,6 +305,14 @@ SPECIAL_SEPARATORS = ["%26%26", "||", "%0a", "%0d%0a", "%1a"]
 SEPARATORS_LVL1 = DEFAULT_SEPARATORS + SPECIAL_SEPARATORS
 SEPARATORS_LVL3 = SEPARATORS_LVL2 = SEPARATORS_LVL1
 
+#retrieve data from dbms(mysql)
+
+MYSQL_COMMANDS = [
+  "SELECT * FROM %s;",
+  "DESCRIBE %s;",
+  "SHOW TABLES;"
+]
+
 # The command injection prefixes.
 PREFIXES = []
 PREFIXES_LVL1 = [""]

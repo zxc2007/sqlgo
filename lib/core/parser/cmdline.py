@@ -44,7 +44,11 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--update", help="update sqlgo", required=False,action="store_true")
         self.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
         self.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False,action="store_true")
-        
+        self.add_argument("--username",help="Specify the DBMS username",required=False)
+        self.add_argument("--password",help="Specify the DBMS password",required=False)
+        self.add_argument("--username-wordlist",help="use wordlist to specify the brute force attack",required=False)
+        self.add_argument("--password-wordlist",help="use wordlist to specify the brute force attack",required=False)
+
 
 
 
@@ -90,6 +94,10 @@ def extract():
     update = args.update
     beep = args.beep
     no_prompt = args.no_prompt
+    username = args.username
+    password = args.password
+    username_wordlist = args.username_wordlist
+    password_wordlist = args.password_wordlist
     return (
         output,
         verbose,
@@ -125,7 +133,11 @@ def extract():
         shell,
         update,
         beep,
-        no_prompt
+        no_prompt,
+        username,
+        password,
+        username_wordlist,
+        password_wordlist
     )
 
 result = extract()
@@ -164,6 +176,10 @@ shell = result[31]
 update = result[32]
 beep = result[33]
 no_prompt = result[34]
+username = result[35]
+password = result[36]
+username_wordlist = result[37]
+password_wordlist = result[38]
 
 
 

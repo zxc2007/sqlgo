@@ -2,25 +2,25 @@ import os
 import sys
 sys.path.append(os.getcwd())
 from lib.datastruc.injectdict import AttribDict
-from lib.core.parser.cmdline import port as _port
+from lib.core.parser.cmdline import port as _port,username,password,url
 from lib.core.parser.cmdline import dbs,dbms
 from lib.logger.log import logger
 from lib.core.Exceptions.exceptions import SQLGOFilePathException
 from abc import ABC,abstractmethod
 from lib.core.enums.enums import DBMS
+from urllib.parse import urlparse
 try:
     import pymysql
 except:
     pass
-username = None
-password= None
 
 
 conf = AttribDict()
-conf.dbmsUser = username
-conf.dbmsPass = password
+conf.dbmsUser = username or "root"
+conf.dbmsPass = password or "alimirmohammad"
+conf.dbmsDb = dbms or "mysql"
 conf.hostname = "localhost"
-conf.dbms = dbms == DBMS.MYSQL or DBMS.MSSQL
+conf.dbms = "owasp-juice-shop.sqlite"
 class Connector(ABC):
     def __init__(self) -> None:
         self.connector = None
@@ -36,11 +36,14 @@ class Connector(ABC):
             self.db = conf.dbmsDb or dbs
         
         except AttributeError:
-            self.user = "root"
-            self.password = "alimirmohammad"
-            self.hostname = "localhost"
+            global url
+            url = urlparse(url)
+            url = url.hostname
+            self.user = conf.dbmsUser or ""
+            self.password = conf.dbmsPass or ""
+            self.hostname = url or ""
             self.port = 3306
-            self.db = "ali"
+            self.db = conf.dbms or "mysql"
     def print_connected(self):
         self.port = 3306
         if self.hostname and self.port:
