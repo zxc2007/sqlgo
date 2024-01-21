@@ -18,3 +18,12 @@ class SQLGOBeepSoundException(SQlgoBasicException):
 
 class SQLGOStreamHandlerException(SQlgoBasicException):
     pass
+
+class SQLGOFilePathException(SQlgoBasicException):
+    pass
+
+class SQLGOConnectionException(SQlgoBasicException):
+    pass
+
+class SQLGODataException(SQlgoBasicException):
+    pass

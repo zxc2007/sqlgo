@@ -4,6 +4,9 @@ import os
 import sys
 sys.path.append(os.getcwd())
 from lib.datastruc.magiclist import Magiclist
+from lib.datastruc.datastruct import OrderedDict
+
+
 class AttribDict(dict):
     """
     This class defines the dictionary with added capability to access members as attributes
@@ -163,3 +166,49 @@ injeciondict = InjectionDict()
 
 def extract_injection():
     print(injeciondict.data.example)
+
+class LRUDict(object):
+    """
+    This class defines the LRU dictionary
+
+    >>> foo = LRUDict(capacity=2)
+    >>> foo["first"] = 1
+    >>> foo["second"] = 2
+    >>> foo["third"] = 3
+    >>> "first" in foo
+    False
+    >>> "third" in foo
+    True
+    """
+
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.cache = OrderedDict()
+
+    def __len__(self):
+        return len(self.cache)
+
+    def __contains__(self, key):
+        return key in self.cache
+
+    def __getitem__(self, key):
+        value = self.cache.pop(key)
+        self.cache[key] = value
+        return value
+
+    def get(self, key):
+        return self.__getitem__(key)
+
+    def __setitem__(self, key, value):
+        try:
+            self.cache.pop(key)
+        except KeyError:
+            if len(self.cache) >= self.capacity:
+                self.cache.popitem(last=False)
+        self.cache[key] = value
+
+    def set(self, key, value):
+        self.__setitem__(key, value)
+
+    def keys(self):
+        return self.cache.keys()
