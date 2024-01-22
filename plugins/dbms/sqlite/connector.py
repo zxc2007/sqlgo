@@ -26,7 +26,7 @@ class Connector(GenericConnector):
         self.checkFileDb()
 
         try:
-            self.connector = self.__sqlite.connect(database="owasp-juice-shop.sqlite", check_same_thread=False, timeout=6)
+            self.connector = self.__sqlite.connect(database=self.db, check_same_thread=False, timeout=6)
 
             cursor = self.connector.cursor()
             cursor.execute("SELECT * FROM sqlite_master")
@@ -64,7 +64,7 @@ class Connector(GenericConnector):
 
     def execute(self, query):
         try:
-            self.connector = self.__sqlite.connect("owasp-juice-shop.sqlite")
+            self.connector = self.__sqlite.connect(self.db)
             self.cursor = self.connector.cursor()
             self.cursor.execute(query)
         except self.__sqlite.OperationalError as ex:
