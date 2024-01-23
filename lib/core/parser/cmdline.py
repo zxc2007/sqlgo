@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+
 import argparse
 import os
+from urllib.parse import urlparse
 import sys
+from sqlmap.lib.core.data import kb,conf
 sys.path.append(os.getcwd())
-import extra.version
+# import extra.version
 
 class Cmdline(argparse.ArgumentParser):
     def __init__(self):
@@ -10,13 +14,13 @@ class Cmdline(argparse.ArgumentParser):
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
-        self.add_argument("--version",action="version",version="SQLgo version: "+extra.version.VERSION)
+        self.add_argument("--version",action="version",version="SQLgo version: "+"1.1.6.3")
         self.add_argument("--url","-u",help="Give the program url of the target",required=False,default=3306)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
         self.add_argument("--table","-T",help="Specify the database possible table",required=False)
-        self.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str)
+        self.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str,default="mysql")
         self.add_argument("--db","-d",help="Specify the database name",required=False,action="store_true")
         self.add_argument("-dbs",help="Enumerate the DBMS databases",required=False,action="store_true")
         self.add_argument("-tables",help="Enumerate the DBMS tables",required=False,action="store_true")
@@ -48,6 +52,11 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--password",help="Specify the DBMS password",required=False)
         self.add_argument("--username-wordlist",help="use wordlist to specify the brute force attack",required=False)
         self.add_argument("--password-wordlist",help="use wordlist to specify the brute force attack",required=False)
+        self.add_argument("--dbs-port",help="specify the DBMS port",required=False)
+        self.add_argument("--dbs-timeout",help="specify the timeout amount for the connection to DBMS",default=10)
+        self.add_argument("--dbms-user",help="specify the DBMS possible username",required=False)
+        self.add_argument("--dbms-pass",help="specify the DBMS possible password",required=False)
+
 
 
 
@@ -98,6 +107,10 @@ def extract():
     password = args.password
     username_wordlist = args.username_wordlist
     password_wordlist = args.password_wordlist
+    dbs_port = args.dbs_port
+    dbs_timeout = args.dbs_timeout
+    dbms_user = args.dbms_user
+    dbms_pass = args.dbms_pass
     return (
         output,
         verbose,
@@ -137,7 +150,11 @@ def extract():
         username,
         password,
         username_wordlist,
-        password_wordlist
+        password_wordlist,
+        dbs_port,
+        dbs_timeout,
+        dbms_user,
+        dbms_pass
     )
 
 result = extract()
@@ -180,7 +197,19 @@ username = result[35]
 password = result[36]
 username_wordlist = result[37]
 password_wordlist = result[38]
+dbs_port = result[39]
+dbs_timeout = result[40]
+dbms_user = result[41]
+dbms_pass = result[42]
 
 
 
-
+conf.dbmsUser = dbms_user or ""
+conf.dbmsPass = dbms_pass or ""
+conf.hostname = urlparse(url).hostname
+conf.port = 3306 if dbms == "mysql" and dbms is not None else ""
+conf.dbmsDb = dbs or ""
+conf.dbms = dbms or "mysql"
+kb.timeout = dbs_timeout
+conf.timeout = dbs_timeout
+conf.dbmsHandler = "f"

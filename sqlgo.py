@@ -84,6 +84,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
 
+    except ModuleNotFoundError:
+        pass
+
     except:
         traceback.print_exc()
     finally:

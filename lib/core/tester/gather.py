@@ -41,7 +41,7 @@ from lib.core.tester.injector.vernosesresponses import Verbose
 from lib.core.dumper.dumpresults import dumping
 from lib.core.parser.cmdline import dump
 from lib.datastruc.injectdict import extract_injection
-from plugins.dbms.mysql.connection import connect
+from lib.core.controler.handler import handle_dbms_connection
 
 import urllib3
 
@@ -112,7 +112,7 @@ def gather_exploit():
             host_injection(url)
         
         if dump:
-            connect()
+            handle_dbms_connection()
         
         Verbose.verbose_response()
         # python sqlgo.py -u http://localhost:3000/#/search?q=fe --port 3000 --dump --username root --password alimirmohammad
@@ -121,5 +121,7 @@ def gather_exploit():
     except Exception as e:
         logger.debug(e)
         raise
+
+#  python sqlgo.py -u http://testfire.net/index.jsp?content=business_deposit.htm --port 443 --dbms mysql --dbms-port 3306 --tamper space2plus 
 
 
