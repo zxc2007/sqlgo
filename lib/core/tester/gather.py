@@ -45,7 +45,6 @@ from plugins.dbms.mysql.connection import connect
 
 import urllib3
 
-connect()
 def gather_exploit():
     if install_dep:
         install_dependent()

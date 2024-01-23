@@ -5,11 +5,12 @@ from plugins.generic.connector import Connector as GenericConnector
 from lib.core.Exceptions.exceptions import SQLGOConnectionException
 from lib.logger.log import logger
 from lib.core.parser.cmdline import time_out as _timeout
+from lib.logger.log import logger
 import logging
 try:
     import pymysql
 except:
-    pass
+    sys.exit("Module not found: pymysql.please install the dependencies before running the program.")
 
 
 class Connector(GenericConnector):
