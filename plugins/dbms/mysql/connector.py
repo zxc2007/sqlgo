@@ -1,73 +1,55 @@
-import os
-import sys
-sys.path.append(os.getcwd())
-from plugins.generic.connector import Connector as GenericConnector
-from lib.core.Exceptions.exceptions import SQLGOConnectionException
-from lib.logger.log import logger
-from lib.core.parser.cmdline import time_out as _timeout
-from lib.logger.log import logger
-import logging
 try:
     import pymysql
 except:
-    sys.exit("Module not found: pymysql.please install the dependencies before running the program.")
+    pass
 
+import logging
+import struct
+
+from sqlmap.lib.core.common import getSafeExString
+from sqlmap.lib.core.data import conf
+from sqlmap.lib.core.data import logger
+from sqlmap.lib.core.exception import SqlmapConnectionException
+from sqlmap.plugins.generic.connector import Connector as GenericConnector
 
 class Connector(GenericConnector):
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+    """
+    Homepage: https://github.com/PyMySQL/PyMySQL
+    User guide: https://pymysql.readthedocs.io/en/latest/
+    Debian package: python3-pymysql
+    License: MIT
+
+    Possible connectors: http://wiki.python.org/moin/MySQL
+    """
 
     def connect(self):
-        self.initconnection()
+        self.initConnection()
 
         try:
-            if self.connector is None:
-                self.connector = pymysql.connect(
-                    host=self.hostname,
-                    user=self.user,
-                    passwd=self.password,
-                    db=self.db,
-                    port=self.port,
-                    connect_timeout=_timeout if _timeout is not None else 5,
-                    use_unicode=True
-                )
-                print("Connection successful")  # Add this line for debugging
-                self.init_cursor()  # Move the cursor initialization here
-        except (pymysql.OperationalError, pymysql.InternalError, pymysql.ProgrammingError) as ex:
-            raise SQLGOConnectionException(str(ex))
+            self.connector = pymysql.connect(host=self.hostname, user=self.user, passwd=self.password, db=self.db, port=self.port, connect_timeout=conf.timeout, use_unicode=True)
+        except (pymysql.OperationalError, pymysql.InternalError, pymysql.ProgrammingError, struct.error) as ex:
+            raise SqlmapConnectionException(getSafeExString(ex))
 
-        self.print_connected()
-
+        self.initCursor()
+        self.printConnected()
 
     def fetchall(self):
         try:
             return self.cursor.fetchall()
         except pymysql.ProgrammingError as ex:
-            logger.error(str(ex))
+            logger.log(logging.WARN if conf.dbmsHandler else logging.DEBUG, "(remote) %s" % getSafeExString(ex))
             return None
 
     def execute(self, query):
         retVal = False
 
         try:
-            if self.cursor is None:
-                self.init_cursor()
-                self.connector = pymysql.connect(
-                    host=self.hostname,
-                    user=self.user,
-                    passwd=self.password,
-                    db=self.db,
-                    port=self.port,
-                    connect_timeout=5,
-                    use_unicode=True
-                )
-            self.cursor = self.connector.cursor()
-            _ = self.cursor.execute(query)
-            retVal = str(_)
+            self.cursor.execute(query)
+            retVal = True
         except (pymysql.OperationalError, pymysql.ProgrammingError) as ex:
-            logger.error(str(ex))
+            logger.log(logging.WARN if conf.dbmsHandler else logging.DEBUG, "(remote) %s" % getSafeExString(ex))
         except pymysql.InternalError as ex:
-            raise SQLGOConnectionException(str(ex))
+            raise SqlmapConnectionException(getSafeExString(ex))
 
         self.connector.commit()
 
