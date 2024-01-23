@@ -11,8 +11,7 @@ from sqlmap.lib.core.data import conf,kb
 from sqlmap.lib.core.data import logger
 from sqlmap.lib.core.exception import SqlmapConnectionException
 import os
-conf.timeout = 4
-kb.timeout = 4
+
 
 from sqlmap.lib.core.data import conf
 from sqlmap.lib.core.data import logger
