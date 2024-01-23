@@ -1,15 +1,22 @@
-import os
-import sys
-import sqlite3
-sys.path.append(os.getcwd())
+try:
+    import sqlite3
+except:
+    pass
 
+import logging
+
+from sqlmap.lib.core.common import getSafeExString
+from sqlmap.lib.core.convert import getText
+from sqlmap.lib.core.data import conf
+from sqlmap.lib.core.data import logger
+from sqlmap.lib.core.exception import SqlmapConnectionException
+from sqlmap.lib.core.exception import SqlmapMissingDependence
 from plugins.generic.connector import Connector as GenericConnector
-from lib.logger.log import logger
 
 class Connector(GenericConnector):
     """
     Homepage: http://pysqlite.googlecode.com/ and http://packages.ubuntu.com/quantal/python-sqlite
-    User guide: http://docs.python.org/release/2.5/lib/module-sqlite3.html
+    User guide: http://docs.python.org/release/2.5/sqlmap.lib/module-sqlite3.html
     API: http://docs.python.org/library/sqlite3.html
     Debian package: python-sqlite (SQLite 2), python-pysqlite3 (SQLite 3)
     License: MIT
@@ -22,11 +29,11 @@ class Connector(GenericConnector):
         self.__sqlite = sqlite3
 
     def connect(self):
-        self.initconnection()
+        self.initConnection()
         self.checkFileDb()
 
         try:
-            self.connector = self.__sqlite.connect(database=self.db, check_same_thread=False, timeout=6)
+            self.connector = self.__sqlite.connect(database=self.db, check_same_thread=False, timeout=conf.timeout)
 
             cursor = self.connector.cursor()
             cursor.execute("SELECT * FROM sqlite_master")
@@ -40,54 +47,35 @@ class Connector(GenericConnector):
                 try:
                     import sqlite
                 except ImportError:
-                    errMsg = "sqlgo requires 'python-sqlite' third-party library "
+                    errMsg = "sqlmap requires 'python-sqlite' third-party library "
                     errMsg += "in order to directly connect to the database '%s'" % self.db
-                    raise errMsg
+                    raise SqlmapMissingDependence(errMsg)
 
                 self.__sqlite = sqlite
-                self.connector = self.__sqlite.connect(database=self.db, check_same_thread=False, timeout=10)
+                self.connector = self.__sqlite.connect(database=self.db, check_same_thread=False, timeout=conf.timeout)
             except (self.__sqlite.DatabaseError, self.__sqlite.OperationalError) as ex:
-                raise ex
+                raise SqlmapConnectionException(getSafeExString(ex))
 
-        self.init_cursor()
-        self.print_connected()
+        self.initCursor()
+        self.printConnected()
 
     def fetchall(self):
-        return self.cursor.fetchall()
-
-        # try:
-        #     return self.cursor.fetchall()
-        # except self.__sqlite.OperationalError as ex:
-        #     print(ex)
-        #     logger.error(ex)
-        #     return None
+        try:
+            return self.cursor.fetchall()
+        except self.__sqlite.OperationalError as ex:
+            logger.log(logging.WARN if conf.dbmsHandler else logging.DEBUG, "(remote) '%s'" % getSafeExString(ex))
+            return None
 
     def execute(self, query):
         try:
-            self.connector = self.__sqlite.connect(self.db)
-            self.cursor = self.connector.cursor()
-            self.cursor.execute(query)
+            self.cursor.execute(getText(query))
         except self.__sqlite.OperationalError as ex:
-            logger.error(ex)
+            logger.log(logging.WARN if conf.dbmsHandler else logging.DEBUG, "(remote) '%s'" % getSafeExString(ex))
         except self.__sqlite.DatabaseError as ex:
-            raise ex
+            raise SqlmapConnectionException(getSafeExString(ex))
 
         self.connector.commit()
 
     def select(self, query):
         self.execute(query)
         return self.fetchall()
-    
-
-con = Connector()
-con.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        user_id INTEGER PRIMARY KEY,
-        username TEXT NOT NULL,
-        email TEXT UNIQUE,
-        birthdate DATE
-    );
-''')
-f = con.execute("SELECT * FROM users;")
-fet = con.fetchall()
-print(fet)
