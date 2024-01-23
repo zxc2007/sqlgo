@@ -1,3 +1,9 @@
 bs4 
 termcolor
 pygame
+urllib3
+charset_normalizer
+idna
+six
+pymysql
+cx_Oracle
