@@ -11,7 +11,11 @@ from extras.bs4funs import *  # Import the missing function
 from src.core.tester.XSSfuns import get_all_forms, get_form_details
 import random
 from extras.useragents import useragents
-from thirdparty.colorama import Fore,init
+
+try:
+    from thirdparty.colorama import Fore,init
+except:
+    from colorama import Fore,init
 from src.core.parser.cmdline import url as _url
 import socket
 try:

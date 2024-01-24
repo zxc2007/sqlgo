@@ -7,6 +7,8 @@ from _plugins.dbms.sqlite.connector import Connector as SqliteCon
 
 from src.core.parser.cmdline import *
 
+from sqlmap.lib.core.data import conf,kb
+
 
 conf.dbmsUser = dbms_user or ""
 conf.dbmsPass = dbms_pass or ""

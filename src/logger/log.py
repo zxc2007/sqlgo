@@ -3,7 +3,10 @@ import os
 import sys
 
 sys.path.append(os.getcwd())
-from thirdparty.colorama import Fore,init
+try:
+    from thirdparty.colorama import Fore,init
+except:
+    from colorama import Fore,init
 from src.core.parser.cmdline import verbose
 
 init()

@@ -46,7 +46,10 @@ import codecs
 from datetime import date
 from datetime import datetime
 sys.path.append(os.getcwd())
-from thirdparty.colorama import *
+try:
+  from thirdparty.colorama import *
+except:
+  from colorama import *
 from src.core.parser.cmdline import tamper as _tamper
 from src.core.parser.cmdline import time_based_tres,crawl
 from src.core.parser.cmdline import time_out
