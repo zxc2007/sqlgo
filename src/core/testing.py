@@ -24,6 +24,8 @@ from sqlmap.lib.core.data import paths
 from sqlmap.lib.core.data import queries
 from sqlmap.lib.core.patch import unisonRandom
 from sqlmap.lib.core.settings import IS_WIN
+from urllib.parse import urlparse
+from src.core.parser.cmdline import url
 
 def vulnTest():
     """
@@ -75,7 +77,7 @@ def vulnTest():
     count = 0
 
     while True:
-        address, port = "testfire.net", random.randint(10000, 65535)
+        address, port = urlparse(url).hostname, random.randint(10000, 65535)
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             if s.connect_ex((address, port)):
@@ -289,4 +291,4 @@ def smokeTest():
 
     return retVal
 
-vulnTest()
+# vulnTest()

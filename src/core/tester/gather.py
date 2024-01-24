@@ -42,6 +42,7 @@ from src.core.dumper.dumpresults import dumping
 from src.core.parser.cmdline import dump
 from src.datastruc.injectdict import extract_injection
 from src.core.controler.handler import handle_dbms_connection
+from src.core.tester.crawler import crawl as _crawl,kb
 
 import urllib3
 
@@ -113,6 +114,8 @@ def gather_exploit():
         if crawl:
             crawler_threads()
             host_injection(url)
+            kb.targets = url
+            _crawl(url)
         
         if dump:
             handle_dbms_connection()
