@@ -33,7 +33,7 @@ from sqlmap.thirdparty import six
 from sqlmap.thirdparty.beautifulsoup.beautifulsoup import BeautifulSoup
 from sqlmap.thirdparty.six.moves import http_client as _http_client
 from sqlmap.thirdparty.six.moves import urllib as _urllib
-
+conf.crawlDepth = 3
 
 def crawl(target, post=None, cookie=None):
     if not target:

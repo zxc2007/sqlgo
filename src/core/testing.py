@@ -25,9 +25,11 @@ from sqlmap.lib.core.data import queries
 from sqlmap.lib.core.patch import unisonRandom
 from sqlmap.lib.core.settings import IS_WIN
 from urllib.parse import urlparse
-from src.core.parser.cmdline import url
+from src.core.parser.cmdline import url,port
 
 def vulnTest():
+    global url
+    global port
     """
     Runs the testing against 'vulnserver'
     """
@@ -77,9 +79,13 @@ def vulnTest():
     count = 0
 
     while True:
-        address, port = urlparse(url).hostname, random.randint(10000, 65535)
+        print("testing")
+
+        address, port = urlparse(url).hostname, port or random.randint(1, 65535)
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            if s.connect((address,port)):
+                break
             if s.connect_ex((address, port)):
                 break
             else:
@@ -88,8 +94,12 @@ def vulnTest():
             s.close()
 
     def _thread():
-        vulnserver.init(quiet=True)
-        vulnserver.run(address=address, port=port)
+        try:
+            vulnserver.init(quiet=True)
+            vulnserver.run(address=address, port=port)
+        
+        except:
+            pass
 
     vulnserver._alive = True
 

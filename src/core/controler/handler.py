@@ -4,6 +4,7 @@ import sys
 from _plugins.dbms.mysql.connector import Connector as MysqlConn
 from _plugins.dbms.oracle.connector import Connector as OracleConn
 from _plugins.dbms.sqlite.connector import Connector as SqliteCon
+from src.core.dumper.dump import dumper
 
 from src.core.parser.cmdline import *
 
