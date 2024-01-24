@@ -4,7 +4,7 @@ import os
 import re
 
 from xml.etree import ElementTree as et
-
+ 
 from sqlmap.lib.core.common import getSafeExString
 from sqlmap.lib.core.compat import xrange
 from sqlmap.lib.core.data import conf
@@ -5710,7 +5710,7 @@ def loadPayloads():
         root = doc.getroot()
         parseXmlNode(root)
 
-
+payload_gen = loadPayloads()
 # a = loadPayloads()
 # print(a)
 # a = chunkSplitPostData("SELECT username,password FROM users")

@@ -1,7 +1,4 @@
-from src.core.parser.cmdline import shell
-if shell:
-    __import__("lib.core.tester.shells")
-    raise SystemExit
+
 from src.logger.log import logger
 from src.core.tester.gather import gather_exploit
 from src.checker.checks import check_version
@@ -19,6 +16,7 @@ import threading
 import os
 import sys
 import warnings
+sys.path.append("./.venv/lib/python3.12/site-packages")
 
 
 warnings.filterwarnings("ignore", category=SyntaxWarning)

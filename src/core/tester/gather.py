@@ -43,6 +43,7 @@ from src.core.parser.cmdline import dump
 from src.datastruc.injectdict import extract_injection
 from src.core.controler.handler import handle_dbms_connection
 from src.core.tester.crawler import crawl as _crawl,kb
+from src.core.testing import vulnTest
 
 import urllib3
 
@@ -104,7 +105,8 @@ def gather_exploit():
         
         if level >= 4:
             threads = [
-                injection_test_is_vuln_time_based()
+                injection_test_is_vuln_time_based(),
+                vulnTest()
             ]
             for _thread in threads:
                 _thread = threading.Thread(target=_thread)
