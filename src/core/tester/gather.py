@@ -38,16 +38,16 @@ from src.core.tester.useragentparam.useragent import crawler
 from src.core.tester.injector._requests import user_agent_injection
 from src.core.tester.injector.injections import crawler_threads
 from src.core.tester.injector.vernosesresponses import Verbose
-# from src.core.dumper.dumpresults import dumping
 from src.core.parser.cmdline import dump
 from src.datastruc.injectdict import extract_injection
 from src.core.controler.handler import handle_dbms_connection
 from src.core.tester.crawler import crawl as _crawl,kb
 from src.core.testing import vulnTest
+from src.core.parser.cmdline import xml
+from src.core.tester.injector.xmls import XML
 
 import urllib3
 
-# handle_dbms_connection()
 
 
 def gather_exploit():
@@ -114,14 +114,26 @@ def gather_exploit():
                 _thread.start()
                 _thread.join()
         
+
+        if dump:
+            try:
+                handle_dbms_connection()
+            
+            except Exception as e:
+                logger.error("error occurred during connection to the database:%s"%str(e))
+        
+        if xml:
+            xml = XML(url)
+            xml.send_to_website()
+            import sys
         if crawl:
             crawler_threads()
             host_injection(url)
             kb.targets = url
             _crawl(url)
         
-        if dump:
-            handle_dbms_connection()
+
+
         
         Verbose.verbose_response()
         # python sqlgo.py -u http://localhost:3000/#/search?q=fe --port 3000 --dump --username root --password alimirmohammad

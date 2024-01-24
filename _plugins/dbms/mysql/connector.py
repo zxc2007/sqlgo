@@ -104,7 +104,7 @@ class Connector(GenericConnector):
         self.initConnection()
 
         try:
-            self.connector = pymysql.connect(host=self.hostname, user=self.user, passwd=self.password, db=self.db, port=self.port, connect_timeout=5, use_unicode=True)
+            self.connector = pymysql.connect(host=self.hostname, user=self.user, passwd=self.password, db=self.db, port=self.port, connect_timeout=10, use_unicode=True)
         except (pymysql.OperationalError, pymysql.InternalError, pymysql.ProgrammingError, struct.error) as ex:
             raise SqlmapConnectionException(getSafeExString(ex))
 
@@ -122,16 +122,17 @@ class Connector(GenericConnector):
         retVal = False
 
         try:
-            self.cursor.execute(query)
+            _  =self.cursor.execute(query)
             retVal = True
         except (pymysql.OperationalError, pymysql.ProgrammingError) as ex:
             logger.log(logging.WARN if conf.dbmsHandler else logging.DEBUG, "(remote) %s" % getSafeExString(ex))
+            print("ERROR")
         except pymysql.InternalError as ex:
             raise SqlmapConnectionException(getSafeExString(ex))
 
         self.connector.commit()
 
-        return retVal
+        return _
 
     def select(self, query):
         retVal = None

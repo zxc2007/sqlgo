@@ -4,11 +4,12 @@ import sys
 import glob
 import requests
 from src.logger.log import logger
-
+from src.core.payloadgen import loadPayloads
 
 class XML:
-    class XMLreq_boolean_based:
-        def __init__(self,url):
+    class XMLALL:
+        def __init__(self, url):
+            loadPayloads()
             self.url = url
             self._cwd = os.getcwd()
             self._xml_all = glob.glob(self._cwd + "/data/xml/*.xml")
@@ -23,27 +24,26 @@ class XML:
 
         def parse_xml(self, xml_string):
             root = ET.fromstring(xml_string)
-            # Process the XML data as needed
-            # For example, logger.info the payload to the terminal
             logger.info(xml_string)
-            # Send the XML payload to a website
-            self.send_to_website(xml_string)
+            return xml_string
 
-        def send_to_website(self, xml_payload):
-            # Replace the URL with the actual endpoint you want to send the data to
-            url = self.url
-            response = self.__request.post(url, data=xml_payload, headers=self.__headers)
-
-            if response.status_code == 200:
-                logger.info("Successfully sent XML payload to the website.")
-                logger.info("Response:", response.text)  # Print the website's response
-            else:
-                logger.info(f"Failed to send XML payload. Status code: {response.status_code}")
-                logger.info("Response:", response.text)  # Print the website's response in case of failure
-
-        def process_payloads(self):
+        def send_to_website(self):
             payloads = self._read_payload()
-            for _payload in payloads:
-                self.parse_xml(_payload)
+            for payload in payloads:
+                xml_payload = self.parse_xml(payload)
+                # Replace the URL with the actual endpoint you want to send the data to
+                url = self.url
+                response = self.__request.post(url, data=xml_payload, headers=self.__headers)
+
+                if response.status_code == 200:
+                    logger.info("Successfully sent XML payload to the website.")
+                    logger.debug("Response:%s"% response.text)  
+                else:
+                    logger.info(f"Failed to send XML payload. Status code: {response.status_code}")
+                    logger.info("Response:%s"% response.text)  
+
+# Instantiate the class and send XML payloads to the website
+
+
 
 

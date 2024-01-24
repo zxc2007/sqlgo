@@ -299,6 +299,6 @@ def smokeTest():
     else:
         logger.error("smoke test final result: FAILED")
 
-    return retVal
+    return 
 
 # vulnTest()

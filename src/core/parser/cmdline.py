@@ -57,6 +57,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--dbs-timeout",help="specify the timeout amount for the connection to DBMS",default=10)
         self.add_argument("--dbms-user",help="specify the DBMS possible username",required=False)
         self.add_argument("--dbms-pass",help="specify the DBMS possible password",required=False)
+        self.add_argument("--xml",help="send xml data payloads to the website ",required=False,action="store_true")
 
 
 
@@ -112,6 +113,7 @@ def extract():
     dbs_timeout = args.dbs_timeout
     dbms_user = args.dbms_user
     dbms_pass = args.dbms_pass
+    xml = args.xml
     return (
         output,
         verbose,
@@ -155,7 +157,8 @@ def extract():
         dbs_port,
         dbs_timeout,
         dbms_user,
-        dbms_pass
+        dbms_pass,
+        xml
     )
 
 result = extract()
@@ -202,6 +205,7 @@ dbs_port = result[39]
 dbs_timeout = result[40]
 dbms_user = result[41]
 dbms_pass = result[42]
+xml = result[43]
 
 
 
