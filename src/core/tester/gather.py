@@ -38,7 +38,7 @@ from src.core.tester.useragentparam.useragent import crawler
 from src.core.tester.injector._requests import user_agent_injection
 from src.core.tester.injector.injections import crawler_threads
 from src.core.tester.injector.vernosesresponses import Verbose
-from src.core.dumper.dumpresults import dumping
+# from src.core.dumper.dumpresults import dumping
 from src.core.parser.cmdline import dump
 from src.datastruc.injectdict import extract_injection
 from src.core.controler.handler import handle_dbms_connection

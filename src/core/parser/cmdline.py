@@ -6,7 +6,7 @@ import sys
 
 import extras.version
 
-from src.datastruc.atribdict import conf,kb
+
 
 
 class Cmdline(argparse.ArgumentParser):
@@ -205,12 +205,12 @@ dbms_pass = result[42]
 
 
 
-conf.dbmsUser = dbms_user or ""
-conf.dbmsPass = dbms_pass or ""
-conf.hostname = urlparse(url).hostname
-conf.port = 3306 if dbms == "mysql" and dbms is not None else ""
-conf.dbmsDb = dbs or ""
-conf.dbms = dbms or "mysql"
-kb.timeout = dbs_timeout
-conf.timeout = dbs_timeout
-conf.dbmsHandler = "f"
+# conf.dbmsUser = dbms_user or ""
+# conf.dbmsPass = dbms_pass or ""
+# conf.hostname = urlparse(url).hostname
+# conf.port = 3306 if dbms == "mysql" and dbms is not None else ""
+# conf.dbmsDb = dbs or ""
+# conf.dbms = dbms or "mysql"
+# kb.timeout = dbs_timeout
+# conf.timeout = dbs_timeout
+# conf.dbmsHandler = "f"
