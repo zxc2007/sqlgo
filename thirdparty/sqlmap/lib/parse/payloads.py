@@ -10,7 +10,7 @@ import re
 
 from xml.etree import ElementTree as et
 
-from lib.core.common import getSafeExString
+from src.core.common import getSafeExString
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import paths

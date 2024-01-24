@@ -7,8 +7,8 @@ See the file 'LICENSE' for copying permission
 
 import zipfile
 
-from lib.core.common import getSafeExString
-from lib.core.common import isZipFile
+from src.core.common import getSafeExString
+from src.core.common import isZipFile
 from lib.core.exception import SqlmapDataException
 from lib.core.exception import SqlmapInstallationException
 from thirdparty import six

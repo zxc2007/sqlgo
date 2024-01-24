@@ -17,7 +17,7 @@ import tempfile
 import zlib
 
 from lib.core.compat import xrange
-from lib.core.enums import MKSTEMP_PREFIX
+from src.core.enums import MKSTEMP_PREFIX
 from lib.core.exception import SqlmapSystemException
 from lib.core.settings import BIGARRAY_CHUNK_SIZE
 from lib.core.settings import BIGARRAY_COMPRESS_LEVEL

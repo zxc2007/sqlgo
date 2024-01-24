@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import binascii
 
-from lib.core.common import Backend
+from src.core.common import Backend
 from lib.core.compat import xrange
 from lib.core.convert import getBytes
 from lib.core.data import logger

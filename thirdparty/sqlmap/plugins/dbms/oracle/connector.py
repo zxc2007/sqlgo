@@ -14,12 +14,12 @@ import logging
 import os
 import re
 
-from lib.core.common import getSafeExString
+from src.core.common import getSafeExString
 from lib.core.convert import getText
 from lib.core.data import conf
 from lib.core.data import logger
 from lib.core.exception import SqlmapConnectionException
-from plugins.generic.connector import Connector as GenericConnector
+from _plugins.generic.connector import Connector as GenericConnector
 
 os.environ["NLS_LANG"] = ".AL32UTF8"
 

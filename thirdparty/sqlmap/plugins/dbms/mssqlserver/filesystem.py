@@ -8,13 +8,13 @@ See the file 'LICENSE' for copying permission
 import ntpath
 import os
 
-from lib.core.common import checkFile
-from lib.core.common import getLimitRange
-from lib.core.common import isNumPosStrValue
-from lib.core.common import isTechniqueAvailable
-from lib.core.common import posixToNtSlashes
-from lib.core.common import randomStr
-from lib.core.common import readInput
+from src.core.common import checkFile
+from src.core.common import getLimitRange
+from src.core.common import isNumPosStrValue
+from src.core.common import isTechniqueAvailable
+from src.core.common import posixToNtSlashes
+from src.core.common import randomStr
+from src.core.common import readInput
 from lib.core.compat import xrange
 from lib.core.convert import encodeBase64
 from lib.core.convert import encodeHex
@@ -22,9 +22,9 @@ from lib.core.convert import rot13
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import EXPECTED
-from lib.core.enums import PAYLOAD
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import EXPECTED
+from src.core.enums import PAYLOAD
 from lib.core.exception import SqlmapNoneDataException
 from lib.core.exception import SqlmapUnsupportedFeatureException
 from lib.request import inject

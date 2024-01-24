@@ -8,22 +8,22 @@ See the file 'LICENSE' for copying permission
 import ntpath
 import re
 
-from lib.core.common import Backend
-from lib.core.common import hashDBWrite
-from lib.core.common import isStackingAvailable
-from lib.core.common import normalizePath
-from lib.core.common import ntToPosixSlashes
-from lib.core.common import posixToNtSlashes
-from lib.core.common import readInput
-from lib.core.common import singleTimeDebugMessage
-from lib.core.common import unArrayizeValue
+from src.core.common import Backend
+from src.core.common import hashDBWrite
+from src.core.common import isStackingAvailable
+from src.core.common import normalizePath
+from src.core.common import ntToPosixSlashes
+from src.core.common import posixToNtSlashes
+from src.core.common import readInput
+from src.core.common import singleTimeDebugMessage
+from src.core.common import unArrayizeValue
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import queries
-from lib.core.enums import DBMS
-from lib.core.enums import HASHDB_KEYS
-from lib.core.enums import OS
+from src.core.enums import DBMS
+from src.core.enums import HASHDB_KEYS
+from src.core.enums import OS
 from lib.core.exception import SqlmapNoneDataException
 from lib.request import inject
 

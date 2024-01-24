@@ -20,12 +20,12 @@ import tempfile
 import threading
 import time
 
-from lib.core.common import dataToStdout
-from lib.core.common import getSafeExString
-from lib.core.common import openFile
-from lib.core.common import saveConfig
-from lib.core.common import setColor
-from lib.core.common import unArrayizeValue
+from src.core.common import dataToStdout
+from src.core.common import getSafeExString
+from src.core.common import openFile
+from src.core.common import saveConfig
+from src.core.common import setColor
+from src.core.common import unArrayizeValue
 from lib.core.compat import xrange
 from lib.core.convert import decodeBase64
 from lib.core.convert import dejsonize
@@ -40,10 +40,10 @@ from lib.core.data import logger
 from lib.core.data import paths
 from lib.core.datatype import AttribDict
 from lib.core.defaults import _defaults
-from lib.core.dicts import PART_RUN_CONTENT_TYPES
-from lib.core.enums import AUTOCOMPLETE_TYPE
-from lib.core.enums import CONTENT_STATUS
-from lib.core.enums import MKSTEMP_PREFIX
+from src.core.dicts import PART_RUN_CONTENT_TYPES
+from src.core.enums import AUTOCOMPLETE_TYPE
+from src.core.enums import CONTENT_STATUS
+from src.core.enums import MKSTEMP_PREFIX
 from lib.core.exception import SqlmapConnectionException
 from lib.core.log import LOGGER_HANDLER
 from lib.core.optiondict import optDict
@@ -53,7 +53,7 @@ from lib.core.settings import RESTAPI_DEFAULT_ADDRESS
 from lib.core.settings import RESTAPI_DEFAULT_PORT
 from lib.core.settings import RESTAPI_UNSUPPORTED_OPTIONS
 from lib.core.settings import VERSION_STRING
-from lib.core.shell import autoCompletion
+from src.core.shell import autoCompletion
 from lib.core.subprocessng import Popen
 from lib.parse.cmdline import cmdLineParser
 from thirdparty.bottle.bottle import error as return_error

@@ -9,7 +9,7 @@ import os
 import re
 import subprocess
 
-from lib.core.common import openFile
+from src.core.common import openFile
 from lib.core.convert import getText
 
 def getRevisionNumber():

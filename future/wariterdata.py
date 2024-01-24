@@ -2,9 +2,9 @@ import io
 import os
 import sys
 sys.path.append(os.getcwd())
-from lib.core.Exceptions.exceptions import SQLGOStreamHandlerException
+from src.core.Exceptions.exceptions import SQLGOStreamHandlerException
 import io
-from lib.core.Exceptions.exceptions import SQLGOStreamHandlerException
+from src.core.Exceptions.exceptions import SQLGOStreamHandlerException
 
 class StreamReaderWriter:
     def __init__(self, stream, encoding='utf-8'):

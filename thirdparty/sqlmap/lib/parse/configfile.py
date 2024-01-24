@@ -5,16 +5,16 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import checkFile
-from lib.core.common import getSafeExString
-from lib.core.common import openFile
-from lib.core.common import unArrayizeValue
-from lib.core.common import UnicodeRawConfigParser
+from src.core.common import checkFile
+from src.core.common import getSafeExString
+from src.core.common import openFile
+from src.core.common import unArrayizeValue
+from src.core.common import UnicodeRawConfigParser
 from lib.core.convert import getUnicode
 from lib.core.data import cmdLineOptions
 from lib.core.data import conf
 from lib.core.data import logger
-from lib.core.enums import OPTION_TYPE
+from src.core.enums import OPTION_TYPE
 from lib.core.exception import SqlmapMissingMandatoryOptionException
 from lib.core.exception import SqlmapSyntaxException
 from lib.core.optiondict import optDict

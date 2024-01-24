@@ -8,20 +8,20 @@ See the file 'LICENSE' for copying permission
 import re
 import socket
 
-from lib.core.common import getSafeExString
-from lib.core.common import popValue
-from lib.core.common import pushValue
-from lib.core.common import readInput
-from lib.core.common import urlencode
+from src.core.common import getSafeExString
+from src.core.common import popValue
+from src.core.common import pushValue
+from src.core.common import readInput
+from src.core.common import urlencode
 from lib.core.convert import getBytes
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.decorators import stackedmethod
-from lib.core.enums import CUSTOM_LOGGING
-from lib.core.enums import HTTP_HEADER
-from lib.core.enums import REDIRECTION
+from src.core.enums import CUSTOM_LOGGING
+from src.core.enums import HTTP_HEADER
+from src.core.enums import REDIRECTION
 from lib.core.exception import SqlmapBaseException
 from lib.core.exception import SqlmapConnectionException
 from lib.core.exception import SqlmapUserQuitException

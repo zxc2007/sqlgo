@@ -7,16 +7,16 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import Backend
-from lib.core.common import Format
-from lib.core.common import randomRange
-from lib.core.common import randomStr
+from src.core.common import Backend
+from src.core.common import Format
+from src.core.common import randomRange
+from src.core.common import randomStr
 from lib.core.compat import xrange
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.session import setDbms
 from lib.core.settings import FIREBIRD_ALIASES
 from lib.core.settings import METADB_SUFFIX

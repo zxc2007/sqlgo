@@ -1,19 +1,19 @@
-from lib.core.parser.cmdline import shell
+from src.core.parser.cmdline import shell
 if shell:
     __import__("lib.core.tester.shells")
     raise SystemExit
-from lib.logger.log import logger
-from lib.core.tester.gather import gather_exploit
-from lib.checker.checks import check_version
-from extra.disclaimer import disclaimer
-from extra.logo import logo
-import lib.core.setting.setting as settings
-from lib.core.parser.cmdline import url as _url
-from lib.core.parser.cmdline import beep
-from lib.core.shell.shell import shell_handler
+from src.logger.log import logger
+from src.core.tester.gather import gather_exploit
+from src.checker.checks import check_version
+from extras.disclaimer import disclaimer
+from extras.logo import logo
+import src.core.setting.setting as settings
+from src.core.parser.cmdline import url as _url
+from src.core.parser.cmdline import beep
+from src.core.shell.shell import shell_handler
 from datetime import datetime
-from lib.core.controler.handler import handle_dbms_connection
-import lib.core.setting.setting as settings
+from src.core.controler.handler import handle_dbms_connection
+import src.core.setting.setting as settings
 import traceback
 import threading
 import os
@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
 
-handle_dbms_connection()
+# handle_dbms_connection()
 
 
 

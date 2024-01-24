@@ -6,14 +6,14 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.agent import agent
-from lib.core.common import dataToOutFile
-from lib.core.common import decodeDbmsHexValue
-from lib.core.common import getSQLSnippet
-from lib.core.common import isNoneValue
+from src.core.common import dataToOutFile
+from src.core.common import decodeDbmsHexValue
+from src.core.common import getSQLSnippet
+from src.core.common import isNoneValue
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import DBMS
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import DBMS
 from lib.core.exception import SqlmapUnsupportedFeatureException
 from lib.request import inject
 from lib.request.connect import Connect as Request

@@ -8,12 +8,12 @@ See the file 'LICENSE' for copying permission
 import atexit
 import os
 
-from lib.core import readlineng as readline
-from lib.core.common import getSafeExString
+from src.core import readlineng as readline
+from src.core.common import getSafeExString
 from lib.core.data import logger
 from lib.core.data import paths
-from lib.core.enums import AUTOCOMPLETE_TYPE
-from lib.core.enums import OS
+from src.core.enums import AUTOCOMPLETE_TYPE
+from src.core.enums import OS
 from lib.core.settings import IS_WIN
 from lib.core.settings import MAX_HISTORY_LENGTH
 

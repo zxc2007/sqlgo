@@ -7,15 +7,15 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import Backend
-from lib.core.common import Format
-from lib.core.common import getCurrentThreadData
-from lib.core.common import randomStr
-from lib.core.common import wasLastResponseDBMSError
+from src.core.common import Backend
+from src.core.common import Format
+from src.core.common import getCurrentThreadData
+from src.core.common import randomStr
+from src.core.common import wasLastResponseDBMSError
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.session import setDbms
 from lib.core.settings import ACCESS_ALIASES
 from lib.core.settings import METADB_SUFFIX

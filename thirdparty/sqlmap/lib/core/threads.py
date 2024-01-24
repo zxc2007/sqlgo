@@ -19,7 +19,7 @@ from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.datatype import AttribDict
-from lib.core.enums import PAYLOAD
+from src.core.enums import PAYLOAD
 from lib.core.exception import SqlmapBaseException
 from lib.core.exception import SqlmapConnectionException
 from lib.core.exception import SqlmapSkipTargetException
@@ -101,7 +101,7 @@ def exceptionHandledFunction(threadFunction, silent=False):
         kb.threadException = True
         raise
     except Exception as ex:
-        from lib.core.common import getSafeExString
+        from src.core.common import getSafeExString
 
         if not silent and kb.get("threadContinue") and not kb.get("multipleCtrlC") and not isinstance(ex, (SqlmapUserQuitException, SqlmapSkipTargetException)):
             errMsg = getSafeExString(ex) if isinstance(ex, SqlmapBaseException) else "%s: %s" % (type(ex).__name__, getSafeExString(ex))
@@ -235,7 +235,7 @@ def runThreads(numThreads, threadFunction, cleanupFunction=None, forwardExceptio
             if isinstance(ex, sqlite3.Error):
                 raise
             else:
-                from lib.core.common import unhandledExceptionMessage
+                from src.core.common import unhandledExceptionMessage
 
                 kb.threadException = True
                 errMsg = unhandledExceptionMessage()

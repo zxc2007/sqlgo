@@ -49,30 +49,30 @@ try:
 
     from lib.core.data import logger
 
-    from lib.core.common import banner
-    from lib.core.common import checkIntegrity
-    from lib.core.common import checkPipedInput
-    from lib.core.common import createGithubIssue
-    from lib.core.common import dataToStdout
-    from lib.core.common import extractRegexResult
-    from lib.core.common import filterNone
-    from lib.core.common import getDaysFromLastUpdate
-    from lib.core.common import getFileItems
-    from lib.core.common import getSafeExString
-    from lib.core.common import maskSensitiveData
-    from lib.core.common import openFile
-    from lib.core.common import setPaths
-    from lib.core.common import weAreFrozen
+    from src.core.common import banner
+    from src.core.common import checkIntegrity
+    from src.core.common import checkPipedInput
+    from src.core.common import createGithubIssue
+    from src.core.common import dataToStdout
+    from src.core.common import extractRegexResult
+    from src.core.common import filterNone
+    from src.core.common import getDaysFromLastUpdate
+    from src.core.common import getFileItems
+    from src.core.common import getSafeExString
+    from src.core.common import maskSensitiveData
+    from src.core.common import openFile
+    from src.core.common import setPaths
+    from src.core.common import weAreFrozen
     from lib.core.convert import getUnicode
-    from lib.core.common import setColor
-    from lib.core.common import unhandledExceptionMessage
+    from src.core.common import setColor
+    from src.core.common import unhandledExceptionMessage
     from lib.core.compat import LooseVersion
     from lib.core.compat import xrange
     from lib.core.data import cmdLineOptions
     from lib.core.data import conf
     from lib.core.data import kb
     from lib.core.datatype import OrderedSet
-    from lib.core.enums import MKSTEMP_PREFIX
+    from src.core.enums import MKSTEMP_PREFIX
     from lib.core.exception import SqlmapBaseException
     from lib.core.exception import SqlmapShellQuitException
     from lib.core.exception import SqlmapSilentQuitException

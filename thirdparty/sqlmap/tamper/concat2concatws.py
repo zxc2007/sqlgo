@@ -7,9 +7,9 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import singleTimeWarnMessage
-from lib.core.enums import DBMS
-from lib.core.enums import PRIORITY
+from src.core.common import singleTimeWarnMessage
+from src.core.enums import DBMS
+from src.core.enums import PRIORITY
 
 __priority__ = PRIORITY.HIGHEST
 

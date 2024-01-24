@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.enums import PRIORITY
+from src.core.enums import PRIORITY
 
 __priority__ = PRIORITY.LOW
 

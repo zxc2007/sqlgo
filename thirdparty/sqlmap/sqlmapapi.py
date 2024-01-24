@@ -19,8 +19,8 @@ import warnings
 warnings.filterwarnings(action="ignore", category=UserWarning)
 warnings.filterwarnings(action="ignore", category=DeprecationWarning)
 
-from lib.core.common import getUnicode
-from lib.core.common import setPaths
+from src.core.common import getUnicode
+from src.core.common import setPaths
 from lib.core.data import logger
 from lib.core.patch import dirtyPatches
 from lib.core.patch import resolveCrossReferences

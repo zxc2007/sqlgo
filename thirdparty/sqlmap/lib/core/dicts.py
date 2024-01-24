@@ -5,10 +5,10 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.enums import CONTENT_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import OS
-from lib.core.enums import POST_HINT
+from src.core.enums import CONTENT_TYPE
+from src.core.enums import DBMS
+from src.core.enums import OS
+from src.core.enums import POST_HINT
 from lib.core.settings import ACCESS_ALIASES
 from lib.core.settings import ALTIBASE_ALIASES
 from lib.core.settings import BLANK

@@ -7,11 +7,11 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import openFile
-from lib.core.common import randomStr
+from src.core.common import openFile
+from src.core.common import randomStr
 from lib.core.data import conf
 from lib.core.data import logger
-from lib.core.enums import REGISTRY_OPERATION
+from src.core.enums import REGISTRY_OPERATION
 
 class Registry(object):
     """

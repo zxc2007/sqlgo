@@ -9,7 +9,7 @@ import re
 
 from xml.sax.handler import ContentHandler
 
-from lib.core.common import sanitizeStr
+from src.core.common import sanitizeStr
 
 class FingerprintHandler(ContentHandler):
     """

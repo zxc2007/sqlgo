@@ -9,8 +9,8 @@ import random
 import string
 
 from lib.core.compat import xrange
-from lib.core.enums import HINT
-from lib.core.enums import PRIORITY
+from src.core.enums import HINT
+from src.core.enums import PRIORITY
 from lib.core.settings import DEFAULT_GET_POST_DELIMITER
 
 __priority__ = PRIORITY.NORMAL

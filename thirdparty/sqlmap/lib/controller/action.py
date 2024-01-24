@@ -6,13 +6,13 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.controller.handler import setHandler
-from lib.core.common import Backend
-from lib.core.common import Format
+from src.core.common import Backend
+from src.core.common import Format
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import paths
-from lib.core.enums import CONTENT_TYPE
+from src.core.enums import CONTENT_TYPE
 from lib.core.exception import SqlmapNoneDataException
 from lib.core.exception import SqlmapUnsupportedDBMSException
 from lib.core.settings import SUPPORTED_DBMS

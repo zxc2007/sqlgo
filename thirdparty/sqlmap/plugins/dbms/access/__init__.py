@@ -5,7 +5,7 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.settings import ACCESS_SYSTEM_DBS
 from lib.core.unescaper import unescaper
 from plugins.dbms.access.enumeration import Enumeration

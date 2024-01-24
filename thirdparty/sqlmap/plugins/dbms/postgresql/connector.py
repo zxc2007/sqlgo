@@ -13,10 +13,10 @@ try:
 except:
     pass
 
-from lib.core.common import getSafeExString
+from src.core.common import getSafeExString
 from lib.core.data import logger
 from lib.core.exception import SqlmapConnectionException
-from plugins.generic.connector import Connector as GenericConnector
+from _plugins.generic.connector import Connector as GenericConnector
 
 class Connector(GenericConnector):
     """

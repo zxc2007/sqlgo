@@ -7,10 +7,10 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import randomRange
+from src.core.common import randomRange
 from lib.core.compat import xrange
 from lib.core.data import kb
-from lib.core.enums import PRIORITY
+from src.core.enums import PRIORITY
 
 __priority__ = PRIORITY.LOW
 

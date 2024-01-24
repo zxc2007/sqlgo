@@ -9,7 +9,7 @@ import logging
 import re
 import sys
 
-from lib.core.enums import CUSTOM_LOGGING
+from src.core.enums import CUSTOM_LOGGING
 
 logging.addLevelName(CUSTOM_LOGGING.PAYLOAD, "PAYLOAD")
 logging.addLevelName(CUSTOM_LOGGING.TRAFFIC_OUT, "TRAFFIC OUT")

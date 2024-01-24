@@ -12,23 +12,23 @@ import re
 import tempfile
 import time
 
-from lib.core.common import checkSameHost
-from lib.core.common import clearConsoleLine
-from lib.core.common import dataToStdout
-from lib.core.common import extractRegexResult
-from lib.core.common import findPageForms
-from lib.core.common import getSafeExString
-from lib.core.common import openFile
-from lib.core.common import readInput
-from lib.core.common import safeCSValue
-from lib.core.common import urldecode
+from src.core.common import checkSameHost
+from src.core.common import clearConsoleLine
+from src.core.common import dataToStdout
+from src.core.common import extractRegexResult
+from src.core.common import findPageForms
+from src.core.common import getSafeExString
+from src.core.common import openFile
+from src.core.common import readInput
+from src.core.common import safeCSValue
+from src.core.common import urldecode
 from lib.core.compat import xrange
 from lib.core.convert import htmlUnescape
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.datatype import OrderedSet
-from lib.core.enums import MKSTEMP_PREFIX
+from src.core.enums import MKSTEMP_PREFIX
 from lib.core.exception import SqlmapConnectionException
 from lib.core.exception import SqlmapSyntaxException
 from lib.core.settings import CRAWL_EXCLUDE_EXTENSIONS

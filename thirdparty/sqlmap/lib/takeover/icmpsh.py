@@ -11,12 +11,12 @@ import socket
 import time
 
 from extra.icmpsh.icmpsh_m import main as icmpshmaster
-from lib.core.common import getLocalIP
-from lib.core.common import getRemoteIP
-from lib.core.common import normalizePath
-from lib.core.common import ntToPosixSlashes
-from lib.core.common import randomStr
-from lib.core.common import readInput
+from src.core.common import getLocalIP
+from src.core.common import getRemoteIP
+from src.core.common import normalizePath
+from src.core.common import ntToPosixSlashes
+from src.core.common import randomStr
+from src.core.common import readInput
 from lib.core.data import conf
 from lib.core.data import logger
 from lib.core.data import paths

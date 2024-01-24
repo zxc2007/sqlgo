@@ -9,7 +9,7 @@ from __future__ import division
 
 import time
 
-from lib.core.common import dataToStdout
+from src.core.common import dataToStdout
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb

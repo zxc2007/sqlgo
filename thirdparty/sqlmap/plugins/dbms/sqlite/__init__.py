@@ -5,14 +5,14 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.settings import SQLITE_SYSTEM_DBS
 from lib.core.unescaper import unescaper
-from plugins.dbms.sqlite.enumeration import Enumeration
-from plugins.dbms.sqlite.filesystem import Filesystem
-from plugins.dbms.sqlite.fingerprint import Fingerprint
-from plugins.dbms.sqlite.syntax import Syntax
-from plugins.dbms.sqlite.takeover import Takeover
+from _plugins.dbms.sqlite.enumeration import Enumeration
+from _plugins.dbms.sqlite.filesystem import Filesystem
+from _plugins.dbms.sqlite.fingerprint import Fingerprint
+from _plugins.dbms.sqlite.syntax import Syntax
+from _plugins.dbms.sqlite.takeover import Takeover
 from plugins.generic.misc import Miscellaneous
 
 class SQLiteMap(Syntax, Fingerprint, Enumeration, Filesystem, Miscellaneous, Takeover):

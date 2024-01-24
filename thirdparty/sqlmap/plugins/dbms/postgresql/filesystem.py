@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import randomInt
+from src.core.common import randomInt
 from lib.core.compat import xrange
 from lib.core.data import kb
 from lib.core.data import logger

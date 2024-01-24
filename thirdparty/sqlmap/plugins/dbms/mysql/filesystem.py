@@ -6,23 +6,23 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.agent import agent
-from lib.core.common import getSQLSnippet
-from lib.core.common import isNumPosStrValue
-from lib.core.common import isTechniqueAvailable
-from lib.core.common import popValue
-from lib.core.common import pushValue
-from lib.core.common import randomStr
-from lib.core.common import singleTimeWarnMessage
+from src.core.common import getSQLSnippet
+from src.core.common import isNumPosStrValue
+from src.core.common import isTechniqueAvailable
+from src.core.common import popValue
+from src.core.common import pushValue
+from src.core.common import randomStr
+from src.core.common import singleTimeWarnMessage
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.decorators import stackedmethod
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import EXPECTED
-from lib.core.enums import PAYLOAD
-from lib.core.enums import PLACE
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import DBMS
+from src.core.enums import EXPECTED
+from src.core.enums import PAYLOAD
+from src.core.enums import PLACE
 from lib.core.exception import SqlmapNoneDataException
 from lib.request import inject
 from lib.request.connect import Connect as Request

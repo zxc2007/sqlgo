@@ -5,11 +5,11 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import Backend
+from src.core.common import Backend
 from lib.core.data import conf
 from lib.core.data import kb
-from lib.core.dicts import DBMS_DICT
-from lib.core.enums import DBMS
+from src.core.dicts import DBMS_DICT
+from src.core.enums import DBMS
 from lib.core.exception import SqlmapConnectionException
 from lib.core.settings import ACCESS_ALIASES
 from lib.core.settings import ALTIBASE_ALIASES
@@ -79,18 +79,18 @@ from plugins.dbms.monetdb.connector import Connector as MonetDBConn
 from plugins.dbms.monetdb import MonetDBMap
 from plugins.dbms.mssqlserver.connector import Connector as MSSQLServerConn
 from plugins.dbms.mssqlserver import MSSQLServerMap
-from plugins.dbms.mysql.connector import Connector as MySQLConn
-from plugins.dbms.mysql import MySQLMap
-from plugins.dbms.oracle.connector import Connector as OracleConn
-from plugins.dbms.oracle import OracleMap
+from _plugins.dbms.mysql.connector import Connector as MySQLConn
+from _plugins.dbms.mysql import MySQLMap
+from _plugins.dbms.oracle.connector import Connector as OracleConn
+from _plugins.dbms.oracle import OracleMap
 from plugins.dbms.postgresql.connector import Connector as PostgreSQLConn
 from plugins.dbms.postgresql import PostgreSQLMap
 from plugins.dbms.presto.connector import Connector as PrestoConn
 from plugins.dbms.presto import PrestoMap
 from plugins.dbms.raima.connector import Connector as RaimaConn
 from plugins.dbms.raima import RaimaMap
-from plugins.dbms.sqlite.connector import Connector as SQLiteConn
-from plugins.dbms.sqlite import SQLiteMap
+from _plugins.dbms.sqlite.connector import Connector as SQLiteConn
+from _plugins.dbms.sqlite import SQLiteMap
 from plugins.dbms.sybase.connector import Connector as SybaseConn
 from plugins.dbms.sybase import SybaseMap
 from plugins.dbms.vertica.connector import Connector as VerticaConn

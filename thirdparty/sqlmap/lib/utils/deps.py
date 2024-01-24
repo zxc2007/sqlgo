@@ -6,8 +6,8 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.data import logger
-from lib.core.dicts import DBMS_DICT
-from lib.core.enums import DBMS
+from src.core.dicts import DBMS_DICT
+from src.core.enums import DBMS
 from lib.core.settings import IS_WIN
 
 def checkDependencies():

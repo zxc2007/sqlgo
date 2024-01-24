@@ -37,7 +37,7 @@ from lib.core.data import logger
 from lib.core.exception import SqlmapConnectionException
 from lib.core.exception import SqlmapFilePathException
 from lib.core.exception import SqlmapMissingDependence
-from plugins.generic.connector import Connector as GenericConnector
+from _plugins.generic.connector import Connector as GenericConnector
 from thirdparty import six
 from thirdparty.six.moves import urllib as _urllib
 

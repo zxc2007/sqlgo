@@ -5,11 +5,11 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import randomStr
+from src.core.common import randomStr
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.decorators import stackedmethod
-from lib.core.enums import PLACE
+from src.core.enums import PLACE
 from lib.request import inject
 from lib.core.exception import SqlmapUnsupportedFeatureException
 from plugins.generic.filesystem import Filesystem as GenericFilesystem

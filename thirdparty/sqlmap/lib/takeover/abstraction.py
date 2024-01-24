@@ -9,21 +9,21 @@ from __future__ import print_function
 
 import sys
 
-from lib.core.common import Backend
-from lib.core.common import dataToStdout
-from lib.core.common import getSQLSnippet
-from lib.core.common import isStackingAvailable
-from lib.core.common import readInput
+from src.core.common import Backend
+from src.core.common import dataToStdout
+from src.core.common import getSQLSnippet
+from src.core.common import isStackingAvailable
+from src.core.common import readInput
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import AUTOCOMPLETE_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import OS
+from src.core.enums import AUTOCOMPLETE_TYPE
+from src.core.enums import DBMS
+from src.core.enums import OS
 from lib.core.exception import SqlmapFilePathException
 from lib.core.exception import SqlmapUnsupportedFeatureException
-from lib.core.shell import autoCompletion
+from src.core.shell import autoCompletion
 from lib.request import inject
 from lib.takeover.udf import UDF
 from lib.takeover.web import Web

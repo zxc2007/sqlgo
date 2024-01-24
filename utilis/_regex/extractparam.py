@@ -2,8 +2,8 @@ import re
 import os
 import sys
 sys.path.append(os.getcwd())
-from lib.core.Exceptions.exceptions import SQLgoNoParameterFoundException
-from lib.core.payloads.makesetsqlpayload import classify,_sorted
+from src.core.Exceptions.exceptions import SQLgoNoParameterFoundException
+from src.core.payloads.makesetsqlpayload import classify,_sorted
 from utilis.colorago.colorago import Fore
 
 def replace_url_parameter(url, new_value):

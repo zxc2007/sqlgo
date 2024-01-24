@@ -18,11 +18,11 @@ import threading
 import time
 
 from extra.vulnserver import vulnserver
-from lib.core.common import clearConsoleLine
-from lib.core.common import dataToStdout
-from lib.core.common import randomInt
-from lib.core.common import randomStr
-from lib.core.common import shellExec
+from src.core.common import clearConsoleLine
+from src.core.common import dataToStdout
+from src.core.common import randomInt
+from src.core.common import randomStr
+from src.core.common import shellExec
 from lib.core.compat import round
 from lib.core.convert import encodeBase64
 from lib.core.data import kb

@@ -9,8 +9,8 @@ import re
 
 from xml.sax.handler import ContentHandler
 
-from lib.core.common import urldecode
-from lib.core.common import parseXmlFile
+from src.core.common import urldecode
+from src.core.common import parseXmlFile
 from lib.core.data import kb
 from lib.core.data import paths
 from lib.core.settings import HEURISTIC_PAGE_SIZE_THRESHOLD

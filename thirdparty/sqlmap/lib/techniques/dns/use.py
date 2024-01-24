@@ -9,24 +9,24 @@ import re
 import time
 
 from lib.core.agent import agent
-from lib.core.common import Backend
-from lib.core.common import calculateDeltaSeconds
-from lib.core.common import dataToStdout
-from lib.core.common import decodeDbmsHexValue
-from lib.core.common import extractRegexResult
-from lib.core.common import getSQLSnippet
-from lib.core.common import hashDBRetrieve
-from lib.core.common import hashDBWrite
-from lib.core.common import randomInt
-from lib.core.common import randomStr
-from lib.core.common import safeStringFormat
-from lib.core.common import singleTimeWarnMessage
+from src.core.common import Backend
+from src.core.common import calculateDeltaSeconds
+from src.core.common import dataToStdout
+from src.core.common import decodeDbmsHexValue
+from src.core.common import extractRegexResult
+from src.core.common import getSQLSnippet
+from src.core.common import hashDBRetrieve
+from src.core.common import hashDBWrite
+from src.core.common import randomInt
+from src.core.common import randomStr
+from src.core.common import safeStringFormat
+from src.core.common import singleTimeWarnMessage
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import queries
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.settings import DNS_BOUNDARIES_ALPHABET
 from lib.core.settings import MAX_DNS_LABEL
 from lib.core.settings import PARTIAL_VALUE_MARKER

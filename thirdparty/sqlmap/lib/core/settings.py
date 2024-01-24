@@ -13,9 +13,9 @@ import string
 import sys
 import time
 
-from lib.core.enums import DBMS
-from lib.core.enums import DBMS_DIRECTORY_NAME
-from lib.core.enums import OS
+from src.core.enums import DBMS
+from src.core.enums import DBMS_DIRECTORY_NAME
+from src.core.enums import OS
 from thirdparty import six
 from thirdparty.six import unichr as _unichr
 

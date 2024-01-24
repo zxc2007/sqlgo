@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.data import conf
-from lib.core.enums import HTTP_HEADER
+from src.core.enums import HTTP_HEADER
 from thirdparty.six.moves import urllib as _urllib
 
 class ChunkedHandler(_urllib.request.HTTPHandler):

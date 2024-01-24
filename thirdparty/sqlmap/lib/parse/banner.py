@@ -9,12 +9,12 @@ import re
 
 from xml.sax.handler import ContentHandler
 
-from lib.core.common import Backend
-from lib.core.common import parseXmlFile
-from lib.core.common import sanitizeStr
+from src.core.common import Backend
+from src.core.common import parseXmlFile
+from src.core.common import sanitizeStr
 from lib.core.data import kb
 from lib.core.data import paths
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.parse.handler import FingerprintHandler
 
 class MSSQLBannerHandler(ContentHandler):

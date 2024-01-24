@@ -12,8 +12,8 @@ import shutil
 import stat
 import string
 
-from lib.core.common import getSafeExString
-from lib.core.common import openFile
+from src.core.common import getSafeExString
+from src.core.common import openFile
 from lib.core.compat import xrange
 from lib.core.convert import getUnicode
 from lib.core.data import logger

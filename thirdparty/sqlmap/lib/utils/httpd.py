@@ -18,7 +18,7 @@ import traceback
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from lib.core.enums import HTTP_HEADER
+from src.core.enums import HTTP_HEADER
 from lib.core.settings import UNICODE_ENCODING
 from lib.core.settings import VERSION_STRING
 from thirdparty import six

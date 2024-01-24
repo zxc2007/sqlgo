@@ -5,15 +5,15 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import Backend
-from lib.core.common import Format
-from lib.core.common import unArrayizeValue
+from src.core.common import Backend
+from src.core.common import Format
+from src.core.common import unArrayizeValue
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import DBMS
-from lib.core.enums import OS
+from src.core.enums import DBMS
+from src.core.enums import OS
 from lib.core.session import setDbms
 from lib.core.settings import SYBASE_ALIASES
 from lib.request import inject

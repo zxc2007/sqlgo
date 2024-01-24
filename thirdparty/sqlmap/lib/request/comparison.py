@@ -9,13 +9,13 @@ from __future__ import division
 
 import re
 
-from lib.core.common import extractRegexResult
-from lib.core.common import getFilteredPageContent
-from lib.core.common import listToStrValue
-from lib.core.common import removeDynamicContent
-from lib.core.common import getLastRequestHTTPError
-from lib.core.common import wasLastResponseDBMSError
-from lib.core.common import wasLastResponseHTTPError
+from src.core.common import extractRegexResult
+from src.core.common import getFilteredPageContent
+from src.core.common import listToStrValue
+from src.core.common import removeDynamicContent
+from src.core.common import getLastRequestHTTPError
+from src.core.common import wasLastResponseDBMSError
+from src.core.common import wasLastResponseHTTPError
 from lib.core.convert import getBytes
 from lib.core.data import conf
 from lib.core.data import kb

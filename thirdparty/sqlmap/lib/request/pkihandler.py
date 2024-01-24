@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.data import conf
-from lib.core.common import getSafeExString
+from src.core.common import getSafeExString
 from lib.core.exception import SqlmapConnectionException
 from thirdparty.six.moves import http_client as _http_client
 from thirdparty.six.moves import urllib as _urllib

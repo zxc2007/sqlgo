@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import parseXmlFile
+from src.core.common import parseXmlFile
 from lib.core.data import kb
 from lib.core.data import paths
 from lib.parse.handler import FingerprintHandler

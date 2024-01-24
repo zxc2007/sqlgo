@@ -7,10 +7,10 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import Backend
+from src.core.common import Backend
 from lib.core.convert import getBytes
 from lib.core.data import conf
-from lib.core.enums import DBMS
+from src.core.enums import DBMS
 from lib.core.exception import SqlmapUndefinedMethod
 
 class Syntax(object):

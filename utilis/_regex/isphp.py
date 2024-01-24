@@ -2,8 +2,8 @@ import re
 import os
 import sys
 sys.path.append(os.getcwd())
-from lib.core.parser.cmdline import url as _url
-from lib.logger.log import logger
+from src.core.parser.cmdline import url as _url
+from src.logger.log import logger
 
 def _isphp(url=_url):
     return bool(re.search(r"\.php", url))

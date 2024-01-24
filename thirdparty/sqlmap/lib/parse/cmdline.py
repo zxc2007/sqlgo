@@ -64,19 +64,19 @@ finally:
 
         return retVal
 
-from lib.core.common import checkOldOptions
-from lib.core.common import checkSystemEncoding
-from lib.core.common import dataToStdout
-from lib.core.common import expandMnemonics
-from lib.core.common import getSafeExString
+from src.core.common import checkOldOptions
+from src.core.common import checkSystemEncoding
+from src.core.common import dataToStdout
+from src.core.common import expandMnemonics
+from src.core.common import getSafeExString
 from lib.core.compat import xrange
 from lib.core.convert import getUnicode
 from lib.core.data import cmdLineOptions
 from lib.core.data import conf
 from lib.core.data import logger
 from lib.core.defaults import defaults
-from lib.core.dicts import DEPRECATED_OPTIONS
-from lib.core.enums import AUTOCOMPLETE_TYPE
+from src.core.dicts import DEPRECATED_OPTIONS
+from src.core.enums import AUTOCOMPLETE_TYPE
 from lib.core.exception import SqlmapShellQuitException
 from lib.core.exception import SqlmapSilentQuitException
 from lib.core.exception import SqlmapSyntaxException
@@ -88,10 +88,10 @@ from lib.core.settings import INFERENCE_UNKNOWN_CHAR
 from lib.core.settings import IS_WIN
 from lib.core.settings import MAX_HELP_OPTION_LENGTH
 from lib.core.settings import VERSION_STRING
-from lib.core.shell import autoCompletion
-from lib.core.shell import clearHistory
-from lib.core.shell import loadHistory
-from lib.core.shell import saveHistory
+from src.core.shell import autoCompletion
+from src.core.shell import clearHistory
+from src.core.shell import loadHistory
+from src.core.shell import saveHistory
 from thirdparty.six.moves import input as _input
 
 def cmdLineParser(argv=None):

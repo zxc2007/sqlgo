@@ -7,20 +7,20 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import Backend
-from lib.core.common import checkFile
-from lib.core.common import decloakToTemp
-from lib.core.common import flattenValue
-from lib.core.common import filterNone
-from lib.core.common import isListLike
-from lib.core.common import isNoneValue
-from lib.core.common import isStackingAvailable
-from lib.core.common import randomStr
+from src.core.common import Backend
+from src.core.common import checkFile
+from src.core.common import decloakToTemp
+from src.core.common import flattenValue
+from src.core.common import filterNone
+from src.core.common import isListLike
+from src.core.common import isNoneValue
+from src.core.common import isStackingAvailable
+from src.core.common import randomStr
 from lib.core.compat import LooseVersion
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import paths
-from lib.core.enums import OS
+from src.core.enums import OS
 from lib.core.exception import SqlmapSystemException
 from lib.core.exception import SqlmapUnsupportedFeatureException
 from lib.request import inject

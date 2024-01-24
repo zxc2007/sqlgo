@@ -13,19 +13,19 @@ import re
 import struct
 import zlib
 
-from lib.core.common import Backend
-from lib.core.common import extractErrorMessage
-from lib.core.common import extractRegexResult
-from lib.core.common import filterNone
-from lib.core.common import getPublicTypeMembers
-from lib.core.common import getSafeExString
-from lib.core.common import isListLike
-from lib.core.common import randomStr
-from lib.core.common import readInput
-from lib.core.common import resetCookieJar
-from lib.core.common import singleTimeLogMessage
-from lib.core.common import singleTimeWarnMessage
-from lib.core.common import unArrayizeValue
+from src.core.common import Backend
+from src.core.common import extractErrorMessage
+from src.core.common import extractRegexResult
+from src.core.common import filterNone
+from src.core.common import getPublicTypeMembers
+from src.core.common import getSafeExString
+from src.core.common import isListLike
+from src.core.common import randomStr
+from src.core.common import readInput
+from src.core.common import resetCookieJar
+from src.core.common import singleTimeLogMessage
+from src.core.common import singleTimeWarnMessage
+from src.core.common import unArrayizeValue
 from lib.core.convert import decodeHex
 from lib.core.convert import getBytes
 from lib.core.convert import getText
@@ -35,10 +35,10 @@ from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.decorators import cachedmethod
 from lib.core.decorators import lockedmethod
-from lib.core.dicts import HTML_ENTITIES
-from lib.core.enums import DBMS
-from lib.core.enums import HTTP_HEADER
-from lib.core.enums import PLACE
+from src.core.dicts import HTML_ENTITIES
+from src.core.enums import DBMS
+from src.core.enums import HTTP_HEADER
+from src.core.enums import PLACE
 from lib.core.exception import SqlmapCompressionException
 from lib.core.settings import BLOCKED_IP_REGEX
 from lib.core.settings import DEFAULT_COOKIE_DELIMITER

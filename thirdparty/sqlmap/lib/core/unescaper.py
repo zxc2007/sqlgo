@@ -5,7 +5,7 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import Backend
+from src.core.common import Backend
 from lib.core.datatype import AttribDict
 from lib.core.settings import EXCLUDE_UNESCAPE
 

@@ -10,11 +10,11 @@ import random
 import re
 import string
 
-from lib.core.common import singleTimeWarnMessage
+from src.core.common import singleTimeWarnMessage
 from lib.core.compat import xrange
 from lib.core.data import kb
-from lib.core.enums import DBMS
-from lib.core.enums import PRIORITY
+from src.core.enums import DBMS
+from src.core.enums import PRIORITY
 from lib.core.settings import IGNORE_SPACE_AFFECTED_KEYWORDS
 
 __priority__ = PRIORITY.LOW

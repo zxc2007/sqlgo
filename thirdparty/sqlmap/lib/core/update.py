@@ -13,13 +13,13 @@ import subprocess
 import time
 import zipfile
 
-from lib.core.common import dataToStdout
-from lib.core.common import extractRegexResult
-from lib.core.common import getLatestRevision
-from lib.core.common import getSafeExString
-from lib.core.common import openFile
-from lib.core.common import pollProcess
-from lib.core.common import readInput
+from src.core.common import dataToStdout
+from src.core.common import extractRegexResult
+from src.core.common import getLatestRevision
+from src.core.common import getSafeExString
+from src.core.common import openFile
+from src.core.common import pollProcess
+from src.core.common import readInput
 from lib.core.convert import getText
 from lib.core.data import conf
 from lib.core.data import logger

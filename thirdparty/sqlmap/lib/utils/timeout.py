@@ -8,8 +8,8 @@ See the file 'LICENSE' for copying permission
 import threading
 
 from lib.core.data import logger
-from lib.core.enums import CUSTOM_LOGGING
-from lib.core.enums import TIMEOUT_STATE
+from src.core.enums import CUSTOM_LOGGING
+from src.core.enums import TIMEOUT_STATE
 
 def timeout(func, args=None, kwargs=None, duration=1, default=None):
     class InterruptableThread(threading.Thread):

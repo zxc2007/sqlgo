@@ -10,16 +10,16 @@ import os
 import sys
 
 from lib.core.agent import agent
-from lib.core.common import Backend
-from lib.core.common import checkFile
-from lib.core.common import dataToOutFile
-from lib.core.common import decloakToTemp
-from lib.core.common import decodeDbmsHexValue
-from lib.core.common import isListLike
-from lib.core.common import isNumPosStrValue
-from lib.core.common import isStackingAvailable
-from lib.core.common import isTechniqueAvailable
-from lib.core.common import readInput
+from src.core.common import Backend
+from src.core.common import checkFile
+from src.core.common import dataToOutFile
+from src.core.common import decloakToTemp
+from src.core.common import decodeDbmsHexValue
+from src.core.common import isListLike
+from src.core.common import isNumPosStrValue
+from src.core.common import isStackingAvailable
+from src.core.common import isTechniqueAvailable
+from src.core.common import readInput
 from lib.core.compat import xrange
 from lib.core.convert import encodeBase64
 from lib.core.convert import encodeHex
@@ -28,10 +28,10 @@ from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import EXPECTED
-from lib.core.enums import PAYLOAD
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import DBMS
+from src.core.enums import EXPECTED
+from src.core.enums import PAYLOAD
 from lib.core.exception import SqlmapUndefinedMethod
 from lib.core.settings import UNICODE_ENCODING
 from lib.request import inject

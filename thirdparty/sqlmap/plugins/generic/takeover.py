@@ -7,18 +7,18 @@ See the file 'LICENSE' for copying permission
 
 import os
 
-from lib.core.common import Backend
-from lib.core.common import getSafeExString
-from lib.core.common import isDigit
-from lib.core.common import isStackingAvailable
-from lib.core.common import openFile
-from lib.core.common import readInput
-from lib.core.common import runningAsAdmin
+from src.core.common import Backend
+from src.core.common import getSafeExString
+from src.core.common import isDigit
+from src.core.common import isStackingAvailable
+from src.core.common import openFile
+from src.core.common import readInput
+from src.core.common import runningAsAdmin
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import DBMS
-from lib.core.enums import OS
+from src.core.enums import DBMS
+from src.core.enums import OS
 from lib.core.exception import SqlmapFilePathException
 from lib.core.exception import SqlmapMissingDependence
 from lib.core.exception import SqlmapMissingMandatoryOptionException

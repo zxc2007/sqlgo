@@ -11,10 +11,10 @@ import sqlite3
 import threading
 import time
 
-from lib.core.common import getSafeExString
-from lib.core.common import serializeObject
-from lib.core.common import singleTimeWarnMessage
-from lib.core.common import unserializeObject
+from src.core.common import getSafeExString
+from src.core.common import serializeObject
+from src.core.common import singleTimeWarnMessage
+from src.core.common import unserializeObject
 from lib.core.compat import xrange
 from lib.core.convert import getBytes
 from lib.core.convert import getUnicode

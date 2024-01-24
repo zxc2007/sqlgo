@@ -9,22 +9,22 @@ import re
 import time
 
 from lib.core.agent import agent
-from lib.core.common import Backend
-from lib.core.common import calculateDeltaSeconds
-from lib.core.common import extractExpectedValue
-from lib.core.common import getCurrentThreadData
-from lib.core.common import hashDBRetrieve
-from lib.core.common import hashDBWrite
-from lib.core.common import isListLike
+from src.core.common import Backend
+from src.core.common import calculateDeltaSeconds
+from src.core.common import extractExpectedValue
+from src.core.common import getCurrentThreadData
+from src.core.common import hashDBRetrieve
+from src.core.common import hashDBWrite
+from src.core.common import isListLike
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.dicts import SQL_STATEMENTS
-from lib.core.enums import CUSTOM_LOGGING
-from lib.core.enums import DBMS
-from lib.core.enums import EXPECTED
-from lib.core.enums import TIMEOUT_STATE
+from src.core.dicts import SQL_STATEMENTS
+from src.core.enums import CUSTOM_LOGGING
+from src.core.enums import DBMS
+from src.core.enums import EXPECTED
+from src.core.enums import TIMEOUT_STATE
 from lib.core.settings import UNICODE_ENCODING
 from lib.utils.safe2bin import safecharencode
 from lib.utils.timeout import timeout

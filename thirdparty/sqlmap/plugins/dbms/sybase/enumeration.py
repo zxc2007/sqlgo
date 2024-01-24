@@ -7,21 +7,21 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import filterPairValues
-from lib.core.common import isListLike
-from lib.core.common import isTechniqueAvailable
-from lib.core.common import readInput
-from lib.core.common import safeSQLIdentificatorNaming
-from lib.core.common import unArrayizeValue
-from lib.core.common import unsafeSQLIdentificatorNaming
+from src.core.common import filterPairValues
+from src.core.common import isListLike
+from src.core.common import isTechniqueAvailable
+from src.core.common import readInput
+from src.core.common import safeSQLIdentificatorNaming
+from src.core.common import unArrayizeValue
+from src.core.common import unsafeSQLIdentificatorNaming
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import paths
 from lib.core.data import queries
-from lib.core.dicts import SYBASE_TYPES
-from lib.core.enums import DBMS
-from lib.core.enums import PAYLOAD
+from src.core.dicts import SYBASE_TYPES
+from src.core.enums import DBMS
+from src.core.enums import PAYLOAD
 from lib.core.exception import SqlmapMissingMandatoryOptionException
 from lib.core.exception import SqlmapNoneDataException
 from lib.core.exception import SqlmapUserQuitException

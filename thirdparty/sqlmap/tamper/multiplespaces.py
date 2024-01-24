@@ -10,7 +10,7 @@ import re
 
 from lib.core.data import kb
 from lib.core.datatype import OrderedSet
-from lib.core.enums import PRIORITY
+from src.core.enums import PRIORITY
 
 __priority__ = PRIORITY.NORMAL
 

@@ -7,9 +7,9 @@ See the file 'LICENSE' for copying permission
 
 import sqlite3
 
-from lib.core.common import cleanReplaceUnicode
-from lib.core.common import getSafeExString
-from lib.core.common import unsafeSQLIdentificatorNaming
+from src.core.common import cleanReplaceUnicode
+from src.core.common import getSafeExString
+from src.core.common import unsafeSQLIdentificatorNaming
 from lib.core.exception import SqlmapConnectionException
 from lib.core.exception import SqlmapGenericException
 from lib.core.exception import SqlmapValueException

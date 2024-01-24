@@ -3,11 +3,11 @@ import hashlib
 import sys
 import threading
 sys.path.append(os.getcwd())
-from lib.conf.conf import data_to_std_out
+from src.conf.conf import data_to_std_out
 from future.wariterdata import StreamReaderWriter
-from lib.logger.log import logger
-from lib.core.Exceptions.exceptions import SQLGOStreamHandlerException
-from lib.core.common.common import IsListLike
+from src.logger.log import logger
+from src.core.Exceptions.exceptions import SQLGOStreamHandlerException
+from src.core.common.common import IsListLike
 
 class Dump(object):
 

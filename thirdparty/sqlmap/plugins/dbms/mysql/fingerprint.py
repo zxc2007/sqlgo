@@ -7,19 +7,19 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import Backend
-from lib.core.common import Format
-from lib.core.common import hashDBRetrieve
-from lib.core.common import hashDBWrite
+from src.core.common import Backend
+from src.core.common import Format
+from src.core.common import hashDBRetrieve
+from src.core.common import hashDBWrite
 from lib.core.compat import xrange
 from lib.core.convert import getUnicode
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import DBMS
-from lib.core.enums import FORK
-from lib.core.enums import HASHDB_KEYS
-from lib.core.enums import OS
+from src.core.enums import DBMS
+from src.core.enums import FORK
+from src.core.enums import HASHDB_KEYS
+from src.core.enums import OS
 from lib.core.session import setDbms
 from lib.core.settings import MYSQL_ALIASES
 from lib.request import inject

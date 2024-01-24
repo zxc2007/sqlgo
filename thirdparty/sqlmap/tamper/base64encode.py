@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 from lib.core.convert import encodeBase64
-from lib.core.enums import PRIORITY
+from src.core.enums import PRIORITY
 
 __priority__ = PRIORITY.LOW
 

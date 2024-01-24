@@ -8,8 +8,8 @@ See the file 'LICENSE' for copying permission
 import re
 import socket
 
-from lib.core.common import filterNone
-from lib.core.common import getSafeExString
+from src.core.common import filterNone
+from src.core.common import getSafeExString
 from lib.core.compat import LooseVersion
 from lib.core.compat import xrange
 from lib.core.data import conf

@@ -8,21 +8,21 @@ See the file 'LICENSE' for copying permission
 import os
 
 from lib.core.agent import agent
-from lib.core.common import Backend
-from lib.core.common import checkFile
-from lib.core.common import dataToStdout
-from lib.core.common import isDigit
-from lib.core.common import isStackingAvailable
-from lib.core.common import readInput
-from lib.core.common import unArrayizeValue
+from src.core.common import Backend
+from src.core.common import checkFile
+from src.core.common import dataToStdout
+from src.core.common import isDigit
+from src.core.common import isStackingAvailable
+from src.core.common import readInput
+from src.core.common import unArrayizeValue
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import logger
 from lib.core.data import queries
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import EXPECTED
-from lib.core.enums import OS
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import DBMS
+from src.core.enums import EXPECTED
+from src.core.enums import OS
 from lib.core.exception import SqlmapFilePathException
 from lib.core.exception import SqlmapMissingMandatoryOptionException
 from lib.core.exception import SqlmapUnsupportedFeatureException

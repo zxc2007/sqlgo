@@ -5,21 +5,21 @@ Copyright (c) 2006-2024 sqlmap developers (https://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-from lib.core.common import getLimitRange
-from lib.core.common import isAdminFromPrivileges
-from lib.core.common import isInferenceAvailable
-from lib.core.common import isNoneValue
-from lib.core.common import isNumPosStrValue
-from lib.core.common import isTechniqueAvailable
+from src.core.common import getLimitRange
+from src.core.common import isAdminFromPrivileges
+from src.core.common import isInferenceAvailable
+from src.core.common import isNoneValue
+from src.core.common import isNumPosStrValue
+from src.core.common import isTechniqueAvailable
 from lib.core.compat import xrange
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.data import queries
-from lib.core.enums import CHARSET_TYPE
-from lib.core.enums import DBMS
-from lib.core.enums import EXPECTED
-from lib.core.enums import PAYLOAD
+from src.core.enums import CHARSET_TYPE
+from src.core.enums import DBMS
+from src.core.enums import EXPECTED
+from src.core.enums import PAYLOAD
 from lib.core.exception import SqlmapNoneDataException
 from lib.core.settings import CURRENT_USER
 from lib.request import inject

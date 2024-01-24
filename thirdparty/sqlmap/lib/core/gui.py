@@ -14,11 +14,11 @@ import tempfile
 import threading
 import webbrowser
 
-from lib.core.common import getSafeExString
-from lib.core.common import saveConfig
+from src.core.common import getSafeExString
+from src.core.common import saveConfig
 from lib.core.data import paths
 from lib.core.defaults import defaults
-from lib.core.enums import MKSTEMP_PREFIX
+from src.core.enums import MKSTEMP_PREFIX
 from lib.core.exception import SqlmapMissingDependence
 from lib.core.exception import SqlmapSystemException
 from lib.core.settings import DEV_EMAIL_ADDRESS

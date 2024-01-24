@@ -9,8 +9,8 @@ sys.path.append(current_directory)
 
 
 
-from lib.logger.log import logger
-from lib.core.common.column.commoncolumn import common_columns_list
+from src.logger.log import logger
+from src.core.common.column.commoncolumn import common_columns_list
 
 def extract_context(text, keyword):
     pattern = re.compile(r'\b(?:\S+\s+){0,5}' + re.escape(keyword) + r'(?:\s+\S+){0,5}\b', re.IGNORECASE)

@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import readInput
+from src.core.common import readInput
 from lib.core.data import kb
 from lib.core.data import logger
 from lib.core.datatype import OrderedSet

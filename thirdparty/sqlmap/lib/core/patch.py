@@ -14,7 +14,7 @@ import re
 import sys
 
 import lib.controller.checks
-import lib.core.common
+import src.core.common
 import lib.core.convert
 import lib.core.option
 import lib.core.threads
@@ -24,17 +24,17 @@ import lib.utils.sqlalchemy
 import thirdparty.ansistrm.ansistrm
 import thirdparty.chardet.universaldetector
 
-from lib.core.common import filterNone
-from lib.core.common import getSafeExString
-from lib.core.common import isDigit
-from lib.core.common import isListLike
-from lib.core.common import readInput
-from lib.core.common import shellExec
-from lib.core.common import singleTimeWarnMessage
+from src.core.common import filterNone
+from src.core.common import getSafeExString
+from src.core.common import isDigit
+from src.core.common import isListLike
+from src.core.common import readInput
+from src.core.common import shellExec
+from src.core.common import singleTimeWarnMessage
 from lib.core.compat import xrange
 from lib.core.convert import stdoutEncode
 from lib.core.data import conf
-from lib.core.enums import PLACE
+from src.core.enums import PLACE
 from lib.core.option import _setHTTPHandlers
 from lib.core.option import setVerbosity
 from lib.core.settings import IS_WIN
@@ -120,18 +120,18 @@ def resolveCrossReferences():
     Place for cross-reference resolution
     """
 
-    lib.core.threads.isDigit = isDigit
-    lib.core.threads.readInput = readInput
-    lib.core.common.getPageTemplate = getPageTemplate
-    lib.core.convert.filterNone = filterNone
-    lib.core.convert.isListLike = isListLike
-    lib.core.convert.shellExec = shellExec
-    lib.core.convert.singleTimeWarnMessage = singleTimeWarnMessage
-    lib.core.option._pympTempLeakPatch = pympTempLeakPatch
-    lib.request.connect.setHTTPHandlers = _setHTTPHandlers
-    lib.utils.search.setHTTPHandlers = _setHTTPHandlers
-    lib.controller.checks.setVerbosity = setVerbosity
-    lib.utils.sqlalchemy.getSafeExString = getSafeExString
+    src.core.threads.isDigit = isDigit
+    src.core.threads.readInput = readInput
+    src.core.common.getPageTemplate = getPageTemplate
+    src.core.convert.filterNone = filterNone
+    src.core.convert.isListLike = isListLike
+    src.core.convert.shellExec = shellExec
+    src.core.convert.singleTimeWarnMessage = singleTimeWarnMessage
+    src.core.option._pympTempLeakPatch = pympTempLeakPatch
+    src.request.connect.setHTTPHandlers = _setHTTPHandlers
+    src.utils.search.setHTTPHandlers = _setHTTPHandlers
+    src.controller.checks.setVerbosity = setVerbosity
+    src.utils.sqlalchemy.getSafeExString = getSafeExString
     thirdparty.ansistrm.ansistrm.stdoutEncode = stdoutEncode
 
 def pympTempLeakPatch(tempDir):

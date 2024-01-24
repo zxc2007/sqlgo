@@ -7,13 +7,13 @@ See the file 'LICENSE' for copying permission
 
 import re
 
-from lib.core.common import Backend
-from lib.core.common import Format
-from lib.core.common import hashDBWrite
+from src.core.common import Backend
+from src.core.common import Format
+from src.core.common import hashDBWrite
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.enums import HASHDB_KEYS
-from lib.core.enums import OS
+from src.core.enums import HASHDB_KEYS
+from src.core.enums import OS
 from lib.core.settings import SUPPORTED_DBMS
 
 def setDbms(dbms):
