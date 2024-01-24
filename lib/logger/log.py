@@ -9,7 +9,12 @@ from lib.core.parser.cmdline import verbose
 init()
 
 import logging
-from thirdparty.termcolor import colored
+
+try:
+    from thirdparty.termcolor import colored
+
+except:
+    from termcolor.termcolor import colored
 
 class CustomColoredFormatter(logging.Formatter):
     COLORS = {

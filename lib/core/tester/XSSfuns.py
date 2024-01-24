@@ -4,7 +4,10 @@ sys.path.append(os.getcwd())
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup as bs
 from lib.logger.log import logger
-import thirdparty.requests as requests
+try:
+    import thirdparty.requests as requests
+except:
+    import requests
 from lib.core.tester.vuln import vulnerable
 
 s = requests.session()

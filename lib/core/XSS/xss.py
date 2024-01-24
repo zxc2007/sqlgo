@@ -3,12 +3,14 @@ import sys
 from pprint import pprint
 from urllib.parse import urljoin
 sys.path.append(os.getcwd())
-import thirdparty.lxml
-import thirdparty.html5lib
 from bs4 import BeautifulSoup as bs
 from lib.logger.log import logger
 from utilis._regex.isphp import isphp
-import thirdparty.requests as requests
+try:
+    import thirdparty.requests as requests
+
+except:
+    import requests
 from lib.core.parser.cmdline import url as _url,beep
 
 def get_all_forms(url):

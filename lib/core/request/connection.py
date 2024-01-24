@@ -2,13 +2,16 @@ import socket
 import os
 import sys
 
-sys.path.append(os.getcwd())
 from lib.core.request.inits.TCP._init import socket_init
 from lib.logger.log import logger
 from lib.core.parser.cmdline import url as _url
 from lib.core.parser.cmdline import port as _port
 from urllib.parse import urlparse
-import thirdparty.requests as requests
+
+try:
+    import thirdparty.requests as requests
+except:
+    import requests
 
 def test_connection(url=_url, port=_port):
     logger.warning(f"Testing connection to the target URL: {url}")

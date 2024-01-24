@@ -12,6 +12,7 @@ from lib.core.parser.cmdline import url as _url
 from lib.core.parser.cmdline import beep
 from lib.core.shell.shell import shell_handler
 from datetime import datetime
+from lib.core.controler.handler import handle_dbms_connection
 import lib.core.setting.setting as settings
 import traceback
 import threading
@@ -19,11 +20,12 @@ import os
 import sys
 import warnings
 
+
 warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
 
-
+handle_dbms_connection()
 
 
 

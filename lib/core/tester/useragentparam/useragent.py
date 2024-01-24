@@ -14,7 +14,10 @@ from extra.useragents import useragents
 from thirdparty.colorama import Fore,init
 from lib.core.parser.cmdline import url as _url
 import socket
-import thirdparty.requests as requests
+try:
+    import thirdparty.requests as requests
+except:
+    import requests
 from extra.logo import logo
 
 init()

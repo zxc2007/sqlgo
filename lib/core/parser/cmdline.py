@@ -1,12 +1,13 @@
-#!/usr/bin/env python
-
 import argparse
 import os
 from urllib.parse import urlparse
 import sys
-from sqlmap.lib.core.data import kb,conf
-sys.path.append(os.getcwd())
-# import extra.version
+import sys
+
+import extra.version
+
+from lib.datastruc.atribdict import conf,kb
+
 
 class Cmdline(argparse.ArgumentParser):
     def __init__(self):
@@ -14,7 +15,7 @@ class Cmdline(argparse.ArgumentParser):
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
-        self.add_argument("--version",action="version",version="SQLgo version: "+"1.1.6.3")
+        self.add_argument("--version",action="version",version="SQLgo version: "+extra.version.VERSION)
         self.add_argument("--url","-u",help="Give the program url of the target",required=False,default=3306)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
