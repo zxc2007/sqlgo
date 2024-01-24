@@ -9,3 +9,4 @@
 *capture.txt
 *.csv
 *.db
+/thirdparty/
