@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append(os.getcwd())
-from thirdparty.colorama import Fore,init
+from thirdparty_.colorama import Fore,init
 
 init(autoreset=True)
 
