@@ -131,6 +131,7 @@ def gather_exploit():
         if xml:
             xml = XML.XMLALL(url)
             xml.send_to_website()
+            logger.info("testing xml data to the target: %s"%url)
             import sys
         if crawl:
             crawler_threads()
