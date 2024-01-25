@@ -10,14 +10,20 @@ from src.core.parser.cmdline import beep
 from src.core.shell.shell import shell_handler
 from datetime import datetime
 from src.core.controler.handler import handle_dbms_connection
+from sqlmap.sqlmap import modulePath
+from sqlmap.lib.core.common import setPaths
 import src.core.setting.setting as settings
 import traceback
 import threading
 import os
 import sys
 import warnings
-sys.path.append("./.venv/lib/python3.12/site-packages")
+from src.core.controler.checker import start
 
+try:
+    sys.path.append("./.venv/lib/python3.12/site-packages")
+except:
+    pass
 
 warnings.filterwarnings("ignore", category=SyntaxWarning)
 
@@ -29,6 +35,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 def main():
     try:
+        setPaths(modulePath())
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)
         print(f"starting @ {settings.formatted_datetime}")

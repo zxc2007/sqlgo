@@ -18,14 +18,21 @@ from sqlmap.lib.core.common import randomStr
 from sqlmap.lib.core.common import shellExec
 from sqlmap.lib.core.compat import round
 from sqlmap.lib.core.convert import encodeBase64
-from sqlmap.lib.core.data import kb
+from sqlmap.lib.core.data import kb,conf
 from sqlmap.lib.core.data import logger
 from sqlmap.lib.core.data import paths
 from sqlmap.lib.core.data import queries
 from sqlmap.lib.core.patch import unisonRandom
 from sqlmap.lib.core.settings import IS_WIN
 from urllib.parse import urlparse
-from src.core.parser.cmdline import url,port
+from sqlmap.lib.core.common import setPaths
+from sqlmap.sqlmap import modulePath
+
+try:
+    from src.core.parser.cmdline import url,port
+except:
+    pass
+
 
 def vulnTest():
     global url
@@ -219,7 +226,7 @@ def smokeTest():
 
     unisonRandom()
 
-    content = open(paths.ERRORS_XML, "r").read()
+    content = open(os.getcwd()+"/data/xml/errors.xml", "r").read()
     for regex in re.findall(r'<error regexp="(.+?)"/>', content):
         try:
             re.compile(regex)
@@ -299,6 +306,5 @@ def smokeTest():
     else:
         logger.error("smoke test final result: FAILED")
 
-    return 
-
-# vulnTest()
+    return retVal
+# 

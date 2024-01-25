@@ -123,7 +123,7 @@ def gather_exploit():
                 logger.error("error occurred during connection to the database:%s"%str(e))
         
         if xml:
-            xml = XML(url)
+            xml = XML.XMLALL(url)
             xml.send_to_website()
             import sys
         if crawl:

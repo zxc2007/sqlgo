@@ -43,7 +43,6 @@ def page_encoding(response, action):
     err_msg += "You are advised to rerun with"
     err_msg += ('out', '')[menu.options.codec == None] + " option '--codec'."
     print(settings.print_critical_msg(str(err_msg)))
-    raise SystemExit()
   
 import copy
 import logging
