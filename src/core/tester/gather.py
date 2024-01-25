@@ -45,6 +45,7 @@ from src.core.tester.crawler import crawl as _crawl,kb
 from src.core.testing import vulnTest
 from src.core.parser.cmdline import xml
 from src.core.tester.injector.xmls import XML
+from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
 
 import urllib3
 
@@ -117,6 +118,11 @@ def gather_exploit():
 
         if dump:
             try:
+                conf.direct = url
+                pushValue(conf.direct)
+                conf.direct = url
+                parseTargetDirect()
+                print(conf.dbmsPass)
                 handle_dbms_connection()
             
             except Exception as e:
