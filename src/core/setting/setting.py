@@ -1229,6 +1229,9 @@ INJECTABLE_ARES_ON_THE_FORM = [
 ]
 
 
+SUBMITTING_XML_INF_MSG = "submitting xml payloads(combined: boolean blind,error based ,inline query , stacked query, time blind, inion query) %s"
+
+
 IS_SPACE2COMMENT = _tamper == "space2comment"
 IS_SPACE2PLUS = _tamper == "space2plus"
 IS_PRINTFECHO = _tamper == "printfehco"
