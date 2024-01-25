@@ -31,11 +31,11 @@ class GenericConnector(object):
         self.hostname = None
 
     def initConnection(self):
-        self.user =  ""
-        self.password = ""
-        self.hostname = urlparse(url).hostname
+        self.user =  "" or conf.dbmsUser
+        self.password = conf.dbmsPass or ""
+        self.hostname = conf.hostname or urlparse(url).hostname
         self.port = dbs_port or 3306
-        self.db = ""
+        self.db = conf.dbmsDb or ""
 
     def printConnected(self):
         if self.hostname and self.port:
