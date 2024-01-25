@@ -52,6 +52,7 @@ import urllib3
 
 
 def gather_exploit():
+    global xml
     if install_dep:
         install_dependent()
         raise SystemExit
