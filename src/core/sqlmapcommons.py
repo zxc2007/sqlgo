@@ -1562,7 +1562,7 @@ def parseTargetDirect():
     Parse target dbms and set some attributes into the configuration singleton
 
     >>> pushValue(conf.direct)
-    >>> conf.direct = "http://testfire.net/index.jsp?content=business_deposit.htm"
+    >>> conf.direct = "mysql://root:testpass@127.0.0.1:3306/testdb"
     >>> parseTargetDirect()
     >>> conf.dbmsDb
     'testdb'
@@ -5591,11 +5591,11 @@ def chunkSplitPostData(data):
 
     return retVal
 
-from sqlmap.lib.core.common import setPaths
-from sqlmap.sqlmap import modulePath
-setPaths(modulePath())
-conf.direct = "http://testfire.net/index.jsp?content=business_deposit.htm"
-pushValue(conf.direct)
-conf.direct = "http://testfire.net/index.jsp?content=business_deposit.htm"
-parseTargetDirect()
-print(conf.dbmsPass)
+# from sqlmap.lib.core.common import setPaths
+# from sqlmap.sqlmap import modulePath
+# setPaths(modulePath())
+# conf.direct = "mysql://root:testpass@127.0.0.1:3306/testdb"
+# pushValue(conf.direct)
+# conf.direct = "mysql://root:testpass@127.0.0.1:3306/testdb"
+# parseTargetDirect()
+# print(conf.dbmsPass)
