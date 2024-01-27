@@ -10,15 +10,15 @@ make sure you have git installed on your system.
 
 # dependencies
 - bs4 library (that is the only library where you need to install,the other libraries are installed on the thirdparty directory)
-```pip install bs4```
-```pip3 install bs4```
-**w for window OS**
-```python -m pip install bs4```
-```python3 -m pip install bs4```
+```pip install -r requirements.txt```
+```pip3 install -r requirements.txt```
+**for window OS**
+```python -m pip install -r requirements.txt```
+```python3 -m pip install-r requirements.txt```
 **for unix based systems**
 
 
-```python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> ```
+```python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump ```
 
 
 # How do i report the bugs?
