@@ -10,3 +10,7 @@
 *.csv
 *.db
 /thirdparty/
+/build/
+/dist/
+*.restore
+*.spec
