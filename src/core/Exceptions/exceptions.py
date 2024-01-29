@@ -27,3 +27,6 @@ class SQLGOConnectionException(SQlgoBasicException):
 
 class SQLGODataException(SQlgoBasicException):
     pass
+
+class SQLGOFilePathException(SQlgoBasicException):
+    pass
