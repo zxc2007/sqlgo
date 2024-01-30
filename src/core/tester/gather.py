@@ -46,6 +46,9 @@ from src.core.testing import vulnTest
 from src.core.parser.cmdline import xml
 from src.core.tester.injector.xmls import XML
 from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
+from src.core.parser.cmdline import hydra
+from src.core.tester.hydram import hydra_handler
+
 
 import urllib3
 
@@ -74,6 +77,8 @@ def gather_exploit():
             _thread_.start()
             _thread_.join()
         
+        if hydra:
+            hydra_handler.run_hydra()
 
         if level >= 3:
             subber
