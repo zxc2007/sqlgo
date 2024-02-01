@@ -5,7 +5,8 @@ import sys
 import sys
 
 import extras.version
-
+from src.core.parser.cmdline import update
+from src.datastruc.attrdict import api
 
 
 
@@ -220,6 +221,11 @@ user_file = result[44]
 pass_file = result[45]
 hydra = result[46]
 
+
+if update:
+    api.updates = True
+else:
+    api.updates = False
 
 
 # conf.dbmsUser = dbms_user or ""
