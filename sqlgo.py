@@ -1,3 +1,8 @@
+from extras.update import update_from_git
+from src.core.parser.cmdline import api
+
+if api.updates:
+    update_from_git()
 
 from src.logger.log import logger
 from src.core.tester.gather import gather_exploit
