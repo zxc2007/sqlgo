@@ -113,8 +113,9 @@ def gather_exploit():
         if level >= 4:
             threads = [
                 injection_test_is_vuln_time_based(),
-                vulnTest()
             ]
+            vulnTest()
+
             vulnTest()
             for _thread in threads:
                 _thread = threading.Thread(target=_thread)

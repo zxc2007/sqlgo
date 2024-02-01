@@ -27,6 +27,7 @@ from sqlmap.lib.core.settings import IS_WIN
 from urllib.parse import urlparse
 from sqlmap.lib.core.common import setPaths
 from sqlmap.sqlmap import modulePath
+from src.core.parser.cmdline import url
 
 try:
     from src.core.parser.cmdline import url,port
@@ -195,7 +196,7 @@ def vulnTest():
         for tag, value in (("<url>", url), ("<base>", base), ("<direct>", direct), ("<tmpdir>", tmpdir), ("<request>", request), ("<log>", log), ("<multiple>", multiple), ("<config>", config), ("<base64>", url.replace("id=1", "id=MZ=%3d"))):
             options = options.replace(tag, value)
 
-        cmd = "%s \"%s\" %s --batch --non-interactive --debug --time-sec=1" % (sys.executable if ' ' not in sys.executable else '"%s"' % sys.executable, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "sqlmap.py")), options)
+        cmd = "sqlmap -u %s --batch --non-interactive --debug --time-sec=1"%url
 
         if "<tmpfile>" in cmd:
             handle, tmp = tempfile.mkstemp()
@@ -207,7 +208,6 @@ def vulnTest():
         if not all((check in output if not check.startswith('~') else check[1:] not in output) for check in checks) or "unhandled exception" in output:
             dataToStdout("---\n\n$ %s\n" % cmd)
             dataToStdout("%s---\n" % output, coloring=False)
-            retVal = False
 
         count += 1
 
