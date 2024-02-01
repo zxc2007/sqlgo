@@ -5,7 +5,6 @@ import sys
 import sys
 
 import extras.version
-from src.core.parser.cmdline import update
 from src.datastruc.attrdict import api
 
 
