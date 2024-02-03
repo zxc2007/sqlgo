@@ -60,7 +60,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--xml",help="send xml data payloads to the website ",required=False,action="store_true")
         self.add_argument("--hydra",help="use hydra for brute force attack",required=False,action="store_true")
         self.add_argument("--user-file",help="specify the username file for hydra",required=False)
-        self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
+        self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
 
 
 
@@ -121,6 +121,7 @@ def extract():
     user_file = args.user_file
     pass_file = args.pass_file
     hydra = args.hydra
+    delay_time = args.delay_time
     return (
         output,
         verbose,
@@ -168,7 +169,8 @@ def extract():
         xml,
         user_file,
         pass_file,
-        hydra
+        hydra,
+        delay_time
     )
 
 result = extract()
@@ -219,6 +221,7 @@ xml = result[43]
 user_file = result[44]
 pass_file = result[45]
 hydra = result[46]
+delay_time = result[47]
 
 
 if update:
