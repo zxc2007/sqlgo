@@ -9,3 +9,4 @@ pymysql
 cx_Oracle
 requests
 GitPython
+sqlmap
