@@ -579,6 +579,8 @@ def error_based_url_replace(url):
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
+                    logger.debug("response : %s"%response_content)
+
                     logger.warning("program will be resume the injection after one minute.")
                     time.sleep(60)
                     # Call sql_injection_basic_detection with both parameters
@@ -637,6 +639,7 @@ def time_based_url_replace(url):
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
+                    logger.debug("response : %s"%response_content)
                     logger.warning("program will be resume the injection after one minute.")
                     time.sleep(60)
         except Exception as e:
@@ -690,10 +693,11 @@ def make_set_url_replace(url):
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after one minute.")
-                    time.sleep(60)
-                    # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
+                    time.sleep(60)
+                    # Call sql_injection_basic_detection with both parameters
+
         except Exception as e:
             traceback.print_exc()
             logger.error(e)
@@ -739,6 +743,7 @@ def union_based_url_replace(url):
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after one minute.")
+                    logger.debug("response: %s"%response_content)
                     time.sleep(60)
 
                     # Call sql_injection_basic_detection with both parameters
