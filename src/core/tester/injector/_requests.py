@@ -544,7 +544,7 @@ def error_based_url_replace(url):
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
             logger.debug("status code %d"%response.status_code)
-            logger.debug(response.text)
+            logger.debug(response.text if verbose == 5 else "")
             logger.info("testing :%s"%Payload.ERROR_BASED+"\033[1mReplacing the url\033[0m")
 
             forms = get_all_forms(url)
@@ -588,7 +588,7 @@ def time_based_url_replace(url):
             logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED+"\033[1mReplacing the url\033[0m")
 
-            logger.debug(response.text)
+            logger.debug(response.text if verbose == 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -626,7 +626,7 @@ def make_set_url_replace(url):
             print(_url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.debug("status code:%d"%response.status_code)
+            logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text)
@@ -659,7 +659,7 @@ def make_set_url_replace(url):
 
 def union_based_url_replace(url):
 
-    for payload in union_payload.split("\n"):
+    for payload in union_payload().split("\n"):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
@@ -669,7 +669,7 @@ def union_based_url_replace(url):
             response = requests.get(_url)
             logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT+"\033[1mReplacing the url\033[0m")
-            logger.debug(response.text)
+            logger.debug(response.text if verbose == 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
