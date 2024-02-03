@@ -43,7 +43,7 @@ class CustomColoredFormatter(logging.Formatter):
 def setup_logger():
     # Create a logger
     logger = logging.getLogger("sqlgo_logger")
-    if verbose == 5:
+    if verbose > 1:
         logger.setLevel(logging.DEBUG)
     
     else:
