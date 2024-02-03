@@ -45,6 +45,7 @@ from src.core.enums.priority import PRIORITY
 from src.datastruc.injectdict import injeciondict
 from src.core.common.urlreplace import update_url
 from src.core.enums.enums import PAYLOAD_SENDING
+import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
@@ -540,9 +541,14 @@ def error_based_url_replace(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
-            _url = _
+            __url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
-            response = requests.get(_url)
+            if "http" not in _url:
+                _url = re.sub(r'^(?!http)(.+)', r'http://\1', url)
+    
+            if "https" not  in _url:
+                _url = re.sub(r'^(?!https)(.+)', r'https://\1',url)
+            response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.debug(response.text if verbose == 5 else "")
@@ -558,7 +564,7 @@ def error_based_url_replace(url):
                     form_data_copy[payload_field_name] = _payload
                     if input_field.get("name") == payload:
                         input_field["value"] = _payload
-                        _url = update_url(url)
+                        __url = update_url(url)
                         break
 
                 response_content = response.text
@@ -582,9 +588,9 @@ def time_based_url_replace(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
-            _url = _
+            __url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
-            response = requests.get(_url)
+            response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED+"\033[1mReplacing the url\033[0m")
@@ -600,7 +606,7 @@ def time_based_url_replace(url):
                     form_data_copy[payload_field_name] = _payload
                     if input_field.get("name") == payload:
                         input_field["value"] = _payload
-                        _url = update_url(url)
+                        __url = update_url(url)
                         break
 
                 response_content = response.text
@@ -622,10 +628,10 @@ def make_set_url_replace(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
             _ = update_url(url,payload)
-            _url = _
-            print(_url)
+            __url = _
+            print(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
-            response = requests.get(_url)
+            response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET+"\033[1mReplacing the url\033[0m")
@@ -641,7 +647,7 @@ def make_set_url_replace(url):
                     form_data_copy[payload_field_name] = _payload
                     if input_field.get("name") == payload:
                         input_field["value"] = _payload
-                        _url = update_url(url)
+                        __url = update_url(url)
                         break
 
                 response_content = response.text
@@ -655,6 +661,7 @@ def make_set_url_replace(url):
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
         except Exception as e:
+            traceback.print_exc()
             logger.error(e)
 
 def union_based_url_replace(url):
@@ -664,9 +671,9 @@ def union_based_url_replace(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
-            _url = _
+            __url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
-            response = requests.get(_url)
+            response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT+"\033[1mReplacing the url\033[0m")
@@ -681,7 +688,7 @@ def union_based_url_replace(url):
                     form_data_copy[payload_field_name] = _payload
                     if input_field.get("name") == payload:
                         input_field["value"] = _payload
-                        _url = update_url(url)
+                        __url = update_url(url)
                         break
 
                 response_content = response.text
