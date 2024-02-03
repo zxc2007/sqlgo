@@ -16,6 +16,10 @@ from src.core.parser.cmdline import install_dep
 from extras.installdep import install_dependent
 from src.core.parser.cmdline import warning_disable
 from src.core.tester.injector._requests import error_based_injection
+from src.core.tester.injector._requests import time_based_url_replace
+from src.core.tester.injector._requests import make_set_url_replace
+from src.core.tester.injector._requests import error_based_url_replace
+from src.core.tester.injector._requests import union_based_url_replace
 from src.core.tester.injector._requests import make_set_sql_injection
 from src.core.tester.injector.injections import make_set_injection_func
 from src.core.tester.injector.injections import time_based_inejction
@@ -48,6 +52,7 @@ from src.core.tester.injector.xmls import XML
 from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
 from src.core.parser.cmdline import hydra
 from src.core.tester.hydram import hydra_handler
+
 
 
 import urllib3
@@ -94,6 +99,10 @@ def gather_exploit():
                 union_based_injection_function(),
                 postgre_sql_function(),
                 mysql_blind_based_function(),
+                make_set_url_replace(url),
+                time_based_url_replace(url),
+                error_based_url_replace(url),
+                union_based_url_replace(url),
                 
             ]
         
