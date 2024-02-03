@@ -9,7 +9,7 @@ copy the above command to the terminal and navigate to the sqlgo directory
 make sure you have git installed on your system.
 
 # dependencies
-- bs4 library (that is the only library where you need to install,the other libraries are installed on the thirdparty directory)
+- use the following commands to install the sqlgo dependencies using pip 
 ```pip install -r requirements.txt```
 ```pip3 install -r requirements.txt```
 **for window OS**
