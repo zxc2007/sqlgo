@@ -1,3 +1,9 @@
+from colorama import Fore,init
+from enum import Enum
+
+init()
+
+
 class DBMS(object):
     ACCESS = "Microsoft Access"
     DB2 = "IBM DB2"
@@ -33,3 +39,9 @@ class AUTOCOMPLETE_TYPE(object):
     OS = 1
     SQLMAP = 2
     API = 3
+
+class PAYLOAD_SENDING(object):
+    _SENDING = f"[{Fore.BLUE}PAYLOAD{Fore.RESET}] code :"
+    SENDING = _SENDING + "%s"
+
+
