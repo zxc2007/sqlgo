@@ -539,7 +539,7 @@ def error_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.info(response.status_code)
+            logger.debug("status code %d"%response.status_code)
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
@@ -579,7 +579,7 @@ def time_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.info(response.status_code)
+            logger.debug("status code %d"%response.status_code)
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
@@ -617,7 +617,7 @@ def make_set_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.info("status code:%d"%response.status_code)
+            logger.debug("status code:%d"%response.status_code)
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
@@ -656,7 +656,7 @@ def union_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.info(response.status_code)
+            logger.debug("status code %d"%response.status_code)
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
