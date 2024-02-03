@@ -542,6 +542,8 @@ def error_based_url_replace(url):
 
             _ = update_url(url,payload)
             __url = _
+            if verbose > 3:
+                logger.debug(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             if "http" not in _url:
                 _url = re.sub(r'^(?!http)(.+)', r'http://\1', url)
@@ -589,6 +591,8 @@ def time_based_url_replace(url):
 
             _ = update_url(url,payload)
             __url = _
+            if verbose > 3:
+                logger.debug(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(__url)
             if verbose > 5:
@@ -630,6 +634,8 @@ def make_set_url_replace(url):
             _ = update_url(url,payload)
             __url = _
             print(__url)
+            if verbose > 3:
+                logger.debug(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(__url)
             if verbose > 5:
@@ -672,6 +678,8 @@ def union_based_url_replace(url):
 
             _ = update_url(url,payload)
             __url = _
+            if verbose > 3:
+                logger.debug(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(__url)
             if verbose > 5:
