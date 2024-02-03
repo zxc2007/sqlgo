@@ -77,6 +77,10 @@ def gather_exploit():
             error_based_heuristic_tests(url),
             heuristic_time_based_tests(url)
         ]
+        make_set_url_replace(url)
+        time_based_url_replace(url)
+        error_based_url_replace(url)
+        union_based_url_replace(url)
         for _thread_ in basic_threads:
             _thread_ = threading.Thread(target=_thread_)
             _thread_.start()

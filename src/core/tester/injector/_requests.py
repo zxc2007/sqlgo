@@ -36,6 +36,7 @@ from src.core.tester.injector.checks import newline_fixation
 from src.core.tester.injector.parameters import get_url_part
 from extras.averagetime import average_response
 from src.core.parser.cmdline import url as _url
+from src.core.parser.cmdline import verbose
 from src.datastruc.tree import root
 from src.datastruc.tree import Tree
 from src.core.parser.cmdline import beep
@@ -205,7 +206,7 @@ def make_set_sql_injection(url,random_header=False):
 
             for _payload in make_set_sql_payload().split("\n"):
                 _payload = apply_tamper(_payload if tamper is not None else None)
-                logger.info("testing %s"%Payload.MAKE_SET.value)
+                logger.info("testing : %s"%Payload.MAKE_SET.value)
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     form_data_copy = form_data.copy()
                     payload_field_name = line  
@@ -267,7 +268,7 @@ def union_based_injection(url):
     for __ in union_payload().split("\n"):
         try:
             forms = get_all_forms(url)
-            logger.debug(settings.CTREATED_FROM_FOR_INJECTION%""+"testing possible parameters on the received form.")
+            logger.debug(settings.CTREATED_FROM_FOR_INJECTION%""+"testing : possible parameters on the received form.")
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -277,7 +278,7 @@ def union_based_injection(url):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                         _payload = apply_tamper(_payload if tamper is not None else None)
 
-                        logger.info(f"testing {Payload.UNION_ALL_SELECT.value}")
+                        logger.info(f"testing : {Payload.UNION_ALL_SELECT.value}")
                         form_data_copy = form_data.copy()
                         payload_field_name = line  
                         form_data_copy[payload_field_name] = _payload
@@ -340,7 +341,7 @@ def mysql_blind_based_injection(url):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in BlindBased.mysql_version_query().split("\n"):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        logger.info(f"testing {Payload.MYSQL_BLIND_BASED.value}")
+                        logger.info(f"testing : {Payload.MYSQL_BLIND_BASED.value}")
                         form_data_copy = form_data.copy()
                         logger.debug("copied the data form %s"%form_data_copy)
                         payload_field_name = line 
@@ -400,7 +401,7 @@ def postgre_sql_blind_injection(url):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                         _payload = apply_tamper(_payload if tamper is not None else None)
 
-                        logger.info(f"testing {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
+                        logger.info(f"testing : {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
                         form_data_copy = form_data.copy()
                         payload_field_name = line  # Replace with the actual name
                         form_data_copy[payload_field_name] = _payload
@@ -484,6 +485,9 @@ def user_agent_injection(url, vuln_parameter, payload):
 
     else:
         return response
+    
+
+
 
 
 def referer_injection(url, vuln_parameter, payload):
@@ -533,7 +537,7 @@ def error_based_url_replace(url):
 
     for payload in error_based().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload)
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
             _url = _
@@ -541,6 +545,8 @@ def error_based_url_replace(url):
             response = requests.get(_url)
             logger.debug("status code %d"%response.status_code)
             logger.debug(response.text)
+            logger.info("testing :%s"%Payload.ERROR_BASED+"\033[1mReplacing the url\033[0m")
+
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -573,13 +579,15 @@ def time_based_url_replace(url):
 
     for payload in time_based_payload().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload)
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
             logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.TIME_BASED+"\033[1mReplacing the url\033[0m")
+
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
@@ -612,12 +620,15 @@ def make_set_url_replace(url):
 
     for payload in make_set_sql_payload().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload)
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
             _ = update_url(url,payload)
             _url = _
+            print(_url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
             logger.debug("status code:%d"%response.status_code)
+            logger.info("testing :%s"%Payload.MAKE_SET+"\033[1mReplacing the url\033[0m")
+
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
@@ -650,13 +661,14 @@ def union_based_url_replace(url):
 
     for payload in union_payload.split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload)
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
             logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.UNION_ALL_SELECT+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text)
             forms = get_all_forms(url)
             for form in forms:
