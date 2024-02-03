@@ -1,5 +1,6 @@
 from colorama import Fore,init
 from enum import Enum
+from datetime import datetime
 
 init()
 
@@ -41,7 +42,9 @@ class AUTOCOMPLETE_TYPE(object):
     API = 3
 
 class PAYLOAD_SENDING(object):
-    _SENDING = f"[{Fore.BLUE}PAYLOAD{Fore.RESET}] code :"
+    timestamp = "[2024-02-03 11:52:14.337308]"
+    parsed_time = datetime.strptime(timestamp, "[%Y-%m-%d %H:%M:%S.%f]")
+    formatted_time = parsed_time.strftime("[%Y-%m-%d %H:%M]")
+    _SENDING = f"{formatted_time}[{Fore.BLUE}PAYLOAD{Fore.RESET}] code:"
     SENDING = _SENDING + "%s"
-
 

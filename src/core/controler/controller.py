@@ -1,7 +1,7 @@
 import os
 import sys
-sys.path.append(os.getcwd())
 import urllib.request
+import requests
 import re
 import time
 import urllib.parse
@@ -15,6 +15,19 @@ from src.core.enums.payloads import Payload
 from src.core.payloads.errorb import error_based as error_based_payload
 from src.core.payloads.timebased import time_based_payload
 from src.core.payloads.substringpayload import sub_string_sql_inj
+from src.core.common.urlreplace import update_url
+from src.core.tester.XSSfuns import get_form_details,submit_form
+from extras.bs4funs import get_form_from_response
+from src.core.parser.cmdline import verbose
+from src.core.tester.XSSfuns import get_all_forms
+from src.core.tester.XSSfuns import get_form_details
+from src.core.tester.detector import sql_injection_basic_detection 
+from src.core.tester.injector._requests import is_sql_injection_vulnerable
+from tampers.maintamper import apply_tamper
+from src.core.parser.cmdline import tamper
+from src.core.enums.enums import PAYLOAD_SENDING
+from src.core.payloads.errorb import error_based
+
 def heuristic_injection_test_union_based(url):
     _verbose = 0
     payload = None

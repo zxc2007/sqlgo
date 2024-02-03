@@ -7,8 +7,6 @@ import requests
 import urllib3
 import urllib.parse
 from urllib.parse import urlparse
-# sys.path.append(os.getcwd())
-# sys.path.insert(0,os.getcwd())
 from src.core.payloads.errorb import error_based
 from src.core.setting.setting import REQUESTS
 import src.core.setting.setting as settings
