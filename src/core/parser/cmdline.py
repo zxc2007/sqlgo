@@ -60,6 +60,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--xml",help="send xml data payloads to the website ",required=False,action="store_true")
         self.add_argument("--hydra",help="use hydra for brute force attack",required=False,action="store_true")
         self.add_argument("--user-file",help="specify the username file for hydra",required=False)
+        self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
         self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
 
 
