@@ -582,7 +582,7 @@ def error_based_url_replace(url):
                     logger.debug("response : %s"%response_content)
 
                     logger.warning("program will be resume the injection after one minute.")
-                    time.sleep(60)
+                    time.sleep(15)
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
         except Exception as e:
@@ -641,7 +641,7 @@ def time_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
                     logger.warning("program will be resume the injection after one minute.")
-                    time.sleep(60)
+                    time.sleep(15)
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -695,7 +695,7 @@ def make_set_url_replace(url):
                     logger.warning("program will be resume the injection after one minute.")
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
-                    time.sleep(60)
+                    time.sleep(15)
                     # Call sql_injection_basic_detection with both parameters
 
         except Exception as e:
@@ -744,7 +744,7 @@ def union_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after one minute.")
                     logger.debug("response: %s"%response_content)
-                    time.sleep(60)
+                    time.sleep(15)
 
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
