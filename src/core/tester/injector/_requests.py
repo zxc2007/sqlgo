@@ -533,6 +533,8 @@ def error_based_url_replace(url):
 
     for payload in error_based().split("\n"):
         try:
+            print(PAYLOAD_SENDING.SENDING%payload)
+
             _ = update_url(url,payload)
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
@@ -571,6 +573,8 @@ def time_based_url_replace(url):
 
     for payload in time_based_payload().split("\n"):
         try:
+            print(PAYLOAD_SENDING.SENDING%payload)
+
             _ = update_url(url,payload)
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
@@ -646,6 +650,8 @@ def union_based_url_replace(url):
 
     for payload in union_payload.split("\n"):
         try:
+            print(PAYLOAD_SENDING.SENDING%payload)
+
             _ = update_url(url,payload)
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
