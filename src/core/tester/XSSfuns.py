@@ -4,12 +4,13 @@ sys.path.append(os.getcwd())
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
+from src.core.parser.cmdline import url as _url
 try:
     import thirdparty.requests as requests
 except:
     import requests
 from src.core.tester.vuln import vulnerable
-
+import re
 s = requests.session()
 
 def get_all_forms(url):
@@ -47,8 +48,18 @@ def submit_form(form_details, url, value):
     logger.info(f"[+] Submitting malicious payload to {target_url}")
     logger.info(f"[+] Data: {data}")
     if form_details["method"] == "post":
+        if "http" in _url:
+            target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
+        
+        if "https" in _url:
+            target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
         return requests.post(target_url, data=data)
     else:
+        if "http" in _url:
+            target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
+        
+        if "https" in _url:
+            target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
         return requests.get(target_url, params=data)
 
 def scan_xss(url):

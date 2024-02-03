@@ -181,7 +181,7 @@ def time_based_inejction(url,payload=True,isauto=True):
 def is_sql_injection_vulnerable(response):
     try:
         # Decode the response content to string
-        response_text = response.decode('utf-8')
+        response_text = response.decode('utf-8') if hasattr(response,"decode") else response
         logger.debug(settings.DECODING_RESPONSE)
         error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning"]
         return any(keyword in response_text.lower() for keyword in error_keywords)
@@ -543,7 +543,8 @@ def error_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.debug("status code %d"%response.status_code)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
             logger.debug(response.text if verbose == 5 else "")
             logger.info("testing :%s"%Payload.ERROR_BASED+"\033[1mReplacing the url\033[0m")
 
@@ -561,16 +562,15 @@ def error_based_url_replace(url):
                         break
 
                 response_content = response.text
-                if hasattr(response_content,"decode"):
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
 
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
-                    if is_sql_injection_vulnerable(response_content):
-                        logger.warning("Potential sql injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
-                        sql_injection_basic_detection(form_in_response, form_details)
-                        __import__("extras.beep.beep")
+                    __import__("extras.beep.beep")
         except Exception as e:
             logger.error(e)
 
@@ -585,7 +585,8 @@ def time_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.debug("status code %d"%response.status_code)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text if verbose == 5 else "")
@@ -603,16 +604,15 @@ def time_based_url_replace(url):
                         break
 
                 response_content = response.text
-                if hasattr(response_content,"decode"):
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
 
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
-                    if is_sql_injection_vulnerable(response_content):
-                        logger.warning("Potential sql injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
-                        sql_injection_basic_detection(form_in_response, form_details)
-                        __import__("extras.beep.beep")
+                    __import__("extras.beep.beep")
         except Exception as e:
             logger.error(e)
     
@@ -626,7 +626,8 @@ def make_set_url_replace(url):
             print(_url)
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
+            if verbose > 5:
+                logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text)
@@ -644,16 +645,15 @@ def make_set_url_replace(url):
                         break
 
                 response_content = response.text
-                if hasattr(response_content,"decode"):
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
 
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
-                    if is_sql_injection_vulnerable(response_content):
-                        logger.warning("Potential sql injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
-                        sql_injection_basic_detection(form_in_response, form_details)
-                        __import__("extras.beep.beep")
+                    __import__("extras.beep.beep")
         except Exception as e:
             logger.error(e)
 
@@ -667,7 +667,8 @@ def union_based_url_replace(url):
             _url = _
             _payload = apply_tamper(_payload if tamper is not None else None)
             response = requests.get(_url)
-            logger.debug("status code %d"%response.status_code)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose == 5 else "")
             forms = get_all_forms(url)
@@ -684,16 +685,17 @@ def union_based_url_replace(url):
                         break
 
                 response_content = response.text
-                if hasattr(response_content,"decode"):
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
 
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
-                    if is_sql_injection_vulnerable(response_content):
-                        logger.warning("Potential sql injection detected!!!")
-                        # Call sql_injection_basic_detection with both parameters
-                        sql_injection_basic_detection(form_in_response, form_details)
-                        __import__("extras.beep.beep")
+                    __import__("extras.beep.beep")
+                
+
         except Exception as e:
             logger.error(e)
 
