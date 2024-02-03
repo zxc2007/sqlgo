@@ -3,11 +3,12 @@ import sys
 import urllib.request
 from urllib.parse import urljoin
 import time
+import requests
 import urllib3
 import urllib.parse
 from urllib.parse import urlparse
-sys.path.append(os.getcwd())
-sys.path.insert(0,os.getcwd())
+# sys.path.append(os.getcwd())
+# sys.path.insert(0,os.getcwd())
 from src.core.payloads.errorb import error_based
 from src.core.setting.setting import REQUESTS
 import src.core.setting.setting as settings
@@ -41,6 +42,7 @@ from src.core.parser.cmdline import beep
 from src.core.enums.devstatus import DevStatus
 from src.core.enums.priority import PRIORITY
 from src.datastruc.injectdict import injeciondict
+from src.core.common.urlreplace import update_url
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
@@ -522,6 +524,52 @@ def referer_injection(url, vuln_parameter, payload):
 
     else:
         return response
+    
+
+
+
+def error_based_url_replace(url):
+
+    for payload in error_based().split("\n"):
+        try:
+            _ = update_url(url,payload)
+            _url = _
+            _payload = apply_tamper(_payload if tamper is not None else None)
+            response = requests.get(_url)
+            logger.debug(response.status_code)
+            logger.debug(response.text)
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        _url = update_url(url)
+                        break
+
+                response_content = response.text
+                if hasattr(response_content,"decode"):
+                    form_in_response = get_form_from_response(response_content)
+                    form_details = get_form_details(form_in_response)
+
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    if is_sql_injection_vulnerable(response_content):
+                        logger.warning("Potential sql injection detected!!!")
+                        # Call sql_injection_basic_detection with both parameters
+                        sql_injection_basic_detection(form_in_response, form_details)
+                        __import__("extras.beep.beep")
+        except Exception as e:
+            traceback.print_exc()
+            logger.error(e)
+
+        
+    
+
+
 # from lib.core.parser.cmdline import crawl 
 
 # crawl = True
