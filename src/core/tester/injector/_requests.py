@@ -582,7 +582,7 @@ def error_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
 
-                    logger.warning("program will be resume the injection after one minute.")
+                    logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     time.sleep(delay_time)
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
@@ -641,7 +641,7 @@ def time_based_url_replace(url):
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
-                    logger.warning("program will be resume the injection after one minute.")
+                    logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     time.sleep(delay_time)
         except Exception as e:
             count = 0
@@ -693,7 +693,7 @@ def make_set_url_replace(url):
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
-                    logger.warning("program will be resume the injection after one minute.")
+                    logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
                     time.sleep(delay_time)
@@ -743,7 +743,7 @@ def union_based_url_replace(url):
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
-                    logger.warning("program will be resume the injection after one minute.")
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
                     time.sleep(delay_time)
 
