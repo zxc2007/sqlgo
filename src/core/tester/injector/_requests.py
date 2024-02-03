@@ -576,6 +576,11 @@ def error_based_url_replace(url):
                     __import__("extras.beep.beep")
 
                     logger.warning("Potential sql injection detected!!!")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after one minute.")
+                    time.sleep(60)
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
         except Exception as e:
@@ -629,6 +634,11 @@ def time_based_url_replace(url):
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after one minute.")
+                    time.sleep(60)
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -676,6 +686,11 @@ def make_set_url_replace(url):
                     __import__("extras.beep.beep")
 
                     logger.warning("Potential sql injection detected!!!")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after one minute.")
+                    time.sleep(60)
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
@@ -720,6 +735,11 @@ def union_based_url_replace(url):
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after one minute.")
+                    time.sleep(60)
 
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
