@@ -736,16 +736,16 @@ dumper = Dump()
 # Set the output file (optional)
 # dumper.setOutputFile()
 
-# # Example usage of some methods
-# dumper.banner("Welcome to SQL Injection Testing Tool")
-# dumper.currentUser("admin")
-# dumper.currentDb("test_database")
-# dumper.hostname("localhost")
-# dumper.dba(True)
-# dumper.users(["user1", "user2", "admin"])
-# dumper.statements(["SELECT * FROM users", "INSERT INTO products VALUES (1, 'Product1')"])
-# dumper.dbs(["database1", "database2"])
-# dumper.dbTables({"database1": ["table1", "table2"], "database2": ["table3", "table4"]})
-# dumper.dbTableColumns({"database1": {"table1": {"column1": "VARCHAR", "column2": "INTEGER"}, "table2": {"column3": "TEXT"}}})
+# Example usage of some methods
+dumper.banner("Welcome to SQL Injection Testing Tool")
+dumper.currentUser("admin")
+dumper.currentDb("test_database")
+dumper.hostname("localhost")
+dumper.dba(True)
+dumper.users(["user1", "user2", "admin"])
+dumper.statements(["SELECT * FROM users", "INSERT INTO products VALUES (1, 'Product1')"])
+dumper.dbs(["database1", "database2"])
+dumper.dbTables({"database1": ["table1", "table2"], "database2": ["table3", "table4"]})
+dumper.dbTableColumns({"database1": {"table1": {"column1": "VARCHAR", "column2": "INTEGER"}, "table2": {"column3": "TEXT"}}})
 # ... and so on
 
