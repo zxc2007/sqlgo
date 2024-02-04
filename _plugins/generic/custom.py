@@ -1,16 +1,27 @@
-import os
-import sys
-import readline
-sys.path.append(os.getcwd())
-from src.core.dicts import SQL_STATEMENTS
-from src.core.enums.enums import DBMS
-from src.core.enums.enums import AUTOCOMPLETE_TYPE
 import re
-from src.logger.log import logger
-from src.core.Exceptions.exceptions import SQLGODataException
+import sys
 
 
-class Custom:
+from sqlmap.lib.core.common import Backend
+from sqlmap.lib.core.common import dataToStdout
+from sqlmap.lib.core.common import getSQLSnippet
+from sqlmap.lib.core.common import isStackingAvailable
+from sqlmap.lib.core.convert import getUnicode
+from sqlmap.lib.core.data import conf
+from sqlmap.lib.core.data import logger
+from sqlmap.lib.core.dicts import SQL_STATEMENTS
+from sqlmap.lib.core.enums import AUTOCOMPLETE_TYPE
+from sqlmap.lib.core.enums import DBMS
+from sqlmap.lib.core.exception import SqlmapNoneDataException
+from sqlmap.lib.core.settings import METADB_SUFFIX
+from sqlmap.lib.core.settings import NULL
+from sqlmap.lib.core.settings import PARAMETER_SPLITTING_REGEX
+from sqlmap.lib.core.shell import autoCompletion
+from sqlmap.lib.request import inject
+from sqlmap.thirdparty.six.moves import input as _input
+from src.core.dumper.dump import dumper
+conf.dumper = dumper
+class Custom(object):
     """
     This class defines custom enumeration functionalities for plugins.
     """
@@ -34,17 +45,17 @@ class Custom:
                 infoMsg = "fetching %s query output: '%s'" % (sqlType if sqlType is not None else "SQL", query)
                 logger.info(infoMsg)
 
-                if isinstance(DBMS.ACCESS,str):
+                if Backend.isDbms(DBMS.MSSQL):
                     match = re.search(r"(\bFROM\s+)([^\s]+)", query, re.I)
                     if match and match.group(2).count('.') == 1:
                         query = query.replace(match.group(0), "%s%s" % (match.group(1), match.group(2).replace('.', ".dbo.")))
 
-                query = re.sub(r"(?i)\w+%s\.?" % "_masterdb", "", query)
+                query = re.sub(r"(?i)\w+%s\.?" % METADB_SUFFIX, "", query)
 
-                output = ""
+                output = inject.getValue(query, fromUser=True)
 
                 return output
-            elif True:
+            elif not isStackingAvailable():
                 warnMsg = "execution of non-query SQL statements is only "
                 warnMsg += "available when stacked queries are supported"
                 logger.warning(warnMsg)
@@ -57,24 +68,28 @@ class Custom:
                     infoMsg = "executing unknown SQL command: '%s'" % query
                 logger.info(infoMsg)
 
+                inject.goStacked(query)
 
-                output = None
+                output = NULL
 
-        except SQLGODataException as ex:
-            logger.warning(str(ex))
+        except SqlmapNoneDataException as ex:
+            logger.warning(ex)
 
         return output
 
     def sqlShell(self):
-        infoMsg = "calling %s shell. To quit type "
+        infoMsg = "calling %s shell. To quit type " % Backend.getIdentifiedDbms()
         infoMsg += "'x' or 'q' and press ENTER"
         logger.info(infoMsg)
 
+        autoCompletion(AUTOCOMPLETE_TYPE.SQL)
 
         while True:
             query = None
 
             try:
+                query = _input("sql-shell> ")
+                query = getUnicode(query, encoding=sys.stdin.encoding)
                 query = query.strip("; ")
             except UnicodeDecodeError:
                 print()
@@ -99,30 +114,30 @@ class Custom:
             output = self.sqlQuery(query)
 
             if output and output != "Quit":
-                pass
+                conf.dumper.sqlQuery(query, output)
 
             elif not output:
                 pass
 
             elif output != "Quit":
-                logger.info("No output!")
+                dataToStdout("No output\n")
 
     def sqlFile(self):
         infoMsg = "executing SQL statements from given file(s)"
         logger.info(infoMsg)
 
-        for filename in re.split(r"[,|;]", ""):
+        for filename in re.split(PARAMETER_SPLITTING_REGEX, conf.sqlFile):
             filename = filename.strip()
 
             if not filename:
                 continue
 
-            snippet = ""
+            snippet = getSQLSnippet(Backend.getDbms(), filename)
 
             if snippet and all(query.strip().upper().startswith("SELECT") for query in (_ for _ in snippet.split(';' if ';' in snippet else '\n') if _)):
                 for query in (_ for _ in snippet.split(';' if ';' in snippet else '\n') if _):
                     query = query.strip()
                     if query:
-                        pass
+                        conf.dumper.sqlQuery(query, self.sqlQuery(query))
             else:
-                pass
+                conf.dumper.sqlQuery(snippet, self.sqlQuery(snippet))

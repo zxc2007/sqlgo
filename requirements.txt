@@ -10,3 +10,5 @@ cx_Oracle
 requests
 GitPython
 sqlmap
+pyodbc
+mysql-connector-python

@@ -44,3 +44,11 @@
 # --disable-warning
 *disable the ssl warning for the less secure targets(not recommended, use this option with caution)*
 # --level LEVEL
+*specify the level of exploits(higher levels might be dangerous and have significant impact on the DBMS,use with caution)*
+
+# --hydra
+*use hydra for the dictionary attacks(still needs work and not completed yet)*
+
+# --xml
+
+*use xml format to send payloads*
