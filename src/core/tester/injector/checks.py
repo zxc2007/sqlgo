@@ -19,3 +19,46 @@ def newline_fixation(payload):
         #payload = _urllib.parse.quote(payload[:_]) + payload[_:]
         payload = payload.replace("\r","%0d")
     return payload
+
+import re
+import requests
+
+def extract_sentence_with_error(html_content, error_word):
+    # Define a regular expression to find sentences containing the error word
+    sentence_pattern = re.compile(r'[^.!?]*\b' + re.escape(error_word) + r'\b[^.!?]*[.!?]', flags=re.IGNORECASE)
+
+    # Find all matches in the HTML content
+    sentence_matches = sentence_pattern.findall(html_content)
+
+    # Return a random sentence (if any found)
+    if sentence_matches:
+        import random
+        return random.choice(sentence_matches)
+    else:
+        return None
+
+
+def extract_some_keyword(url):
+# Make a request to a website (replace the URL with your target URL)
+    response = requests.get(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200 or True:
+        # Extract HTML content
+        html_content = response.text
+
+        # Define error word (replace with your target error word)
+        error_word = "Error"
+
+        # Extract a sentence containing the error word
+        sentence_with_error = extract_sentence_with_error(html_content, error_word)
+        return sentence_with_error
+
+        # Print the result
+        if sentence_with_error:
+            print(f"Random sentence containing the error word '{error_word}':")
+            print(sentence_with_error)
+        else:
+            print(f"No sentences found containing the error word '{error_word}'.")
+    else:
+        print(f"Error: Unable to fetch URL. Status code: {response.status_code}")

