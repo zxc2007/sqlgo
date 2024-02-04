@@ -52,20 +52,11 @@ from src.core.tester.injector.xmls import XML
 from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
 from src.core.parser.cmdline import hydra
 from src.core.tester.hydram import hydra_handler
-from sqlmap.lib.core.data import conf
 
 
 
 import urllib3
 
-
-
-def dump_actions():
-    from foreign.bindinjection import main as run_further
-    from foreign.accessinjection import main as dumper_injections
-
-    run_further()
-    dumper_injections()
 
 
 def gather_exploit():
@@ -90,8 +81,6 @@ def gather_exploit():
             error_based_url_replace(url),
             union_based_url_replace(url)
         ]
-        if conf.vuln:
-            dump_actions()
  
         for _thread_ in basic_threads:
             _thread_ = threading.Thread(target=_thread_)
@@ -121,8 +110,6 @@ def gather_exploit():
                 union_based_url_replace(url),
                 
             ]
-            if conf.vuln:
-                dump_actions()
         
 
 
