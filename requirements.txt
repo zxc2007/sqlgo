@@ -12,3 +12,4 @@ GitPython
 sqlmap
 pyodbc
 mysql-connector-python
+prettytable
