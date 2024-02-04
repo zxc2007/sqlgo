@@ -1,7 +1,8 @@
 import re, requests, threading, sys, os
 from prettytable import PrettyTable
-sys.path.append(os.getcwd())
 from src.logger.log import logger
+from src.core.parser.cmdline import url as _url
+from sqlmap.lib.core.data import conf
 
 
 __author__ = "AdminTony"
@@ -210,5 +211,7 @@ def sql_injection(url, keyword=None, thread_num=10):
     logger.info(pretty_table)
 
 
-if __name__ == "__main__":
-    sql_injection(url="https://hack-yourself-first.com/Make/5?orderby=supercarid)", keyword="Application")
+
+def main():
+
+    sql_injection(url=_url, keyword=conf.keyword)

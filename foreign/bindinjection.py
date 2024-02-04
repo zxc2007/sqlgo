@@ -2,13 +2,14 @@ __author__="AdminTony"
 
 import requests,time,random,sys,threading
 from src.core.parser.cmdline import url  as _url
+from sqlmap.lib.core.common import conf
 
 #将所有打印字符的ascii码放在list里面,打印字符从32-127 直接用列表生成式
 list=[i for i in range(32,128)]
 #Target URL
 url = _url
 #keyword 用于判断页面是否正确
-keyword ="Application"
+keyword = conf.keyword
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"}
 
 table_list=[]
@@ -378,5 +379,5 @@ def main():
     # info = Info()
 
     run()
-if __name__ == '__main__':
-    main()
+# main()if __name__ == '__main__':
+    

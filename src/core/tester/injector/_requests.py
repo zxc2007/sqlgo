@@ -44,6 +44,8 @@ from src.datastruc.injectdict import injeciondict
 from src.core.common.urlreplace import update_url
 from src.core.enums.enums import PAYLOAD_SENDING
 from src.core.parser.cmdline import delay_time
+from src.core.tester.injector.checks import extract_some_keyword
+from sqlmap.lib.core.data import conf
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
@@ -581,6 +583,9 @@ def error_based_url_replace(url):
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+
 
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     time.sleep(delay_time)
@@ -642,6 +647,10 @@ def time_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+
+
                     time.sleep(delay_time)
         except Exception as e:
             count = 0
@@ -696,6 +705,10 @@ def make_set_url_replace(url):
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     sql_injection_basic_detection(form_in_response, form_details)
                     __import__("extras.beep.beep")
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+
+
                     time.sleep(delay_time)
                     # Call sql_injection_basic_detection with both parameters
 
@@ -745,6 +758,8 @@ def union_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
                     time.sleep(delay_time)
 
                     # Call sql_injection_basic_detection with both parameters
