@@ -555,7 +555,7 @@ def error_based_url_replace(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.debug(response.text if verbose == 5 else "")
-            logger.info("testing :%s"%Payload.ERROR_BASED+"\033[1mReplacing the url\033[0m")
+            logger.info("testing :%s"%Payload.ERROR_BASED.value+"\033[1mReplacing the url\033[0m")
 
             forms = get_all_forms(url)
             for form in forms:
@@ -614,7 +614,7 @@ def time_based_url_replace(url):
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
-            logger.info("testing :%s"%Payload.TIME_BASED+"\033[1mReplacing the url\033[0m")
+            logger.info("testing :%s"%Payload.TIME_BASED.value+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text if verbose == 5 else "")
             forms = get_all_forms(url)
@@ -674,7 +674,7 @@ def make_set_url_replace(url):
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
-            logger.info("testing :%s"%Payload.MAKE_SET+"\033[1mReplacing the url\033[0m")
+            logger.info("testing :%s"%Payload.MAKE_SET.value+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text)
             forms = get_all_forms(url)
@@ -730,7 +730,7 @@ def union_based_url_replace(url):
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
-            logger.info("testing :%s"%Payload.UNION_ALL_SELECT+"\033[1mReplacing the url\033[0m")
+            logger.info("testing :%s"%Payload.UNION_ALL_SELECT.value+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose == 5 else "")
             forms = get_all_forms(url)
             for form in forms:

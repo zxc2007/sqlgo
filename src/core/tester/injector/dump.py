@@ -8,6 +8,7 @@ import hashlib
 import random
 import re
 import codecs
+from src.core.parser.cmdline import url as _url
 
 ip = 1
 dump_array = []
@@ -94,7 +95,7 @@ def confirm_proxy():
 			
 def get_link():
 	global link
-	tmp = input(prefix + "Insert link: ")
+	tmp = _url
 	if not tmp:
 		link = "http://127.0.0.1/sqli.php?id=11"
 		return
@@ -673,4 +674,7 @@ def main():
 	input(prefix + "Press enter to get databases .. ")
 	get_databases()
 
-main()
+
+
+def dump_data_gather():
+    main()

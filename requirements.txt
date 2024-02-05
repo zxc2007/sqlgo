@@ -13,3 +13,5 @@ sqlmap
 pyodbc
 mysql-connector-python
 prettytable
+aiohttp
+pwn
