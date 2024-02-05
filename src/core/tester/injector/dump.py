@@ -10,6 +10,7 @@ import re
 import codecs
 from src.core.parser.cmdline import url as _url
 
+#Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py
 ip = 1
 dump_array = []
 temp_array = {}
