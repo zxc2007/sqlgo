@@ -16,3 +16,4 @@ prettytable
 aiohttp
 pwn
 socks
+colorama
