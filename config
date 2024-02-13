@@ -1,8 +1,0 @@
-[Default]
-url = https://hack-yourself-first.com/Make/5?orderby=supercarid
-res_true = <expected_response_on_true_queries>
-res_false = <expected_response_on_false_queries>
-table_name = <known_table_name>
-col_name = <known_column_name>
-cookies = {"cookie1": "value1", "cookie2": "value2"}
-
