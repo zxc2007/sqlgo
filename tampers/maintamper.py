@@ -40,6 +40,7 @@ import tampers.equaltolike
 import tampers.equaltorlike
 import tampers.escapequotes
 import tampers.greatests
+import tampers.hexentities
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -79,8 +80,11 @@ def apply_tamper(payload):
         return tampers.equaltorlike.tamper(payload)
     elif _tamper == "escapequotes":
         return tampers.escapequotes.tamper(payload)
+    elif _tamper == "hexentities":
+        return tampers.hexentities.tamper(payload)
     elif _tamper == "greatests":
         return tampers.greatests.tamper(payload)
+    
     elif _tamper is None:
         return payload
     else:
