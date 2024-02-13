@@ -33,6 +33,7 @@ import tampers.between
 import tampers.binary
 import tampers.chardoubleencode
 import tampers.charencode
+import tampers.charunicodeescape
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -60,6 +61,8 @@ def apply_tamper(payload):
         return tampers.chardoubleencode.tamper(payload)
     elif _tamper == "charencode":
         return tampers.charencode.tamper(payload)
+    elif _tamper == "charunicodeescape":
+        return tampers.charunicodeescape.tamper(payload)
     elif _tamper is None:
         return payload
     else:
