@@ -49,6 +49,7 @@ import tampers.least
 import tampers.ord2ascii
 import tampers.overlongutf8
 import tampers.overlongutf8more
+import tampers.percentage
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -108,6 +109,8 @@ def apply_tamper(payload):
         return tampers.overlongutf8.tamper(payload)
     elif _tamper == "overlongutf8more":
         return tampers.overlongutf8more.tamper(payload)
+    elif _tamper == "percentage":
+        return tampers.percentage.tamper(payload)
     elif _tamper is None:
         return payload
     else:
