@@ -42,6 +42,7 @@ import tampers.escapequotes
 import tampers.greatests
 import tampers.hexentities
 import tampers.htmlencode
+import tampers.ifnull2casewhenisnull
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -87,6 +88,8 @@ def apply_tamper(payload):
         return tampers.greatests.tamper(payload)
     elif _tamper == "htmlencode":
         return tampers.htmlencode.tamper(payload)
+    elif _tamper == "ifnull2casewhenisnull":
+        return tampers.ifnull2casewhenisnull.tamper(payload)
     elif _tamper is None:
         return payload
     else:
