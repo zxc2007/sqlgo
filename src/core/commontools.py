@@ -18,15 +18,29 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import os
-import sys
-import time
-from utilis._regex.extractparam import replace_url_parameter
-from src.logger.log import logger
-from src.core.parser.cmdline import url as _url
+def readInput(msg, default=None, boolean=False):
+    retVal = None
 
-def prompt_parameter(url=_url):
-    _,param = replace_url_parameter(url,new_value=None)
-    logger.info("testing if %s is injectable."%param)
-    time.sleep(5)
+    if default is not None:
+        msg += " [%s]" % default
 
+    while retVal is None:
+        retVal = input(msg).strip()
+
+        if retVal == '' and default is not None:
+            retVal = default
+        elif retVal == '0' and boolean:
+            retVal = False
+        elif retVal == '1' and boolean:
+            retVal = True
+
+        try:
+            if boolean:
+                retVal = bool(int(retVal))
+            else:
+                retVal = int(retVal)
+
+        except ValueError:
+            pass
+
+    return retVal
