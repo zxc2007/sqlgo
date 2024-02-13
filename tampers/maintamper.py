@@ -31,6 +31,7 @@ import tampers.lowercase
 import tampers.space2slash
 import tampers.between
 import tampers.binary
+import tampers.chardoubleencode
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -54,6 +55,8 @@ def apply_tamper(payload):
         return tampers.between.tamper(payload)
     elif _tamper == "binary":
         return tampers.binary.tamper(payload)
+    elif _tamper == "chardoubleencode":
+        return tampers.chardoubleencode.tamper(payload)
     elif _tamper is None:
         return payload
     else:
