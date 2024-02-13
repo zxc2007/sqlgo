@@ -26,6 +26,7 @@ from src.core.parser.cmdline import url as _url
 from src.logger.log import logger
 from utilis.colorago.colorago import Fore
 from src.core.parser.cmdline import beep
+from src.data import arg
 
 def extract_cookies(url=_url):
     user_input = ""
@@ -37,11 +38,15 @@ def extract_cookies(url=_url):
 
         logger.info("cookies from %s"%url)
         for cookie in cookies.values():
-            if beep:
+            if arg.beep:
                 __import__("extra.beep.beep")
             logger.info(f"Cookie name: {cookie.key}, cookie value by the server: {cookie.value}")
-
-        user_input = input(f"{Fore.BRIGHT_GREEN}you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: {Fore.RESET}").lower()
+        if arg.accept_cookie:
+            user_input = 'y'
+        
+        else:
+            user_input = input(f"{Fore.BRIGHT_GREEN}you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: {Fore.RESET}").lower()
+  
         if user_input != 'y':
             logger.error("Canceled by the user.")
             raise SystemExit

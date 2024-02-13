@@ -29,6 +29,7 @@ import tampers.space2space
 import tampers.uppercase
 import tampers.lowercase
 import tampers.space2slash
+import tampers.between
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -48,6 +49,8 @@ def apply_tamper(payload):
         return tampers.lowercase.tamper(payload)
     elif _tamper == "space2slash":
         return tampers.space2slash.tamper(payload)
+    elif _tamper == "between":
+        return tampers.between.tamper(payload)
     elif _tamper is None:
         return payload
     else:

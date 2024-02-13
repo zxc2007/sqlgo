@@ -186,6 +186,7 @@ def gather_exploit():
                 logger.error("error occurred during connection to the database:%s"%str(e))
         
         if arg.xml:
+            logger.warning("This option will not work properly and will be removed in sqlgo 2.")
             xml = XML.XMLALL(url)
             xml.send_to_website()
             logger.info("testing xml data to the target: %s"%url)

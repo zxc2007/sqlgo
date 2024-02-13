@@ -46,7 +46,6 @@ def sql_injection_basic_detection(form_soup, form_details):
             logger.warning("Basic tests show that the target might be injectable to SQL injection.")
             return True
     
-    logger.warning("Basic tests show that the target might not be injectable to SQL injection.")
     return False
 
 # Example usage

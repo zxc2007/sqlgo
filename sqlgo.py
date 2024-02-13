@@ -27,30 +27,33 @@ from src.core.parser.cmdline import api
 if api.updates:
     update_from_git()
     raise SystemExit
-
-from src.logger.log import logger
-from src.core.tester.gather import gather_exploit
-from src.checker.checks import check_version
-from extras.disclaimer import disclaimer
-from extras.logo import logo
-import src.core.setting.setting as settings
-from src.core.parser.cmdline import url as _url
-from src.core.parser.cmdline import beep
-from src.core.shell.shell import shell_handler
-from datetime import datetime
-from src.core.controler.handler import handle_dbms_connection
-from sqlmap.sqlmap import modulePath
-from sqlmap.lib.core.common import setPaths
-import src.core.setting.setting as settings
-import traceback
-import threading
-import os
-import sys
-import warnings
-from src.core.controler.checker import start
+try:
+    from src.logger.log import logger
+    from src.core.tester.gather import gather_exploit
+    from src.checker.checks import check_version
+    from extras.disclaimer import disclaimer
+    from extras.logo import logo
+    import src.core.setting.setting as settings
+    from src.core.parser.cmdline import url as _url
+    from src.core.parser.cmdline import beep
+    from src.core.shell.shell import shell_handler
+    from datetime import datetime
+    from src.core.controler.handler import handle_dbms_connection
+    from sqlmap.sqlmap import modulePath
+    from sqlmap.lib.core.common import setPaths
+    import src.core.setting.setting as settings
+    import traceback
+    import threading
+    import os
+    import sys
+    import warnings
+    from src.core.controler.checker import start
+except KeyboardInterrupt:
+    print("Operation canceled by user.")
+    raise SystemExit
 
 try:
-    sys.path.append("./.venv/lib/python3.12/site-packages")
+    pass
 except:
     pass
 

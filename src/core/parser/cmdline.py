@@ -84,6 +84,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--user-file",help="specify the username file for hydra",required=False)
         self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
         self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
+        self.add_argument("--accept-cookie",help="Accept the cookies by the server by default",action="store_true")
 
 
 
@@ -145,6 +146,7 @@ def extract():
     pass_file = args.pass_file
     hydra = args.hydra
     delay_time = args.delay_time
+    accept_cookie = args.accept_cookie
     return (
         output,
         verbose,
@@ -193,7 +195,8 @@ def extract():
         user_file,
         pass_file,
         hydra,
-        delay_time
+        delay_time,
+        accept_cookie
     )
 
 
@@ -247,6 +250,7 @@ try:
     pass_file = result[45]
     hydra = result[46]
     delay_time = result[47]
+    accept_cookie = result[48]
 
     arg.output = result[0]
     arg.verbose = result[1]
@@ -296,6 +300,7 @@ try:
     arg.pass_file = result[45]
     arg.hydra = result[46]
     arg.delay_time = result[47]
+    arg.accept_cookie = result[48]
 except MemoryError:
     pass
 
