@@ -568,6 +568,8 @@ def error_based_url_replace(url):
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(_payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             if "http" not in _url:
                 _url = re.sub(r'^(?!http)(.+)', r'http://\1', url)
     
@@ -629,11 +631,12 @@ def time_based_url_replace(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,payload)
-            __url = _
+
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
@@ -690,13 +693,12 @@ def make_set_url_replace(url):
     for payload in make_set_sql_payload().split("\n"):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
-            _ = update_url(url,payload)
-            __url = _
-            print(__url)
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
             response = requests.get(__url)
+            _ = update_url(url,_payload)
+            __url = _
             if verbose > 5:
                 logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET.value+"\033[1mReplacing the url\033[0m")
@@ -749,11 +751,11 @@ def union_based_url_replace(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,payload)
-            __url = _
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
@@ -811,11 +813,12 @@ def stack_query(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,payload)
-            __url = _
+
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
@@ -872,12 +875,13 @@ def error_boolean(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,payload)
-            __url = _
+
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
             response = requests.get(__url)
+            _ = update_url(url,_payload)
+            __url = _
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.ERROR_BOOL.value+"\033[1mReplacing the url\033[0m")
@@ -933,11 +937,12 @@ def inline(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,payload)
-            __url = _
+
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
@@ -999,6 +1004,8 @@ def time_based_heavy_q(url):
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload if tamper is not None else None)
+            _ = update_url(url,_payload)
+            __url = _
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
