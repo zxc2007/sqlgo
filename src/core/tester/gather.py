@@ -53,6 +53,11 @@ from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
 from src.core.parser.cmdline import hydra
 from src.core.tester.hydram import hydra_handler
 from src.core.tester.injector.dump import dump_data_gather
+from src.core.tester.injector._requests import stack_query
+from src.core.tester.injector._requests import inline
+from src.core.tester.injector._requests import error_boolean
+from src.core.tester.injector._requests import time_based_heavy_q
+from src.data import arg
 
 
 
@@ -62,27 +67,27 @@ import urllib3
 
 def gather_exploit():
     global xml
-    if install_dep:
+    if arg.install_dep:
         install_dependent()
         raise SystemExit
-    if warning_disable:
+    if arg.warning_disable:
         urllib3.disable_warnings()
     try:
         test_connection()
         extract_cookies()
         prompt_parameter()
         basic_threads = [
-            heuristic_injection_test_union_based(url),
-            heuristic_time_based_tests(url),
-            substring_heuristic_basic_injections(url),
-            error_based_heuristic_tests(url),
-            heuristic_time_based_tests(url),
-            make_set_url_replace(url),
-            time_based_url_replace(url),
-            error_based_url_replace(url),
-            union_based_url_replace(url)
+            heuristic_injection_test_union_based(arg.url),
+            heuristic_time_based_tests(arg.url),
+            substring_heuristic_basic_injections(arg.url),
+            error_based_heuristic_tests(arg.url),
+            heuristic_time_based_tests(arg.url),
+            make_set_url_replace(arg.url),
+            time_based_url_replace(arg.url),
+            error_based_url_replace(arg.url),
+            union_based_url_replace(arg.url)
         ]
-        if dump:
+        if arg.dump:
             dump_data_gather()
  
         for _thread_ in basic_threads:
@@ -90,10 +95,10 @@ def gather_exploit():
             _thread_.start()
             _thread_.join()
         
-        if hydra:
+        if arg.hydra:
             hydra_handler.run_hydra()
 
-        if level >= 3:
+        if arg.level >= 3:
             subber
             threads = [
                 union(),
@@ -107,13 +112,17 @@ def gather_exploit():
                 union_based_injection_function(),
                 postgre_sql_function(),
                 mysql_blind_based_function(),
-                make_set_url_replace(url),
-                time_based_url_replace(url),
-                error_based_url_replace(url),
-                union_based_url_replace(url),
+                stack_query(arg.url),
+                inline(arg.url),
+                time_based_heavy_q(arg.url),
+                error_boolean(arg.url),
+                make_set_url_replace(arg.url),
+                time_based_url_replace(arg.url),
+                error_based_url_replace(arg.url),
+                union_based_url_replace(arg.url),
                 
             ]
-            if dump:
+            if arg.dump:
                 dump_data_gather()
         
 
@@ -129,7 +138,7 @@ def gather_exploit():
             for _thread in thread_objects:
                 _thread.join()
         
-        if level >= 4:
+        if arg.level >= 4:
             threads = [
                 injection_test_is_vuln_time_based(),
             ]
@@ -144,7 +153,7 @@ def gather_exploit():
                 _thread.join()
         
 
-        if dump:
+        if arg.dump:
             try:
                 conf.direct = url
                 pushValue(conf.direct)
@@ -156,12 +165,12 @@ def gather_exploit():
             except Exception as e:
                 logger.error("error occurred during connection to the database:%s"%str(e))
         
-        if xml:
+        if arg.xml:
             xml = XML.XMLALL(url)
             xml.send_to_website()
             logger.info("testing xml data to the target: %s"%url)
             import sys
-        if crawl:
+        if arg.crawl:
             crawler_threads()
             host_injection(url)
             kb.targets = url

@@ -81,8 +81,6 @@ try:
     else:
         print(logo)
         print()
-        print()
-        print()
         _msg = "No url has been set for sqlgo to test the injection\n"
         _msg += "\nEXITING!!!"
         logger.critical(_msg)
@@ -90,9 +88,6 @@ try:
 
 except requests.exceptions.MissingSchema:
     print(logo)
-    print()
-    print()
-    print()
     print()
     _msg = "No url has been set for sqlgo to test the injection,\n or having messing schema.make sure you include http://| https:// in url."
     _msg += "\nEXITING!!!"

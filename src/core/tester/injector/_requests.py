@@ -46,6 +46,7 @@ from src.core.enums.enums import PAYLOAD_SENDING
 from src.core.parser.cmdline import delay_time
 from src.core.tester.injector.checks import extract_some_keyword
 from sqlmap.lib.core.data import conf
+from src.core.common.common import IOFileReader
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
@@ -776,6 +777,243 @@ def union_based_url_replace(url):
                 logger.error(e)
 
 
+def stack_query(url):
+
+    for payload in IOFileReader.payload("stack_q.txt").split("\n"):
+        try:
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
+            _ = update_url(url,payload)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(_payload if tamper is not None else None)
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.STACK_Q.value+"\033[1mReplacing the url\033[0m")
+            logger.debug(response.text if verbose == 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
+
+
+def error_boolean(url):
+
+    for payload in IOFileReader.payload("error_boolean.txt").split("\n"):
+        try:
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
+            _ = update_url(url,payload)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(_payload if tamper is not None else None)
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.ERROR_BOOL.value+"\033[1mReplacing the url\033[0m")
+            logger.debug(response.text if verbose == 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
+
+
+def inline(url):
+
+    for payload in IOFileReader.payload("inline.txt").split("\n"):
+        try:
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
+            _ = update_url(url,payload)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(_payload if tamper is not None else None)
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.INLINE_Q.value+"\033[1mReplacing the url\033[0m")
+            logger.debug(response.text if verbose == 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
+
+def time_based_heavy_q(url):
+
+    for payload in IOFileReader.payload("time_based.txt").split("\n"):
+        try:
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
+            _ = update_url(url,payload)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(_payload if tamper is not None else None)
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
+            logger.debug(response.text if verbose == 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    __import__("extras.beep.beep")
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
 # from lib.core.parser.cmdline import crawl 
 
 # crawl = True
