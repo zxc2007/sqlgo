@@ -54,6 +54,8 @@ import tampers.schemasplit
 import tampers.scientific
 import tampers.sp_password
 import tampers.space2dash
+import tampers.space2morecomment
+import tampers.space2mssqlhash
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -123,6 +125,10 @@ def apply_tamper(payload):
         return tampers.sp_password.tamper(payload)
     elif _tamper == "space2dash":
         return tampers.space2dash.tamper(payload)
+    elif _tamper == "space2morecomment":
+        return tampers.space2morecomment.tamper(payload)
+    elif _tamper == "space2mssqlhash":
+        return tampers.space2mssqlhash.tamper(payload)
     elif _tamper is None:
         return payload
     else:
