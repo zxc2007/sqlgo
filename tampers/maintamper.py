@@ -35,6 +35,7 @@ import tampers.chardoubleencode
 import tampers.charencode
 import tampers.charunicodeescape
 import tampers.commentbeforeparanthese
+import tampers.decenties
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -66,6 +67,8 @@ def apply_tamper(payload):
         return tampers.charunicodeescape.tamper(payload)
     elif _tamper == "commentbeforeparanthese":
         return tampers.commentbeforeparanthese.tamper(payload)
+    elif _tamper == "decenties":
+        return tampers.decenties.tamper(payload)
     elif _tamper is None:
         return payload
     else:
