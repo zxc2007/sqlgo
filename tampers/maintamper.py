@@ -36,6 +36,8 @@ import tampers.charencode
 import tampers.charunicodeescape
 import tampers.commentbeforeparanthese
 import tampers.decenties
+import tampers.equaltolike
+import tampers.equaltorlike
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -69,6 +71,10 @@ def apply_tamper(payload):
         return tampers.commentbeforeparanthese.tamper(payload)
     elif _tamper == "decenties":
         return tampers.decenties.tamper(payload)
+    elif _tamper == "equaltolike":
+        return tampers.equaltolike.tamper(payload)
+    elif _tamper == "equaltorlike":
+        return tampers.equaltorlike.tamper(payload)
     elif _tamper is None:
         return payload
     else:
