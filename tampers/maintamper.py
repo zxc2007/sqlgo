@@ -44,6 +44,8 @@ import tampers.hexentities
 import tampers.htmlencode
 import tampers.ifnull2casewhenisnull
 import tampers.ifnull2isnull
+import tampers.informationschemacomment
+import tampers.least
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -93,6 +95,10 @@ def apply_tamper(payload):
         return tampers.ifnull2casewhenisnull.tamper(payload)
     elif _tamper == "ifnull2isnull":
         return tampers.ifnull2isnull.tamper(payload)
+    elif _tamper == "informationschemacomment":
+        return tampers.informationschemacomment.tamper(payload)
+    elif _tamper == "least":
+        return tampers.least.tamper(payload)
     elif _tamper is None:
         return payload
     else:
