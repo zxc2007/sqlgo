@@ -53,6 +53,7 @@ import tampers.percentage
 import tampers.schemasplit
 import tampers.scientific
 import tampers.sp_password
+import tampers.space2dash
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -120,6 +121,8 @@ def apply_tamper(payload):
         return tampers.scientific.tamper(payload)
     elif _tamper == "sp_password":
         return tampers.sp_password.tamper(payload)
+    elif _tamper == "space2dash":
+        return tampers.space2dash.tamper(payload)
     elif _tamper is None:
         return payload
     else:
