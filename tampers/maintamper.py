@@ -52,6 +52,7 @@ import tampers.overlongutf8more
 import tampers.percentage
 import tampers.schemasplit
 import tampers.scientific
+import tampers.sp_password
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -117,6 +118,8 @@ def apply_tamper(payload):
         return tampers.schemasplit.tamper(payload)
     elif _tamper == "scientific":
         return tampers.scientific.tamper(payload)
+    elif _tamper == "sp_password":
+        return tampers.sp_password.tamper(payload)
     elif _tamper is None:
         return payload
     else:
