@@ -43,6 +43,7 @@ import tampers.greatests
 import tampers.hexentities
 import tampers.htmlencode
 import tampers.ifnull2casewhenisnull
+import tampers.ifnull2isnull
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -90,6 +91,8 @@ def apply_tamper(payload):
         return tampers.htmlencode.tamper(payload)
     elif _tamper == "ifnull2casewhenisnull":
         return tampers.ifnull2casewhenisnull.tamper(payload)
+    elif _tamper == "ifnull2isnull":
+        return tampers.ifnull2isnull.tamper(payload)
     elif _tamper is None:
         return payload
     else:
