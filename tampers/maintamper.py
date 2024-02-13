@@ -41,6 +41,7 @@ import tampers.equaltorlike
 import tampers.escapequotes
 import tampers.greatests
 import tampers.hexentities
+import tampers.htmlencode
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -84,7 +85,8 @@ def apply_tamper(payload):
         return tampers.hexentities.tamper(payload)
     elif _tamper == "greatests":
         return tampers.greatests.tamper(payload)
-    
+    elif _tamper == "htmlencode":
+        return tampers.htmlencode.tamper(payload)
     elif _tamper is None:
         return payload
     else:
