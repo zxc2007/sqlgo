@@ -34,6 +34,7 @@ import tampers.binary
 import tampers.chardoubleencode
 import tampers.charencode
 import tampers.charunicodeescape
+import tampers.commentbeforeparanthese
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -63,6 +64,8 @@ def apply_tamper(payload):
         return tampers.charencode.tamper(payload)
     elif _tamper == "charunicodeescape":
         return tampers.charunicodeescape.tamper(payload)
+    elif _tamper == "commentbeforeparanthese":
+        return tampers.commentbeforeparanthese.tamper(payload)
     elif _tamper is None:
         return payload
     else:
