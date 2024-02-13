@@ -46,6 +46,8 @@ import tampers.ifnull2casewhenisnull
 import tampers.ifnull2isnull
 import tampers.informationschemacomment
 import tampers.least
+import tampers.ord2ascii
+import tampers.overlongutf8
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -99,6 +101,10 @@ def apply_tamper(payload):
         return tampers.informationschemacomment.tamper(payload)
     elif _tamper == "least":
         return tampers.least.tamper(payload)
+    elif _tamper == "ord2ascii":
+        return tampers.ord2ascii.tamper(payload)
+    elif _tamper == "overlongutf8":
+        return tampers.overlongutf8.tamper(payload)
     elif _tamper is None:
         return payload
     else:
