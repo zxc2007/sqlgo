@@ -59,6 +59,7 @@ import tampers.space2mssqlhash
 import tampers.space2randomblank
 import tampers.substring2leftright
 import tampers.symboliclogical
+import tampers.unionalltounion
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -138,6 +139,8 @@ def apply_tamper(payload):
         return tampers.substring2leftright.tamper(payload)
     elif _tamper == "symboliclogical":
         return tampers.symboliclogical.tamper(payload)
+    elif _tamper == "unionalltounion":
+        return tampers.unionalltounion.tamper(payload)
     elif _tamper is None:
         return payload
     else:
