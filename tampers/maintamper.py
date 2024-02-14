@@ -57,6 +57,7 @@ import tampers.space2dash
 import tampers.space2morecomment
 import tampers.space2mssqlhash
 import tampers.space2randomblank
+import tampers.substring2leftright
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -132,6 +133,8 @@ def apply_tamper(payload):
         return tampers.space2mssqlhash.tamper(payload)
     elif _tamper == "space2randomblank":
         return tampers.space2randomblank.tamper(payload)
+    elif _tamper == "substring2leftright":
+        return tampers.substring2leftright.tamper(payload)
     elif _tamper is None:
         return payload
     else:
