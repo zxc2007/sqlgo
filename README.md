@@ -10,15 +10,20 @@ make sure you have git installed on your system.
 
 # dependencies
 - use the following commands to install the sqlgo dependencies using pip 
-```pip install -r requirements.txt```
-```pip3 install -r requirements.txt```
+```
+pip install -r requirements.txt```
+```
+pip3 install -r requirements.txt```
 **for window OS**
-```python -m pip install -r requirements.txt```
-```python3 -m pip install-r requirements.txt```
+```
+python -m pip install -r requirements.txt```
+```
+python3 -m pip install-r requirements.txt```
 **for unix based systems**
 
 
-```python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump ```
+```
+python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump ```
 
 
 # How do i report the bugs?
