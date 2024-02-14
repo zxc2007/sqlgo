@@ -23,7 +23,10 @@ python -m pip install -r requirements.txt
 python3 -m pip install-r requirements.txt
 **for unix based systems**
 
-https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/261e2743-086e-48dc-9137-7a224c212df3
+
+
+
+https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/af0aca77-f22b-4458-a340-342e98be78da
 
 
 
