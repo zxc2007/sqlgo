@@ -61,6 +61,7 @@ import tampers.substring2leftright
 import tampers.symboliclogical
 import tampers.unionalltounion
 import tampers.unmagicquotes
+import tampers.apostrophemask
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -144,6 +145,8 @@ def apply_tamper(payload):
         return tampers.unionalltounion.tamper(payload)
     elif _tamper == "unmagicquotes":
         return tampers.unmagicquotes.tamper(payload)
+    elif _tamper == "apostrophemask":
+        return tampers.apostrophemask.tamper(payload)
     elif _tamper is None:
         return payload
     else:
