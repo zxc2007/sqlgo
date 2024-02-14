@@ -695,10 +695,11 @@ def make_set_url_replace(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload if tamper is not None else None)
-            response = requests.get(__url)
             _ = update_url(url,_payload)
             __url = _
+            _payload = apply_tamper(payload if tamper is not None else None)
+            response = requests.get(__url)
+
             if verbose > 5:
                 logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET.value+"\033[1mReplacing the url\033[0m")

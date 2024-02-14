@@ -29,6 +29,7 @@ import random
 import re
 import codecs
 from src.core.parser.cmdline import url as _url
+from extras.logo import logo
 
 #Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py
 ip = 1
@@ -50,11 +51,7 @@ version = "1.1"
 
 def clear():
 	os.system('cls' if os.name == 'nt' else 'clear')
-	print("         __  __      ___  ___  _       ___       _        _           ")
-	print("        |  \/  |_  _/ __|/ _ \| |     |_ _|_ _  (_)___ __| |_ ___ _ _ ")
-	print("        | |\/| | || \__ \ (_) | |__    | || ' \ | / -_) _|  _/ _ \ '_|")
-	print("        |_|  |_|\_, |___/\__\_\____|  |___|_|\_|| \___\__|\__\___/_|  ")
-	print("                |___/                         \___/                v" + version)
+	print(logo)
 	print()
 
 proxy = 0
