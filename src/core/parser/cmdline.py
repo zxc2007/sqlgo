@@ -27,6 +27,7 @@ import sys
 import extras.version
 from src.datastruc.attrdict import api
 from src.data import arg
+from src.core.common.common import _listTamperingFunctions
 
 
 
@@ -85,6 +86,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
         self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
         self.add_argument("--accept-cookie",help="Accept the cookies by the server by default",action="store_true")
+        self.add_argument("--list-tampers",help="list all available tamper functions",action="store_true")
 
 
 
@@ -147,6 +149,7 @@ def extract():
     hydra = args.hydra
     delay_time = args.delay_time
     accept_cookie = args.accept_cookie
+    list_tampers = args.list_tampers
     return (
         output,
         verbose,
@@ -196,7 +199,8 @@ def extract():
         pass_file,
         hydra,
         delay_time,
-        accept_cookie
+        accept_cookie,
+        list_tampers
     )
 
 
@@ -251,6 +255,8 @@ try:
     hydra = result[46]
     delay_time = result[47]
     accept_cookie = result[48]
+    list_tampers = result[49]
+
 
     arg.output = result[0]
     arg.verbose = result[1]
@@ -301,9 +307,13 @@ try:
     arg.hydra = result[46]
     arg.delay_time = result[47]
     arg.accept_cookie = result[48]
+    arg.listTamper = result[49]
 except MemoryError:
-    pass
+    print("Could not allocate memory for the args namepace, exiting...")
 
+if arg.listTamper:
+    _listTamperingFunctions()
+    raise SystemExit
 
 
 if update:

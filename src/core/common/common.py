@@ -23,6 +23,10 @@ import sys
 import re
 import random
 import string
+import glob
+import os
+import re
+from sqlmap.lib.core.common import setColor
 
 
 
@@ -82,3 +86,20 @@ class IOFileReader(object):
             return sorted_payload
 
 # IOFileReader.payload("inline.txt")
+
+
+def _listTamperingFunctions():
+    """
+    Lists available tamper functions
+    """
+
+    infoMsg = "listing available tamper scripts\n"
+    print(infoMsg)
+
+    for script in sorted(glob.glob(os.path.join(os.getcwd(), "tampers", "*.py"))):
+        with open(script, "r") as file:
+            content = file.read()
+            match = re.search(r'(?s).+"""(.+)"""', content)
+            if match:
+                comment = match.group(1).strip()
+                print("* %s - %s\n" % (setColor(os.path.basename(script), "yellow"), re.sub(r" *\n *", " ", comment.split("\n\n")[0].strip())))
