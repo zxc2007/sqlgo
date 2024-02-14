@@ -23,9 +23,14 @@ python -m pip install -r requirements.txt
 python3 -m pip install-r requirements.txt
 **for unix based systems**
 
+https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/261e2743-086e-48dc-9137-7a224c212df3
+
+
+
 
 ```
-python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump ```
+python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump
+```
 
 
 # How do i report the bugs?
