@@ -60,6 +60,7 @@ import tampers.space2randomblank
 import tampers.substring2leftright
 import tampers.symboliclogical
 import tampers.unionalltounion
+import tampers.unmagicquotes
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -141,6 +142,8 @@ def apply_tamper(payload):
         return tampers.symboliclogical.tamper(payload)
     elif _tamper == "unionalltounion":
         return tampers.unionalltounion.tamper(payload)
+    elif _tamper == "unmagicquotes":
+        return tampers.unmagicquotes.tamper(payload)
     elif _tamper is None:
         return payload
     else:
