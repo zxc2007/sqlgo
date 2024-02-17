@@ -138,7 +138,7 @@ if __name__ == "__main__":
         finally:
             print(f"ending @ {settings.formatted_datetime}")
             if beep:
-                __import__("extra.beep.beep")
+                __import__("extras.beep.beep")
             
 
 

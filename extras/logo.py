@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-sys.path.append(os.getcwd())
 from utilis.colorago.colorago import Fore
 logo = f""" {Fore.YELLOW}
 ──────────────────────────────────────────────────────────────────────────────

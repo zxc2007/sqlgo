@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-sys.path.append(os.getcwd())
 from src.core.parser.cmdline import install_dep
 
 def install_dependent():

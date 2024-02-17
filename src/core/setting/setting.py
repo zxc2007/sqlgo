@@ -64,7 +64,6 @@ import string
 import codecs
 from datetime import date
 from datetime import datetime
-sys.path.append(os.getcwd())
 try:
   from thirdparty.colorama import *
 except:

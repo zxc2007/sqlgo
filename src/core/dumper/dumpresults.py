@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 # import os
 # import sys
-# sys.path.append(os.getcwd())
 # from src.core.dumper.dump import dumper
 # from src.datastruc.tree import Tree,root
 # from src.core.tester.injector.injections import make_set_injection_func
