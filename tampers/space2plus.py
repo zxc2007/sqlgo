@@ -31,6 +31,13 @@ if not settings.TAMPER_SCRIPTS[__tamper__]:
     settings.TAMPER_SCRIPTS[__tamper__] = True
 
 def tamper(payload, **kwargs):
+    """
+    Replaces spaces with plus sign
+
+
+    >>> tamper("hello world this is me talking to you all!")
+    'hello+world+this+is+me+talking+to+you+all!'
+    """
     warnings.filterwarnings("ignore",category=SyntaxWarning)
     _retval = None
     _pattern = re.compile(r"\s")

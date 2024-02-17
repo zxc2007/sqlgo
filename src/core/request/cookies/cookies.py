@@ -41,7 +41,7 @@ def extract_cookies(url=_url):
             if arg.beep:
                 __import__("extra.beep.beep")
             logger.info(f"Cookie name: {cookie.key}, cookie value by the server: {cookie.value}")
-        if arg.accept_cookie:
+        if arg.accept_cookie or arg.batch:
             user_input = 'y'
         
         else:

@@ -207,7 +207,7 @@ def is_sql_injection_vulnerable(response):
         # Decode the response content to string
         response_text = response.decode('utf-8') if hasattr(response,"decode") else response
         logger.debug(settings.DECODING_RESPONSE)
-        error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning"]
+        error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning","You have an error in your SQL syntax","check the manual that corresponds to you","warning: mysql_","supplied argument is not a valid mysql","to be resource, boolean given in","Warning: mysql_fetch_array()","Error Query", "Error performing query:"]
         return any(keyword in response_text.lower() for keyword in error_keywords)
     except Exception as e:
         print(f"Error decoding response: {str(e)}")
@@ -696,7 +696,7 @@ def make_set_url_replace(url):
         try:
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            _ = update_url(url,_payload)
+            _ = update_url(url,payload)
             __url = _
             if verbose > 3:
                 logger.debug(__url)

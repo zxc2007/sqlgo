@@ -87,6 +87,8 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
         self.add_argument("--accept-cookie",help="Accept the cookies by the server by default",action="store_true")
         self.add_argument("--list-tampers",help="list all available tamper functions",action="store_true")
+        self.add_argument("--skip-basic",help="skip basic tests",action="store_true",required=False)
+        self.add_argument("--batch",help="batch mode,never ask user for any input.",action="store_true",required=False)
 
 
 
@@ -150,6 +152,8 @@ def extract():
     delay_time = args.delay_time
     accept_cookie = args.accept_cookie
     list_tampers = args.list_tampers
+    skip_basic = args.skip_basic
+    batch = args.batch
     return (
         output,
         verbose,
@@ -200,7 +204,9 @@ def extract():
         hydra,
         delay_time,
         accept_cookie,
-        list_tampers
+        list_tampers,
+        skip_basic,
+        batch
     )
 
 
@@ -308,6 +314,8 @@ try:
     arg.delay_time = result[47]
     arg.accept_cookie = result[48]
     arg.listTamper = result[49]
+    arg.skipBasic = result[50]
+    arg.batch = result[51]
 except MemoryError:
     print("Could not allocate memory for the args namepace, exiting...")
 

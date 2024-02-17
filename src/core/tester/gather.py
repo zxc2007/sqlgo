@@ -107,13 +107,13 @@ def gather_exploit():
             error_based_url_replace(arg.url),
             union_based_url_replace(arg.url)
         ]
-        if arg.dump:
-            dump_data_gather()
+
  
         for _thread_ in basic_threads:
-            _thread_ = threading.Thread(target=_thread_)
-            _thread_.start()
-            _thread_.join()
+            if not arg.skipBasic:
+                _thread_ = threading.Thread(target=_thread_)
+                _thread_.start()
+                _thread_.join()
         
         if arg.hydra:
             hydra_handler.run_hydra()
@@ -142,8 +142,8 @@ def gather_exploit():
                 union_based_url_replace(arg.url),
                 
             ]
-            if arg.dump:
-                dump_data_gather()
+        if arg.dump:
+            dump_data_gather()
         
 
 
