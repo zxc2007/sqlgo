@@ -115,9 +115,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        
         main()
-    
     except SystemExit:
         raise
     except KeyboardInterrupt:
@@ -129,16 +127,15 @@ if __name__ == "__main__":
     except:
         traceback.print_exc()
     finally:
-        try:
-            if threading.active_count() > 1:
-                os._exit(0)
-            else:
-                sys.exit(0)
+        print(f"ending @ {settings.formatted_datetime}")
+        if threading.active_count() > 1:
+            os._exit(getattr(os, "_exitcode", 0))
+        else:
+            sys.exit(getattr(os, "_exitcode", 0))
         
-        finally:
-            print(f"ending @ {settings.formatted_datetime}")
-            if beep:
-                __import__("extras.beep.beep")
+        # finally:
+        #     if beep:
+        #         __import__("extras.beep.beep")
             
 
 
