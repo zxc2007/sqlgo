@@ -19,10 +19,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
+try:
 
-
-from extras.update import update_from_git
-from src.core.parser.cmdline import api
+    from extras.update import update_from_git
+    from src.core.parser.cmdline import api
+except KeyboardInterrupt:
+    print("Operation canceled by user.")
+    raise SystemExit
 
 if api.updates:
     update_from_git()
