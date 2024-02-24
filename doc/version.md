@@ -8,3 +8,5 @@
 *more user friendly UI*
 # 1.2.5
 *more bugs removed*
+# 1.2.6
+*module bugs fixed*

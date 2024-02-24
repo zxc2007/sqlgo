@@ -23,6 +23,7 @@ import os
 import sys
 import gzip
 import zlib
+import requests
 
 
 def page_encoding(response, action):
