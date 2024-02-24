@@ -208,10 +208,10 @@ def is_sql_injection_vulnerable(response):
         # Decode the response content to string
         response_text = response.decode('utf-8') if hasattr(response,"decode") else response
         logger.debug(settings.DECODING_RESPONSE)
-        error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning","You have an error in your SQL syntax","check the manual that corresponds to you","warning: mysql_","supplied argument is not a valid mysql","to be resource, boolean given in","Warning: mysql_fetch_array()","Error Query", "Error performing query:","Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in /hj/var/www/search.php on line 61"]
+        error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning","You have an error in your SQL syntax","check the manual that corresponds to you","warning: mysql_","supplied argument is not a valid mysql","to be resource, boolean given in","Warning: mysql_fetch_array()","Error Query", "Error performing query:","Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in /hj/var/www/search.php on line 61","[SqlException]: Invalid column name"]
         error_keywords.extend(errors)
         pattern = re.compile('|'.join(re.escape(keyword) for keyword in error_keywords), re.IGNORECASE)
-        return any(keyword in response_text.lower() for keyword in error_keywords) or pattern.search(response_text)
+        return any(keyword.lower() in response_text.text.lower() for keyword in error_keywords)
     except Exception as e:
         print(f"Error decoding response: {str(e)}")
         return False
