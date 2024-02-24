@@ -162,7 +162,7 @@ def gather_exploit():
             threads = [
                 injection_test_is_vuln_time_based(),
             ]
-            if dump:
+            if arg.dump:
                 threads.append(dump_data_gather())
             vulnTest()
 
