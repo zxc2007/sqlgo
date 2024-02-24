@@ -24,10 +24,7 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
 from src.core.parser.cmdline import url as _url
-try:
-    import thirdparty.requests as requests
-except:
-    import requests
+import requests
 from src.core.tester.vuln import vulnerable
 import re
 s = requests.session()

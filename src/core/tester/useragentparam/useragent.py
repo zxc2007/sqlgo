@@ -31,16 +31,10 @@ from src.core.tester.XSSfuns import get_all_forms, get_form_details
 import random
 from extras.useragents import useragents
 
-try:
-    from thirdparty.colorama import Fore,init
-except:
-    from colorama import Fore,init
+from colorama import Fore,init
 from src.core.parser.cmdline import url as _url
 import socket
-try:
-    import thirdparty.requests as requests
-except:
-    import requests
+import requests
 from extras.logo import logo
 
 init()

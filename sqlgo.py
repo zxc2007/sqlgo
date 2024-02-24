@@ -19,6 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
+
+from __future__ import print_function
 try:
     import warnings
     warnings.filterwarnings("ignore",category=SyntaxWarning)

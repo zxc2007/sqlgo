@@ -26,11 +26,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
 from utilis._regex.isphp import isphp
-try:
-    import thirdparty.requests as requests
 
-except:
-    import requests
+import requests
 from src.core.parser.cmdline import url as _url,beep
 
 def get_all_forms(url):

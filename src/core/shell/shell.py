@@ -25,11 +25,8 @@ import re  # Import the regular expression module
 from extras.logo import logo
 from extras.options import OPTIONS
 from extras.options import AVAIAIBLE_INFO
-try:
-    import thirdparty.requests as requests
 
-except:
-    import requests
+import requests
 from src.core.tester.injector._requests import error_based_injection
 from src.core.enums.devstatus import DevStatus
 from src.core.enums.priority import PRIORITY

@@ -28,10 +28,7 @@ from src.core.parser.cmdline import url as _url
 from src.core.parser.cmdline import port as _port
 from urllib.parse import urlparse
 
-try:
-    import thirdparty.requests as requests
-except:
-    import requests
+import requests
 
 def test_connection(url=_url, port=_port):
     logger.warning(f"Testing connection to the target URL: {url}")

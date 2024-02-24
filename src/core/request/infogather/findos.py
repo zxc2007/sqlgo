@@ -20,12 +20,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-try:
-    import thirdparty.nmap as nmap
-except:
-    pass
 from utilis._regex.getdomain import extract_domain
 from src.logger.log import logger
+try:
+    import nmap
+except:
+    pass
 
 def find_os(url):
     _retval = None

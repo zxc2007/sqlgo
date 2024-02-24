@@ -23,21 +23,15 @@ import logging
 import os
 import sys
 
-try:
-    from thirdparty.colorama import Fore,init
-except:
-    from colorama import Fore,init
+from colorama import Fore,init
 from src.core.parser.cmdline import verbose
 
 init()
 
 import logging
 
-try:
-    from thirdparty.termcolor import colored
 
-except:
-    from termcolor.termcolor import colored
+from termcolor.termcolor import colored
 
 class CustomColoredFormatter(logging.Formatter):
     COLORS = {
