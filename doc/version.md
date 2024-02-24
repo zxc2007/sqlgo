@@ -6,3 +6,5 @@
 *added advanced tests,dumping databases and tamper scripts*
 # 1.2.2
 *more user friendly UI*
+# 1.2.5
+*more bugs removed*
