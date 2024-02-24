@@ -50,9 +50,11 @@ def injection_test(payload, url, http_request_method="POST"):
     else:
         parsed = urllib.parse.urlparse(arg.url)
         try:
-            parameter = urllib.parse.unquote(parameter)
+            parameter = urllib.parse.unquote(parsed.query)
         except:
             parameter = urlparse(arg.url).query
+        parameter = urlparse(arg.url).query
+        
         # Check if its not specified the 'INJECT_HERE' tag
         parameter = ''.join(str(e) for e in parameter).replace("+","%2B")
         # Define the vulnerable parameter
