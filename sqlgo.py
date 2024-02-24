@@ -20,6 +20,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 try:
+    import warnings
+    warnings.filterwarnings("ignore",category=SyntaxWarning)
+
 
     from extras.update import update_from_git
     from src.core.parser.cmdline import api
