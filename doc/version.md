@@ -14,3 +14,5 @@
 *more bugs fixed for undefined modules in sqlmap module*
 # 1.2.8
 *more bugs solved for sqlmap modules*
+# 1.2.9
+*more bugs solved for syntax and global and local variables errors.*

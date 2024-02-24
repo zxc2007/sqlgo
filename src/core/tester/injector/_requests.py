@@ -886,10 +886,11 @@ def error_boolean(url):
 
 
 
-            _payload = apply_tamper(payload if tamper is not None else None)
-            response = requests.get(__url)
+
             _ = update_url(url,_payload)
             __url = _
+            _payload = apply_tamper(payload if tamper is not None else None)
+            response = requests.get(__url)
             if verbose > 3:
                 logger.debug(__url)
             if verbose > 5:
