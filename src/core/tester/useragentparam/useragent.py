@@ -95,7 +95,7 @@ class Crawler:
 
 try:
     _req = requests.get(_url)
-    if _url is not None and _req.status_code == 200:
+    if _url is not None:
         crawler = Crawler(_url)
     else:
         print(logo)
