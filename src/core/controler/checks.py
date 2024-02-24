@@ -162,8 +162,8 @@ from sqlmap.lib.request.inject import checkBooleanExpression
 from sqlmap.lib.request.templates import getPageTemplate
 from sqlmap.lib.techniques.union.test import unionTest
 from sqlmap.lib.techniques.union.use import configUnion
-from thirdparty import six
-from thirdparty.six.moves import http_client as _http_client
+from sqlmap.thirdparty import six
+from sqlmap.thirdparty.six.moves import http_client as _http_client
 
 def checkSqlInjection(place, parameter, value):
     # Store here the details about boundaries and payload used to
