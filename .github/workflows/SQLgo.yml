@@ -23,4 +23,4 @@ jobs:
           pip install -r requirements.txt  # If you have any requirements
 
       - name: Run Python script
-        run: python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --port=80 --level=5 --delay-time=1 --tamper=space2randomblank  --dump --batch --beep
+        run: python sqlgo.py -u http://testasp.vulnweb.com/showthread.asp?id=3 --port=80 --level=5 --delay-time=1 --tamper=space2randomblank  --dump --batch --beep --verbose=5
