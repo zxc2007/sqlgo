@@ -32,6 +32,8 @@ from src.logger.log import logger
 import src.core.setting.setting as settings
 from src.core.enums.payloads import Payload as P_type
 from utilis.colorago.resetor import reset_tested_payload
+from src.data import arg
+from urllib.parse import urlparse,parse_qs
 
 def injection_test(payload, url, http_request_method="POST"):
 
@@ -46,7 +48,11 @@ def injection_test(payload, url, http_request_method="POST"):
         request = urllib.request.Request(target)
 
     else:
-        #parameter = urllib.parse.unquote(parameter)
+        parsed = urllib.parse.urlparse(arg.url)
+        try:
+            parameter = urllib.parse.unquote(parameter)
+        except:
+            parameter = urlparse(arg.url).query
         # Check if its not specified the 'INJECT_HERE' tag
         parameter = ''.join(str(e) for e in parameter).replace("+","%2B")
         # Define the vulnerable parameter

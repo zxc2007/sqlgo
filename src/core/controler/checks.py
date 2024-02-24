@@ -61,9 +61,12 @@ def page_encoding(response, action):
     _ = True
     pass
   if _:
-    err_msg += "You are advised to rerun with"
-    err_msg += ('out', '')[menu.options.codec == None] + " option '--codec'."
-    print(settings.print_critical_msg(str(err_msg)))
+    try:
+        err_msg += "You are advised to rerun with"
+        err_msg += ('out', '')[menu.options.codec == None] + " option '--codec'."
+        print(settings.print_critical_msg(str(err_msg)))
+    except:
+        pass
   
 import copy
 import logging

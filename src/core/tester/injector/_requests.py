@@ -570,7 +570,7 @@ def error_based_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(_payload if tamper is not None else None)
+            _payload = apply_tamper(payload if tamper is not None else None)
             _ = update_url(url,_payload)
             __url = _
             if "http" not in __url:

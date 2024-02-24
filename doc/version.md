@@ -16,3 +16,5 @@
 *more bugs solved for sqlmap modules*
 # 1.2.9
 *more bugs solved for syntax and global and local variables errors.*
+# 1.3.1
+*some bugs are solved for tampering url*
