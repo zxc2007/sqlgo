@@ -887,7 +887,7 @@ def error_boolean(url):
 
 
 
-            _ = update_url(url,_payload)
+            _ = update_url(url,payload)
             __url = _
             _payload = apply_tamper(payload if tamper is not None else None)
             response = requests.get(__url)

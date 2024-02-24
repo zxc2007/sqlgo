@@ -20,3 +20,5 @@
 *some bugs are solved for tampering url*
 # 1.3.2
 *some little bugs fixed in time based injection*
+# 1.3.3
+*some changes with the payloads*
