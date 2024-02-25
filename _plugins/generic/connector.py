@@ -28,7 +28,7 @@ from src.core.parser.cmdline import dbms as _dbms
 from src.core.parser.cmdline import dbms_pass as _dbms_pass
 from src.core.parser.cmdline import dbms_user as _dbms_user
 from src.core.parser.cmdline import port as _port
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 from urllib.parse import urlparse
 
 class Connector(object):
@@ -44,7 +44,7 @@ class Connector(object):
     def initConnection(self):
         self.user = _dbms_user
         self.password = _dbms_pass
-        self.hostname = urlparse(_url).hostname
+        self.hostname = urlparse(arg.url).hostname
         self.port = _port
         self.db = _dbms
 
