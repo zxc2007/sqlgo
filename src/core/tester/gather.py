@@ -148,7 +148,10 @@ def gather_exploit():
                 
             ]
         if arg.dump:
-            dump_data_gather()
+            try:
+                dump_data_gather()
+            except SystemExit:
+                pass
         
 
 
