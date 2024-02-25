@@ -22,3 +22,7 @@
 *some little bugs fixed in time based injection*
 # 1.3.3
 *some changes with the payloads*
+
+# 1.3.5
+
+*Some bugs in tamper scripts has been resolved*
