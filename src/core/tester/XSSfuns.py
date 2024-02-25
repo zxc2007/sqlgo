@@ -23,7 +23,7 @@ import sys
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 import requests
 from src.core.tester.vuln import vulnerable
 import re
@@ -53,10 +53,10 @@ def get_form_details(form):
     return details
 
 def submit_form(form_details, url, value):
-    if "http" not in _url:
+    if "http" not in arg.url:
         url = re.sub(r'^(?!http)(.+)', r'http://\1', url)
     
-    if "https" not  in _url:
+    if "https" not  in arg.url:
         url = re.sub(r'^(?!https)(.+)', r'https://\1',url)
     target_url = urljoin(url, form_details["action"])
     inputs = form_details["inputs"]
@@ -69,17 +69,17 @@ def submit_form(form_details, url, value):
     logger.info(f"[+] Submitting malicious payload to {target_url}")
     logger.info(f"[+] Data: {data}")
     if form_details["method"] == "post":
-        if "http" not in _url:
+        if "http" not in arg.url:
             target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
         
-        if "https" not  in _url:
+        if "https" not  in arg.url:
             target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
         return requests.post(target_url, data=data)
     else:
-        if "http" not in _url:
+        if "http" not in arg.url:
             target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
         
-        if "https" not in _url:
+        if "https" not in arg.url:
             target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
         return requests.get(target_url, params=data)
 

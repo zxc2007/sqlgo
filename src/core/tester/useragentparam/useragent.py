@@ -32,7 +32,7 @@ import random
 from extras.useragents import useragents
 
 from colorama import Fore,init
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 import socket
 import requests
 from extras.logo import logo
@@ -88,9 +88,9 @@ class Crawler:
 # obj.referer_parameter()
 
 try:
-    _req = requests.get(_url)
-    if _url is not None:
-        crawler = Crawler(_url)
+    _req = requests.get(arg.url)
+    if arg.url is not None:
+        crawler = Crawler(arg.url)
     else:
         print(logo)
         print()

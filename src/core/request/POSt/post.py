@@ -27,12 +27,10 @@ import time
 from src.core.request.inits.TCP._init import socket_init
 from src.logger.log import logger
 from src.core.Exceptions.exceptions import SQLgoWrongUrlException
-from src.core.parser.cmdline import url as _url
-from src.core.parser.cmdline import port as _port
-from src.core.parser.cmdline import time_out
+from src.data import arg
 
 class SubData:
-    def __init__(self, host=_url, port=_port,timeout=time_out) -> None:
+    def __init__(self, host=arg.url, port=arg.port,timeout=arg.time_out) -> None:
         self.host = host
         self.port = port
         self.response = None  

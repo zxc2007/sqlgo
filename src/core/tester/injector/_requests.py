@@ -53,7 +53,6 @@ from src.core.parser.cmdline import tamper
 from src.core.tester.injector.checks import newline_fixation
 from src.core.tester.injector.parameters import get_url_part
 from extras.averagetime import average_response
-from src.core.parser.cmdline import url as _url
 from src.core.parser.cmdline import verbose
 from src.datastruc.tree import root
 from src.datastruc.tree import Tree
@@ -157,7 +156,7 @@ def time_based_inejction(url,payload=True,isauto=True):
 
             for _payload in time_based_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                    _payload = apply_tamper(_payload if tamper is not None else None)
+                    _payload = apply_tamper(_payload)
  
 
                     logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%line)
@@ -232,7 +231,7 @@ def make_set_sql_injection(url,random_header=False):
                 logger.debug(settings.GOT_INPUT_FIELD%input_field)
 
             for _payload in make_set_sql_payload().split("\n"):
-                _payload = apply_tamper(_payload if tamper is not None else None)
+                _payload = apply_tamper(_payload)
                 logger.info("testing : %s"%Payload.MAKE_SET.value)
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     form_data_copy = form_data.copy()
@@ -303,7 +302,7 @@ def union_based_injection(url):
                 for _payload in union_payload().split("\n"):
 
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        _payload = apply_tamper(_payload if tamper is not None else None)
+                        _payload = apply_tamper(_payload)
 
                         logger.info(f"testing : {Payload.UNION_ALL_SELECT.value}")
                         form_data_copy = form_data.copy()
@@ -426,7 +425,7 @@ def postgre_sql_blind_injection(url):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in BlindBased.postgre_sql_payload_version_query().split("\n"):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        _payload = apply_tamper(_payload if tamper is not None else None)
+                        _payload = apply_tamper(_payload)
 
                         logger.info(f"testing : {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
                         form_data_copy = form_data.copy()
@@ -570,7 +569,7 @@ def error_based_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
             if "http" not in __url:
@@ -636,7 +635,7 @@ def time_based_url_replace(url):
 
 
 
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
 
             __url = _
@@ -703,7 +702,7 @@ def make_set_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             response = requests.get(__url)
 
             if verbose > 5:
@@ -759,7 +758,7 @@ def union_based_url_replace(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
 
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload )
             _ = update_url(url,_payload)
             __url = _
             if verbose > 3:
@@ -823,7 +822,7 @@ def stack_query(url):
 
 
 
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
             if verbose > 3:
@@ -889,7 +888,7 @@ def error_boolean(url):
 
             _ = update_url(url,payload)
             __url = _
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             response = requests.get(__url)
             if verbose > 3:
                 logger.debug(__url)
@@ -950,7 +949,7 @@ def inline(url):
 
 
 
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
             if verbose > 3:
@@ -1015,7 +1014,7 @@ def time_based_heavy_q(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload if tamper is not None else None)
+            _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
             response = requests.get(__url)

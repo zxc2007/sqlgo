@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 from src.core.tester.injector._requests import *
-from src.core.parser.cmdline import url
+from src.data import arg
 import threading
 import src.core.setting.setting as settings
 import os
@@ -31,38 +31,38 @@ __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
 
 def make_set_injection_func():
-    _ = make_set_sql_injection(url)
+    _ = make_set_sql_injection(arg.url)
     return _
 
 def time_based_injection_func():
-    _ = time_based_inejction(url)
+    _ = time_based_inejction(arg.url)
     return _
 
 def host_injection_func():
-    _ = host_injection(url)
+    _ = host_injection(arg.url)
     return _
 
 def error_based_INJECTION():
-    _ = error_based_injection(url)
+    _ = error_based_injection(arg.url)
     return _
 
 def union_based_injection_function():
-    _ = union_based_injection(url)
+    _ = union_based_injection(arg.url)
     return _
 
 def mysql_blind_based_function():
-    _ = mysql_blind_based_injection(url=url)
+    _ = mysql_blind_based_injection(url=arg.url)
     return _
 
 def postgre_sql_function():
-    _ = postgre_sql_blind_injection(url=url)
+    _ = postgre_sql_blind_injection(url=arg.url)
     return _
 
 def crawler_threads():
     for payload in time_based_payload().split("\n"):
         for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-            referer_injection(url=url,payload=payload,vuln_parameter=line),
-            user_agent_injection(url=url,payload=payload,vuln_parameter=line)
+            referer_injection(url=arg.url,payload=payload,vuln_parameter=line),
+            user_agent_injection(url=arg.url,payload=payload,vuln_parameter=line)
                 
 
 

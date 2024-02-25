@@ -28,8 +28,8 @@ import hashlib
 import random
 import re
 import codecs
-from src.core.parser.cmdline import url as _url
 from extras.logo import logo
+from src.data import arg
 
 #Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py
 ip = 1
@@ -113,7 +113,7 @@ def confirm_proxy():
 			
 def get_link():
 	global link
-	tmp = _url
+	tmp = arg.url
 	if not tmp:
 		link = "http://127.0.0.1/sqli.php?id=11"
 		return

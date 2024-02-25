@@ -27,7 +27,7 @@ import time
 import src.core.setting.setting as settings
 from src.core.request.parameters import vuln_GET_param
 from src.core.payloads.timebased import time_based_payload
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 from src.logger.log import logger
 import src.core.setting.setting as settings
 from src.core.enums.payloads import Payload as P_type
@@ -82,7 +82,7 @@ def injection_test(payload, url, http_request_method="POST"):
 
 
 
-def injection_test_is_vuln_time_based(url=_url):
+def injection_test_is_vuln_time_based(url=arg.url):
     _retval = None
     _inj = None
     _imsg = None

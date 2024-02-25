@@ -23,9 +23,9 @@ import sys
 import time
 from utilis._regex.extractparam import replace_url_parameter
 from src.logger.log import logger
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 
-def prompt_parameter(url=_url):
+def prompt_parameter(url=arg.url):
     _,param = replace_url_parameter(url,new_value=None)
     logger.info("testing if %s is injectable."%param)
     time.sleep(5)

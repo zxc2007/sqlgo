@@ -28,7 +28,7 @@ from src.logger.log import logger
 from utilis._regex.isphp import isphp
 
 import requests
-from src.core.parser.cmdline import url as _url,beep
+from src.data import arg
 
 def get_all_forms(url):
     """Given a `url`, it returns all forms from the HTML content"""
@@ -82,7 +82,7 @@ def submit_form(form_details, url, value):
             # then add them to the data of form submission
             data[input_name] = input_value
 
-    if beep:
+    if arg.beep:
         __import__("extra.beep.beep")
     logger.info(f"[+] Submitting malicious payload to {target_url}")
     logger.info(f"[+] Data: {data}")
@@ -109,7 +109,7 @@ def scan_xss(url):
         form_details = get_form_details(form)
         content = submit_form(form_details, url, js_script).content.decode()
         if js_script in content:
-            if beep:
+            if arg.beep:
                 __import__("extra.beep.beep")
             logger.warning(f"[+] XSS Detected on {url}")
             logger.info(f"[*] Form details:")
@@ -118,6 +118,6 @@ def scan_xss(url):
             # won't break because we want to print available vulnerable forms
     return is_vulnerable
 
-def XSS(url=_url):
+def XSS(url=arg.url):
     scan_xss(url)
     

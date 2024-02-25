@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import os
 import sys
 from src.core.payloads.substringpayload import _sorted as substring_payload
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 from src.core.parser.cmdline import port as _port
 from src.core.parser.cmdline import attack
 from src.core.request.POSt.post import SubData
@@ -29,7 +29,7 @@ import src.core.setting.setting as settings
 from src.logger.log import logger
 
 class SubstringTester:
-    def __init__(self,data, url= _url,  port=_port) -> None:
+    def __init__(self,data, url= arg.url,  port=_port) -> None:
         self.url = url
         self.data = data if data is not None else substring_payload
         self.port = port

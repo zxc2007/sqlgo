@@ -21,14 +21,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import re
 import os
 import sys
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 from src.logger.log import logger
 
-def _isphp(url=_url):
+def _isphp(url=arg.url):
     return bool(re.search(r"\.php", url))
 
 def isphp():
     if _isphp() is True:
-        logger.info("target:%s backend is designed with php.this site might be vulnerable to XSS(cross site scripting)"%_url)
+        logger.info("target:%s backend is designed with php.this site might be vulnerable to XSS(cross site scripting)"%arg.url)
         return True
     

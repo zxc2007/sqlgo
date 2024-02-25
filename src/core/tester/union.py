@@ -25,7 +25,7 @@ from src.core.payloads.unionpayload import union_payload
 from src.core.request.POSt.post import subber
 from src.logger.log import logger
 from utilis._regex.extractparam import replace_url_parameter
-from src.core.parser.cmdline import url
+from src.data import arg
 from src.core.enums.payloads import Payload
 from src.datastruc.keygendict import Keygendict
 import src.core.setting.setting as settings
@@ -67,7 +67,7 @@ def union():
 
 def union_man():
     for payload in union_payload().split("\n"):
-        rep = (replace_url_parameter(url=url,new_value=payload))
+        rep = (replace_url_parameter(url=arg.url,new_value=payload))
         logger.info(rep[0])
     
 

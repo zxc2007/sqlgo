@@ -22,13 +22,12 @@ import http.cookies
 import urllib.request
 import os
 import sys
-from src.core.parser.cmdline import url as _url
 from src.logger.log import logger
 from utilis.colorago.colorago import Fore
 from src.core.parser.cmdline import beep
 from src.data import arg
 
-def extract_cookies(url=_url):
+def extract_cookies(url=arg.url):
     user_input = ""
     try:
         response = urllib.request.urlopen(url)

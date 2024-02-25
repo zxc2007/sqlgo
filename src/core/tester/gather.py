@@ -31,7 +31,6 @@ from src.core.request.cookies.cookies import extract_cookies
 from src.core.tester.prompts import prompt_parameter
 from src.core.tester.errorb import error_based
 from src.core.XSS.xss import XSS
-from src.core.parser.cmdline import url
 from src.core.parser.cmdline import install_dep
 from extras.installdep import install_dependent
 from src.core.parser.cmdline import warning_disable
@@ -180,30 +179,18 @@ def gather_exploit():
                 _thread.start()
                 _thread.join()
         
-
-        if arg.dump:
-            try:
-                conf.direct = url
-                pushValue(conf.direct)
-                conf.direct = url
-                parseTargetDirect()
-                print(conf.dbmsPass)
-                handle_dbms_connection()
-            
-            except Exception as e:
-                logger.error("error occurred during connection to the database:%s"%str(e))
         
         if arg.xml:
             logger.warning("This option will not work properly and will be removed in sqlgo 2.")
-            xml = XML.XMLALL(url)
+            xml = XML.XMLALL(arg.url)
             xml.send_to_website()
-            logger.info("testing xml data to the target: %s"%url)
+            logger.info("testing xml data to the target: %s"%arg.url)
             import sys
         if arg.crawl:
             crawler_threads()
-            host_injection(url)
-            kb.targets = url
-            _crawl(url)
+            host_injection(arg.url)
+            kb.targets = arg.url
+            _crawl(arg.url)
         
 
 

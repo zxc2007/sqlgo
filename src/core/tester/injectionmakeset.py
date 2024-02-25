@@ -22,14 +22,14 @@ import os
 import sys
 from src.core.request.POSt.post import SubData
 from src.core.payloads.makesetsqlpayload import _sorted as make_set_payload
-from src.core.parser.cmdline import url as _url
+from src.data import arg
 from src.core.parser.cmdline import port as _port
 from src.core.parser.cmdline import attack
 
 
 
 class Tester_make_set_sql:
-    def __init__(self,data, url= _url,  port=_port) -> None:
+    def __init__(self,data, url= arg.url,  port=_port) -> None:
         self.url = url
         self.data = data if data is not None else make_set_payload
         self.port = port

@@ -22,7 +22,7 @@ from sqlmap.lib.core.data import conf,kb
 from src.core.parser.cmdline import dbms
 from src.logger.log import logger
 from src.core.Exceptions.exceptions import SQLGOFilePathException
-from src.core.parser.cmdline import url
+from src.data import arg
 from src.core.parser.cmdline import user_file
 from src.core.parser.cmdline import pass_file
 from src.core.parser.cmdline import hydra
@@ -41,7 +41,7 @@ class Hydra(object):
         try:
             self.userfile = user_file
             self.passfile = pass_file
-            self.host = urlparse(url).hostname
+            self.host = urlparse(arg.url).hostname
             self.dbms = conf.dbms or dbms or "mysql"
             self.mysql_scheme = "mysql://"
             self.hydra_command = f"hydra -l {self.userfile} -p {self.passfile} {self.mysql_scheme}{self.host}"
@@ -50,7 +50,7 @@ class Hydra(object):
         except AttributeError:
             self.userfile = user_file
             self.passfile = pass_file
-            self.host = urlparse(url).hostname
+            self.host = urlparse(arg.url).hostname
             self.dbms = dbms
             self.mysql_scheme = "mysql://"
             self.hydra_command = f"hydra -l {self.userfile} -p {self.passfile} {self.mysql_scheme}{self.host}"

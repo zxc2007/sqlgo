@@ -24,13 +24,12 @@ import sys
 
 from src.core.request.inits.TCP._init import socket_init
 from src.logger.log import logger
-from src.core.parser.cmdline import url as _url
-from src.core.parser.cmdline import port as _port
 from urllib.parse import urlparse
+from src.data import arg
 
 import requests
 
-def test_connection(url=_url, port=_port):
+def test_connection(url=arg.url, port=arg.port):
     logger.warning(f"Testing connection to the target URL: {url}")
     req = requests.get(url)
     _ = req.status_code
