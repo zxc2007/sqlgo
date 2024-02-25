@@ -42,7 +42,6 @@ try:
     from extras.disclaimer import disclaimer
     from extras.logo import logo
     import src.core.setting.setting as settings
-    from src.core.parser.cmdline import url as _url
     from src.core.parser.cmdline import beep
     from src.core.shell.shell import shell_handler
     from datetime import datetime
@@ -78,7 +77,7 @@ def main():
         setPaths(modulePath())
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)
-        print(f"starting @ {settings.formatted_datetime}")
+        print("starting @ %s"%settings.formatted_datetime)
         check_version()
         gather_exploit()
     
