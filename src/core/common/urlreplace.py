@@ -43,6 +43,3 @@ def update_url(url,value):
     new_url = urllib.parse.urlunparse((parsed_url.scheme, parsed_url.netloc, parsed_url.path, parsed_url.params, new_query_string, parsed_url.fragment))
     return new_url
 
-# url = "https://example.com/api?id=value1&param2=value2"
-# new_url = update_url(url,"OR 1=1")
-# print(new_url)

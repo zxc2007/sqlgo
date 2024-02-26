@@ -49,7 +49,13 @@ try:
     try:
         from extras.logo import logo
     except:
-        logo = ""
+        logo = """
+ ____   ___  _     ____  ___  
+/ ___| / _ \| |   / ___|/ _ \ 
+\___ \| | | | |  | |  _| | | |
+ ___) | |_| | |__| |_| | |_| |
+|____/ \__\_\_____\____|\___/ 
+        """
     import src.core.setting.setting as settings
     from src.core.parser.cmdline import beep
     from src.core.shell.shell import shell_handler
