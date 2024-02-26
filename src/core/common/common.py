@@ -31,11 +31,11 @@ from sqlmap.lib.core.common import setColor
 
 
 class _IOFileReader(object):
-    def __init__(self, to_write, to_read) -> None:
+    def __init__(self, to_write, to_read):
         self.__os = os
         self.__sys = sys
-        self._payload_dir = os.path.join(self.__os.getcwd(), "data", "payloads", f"{to_read}.txt")
-        self.__paylods_dir = os.path.join(self.__os.getcwd(), "data", "payloads", f"{to_write}.txt")
+        self._payload_dir = os.path.join(self.__os.getcwd(), "data", "payloads", "%s.txt"%to_read)
+        self.__paylods_dir = os.path.join(self.__os.getcwd(), "data", "payloads", "%s.txt"%to_write)
         self.__regex = re
         self.__numeric_pattern = re.compile(r'\[RANDNUM\]|\[RANDNUM1\]|\[INFERENCE\]|\[RANDNUM2\]|\[SLEEPTIME\]')
         self.__string_pattern = re.compile(r'\[RANDSTR\]|\[RANDSTR1\]|\[GENERIC_SQL_COMMENT\]|\[ORIGVALUE\]|\[DELIMITER_START\]|\[QUERY\]')

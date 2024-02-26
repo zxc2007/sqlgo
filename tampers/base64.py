@@ -23,7 +23,7 @@ import sys
 import src.core.setting.setting as settings
 from src.core.converts.base64 import b64encode
 
-def tamper(payload:str,**kwargs):
+def tamper(payload,**kwargs):
     if isinstance(payload,bytes):
         _payload = b64encode(payload)
         return _payload

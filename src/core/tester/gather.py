@@ -57,7 +57,6 @@ from src.core.parser.cmdline import level
 import src.core.setting.setting as settings
 from src.core.tester.injector.timebased.tb_injector import injection_test_is_vuln_time_based
 from src.core.parser.cmdline import crawl
-from src.core.tester.useragentparam.useragent import crawler
 from src.core.tester.injector._requests import user_agent_injection
 from src.core.tester.injector.injections import crawler_threads
 from src.core.tester.injector.vernosesresponses import Verbose

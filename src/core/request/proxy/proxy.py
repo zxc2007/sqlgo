@@ -19,7 +19,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 import urllib3
-import urllib.request
+try:
+    import urllib.request
+except:
+    import urllib2 as urllib
 import os
 import sys
 import traceback
@@ -42,13 +45,12 @@ def use_proxy(request, ignore_proxy=False, tor=False, tor_proxy=None, proxy=None
         traceback.print_exc()
         return str(err_msg)
 
-your_request_object = urllib.request.Request("http://testfire.net/index.jsp?content=business_deposit.htm")
 
 # proxy_ip = "180.183.157.159"
 # proxy_port = 8080
 
 def set_proxy(ip,port):
-    proxy_url = f"http://{ip}:{port}"
+    proxy_url = "http://%s:%d"%(ip,port)
     return proxy_url
 # result_use_general_proxy = use_proxy(your_request_object, proxy=proxy_url)
 # print("Result (Use General Proxy):", result_use_general_proxy)

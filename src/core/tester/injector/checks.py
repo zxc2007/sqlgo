@@ -21,7 +21,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import re
 import os
 import sys
-import urllib.parse
+try:
+
+    import urllib.parse
+except:
+    import urlparse as urllib
+
 from src.core.enums.devstatus import DevStatus
 from src.core.enums.priority import PRIORITY
 
@@ -40,7 +45,10 @@ def newline_fixation(payload):
     return payload
 
 import re
-import requests
+try:
+    import requests
+except:
+    import third.requester as requests
 
 def extract_sentence_with_error(html_content, error_word):
     # Define a regular expression to find sentences containing the error word
@@ -74,10 +82,10 @@ def extract_some_keyword(url):
         return sentence_with_error
 
         # Print the result
-        if sentence_with_error:
-            print(f"Random sentence containing the error word '{error_word}':")
-            print(sentence_with_error)
-        else:
-            print(f"No sentences found containing the error word '{error_word}'.")
-    else:
-        print(f"Error: Unable to fetch URL. Status code: {response.status_code}")
+    #     if sentence_with_error:
+    #         print(f"Random sentence containing the error word '{error_word}':")
+    #         print(sentence_with_error)
+    #     else:
+    #         print(f"No sentences found containing the error word '{error_word}'.")
+    # else:
+    #     print(f"Error: Unable to fetch URL. Status code: {response.status_code}")

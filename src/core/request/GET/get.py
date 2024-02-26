@@ -30,7 +30,7 @@ class Get:
         self.start = time.time()
 
     def _header_prep(self):
-        header = f"GET / HTTP/1.1\r\nHost: {self.host}\r\n\r\n"
+        header = "GET / HTTP/1.1\r\nHost: %s\r\n\r\n"%self.host
         return header
 
     def _connect(self):

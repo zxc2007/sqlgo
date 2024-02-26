@@ -30,7 +30,7 @@ if not settings.TAMPER_SCRIPTS[__tamper__]:
     settings.TAMPER_SCRIPTS[__tamper__] = True
 
 
-def tamper(payload:str):
+def tamper(payload):
     _retval = None
     settings.TAMPER_SCRIPTS[__tamper__] = True
     modified_payload = re.sub(r"\s", "--", payload)

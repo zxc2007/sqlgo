@@ -21,8 +21,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
-class ReadFile:
-    def __init__(self,filename) -> None:
+class ReadFile(object):
+    def __init__(self,filename):
         self.filename = filename
     
     def __enter__(self):

@@ -100,7 +100,7 @@ class MakeSet:
         for payload in self.payload.split("\n"):
             req = self.datasub.submit_data(self.host,self.payload)
             self.result.append(self.datasub)
-            logger.info(f"testing {payload} ")
+            logger.info("testing %s "%payload)
         
 
 

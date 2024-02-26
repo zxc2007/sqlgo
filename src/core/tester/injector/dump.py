@@ -19,7 +19,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 import socket
-import urllib.request, urllib.error, urllib.parse
+try:
+	import urllib.request, urllib.error, urllib.parse
+except:
+	import urllib2  # alternative to urllib.request
+	import urllib2  # alternative to urllib.error
+	import urlparse  # alternative to urllib.parse
 import sys
 import os
 from threading import Thread
@@ -28,7 +33,10 @@ import hashlib
 import random
 import re
 import codecs
-from extras.logo import logo
+try:
+	from extras.logo import logo
+except:
+	pass
 from src.data import arg
 
 #Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py

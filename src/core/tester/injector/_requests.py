@@ -20,13 +20,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-import urllib.request
-from urllib.parse import urljoin
+try:
+    import urllib.request
+except:
+    import urllib2 as urllib
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
+
 import time
-import requests
+try:
+    import requests
+except:
+    import third.requester as requests
 import urllib3
-import urllib.parse
-from urllib.parse import urlparse
+try:
+    import urllib.parse
+except:
+    import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
+
 from src.core.payloads.errorb import error_based
 from src.core.setting.setting import REQUESTS
 import src.core.setting.setting as settings
@@ -72,6 +89,7 @@ import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
+_responses = []
 
 def host_injection(url,vuln_parameter="", payload="" ):
 
@@ -211,7 +229,7 @@ def is_sql_injection_vulnerable(response):
         error_keywords.extend(errors)
         return any(keyword in response_text.lower() for keyword in error_keywords)
     except Exception as e:
-        print(f"Error decoding response: {str(e)}")
+        print("Error decoding response: %s"%str(e))
         return False
 
 def make_set_sql_injection(url,random_header=False):
@@ -279,7 +297,7 @@ def make_set_sql_injection(url,random_header=False):
                     
     
     except Exception as e:
-        logger.error(f"Error: {str(e)}")
+        logger.error("Error: %s"%str(e))
         return
         # Handle the exception as needed
 
@@ -303,7 +321,7 @@ def union_based_injection(url):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                         _payload = apply_tamper(_payload)
 
-                        logger.info(f"testing : {Payload.UNION_ALL_SELECT.value}")
+                        logger.info("testing : %s"%Payload.UNION_ALL_SELECT.value)
                         form_data_copy = form_data.copy()
                         payload_field_name = line  
                         form_data_copy[payload_field_name] = _payload
@@ -366,7 +384,7 @@ def mysql_blind_based_injection(url):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in BlindBased.mysql_version_query().split("\n"):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        logger.info(f"testing : {Payload.MYSQL_BLIND_BASED.value}")
+                        logger.info("testing : %s"%Payload.MYSQL_BLIND_BASED.value)
                         form_data_copy = form_data.copy()
                         logger.debug("copied the data form %s"%form_data_copy)
                         payload_field_name = line 
@@ -426,7 +444,7 @@ def postgre_sql_blind_injection(url):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                         _payload = apply_tamper(_payload)
 
-                        logger.info(f"testing : {Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value}")
+                        logger.info("testing : %s"%Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value)
                         form_data_copy = form_data.copy()
                         payload_field_name = line  # Replace with the actual name
                         form_data_copy[payload_field_name] = _payload
@@ -476,7 +494,7 @@ def postgre_sql_blind_injection(url):
 def user_agent_injection(url, vuln_parameter, payload):
     _responses = []
     def inject_user_agent(url, vuln_parameter, payload):
-        nonlocal _responses
+        global _responses
         logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"User-agent")
 
         request = urllib.request.Request(url)
@@ -520,7 +538,7 @@ def referer_injection(url, vuln_parameter, payload):
         logger.info(settings.REFERER_INJECTION)
     _responses = []
     def inject(url, vuln_parameter, payload):
-        nonlocal _responses
+        global _responses
         logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"Referer")
 
         request = urllib.request.Request(url)
@@ -695,7 +713,7 @@ def make_set_url_replace(url):
 
     for payload in make_set_sql_payload().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+            print(PAYLOAD_SENDING.SENDING.format(payload if verbose >= 3 else ""))
 
             _ = update_url(url,payload)
             __url = _

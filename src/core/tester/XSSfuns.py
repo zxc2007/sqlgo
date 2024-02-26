@@ -20,11 +20,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-from urllib.parse import urljoin
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
+
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
 from src.data import arg
-import requests
+try:
+    import requests
+except:
+    import third.requester as requests
 from src.core.tester.vuln import vulnerable
 import re
 s = requests.session()
@@ -66,8 +73,8 @@ def submit_form(form_details, url, value):
             input["value"] = value
         data[input["name"]] = input["value"]
 
-    logger.info(f"[+] Submitting malicious payload to {target_url}")
-    logger.info(f"[+] Data: {data}")
+    logger.info("[+] Submitting malicious payload to %s"%target_url)
+    logger.info("[+] Data: %s"%data)
     if form_details["method"] == "post":
         if "http" not in arg.url:
             target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
@@ -85,15 +92,15 @@ def submit_form(form_details, url, value):
 
 def scan_xss(url):
     forms = get_all_forms(url)
-    logger.info(f"[+] Detected {len(forms)} forms on {url}.")
+    logger.info("[+] Detected %d forms on %s."%(len(forms),url))
     js_script = "<script>alert('hi')</script>"
     is_vulnerable = False
     for form in forms:
         form_details = get_form_details(form)
         content = submit_form(form_details, url, js_script).content.decode()
         if js_script in content:
-            logger.warning(f"[+] XSS Detected on {url}")
-            logger.info(f"[*] Form details:")
+            logger.warning("[+] XSS Detected on %s"%url)
+            logger.info("[*] Form details:")
             logger.info(form_details)
             is_vulnerable = True
     return is_vulnerable

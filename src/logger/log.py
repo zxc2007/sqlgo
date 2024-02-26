@@ -30,8 +30,10 @@ init()
 
 import logging
 
-
-from termcolor.termcolor import colored
+try:
+    from termcolor.termcolor import colored
+except:
+    from termcolor import colored
 
 class CustomColoredFormatter(logging.Formatter):
     COLORS = {
@@ -52,7 +54,7 @@ class CustomColoredFormatter(logging.Formatter):
         record.log_level = log_level_name  # Add a custom log level field
         record.timestamp_colored = timestamp_colored  # Add a custom timestamp field
 
-        return super().format(record)
+        return super(CustomColoredFormatter, self).format(record)
 
 def setup_logger():
     # Create a logger

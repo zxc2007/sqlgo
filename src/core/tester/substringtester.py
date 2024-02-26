@@ -29,7 +29,7 @@ import src.core.setting.setting as settings
 from src.logger.log import logger
 
 class SubstringTester:
-    def __init__(self,data, url= arg.url,  port=_port) -> None:
+    def __init__(self,data, url= arg.url,  port=_port):
         self.url = url
         self.data = data if data is not None else substring_payload
         self.port = port

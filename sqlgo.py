@@ -22,8 +22,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from __future__ import print_function
 try:
+    from six.moves import range
+except:
+    pass
+try:
     import warnings
     warnings.filterwarnings("ignore",category=SyntaxWarning)
+    warnings.filterwarnings("ignore", category=DeprecationWarning, module="cryptography")
+
 
 
     from extras.update import update_from_git
@@ -40,7 +46,10 @@ try:
     from src.core.tester.gather import gather_exploit
     from src.checker.checks import check_version
     from extras.disclaimer import disclaimer
-    from extras.logo import logo
+    try:
+        from extras.logo import logo
+    except:
+        logo = ""
     import src.core.setting.setting as settings
     from src.core.parser.cmdline import beep
     from src.core.shell.shell import shell_handler
@@ -130,11 +139,13 @@ if __name__ == "__main__":
 
     except ModuleNotFoundError:
         pass
+    except SyntaxError:
+        pass
 
     except:
         traceback.print_exc()
     finally:
-        print(f"ending @ {settings.formatted_datetime}")
+        print("ending @ %s"%settings.formatted_datetime)
         if threading.active_count() > 1:
             os._exit(getattr(os, "_exitcode", 0))
         else:

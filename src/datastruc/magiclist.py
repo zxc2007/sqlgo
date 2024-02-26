@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 class Magiclist(list):
     def __init__(self):
-        super().__init__(self)
+        super(Magiclist,self).__init__(self)
     
     def append(self,*args):
         for arg in args:

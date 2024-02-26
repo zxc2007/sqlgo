@@ -65,6 +65,4 @@ class PAYLOAD_SENDING(object):
     timestamp = "[2024-02-03 11:52:14.337308]"
     parsed_time = datetime.strptime(timestamp, "[%Y-%m-%d %H:%M:%S.%f]")
     formatted_time = parsed_time.strftime("[%Y-%m-%d %H:%M]")
-    _SENDING = f"{formatted_time}[{Fore.BLUE}PAYLOAD{Fore.RESET}] code:"
-    SENDING = _SENDING + "%s"
-
+    SENDING = "%s[%sPAYLOAD%s] code:{}" % (formatted_time, Fore.BLUE, Fore.RESET)

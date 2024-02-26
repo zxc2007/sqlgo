@@ -24,15 +24,23 @@ import sys
 
 from src.core.request.inits.TCP._init import socket_init
 from src.logger.log import logger
-from urllib.parse import urlparse
-from src.data import arg
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
 
-import requests
+from src.data import arg
+try:
+
+    import requests
+
+except:
+    import third.requester as requests
 
 def test_connection(url=arg.url, port=arg.port):
-    logger.warning(f"Testing connection to the target URL: {url}")
+    logger.warning("Testing connection to the target URL: %s"%url)
     req = requests.get(url)
-    _ = req.status_code
+    _ = req.status_code if hasattr(req, "status_code") else 200
     logger.debug("current status code of the response code is:|%s|"%_)
 
     # Extract host and path from the URL
@@ -47,7 +55,7 @@ def test_connection(url=arg.url, port=arg.port):
 
         sock.connect((host, port))
 
-        request = f"GET {path} HTTP/1.1\r\nHost: {host}\r\n\r\n"
+        request = "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n"%(path,host)
 
         sock.sendall(request.encode())
 

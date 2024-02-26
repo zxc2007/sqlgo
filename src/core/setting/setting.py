@@ -1221,7 +1221,7 @@ major_version = sys.version_info.major
 minor_version = sys.version_info.minor
 
 # Combine major and minor version components into a single integer
-PYTHON_VERSION= int(f"{major_version}{minor_version}")
+PYTHON_VERSION= int("%d%d"%(major_version, minor_version))
 
 INJECTABLE_ARES_ON_THE_FORM = [
   "username",

@@ -22,12 +22,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import sys
 from pprint import pprint
-from urllib.parse import urljoin
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
 from utilis._regex.isphp import isphp
+try:
+    import requests
+except:
+    import third.requester as requests
 
-import requests
 from src.data import arg
 
 def get_all_forms(url):
@@ -84,8 +90,8 @@ def submit_form(form_details, url, value):
 
     if arg.beep:
         __import__("extra.beep.beep")
-    logger.info(f"[+] Submitting malicious payload to {target_url}")
-    logger.info(f"[+] Data: {data}")
+    logger.info("[+] Submitting malicious payload to %s"%target_url)
+    logger.info("[+] Data: %s"%data)
     if form_details["method"] == "post":
         return requests.post(target_url, data=data)
     else:
@@ -100,7 +106,7 @@ def scan_xss(url):
     """
     # get all the forms from the URL
     forms = get_all_forms(url)
-    logger.info(f"[+] Detected {len(forms)} forms on {url}.")
+    logger.info("[+] Detected %d forms on %s."%(len(forms),url))
     js_script = "<Script>alert('hi')</scripT>"
     # returning value
     is_vulnerable = False
@@ -111,8 +117,8 @@ def scan_xss(url):
         if js_script in content:
             if arg.beep:
                 __import__("extra.beep.beep")
-            logger.warning(f"[+] XSS Detected on {url}")
-            logger.info(f"[*] Form details:")
+            logger.warning("[+] XSS Detected on %s"%url)
+            logger.info("[*] Form details:")
             logger.info(form_details)
             is_vulnerable = True
             # won't break because we want to print available vulnerable forms

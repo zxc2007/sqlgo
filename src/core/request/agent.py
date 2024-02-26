@@ -20,14 +20,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import random
 import string
-import asyncio
-import requests
 
 def generate_user_agent():
     browser = random.choice(["Chrome", "Firefox", "Safari", "Edge"])
     version = ".".join([str(random.randint(1, 15)) for _ in range(3)])
     platform = random.choice(["Windows", "Macintosh", "Linux"])
-    user_agent = f"{browser}/{version} ({platform}; { generate_random_string(10)})"
+    user_agent = "%s/%s(%s; %s)" % (browser, version, platform, generate_random_string(10))
+
     return user_agent
 
 def generate_random_string(length):

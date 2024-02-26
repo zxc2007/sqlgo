@@ -21,11 +21,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
-import urllib.request
-import requests
+try:
+    import urllib.request
+except:
+    import urllib2 as urllib
+
+
 import re
 import time
-import urllib.parse
+try:
+    import urllib.parse
+except:
+    import urlparse as urllib
+
 from src.core.setting.setting import ALTER_SHELL_BASIC_COMMAND_INJECTION_PAYLOADS, WHITESPACES, IDENTIFIED_COMMAND_INJECTION, MULTI_TARGETS, SINGLE_WHITESPACE, TESTABLE_VALUE, INJECT_TAG, print_payload
 from src.core.payloads.unionpayload import union_payload
 import traceback
@@ -93,9 +101,9 @@ def heuristic_injection_test_union_based(url):
                             time.sleep(3)
                     # print(_data)
                 except urllib.error.URLError as e:
-                    print(f"URLError: {e.reason}")
+                    print("URLError: %s"%e.reason)
                 except urllib.error.HTTPError as e:
-                    print(f"HTTPError: {e.code}")
+                    print("HTTPError: %s"%e.code)
     
     except Exception as e:
         logger.debug(e)
@@ -145,9 +153,9 @@ def error_based_heuristic_tests(url):
                             time.sleep(3)
                     # print(_data)
                 except urllib.error.URLError as e:
-                    print(f"URLError: {e.reason}")
+                    print("URLError: %s"%e.reason)
                 except urllib.error.HTTPError as e:
-                    print(f"HTTPError: {e.code}")
+                    print("HTTPError: %s"%e.code)
     
     except Exception as e:
         logger.debug(e)
@@ -198,9 +206,9 @@ def heuristic_time_based_tests(url):
                             time.sleep(3)
                     # print(_data)
                 except urllib.error.URLError as e:
-                    print(f"URLError: {e.reason}")
+                    print("URLError: %s"%e.reason)
                 except urllib.error.HTTPError as e:
-                    print(f"HTTPError: {e.code}")
+                    print("HTTPError: %s"%e.code)
     
     except Exception as e:
         logger.debug(e)
@@ -251,9 +259,9 @@ def substring_heuristic_basic_injections(url):
                             time.sleep(3)
                     # print(_data)
                 except urllib.error.URLError as e:
-                    print(f"URLError: {e.reason}")
+                    print("URLError: %s"%e.reason)
                 except urllib.error.HTTPError as e:
-                    print(f"HTTPError: {e.code}")
+                    print("HTTPError: %s"%e.code)
     
     except Exception as e:
         logger.debug(e)

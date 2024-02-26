@@ -18,8 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import urllib.parse
-import requests
+try:
+    import urllib.parse
+except:
+    import urlparse as urllib
+
+try:
+    import requests
+except:
+    import third.requester as requests
 import re
 
 

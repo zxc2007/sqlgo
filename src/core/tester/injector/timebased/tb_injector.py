@@ -20,8 +20,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-import urllib.parse
-import urllib.request
+try:
+    import urllib.parse
+except:
+    from urlparse import urlparse
+try:
+    import urllib.request
+except:
+    import urlparse as urllib
+
 import re
 import time
 import src.core.setting.setting as settings
@@ -33,7 +40,10 @@ import src.core.setting.setting as settings
 from src.core.enums.payloads import Payload as P_type
 from utilis.colorago.resetor import reset_tested_payload
 from src.data import arg
-from urllib.parse import urlparse,parse_qs
+try:
+    from urllib.parse import urlparse,parse_qs
+except:
+    import urlparse
 
 def injection_test(payload, url, http_request_method="POST"):
 

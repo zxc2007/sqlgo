@@ -18,7 +18,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import urllib.parse
+try:
+    import urllib.parse
+except:
+    import urlparse as urllib
 import os
 import sys
 from src.core.enums.devstatus import DevStatus

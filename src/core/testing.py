@@ -44,7 +44,10 @@ from sqlmap.lib.core.data import paths
 from sqlmap.lib.core.data import queries
 from sqlmap.lib.core.patch import unisonRandom
 from sqlmap.lib.core.settings import IS_WIN
-from urllib.parse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    import urlparse
 from sqlmap.lib.core.common import setPaths
 from sqlmap.sqlmap import modulePath
 from src.core.parser.cmdline import url

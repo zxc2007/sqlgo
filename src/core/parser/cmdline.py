@@ -20,7 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import argparse
 import os
-from urllib.parse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    from urlparse import urlparse
+
 import sys
 import sys
 
@@ -34,7 +38,7 @@ from src.core.common.common import _listTamperingFunctions
 
 class Cmdline(argparse.ArgumentParser):
     def __init__(self):
-        super().__init__(description="sqlgo")
+        super(Cmdline, self).__init__(description="sqlgo")
 
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)

@@ -18,7 +18,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import requests
+try:
+    import requests
+except:
+    import third.requester as requests
 from bs4 import BeautifulSoup
 import os
 import sys

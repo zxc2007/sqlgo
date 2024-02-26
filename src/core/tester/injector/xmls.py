@@ -22,7 +22,10 @@ import xml.etree.ElementTree as ET
 import os
 import sys
 import glob
-import requests
+try:
+    import requests
+except:
+    import third.requester as requests
 from src.logger.log import logger
 from src.core.payloadgen import loadPayloads
 import src.core.setting.setting as settings
@@ -76,7 +79,7 @@ class XML:
                             logger.warning("sql injection might not certainly exists.")
                     
                 else:
-                    logger.error(f"Failed to send XML payload. Status code: {response.status_code}")
+                    logger.error("failed")
                     logger.info("Response:%s"% response.text)  
 
 # Instantiate the class and send XML payloads to the website

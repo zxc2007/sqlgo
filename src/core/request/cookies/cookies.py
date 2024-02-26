@@ -18,8 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import http.cookies
-import urllib.request
+try:
+    import http.cookies
+except:
+    import Cookie as http
+
+try:
+    import urllib.request
+except:
+    import urllib2 as urllib
 import os
 import sys
 from src.logger.log import logger
@@ -39,12 +46,12 @@ def extract_cookies(url=arg.url):
         for cookie in cookies.values():
             if arg.beep:
                 __import__("extra.beep.beep")
-            logger.info(f"Cookie name: {cookie.key}, cookie value by the server: {cookie.value}")
+            logger.info("Cookie name: %s, cookie value by the server: %s"%(cookie.key,cookie.value))
         if arg.accept_cookie or arg.batch:
             user_input = 'y'
         
         else:
-            user_input = input(f"{Fore.BRIGHT_GREEN}you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: {Fore.RESET}").lower()
+            user_input = input("%s you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: %s" % (Fore.RED,Fore.RESET)).strip("").lower()
   
         if user_input != 'y':
             logger.error("Canceled by the user.")

@@ -83,10 +83,10 @@ class Keygendict(dict):
         _retval = _
         return _retval
     
-    def __len__(self) -> int:
+    def __len__(self):
         return super().__len__()
     
-    def __delitem__(self,key) -> None:
+    def __delitem__(self,key):
         if key in self.caps:
             del self.caps[key]
             self.dict_capacity_calculation()  

@@ -35,7 +35,7 @@ def replace_url_parameter(url, new_value):
     NOTE: return would be url,parameter
     """
     pattern = r"(\?|\&)([^=]+)=[^&]*"
-    replaced_url = re.sub(pattern, rf"\1\2={new_value}", url)
+    replaced_url = re.sub(pattern, r"\1\2=%s"%new_value, url)
     extracted_value = re.search(pattern, url).group()
     if not replace_url_parameter:
         raise SQLgoNoParameterFoundException

@@ -18,8 +18,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-
-from urllib.parse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    import urlparse
+    
 import os
 import sys
 from _plugins.dbms.mysql.connector import Connector as MysqlConn

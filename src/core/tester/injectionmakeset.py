@@ -29,7 +29,7 @@ from src.core.parser.cmdline import attack
 
 
 class Tester_make_set_sql:
-    def __init__(self,data, url= arg.url,  port=_port) -> None:
+    def __init__(self,data, url= arg.url,  port=_port):
         self.url = url
         self.data = data if data is not None else make_set_payload
         self.port = port

@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import re
 
 
-def tamper(payload:str,**kwargs):
+def tamper(payload,**kwargs):
     _retval = None
     _pattern = re.compile(r"[a-z]")
     payload = re.sub(_pattern,lambda x: x.group().upper(),payload)

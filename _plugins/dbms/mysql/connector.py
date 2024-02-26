@@ -38,8 +38,10 @@ from sqlmap.lib.core.data import logger
 from sqlmap.lib.core.exception import SqlmapFilePathException
 from sqlmap.lib.core.exception import SqlmapUndefinedMethod
 from src.core.parser.cmdline import dbms,url,dbs_port
-
-from urllib.parse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    import urlparse
 class GenericConnector(object):
     """
     This class defines generic dbms protocol functionalities for plugins.

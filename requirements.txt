@@ -17,3 +17,4 @@ aiohttp
 pwn
 socks
 colorama
+six

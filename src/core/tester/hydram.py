@@ -26,7 +26,11 @@ from src.data import arg
 from src.core.parser.cmdline import user_file
 from src.core.parser.cmdline import pass_file
 from src.core.parser.cmdline import hydra
-from urllib.parse import urlparse
+try:
+    from urllib.parse import urlparse
+except:
+    import urlparse
+
 from utilis.readfile import ReadFile
 import os
 import sys
@@ -44,17 +48,14 @@ class Hydra(object):
             self.host = urlparse(arg.url).hostname
             self.dbms = conf.dbms or dbms or "mysql"
             self.mysql_scheme = "mysql://"
-            self.hydra_command = f"hydra -l {self.userfile} -p {self.passfile} {self.mysql_scheme}{self.host}"
-
-        
-        except AttributeError:
+            self.hydra_command = "hydra -l %s -p %s %s%s" % (self.userfile, self.passfile, self.mysql_scheme, self.host)
+        except:
             self.userfile = user_file
             self.passfile = pass_file
-            self.host = urlparse(arg.url).hostname
+            self.host = arg.url
             self.dbms = dbms
             self.mysql_scheme = "mysql://"
-            self.hydra_command = f"hydra -l {self.userfile} -p {self.passfile} {self.mysql_scheme}{self.host}"
-    
+            self.hydra_command = "hydra -l %s -p %s %s%s" % (self.userfile, self.passfile, self.mysql_scheme, self.host)    
     def _check_hydra(self):
         try:
             command = os.system(__tool__)

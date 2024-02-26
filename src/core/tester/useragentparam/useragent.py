@@ -20,8 +20,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import os
 import sys
-import urllib.request
-import urllib.parse
+try:
+    import urllib.request
+except:
+    import urllib2 as urllib
+try:
+    import urllib.parse
+except:
+    import urlparse as urllib
+
 import src.core.setting.setting as settings
 from src.logger.log import logger
 from src.core.tester.detector import sql_injection_basic_detection

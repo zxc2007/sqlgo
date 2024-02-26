@@ -47,7 +47,7 @@ class Tree:
 
 >>> root.print_tree()
     """
-    def __init__(self,data) -> None:
+    def __init__(self,data):
         self.data = data
         self.children = Magiclist()
         self.parent = None

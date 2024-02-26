@@ -30,7 +30,7 @@ from src.core.Exceptions.exceptions import SQLgoWrongUrlException
 from src.data import arg
 
 class SubData:
-    def __init__(self, host=arg.url, port=arg.port,timeout=arg.time_out) -> None:
+    def __init__(self, host=arg.url, port=arg.port,timeout=arg.time_out):
         self.host = host
         self.port = port
         self.response = None  
@@ -41,7 +41,7 @@ class SubData:
         host, path = self.parse_url(self.host)
 
         # Construct the POST request headers and body
-        headers = f"POST {path} HTTP/1.1\r\nHost: {host}\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: {len(data)}\r\n\r\n"
+        headers = "POST %s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: %d\r\n\r\n"%(path,host,len(data))
         request = headers + data
 
         s = socket_init()
