@@ -41,10 +41,8 @@ def replace_url_parameter(url, new_value):
         raise SQLgoNoParameterFoundException
     return replaced_url,Fore.BRIGHT_CYAN+str(extracted_value)+Fore.RESET
 
-#http://testfire.net/index.jsp?content=business_deposit.htm
 
 
 
-# print(replace_url_parameter(url="http://testfire.net/index.jsp?content=business_deposit.htm",new_value=_sorted))
 
 

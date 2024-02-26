@@ -28,7 +28,6 @@ except:
     from urlparse import urljoin
 from bs4 import BeautifulSoup as bs
 from src.logger.log import logger
-from utilis._regex.isphp import isphp
 try:
     import requests
 except:

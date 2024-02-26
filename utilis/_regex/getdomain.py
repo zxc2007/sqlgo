@@ -29,4 +29,3 @@ def extract_domain(url):
     else:
         return None
 
-# print(extract_domain("https://scanme.org/"))
