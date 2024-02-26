@@ -34,19 +34,20 @@ from src.core.parser.cmdline import *
 
 from sqlmap.lib.core.data import conf,kb
 
+try:
+    conf.dbmsUser = dbms_user or ""
+    conf.dbmsPass = dbms_pass or ""
+    conf.hostname = urlparse(url).hostname
+    conf.port = 3306 if dbms == "mysql" and dbms is    not None else ""
+    conf.dbmsDb = dbs or ""
+    conf.dbms = dbms or "mysql"
+    kb.timeout = dbs_timeout
+    conf.timeout = dbs_timeout
+    conf.dbmsHandler = "f"
 
-conf.dbmsUser = dbms_user or ""
-conf.dbmsPass = dbms_pass or ""
-conf.hostname = urlparse(url).hostname
-conf.port = 3306 if dbms == "mysql" and dbms is not None else ""
-conf.dbmsDb = dbs or ""
-conf.dbms = dbms or "mysql"
-kb.timeout = dbs_timeout
-conf.timeout = dbs_timeout
-conf.dbmsHandler = "f"
-
-comn_table = common_tables()
-
+    comn_table = common_tables()
+except:
+    pass
 def handle_dbms_connection():
     global comn_table
     for _ in comn_table:
