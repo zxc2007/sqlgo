@@ -195,8 +195,6 @@ def gather_exploit():
 
         
         Verbose.verbose_response()
-        # python sqlgo.py -u http://localhost:3000/#/search?q=fe --port 3000 --dump --username root --password alimirmohammad
-        # extract_injection()
     
     except Exception as e:
         logger.debug(e)
