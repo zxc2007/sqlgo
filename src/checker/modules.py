@@ -25,7 +25,10 @@ import urllib3
 import charset_normalizer
 import idna
 import six
-import requests
+try:
+    import requests
+except:
+    pass
 import git
 import sqlmap
 import prettytable

@@ -89,7 +89,6 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
 
-# handle_dbms_connection()
 
 
 
@@ -163,9 +162,6 @@ if __name__ == "__main__":
         else:
             sys.exit(getattr(os, "_exitcode", 0))
         
-        # finally:
-        #     if beep:
-        #         __import__("extras.beep.beep")
             
 
 
