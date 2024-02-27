@@ -5,15 +5,10 @@ urllib3
 charset_normalizer
 idna
 six
-pymysql
-cx_Oracle
 requests
 GitPython
 sqlmap
-pyodbc
-mysql-connector-python
 prettytable
-aiohttp
 pwn
 socks
 colorama
