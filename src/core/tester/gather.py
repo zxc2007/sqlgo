@@ -200,7 +200,7 @@ def gather_exploit():
     
     except Exception as e:
         logger.debug(e)
-        if any(isinstance(e,ConnectionResetError),"Connection reset by peer" in str(e),"[Errno 54] Connection reset by peer" in str(e)):
+        if any([isinstance(e,ConnectionResetError),"Connection reset by peer" in str(e),"[Errno 54] Connection reset by peer" in str(e)]):
             logger.warning("It looks like that the target has been closed the connection due to the harmful requests.please try using the proxy or vpn.")
             logger.critical("This can be a protection of WAF/IPS against harmful requests.")
         
