@@ -18,20 +18,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
+import sys
+
+
 import bs4 
 import termcolor
 import pygame
 import urllib3
-try:
+if sys.version_info[0] > 2:
     import charset_normalizer
-except:
-    pass
+    import requests 
+
 import idna
 import six
-try:
-    import requests
-except:
-    pass
 import git
 import sqlmap
 import prettytable
