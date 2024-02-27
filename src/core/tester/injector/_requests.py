@@ -597,7 +597,7 @@ def error_based_url_replace(url):
             response = requests.get(__url)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             logger.info("testing :%s"%Payload.ERROR_BASED.value+"\033[1mReplacing the url\033[0m")
 
             forms = get_all_forms(url)
@@ -612,6 +612,8 @@ def error_based_url_replace(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -663,7 +665,7 @@ def time_based_url_replace(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED.value+"\033[1mReplacing the url\033[0m")
 
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -676,6 +678,8 @@ def time_based_url_replace(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -723,7 +727,7 @@ def make_set_url_replace(url):
             response = requests.get(__url)
 
             if verbose > 5:
-                logger.debug("status code:%d"%response.status_code if verbose == 5 else "")
+                logger.debug("status code:%d"%response.status_code if verbose >= 5 else "")
             logger.info("testing :%s"%Payload.MAKE_SET.value+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text)
@@ -739,6 +743,8 @@ def make_set_url_replace(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -762,7 +768,6 @@ def make_set_url_replace(url):
 
 
                     time.sleep(delay_time)
-                    # Call sql_injection_basic_detection with both parameters
 
         except Exception as e:
             traceback.print_exc()
@@ -784,7 +789,7 @@ def union_based_url_replace(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT.value+"\033[1mReplacing the url\033[0m")
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -848,7 +853,7 @@ def stack_query(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.STACK_Q.value+"\033[1mReplacing the url\033[0m")
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -861,7 +866,9 @@ def stack_query(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
-
+                
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
                 form_details = get_form_details(form_in_response)
@@ -912,7 +919,7 @@ def error_boolean(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.ERROR_BOOL.value+"\033[1mReplacing the url\033[0m")
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -925,6 +932,8 @@ def error_boolean(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -975,7 +984,7 @@ def inline(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.INLINE_Q.value+"\033[1mReplacing the url\033[0m")
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -988,6 +997,8 @@ def inline(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -1038,7 +1049,7 @@ def time_based_heavy_q(url):
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
-            logger.debug(response.text if verbose == 5 else "")
+            logger.debug(response.text if verbose >= 5 else "")
             forms = get_all_forms(url)
             for form in forms:
                 form_data = {}
@@ -1051,6 +1062,8 @@ def time_based_heavy_q(url):
                         input_field["value"] = _payload
                         __url = update_url(url)
                         break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
@@ -1083,9 +1096,3 @@ def time_based_heavy_q(url):
             
             if count > 0 and "HTTPConnectionPool" in str(e):
                 logger.error(e)
-# from lib.core.parser.cmdline import crawl 
-
-# crawl = True
-# for payload in time_based_payload().split("\n"):
-#     print(user_agent_injection("http://testfire.net/index.jsp?content=business_deposit.htm","id",payload))
-# make_set_sql_injection("http://testfire.net/index.jsp?content=business_deposit.htm")

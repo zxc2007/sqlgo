@@ -21,6 +21,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from __future__ import print_function
+
+
+try:
+    __import__("src.checker.modules")
+except ImportError:
+    import sys
+    sys.exit("[!]wrong installation,(missing thirdparty modules).please run python3 -m pip install -r requirements.txt")
+except KeyboardInterrupt:
+    print("Operation canceled by user.")
+    raise SystemExit
 try:
     from six.moves import range
 except:
@@ -57,10 +67,6 @@ try:
 |____/ \__\_\_____\____|\___/ 
         """
     import src.core.setting.setting as settings
-    from src.core.parser.cmdline import beep
-    from src.core.shell.shell import shell_handler
-    from datetime import datetime
-    from src.core.controler.handler import handle_dbms_connection
     from sqlmap.sqlmap import modulePath
     from sqlmap.lib.core.common import setPaths
     import src.core.setting.setting as settings

@@ -18,6 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-_VERSION = "1.3.5.3"
-VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
-VERSION = _VERSION+VERSION_TYPE
+import bs4 
+import termcolor
+import pygame
+import urllib3
+import charset_normalizer
+import idna
+import six
+import requests
+import git
+import sqlmap
+import prettytable
+import colorama

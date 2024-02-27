@@ -7,9 +7,7 @@ idna
 six
 requests
 GitPython
-sqlmap
-prettytable
-pwn
-socks
-colorama
-six
+sqlmap>=1.8.1
+prettytable>=3.9.9
+colorama>=0.4.5
+six>=1.15.9

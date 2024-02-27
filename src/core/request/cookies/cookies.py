@@ -60,6 +60,4 @@ def extract_cookies(url=arg.url):
     except Exception as e:
         logger.error(e)
 
-# Example usage
-# url_to_extract_cookies = "http://testfire.net/index.jsp?content=business_deposit.htm"
-# extract_cookies(url_to_extract_cookies)
+
