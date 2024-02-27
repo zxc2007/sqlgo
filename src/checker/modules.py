@@ -22,7 +22,10 @@ import bs4
 import termcolor
 import pygame
 import urllib3
-import charset_normalizer
+try:
+    import charset_normalizer
+except:
+    pass
 import idna
 import six
 try:
