@@ -33,6 +33,7 @@ from src.logger.log import logger
 from utilis.colorago.colorago import Fore
 from src.core.parser.cmdline import beep
 from src.data import arg
+from src.core.common.common import read_input
 
 def extract_cookies(url=arg.url):
     user_input = ""
@@ -47,14 +48,10 @@ def extract_cookies(url=arg.url):
             if arg.beep:
                 __import__("extra.beep.beep")
             logger.info("Cookie name: %s, cookie value by the server: %s"%(cookie.key,cookie.value))
-        if arg.accept_cookie or arg.batch:
-            user_input = 'y'
         
-        else:
-            user_input = input("%s you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: %s" % (Fore.RED,Fore.RESET)).strip("").lower()
-  
-        if user_input != 'y':
-            logger.error("Canceled by the user.")
+        user_input = read_input("%s[INFO] you have not declared any cookies while the server want to set its own,do you want to use those?(y,n)?: %s" % (Fore.BRIGHT_GREEN,Fore.RESET),boolean=True,options=['y','n'])  
+        if not user_input:
+            logger.error("Canceled by the user.You do not have any cookies set up,you have to accept or set your own.")
             raise SystemExit
 
     except Exception as e:

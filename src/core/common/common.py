@@ -25,8 +25,10 @@ import random
 import string
 import glob
 import os
+sys.path.append(os.getcwd())
 import re
 from sqlmap.lib.core.common import setColor
+from src.data import arg
 
 
 
@@ -103,3 +105,43 @@ def _listTamperingFunctions():
             if match:
                 comment = match.group(1).strip()
                 print("* %s - %s\n" % (setColor(os.path.basename(script), "yellow"), re.sub(r" *\n *", " ", comment.split("\n\n")[0].strip())))
+
+def read_input(msg, default=None, boolean=False,options=[]):
+    """
+    A function to read input from the stream.
+    *Note:first option of the list the the default value 
+    """
+    if not options:
+        options = ["y", "n"]
+    retVal = None
+    if arg.batch:
+        retVal = default
+        return True
+
+    if default is not None:
+        msg += " [%s/%s]" % (default[0].upper()+default[1:] or options[0],options[1])
+
+    while retVal is None:
+        retVal = input(msg).strip().lower()
+
+        if retVal == '' and default is not None:
+            retVal = default
+        elif retVal == '0' and boolean:
+            retVal = False
+        elif retVal == '1' and boolean:
+            retVal = True
+        elif retVal == options[0] or retVal == default:
+            retVal = True
+        elif retVal == options[1]:
+            retVal = False
+
+        try:
+            if boolean:
+                retVal = bool(int(retVal))
+            else:
+                retVal = int(retVal)
+
+        except ValueError:
+            pass
+
+    return retVal
