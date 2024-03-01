@@ -172,10 +172,11 @@ def gather_exploit():
                 injection_test_is_vuln_time_based(),
             ]
             if arg.dump:
-                threads.append(dump_data_gather())
-            vulnTest()
+                try:
+                    threads.append(dump_data_gather())
+                except (KeyboardInterrupt,SystemExit):
+                    pass
 
-            vulnTest()
             for _thread in threads:
                 _thread = threading.Thread(target=_thread)
                 _thread.start()
