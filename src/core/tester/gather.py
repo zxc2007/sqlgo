@@ -151,7 +151,7 @@ def gather_exploit():
         if arg.dump:
             try:
                 dump_data_gather()
-            except SystemExit:
+            except (SystemExit,KeyboardInterrupt):
                 pass
         
 
