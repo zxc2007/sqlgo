@@ -33,13 +33,20 @@ import src.core.setting.setting as settings
 
 def union():
     for payload in union_payload().split("\n"):
-        _infomsg = None
-        msg = None
-        _testmsg = None
-        subber.submit_data(payload)
-        logger.debug(subber.response)
-        _testmsg = "testing: %s"%Payload.UNION_ALL_SELECT.value
-        logger.info(_testmsg)
+        try:
+            _infomsg = None
+            msg = None
+            _testmsg = None
+            subber.submit_data(payload)
+            logger.debug(subber.response)
+            _testmsg = "testing: %s"%Payload.UNION_ALL_SELECT.value
+            logger.info(_testmsg)
+        except (ConnectionResetError,ConnectionRefusedError,
+                ConnectionAbortedError,ConnectionError) as exc:
+            errmsg = "It looks like the server is not responding to the requests,or the WAF/IPS is dropping the requests.please use proxy for more efficiency while sending requests."
+            logger.error(errmsg)
+            logger.debug(str(exc)) 
+            return
 
         if re.search(r"ORDER BY [^ ]+\Z",subber.response):
             msg = "ORDER BY"

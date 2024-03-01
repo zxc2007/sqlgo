@@ -124,10 +124,6 @@ def gather_exploit():
         if arg.level >= 3:
             subber
             threads = [
-                union(),
-                substring(),
-                time_based(),
-                error_based(),
                 XSS(),
                 make_set_injection_func(),
                 time_based_injection_func(),
@@ -145,6 +141,13 @@ def gather_exploit():
                 union_based_url_replace(arg.url),
                 
             ]
+            if not arg.skipBasic:
+                threads.append(
+                union(),
+                substring(),
+                time_based(),
+                error_based(),
+                )
         if arg.dump:
             try:
                 dump_data_gather()
@@ -203,6 +206,5 @@ def gather_exploit():
             logger.critical("This can be a protection of WAF/IPS against harmful requests.")
         
 
-#  python sqlgo.py -u http://testfire.net/index.jsp?content=business_deposit.htm --port 443 --dbms mysql --dbms-port 3306 --tamper space2plus 
 
 

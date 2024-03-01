@@ -51,7 +51,7 @@ class SubData:
         s.sendall(request.encode())
 
         response = b""
-        while True:
+        for _ in range(10):
             chunk = s.recv(4096)
             if not chunk:
                 break

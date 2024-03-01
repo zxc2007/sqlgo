@@ -156,7 +156,7 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
     
     except Exception as e:
         logger.debug(str(e))
-        return
+        
 
 def time_based_inejction(url,payload=True,isauto=True):
     _ = 0
@@ -216,7 +216,6 @@ def time_based_inejction(url,payload=True,isauto=True):
 
     except Exception as e:
         logger.debug(e)
-        return
 
 
 
@@ -426,7 +425,6 @@ def mysql_blind_based_injection(url):
 
         except Exception as e:
             logger.debug(e)
-            return
 
 def postgre_sql_blind_injection(url):
     _ = 0
