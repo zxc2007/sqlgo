@@ -84,7 +84,6 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--dbs-timeout",help="specify the timeout amount for the connection to DBMS",default=10)
         self.add_argument("--dbms-user",help="specify the DBMS possible username",required=False)
         self.add_argument("--dbms-pass",help="specify the DBMS possible password",required=False)
-        self.add_argument("--xml",help="send xml data payloads to the website ",required=False,action="store_true")
         self.add_argument("--hydra",help="use hydra for brute force attack",required=False,action="store_true")
         self.add_argument("--user-file",help="specify the username file for hydra",required=False)
         self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
@@ -149,7 +148,6 @@ def extract():
     dbs_timeout = args.dbs_timeout
     dbms_user = args.dbms_user
     dbms_pass = args.dbms_pass
-    xml = args.xml
     user_file = args.user_file
     pass_file = args.pass_file
     hydra = args.hydra
@@ -202,7 +200,6 @@ def extract():
         dbs_timeout,
         dbms_user,
         dbms_pass,
-        xml,
         user_file,
         pass_file,
         hydra,
@@ -259,13 +256,12 @@ try:
     dbs_timeout = result[40]
     dbms_user = result[41]
     dbms_pass = result[42]
-    xml = result[43]
-    user_file = result[44]
-    pass_file = result[45]
-    hydra = result[46]
-    delay_time = result[47]
-    accept_cookie = result[48]
-    list_tampers = result[49]
+    user_file = result[43]
+    pass_file = result[44]
+    hydra = result[45]
+    delay_time = result[46]
+    accept_cookie = result[47]
+    list_tampers = result[48]
 
 
     arg.output = result[0]
@@ -311,15 +307,14 @@ try:
     arg.dbs_timeout = result[40]
     arg.dbms_user = result[41]
     arg.dbms_pass = result[42]
-    arg.xml = result[43]
-    arg.user_file = result[44]
-    arg.pass_file = result[45]
-    arg.hydra = result[46]
-    arg.delay_time = result[47]
-    arg.accept_cookie = result[48]
-    arg.listTamper = result[49]
-    arg.skipBasic = result[50]
-    arg.batch = result[51]
+    arg.user_file = result[43]
+    arg.pass_file = result[44]
+    arg.hydra = result[45]
+    arg.delay_time = result[46]
+    arg.accept_cookie = result[47]
+    arg.listTamper = result[48]
+    arg.skipBasic = result[49]
+    arg.batch = result[50]
 except MemoryError:
     print("Could not allocate memory for the args namepace, exiting...")
 

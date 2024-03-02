@@ -30,23 +30,26 @@ from src.logger.log import logger
 from src.datastruc.keygendict import Keygendict
 
 def time_based():
-    _dmsg = None
-    _caps = Keygendict()
-    _demerite = 0
+    try:
+        _dmsg = None
+        _caps = Keygendict()
+        _demerite = 0
 
-    for payload in time_based_payload().split("\n"):
-        subber.submit_data(payload)
-        _caps.add_cap(key="Debug response:%d%s"%(random.randint(0,100,random.choice(string.ascii_letters))),value=subber.response)
-        if re.search(r"HAVING[^ ]+\Z",subber.response):
-            _dmsg = "Found HAVING for some values in html response."
-            _caps.add_cap(key="HAVINGcap%s%d"%(random.choice(string.ascii_letters),random.randint(0,100)))
-            _demerite +=1
-            logger.debug(_dmsg)
-        
-        elif re.search(r"SELECT[^ ]+\Z",subber.response):
-            _dmsg = "Found SELECT for some values in html response."
-            _caps.add_cap(key="SELECTcap%s%d"%(random.choice(string.ascii_letters),random.randint(0,100)))
-            logger.debug(_dmsg)
-            _demerite +=1
+        for payload in time_based_payload().split("\n"):
+            subber.submit_data(payload)
+            _caps.add_cap(key="Debug response:%d%s"%(random.randint(0,100,random.choice(string.ascii_letters))),value=subber.response)
+            if re.search(r"HAVING[^ ]+\Z",subber.response):
+                _dmsg = "Found HAVING for some values in html response."
+                _caps.add_cap(key="HAVINGcap%s%d"%(random.choice(string.ascii_letters),random.randint(0,100)))
+                _demerite +=1
+                logger.debug(_dmsg)
+            
+            elif re.search(r"SELECT[^ ]+\Z",subber.response):
+                _dmsg = "Found SELECT for some values in html response."
+                _caps.add_cap(key="SELECTcap%s%d"%(random.choice(string.ascii_letters),random.randint(0,100)))
+                logger.debug(_dmsg)
+                _demerite +=1
 
+    except Exception as e:
+        logger.error(e)
 

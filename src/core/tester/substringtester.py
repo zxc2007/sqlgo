@@ -46,5 +46,3 @@ def run_substring():
         test = SubstringTester(data=None)
         test.test()
 
-# test = SubstringTester(url="http://testfire.net/login.jsp",port=80,data=None)
-# test.test()

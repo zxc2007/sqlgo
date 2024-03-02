@@ -46,7 +46,7 @@ def union():
             errmsg = "It looks like the server is not responding to the requests,or the WAF/IPS is dropping the requests.please use proxy for more efficiency while sending requests."
             logger.error(errmsg)
             logger.debug(str(exc)) 
-            return
+            
 
         if re.search(r"ORDER BY [^ ]+\Z",subber.response):
             msg = "ORDER BY"

@@ -34,7 +34,7 @@ https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/af0aca77-f22b-4
 
 
 ```
-python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --xml --dbms<DBMS> --dump
+python3 sqlgo.py -u www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --dbms<DBMS> --dump
 ```
 
 

@@ -65,8 +65,6 @@ from src.datastruc.injectdict import extract_injection
 from src.core.controler.handler import handle_dbms_connection
 from src.core.tester.crawler import crawl as _crawl,kb
 from src.core.testing import vulnTest
-from src.core.parser.cmdline import xml
-from src.core.tester.injector.xmls import XML
 from src.core.sqlmapcommons import parseTargetDirect,conf,pushValue
 from src.core.parser.cmdline import hydra
 from src.core.tester.hydram import hydra_handler
