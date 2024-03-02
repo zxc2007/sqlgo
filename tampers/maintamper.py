@@ -70,6 +70,7 @@ import tampers.commalessmid
 import tampers.concat2concatws
 import tampers.dunion
 import tampers.halfversionedmorekeywords
+import tampers.hex2char
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -171,6 +172,8 @@ def apply_tamper(payload):
         return tampers.dunion.tamper(payload)
     elif _tamper == "halfversionedmorekeywords":
         return tampers.halfversionedmorekeywords.tamper(payload)
+    elif _tamper == "hex2char":
+        return tampers.hex2char.tamper(payload)
     elif _tamper is None:
         return payload
     else:
