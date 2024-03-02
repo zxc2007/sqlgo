@@ -86,8 +86,15 @@ class IOFileReader(object):
             sorted_rows = sorted(rows) 
             sorted_payload = "\n".join(sorted_rows) 
             return sorted_payload
+    @classmethod
+    def generic(cls,path):
+        with open(os.getcwd()+path, "r") as file: 
+            payload = file.read() 
+            rows = payload.split("\n") 
+            sorted_rows = sorted(rows) 
+            sorted_payload = "\n".join(sorted_rows) 
+            return sorted_payload
 
-# IOFileReader.payload("inline.txt")
 
 
 def _listTamperingFunctions():
