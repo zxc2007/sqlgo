@@ -64,6 +64,7 @@ import tampers.unmagicquotes
 import tampers.apostrophemask
 import tampers.appnednullbyte
 import tampers.bluecoat
+import tampers.charunicodeencode
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -153,6 +154,8 @@ def apply_tamper(payload):
         return tampers.appnednullbyte.tamper(payload)
     elif _tamper == "bluecoat":
         return tampers.bluecoat.tamper(payload)
+    elif _tamper == "charunicodeencode" or _tamper == "charuencode":
+        return tampers.charunicodeencode.tamper(payload)
     elif _tamper is None:
         return payload
     else:
