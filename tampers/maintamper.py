@@ -62,6 +62,7 @@ import tampers.symboliclogical
 import tampers.unionalltounion
 import tampers.unmagicquotes
 import tampers.apostrophemask
+import tampers.appnednullbyte
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -147,6 +148,8 @@ def apply_tamper(payload):
         return tampers.unmagicquotes.tamper(payload)
     elif _tamper == "apostrophemask":
         return tampers.apostrophemask.tamper(payload)
+    elif _tamper == "appnednullbyte":
+        return tampers.appnednullbyte.tamper(payload)
     elif _tamper is None:
         return payload
     else:
