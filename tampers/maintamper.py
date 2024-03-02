@@ -73,6 +73,7 @@ import tampers.halfversionedmorekeywords
 import tampers.hex2char
 import tampers.if2case
 import tampers.misunion
+import tampers.modsecurityversioned
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -180,6 +181,8 @@ def apply_tamper(payload):
         return tampers.if2case.tamper(payload)
     elif _tamper == "misunion":
         return tampers.misunion.tamper(payload)
+    elif _tamper == "modsecurityversioned":
+        return tampers.modsecurityversioned.tamper(payload)
     elif _tamper is None:
         return payload
     else:
