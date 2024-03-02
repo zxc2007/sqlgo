@@ -66,6 +66,7 @@ import tampers.appnednullbyte
 import tampers.bluecoat
 import tampers.charunicodeencode
 import tampers.commalesslimit
+import tampers.commalessmid
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -159,6 +160,8 @@ def apply_tamper(payload):
         return tampers.charunicodeencode.tamper(payload)
     elif _tamper == "commalesslimit":
         return tampers.commalesslimit.tamper(payload)
+    elif _tamper == "commalessmid":
+        return tampers.commalessmid.tamper(payload)
     elif _tamper is None:
         return payload
     else:
