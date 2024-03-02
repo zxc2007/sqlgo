@@ -71,6 +71,7 @@ import tampers.concat2concatws
 import tampers.dunion
 import tampers.halfversionedmorekeywords
 import tampers.hex2char
+import tampers.if2case
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -174,6 +175,8 @@ def apply_tamper(payload):
         return tampers.halfversionedmorekeywords.tamper(payload)
     elif _tamper == "hex2char":
         return tampers.hex2char.tamper(payload)
+    elif _tamper == "if2case":
+        return tampers.if2case.tamper(payload)
     elif _tamper is None:
         return payload
     else:
