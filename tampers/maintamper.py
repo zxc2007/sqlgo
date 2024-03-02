@@ -72,6 +72,7 @@ import tampers.dunion
 import tampers.halfversionedmorekeywords
 import tampers.hex2char
 import tampers.if2case
+import tampers.misunion
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -177,6 +178,8 @@ def apply_tamper(payload):
         return tampers.hex2char.tamper(payload)
     elif _tamper == "if2case":
         return tampers.if2case.tamper(payload)
+    elif _tamper == "misunion":
+        return tampers.misunion.tamper(payload)
     elif _tamper is None:
         return payload
     else:
