@@ -69,6 +69,7 @@ import tampers.commalesslimit
 import tampers.commalessmid
 import tampers.concat2concatws
 import tampers.dunion
+import tampers.halfversionedmorekeywords
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -168,6 +169,8 @@ def apply_tamper(payload):
         return tampers.concat2concatws.tamper(payload)
     elif _tamper == "dunion":
         return tampers.dunion.tamper(payload)
+    elif _tamper == "halfversionedmorekeywords":
+        return tampers.halfversionedmorekeywords.tamper(payload)
     elif _tamper is None:
         return payload
     else:

