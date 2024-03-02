@@ -181,14 +181,6 @@ def gather_exploit():
                 _thread = threading.Thread(target=_thread)
                 _thread.start()
                 _thread.join()
-        
-        
-        if arg.xml:
-            logger.warning("This option will not work properly and will be removed in sqlgo 2.")
-            xml = XML.XMLALL(arg.url)
-            xml.send_to_website()
-            logger.info("testing xml data to the target: %s"%arg.url)
-            import sys
         if arg.crawl:
             crawler_threads()
             host_injection(arg.url)
