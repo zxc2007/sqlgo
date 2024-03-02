@@ -747,8 +747,10 @@ def make_set_url_replace(url):
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
                 form_details = get_form_details(form_in_response)
-
-                sql_injection_basic_detection(form_in_response, form_details)
+                try:
+                    sql_injection_basic_detection(form_in_response, form_details)
+                except requests.exceptions.MissingSchema as exc:
+                    logger.debug("missing schema %s"%exc)
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
