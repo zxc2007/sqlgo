@@ -78,6 +78,7 @@ import tampers.modsecurityzeroversioned
 import tampers.versionedkeywords
 import tampers.versionedmorekeywords
 import tampers.space2morehash
+import tampers.space2mssqlblank
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -195,6 +196,8 @@ def apply_tamper(payload):
         return tampers.versionedmorekeywords.tamper(payload)
     elif _tamper == "space2morehash":
         return tampers.space2morehash.tamper(payload)
+    elif _tamper == "space2mssqlblank":
+        return tampers.space2mssqlblank.tamper(payload)
     elif _tamper is None:
         return payload
     else:
