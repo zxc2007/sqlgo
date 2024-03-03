@@ -75,6 +75,8 @@ import tampers.if2case
 import tampers.misunion
 import tampers.modsecurityversioned
 import tampers.modsecurityzeroversioned
+import tampers.versionedkeywords
+import tampers.versionedmorekeywords
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -186,6 +188,10 @@ def apply_tamper(payload):
         return tampers.modsecurityversioned.tamper(payload)
     elif _tamper == "modsecurityzeroversioned":
         return tampers.modsecurityzeroversioned.tamper(payload)
+    elif _tamper == "versionedkeywords":
+        return tampers.versionedkeywords.tamper(payload)
+    elif _tamper == "versionedmorekeywords":
+        return tampers.versionedmorekeywords.tamper(payload)
     elif _tamper is None:
         return payload
     else:
