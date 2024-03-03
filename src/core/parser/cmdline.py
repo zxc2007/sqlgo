@@ -93,6 +93,8 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--list-tampers",help="list all available tamper functions",action="store_true")
         self.add_argument("--skip-basic",help="skip basic tests",action="store_true",required=False)
         self.add_argument("--batch",help="batch mode,never ask user for any input.",action="store_true",required=False)
+        self.add_argument("--bin","--binary",help="Use binary convert while sending the payloads",required=False,action="store_true")
+        self.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
 
 
 
@@ -157,6 +159,8 @@ def extract():
     list_tampers = args.list_tampers
     skip_basic = args.skip_basic
     batch = args.batch
+    binary = args.bin
+    hexa = args.hex
     return (
         output,
         verbose,
@@ -208,7 +212,9 @@ def extract():
         accept_cookie,
         list_tampers,
         skip_basic,
-        batch
+        batch,
+        binary,
+        hexa
     )
 
 
@@ -316,8 +322,10 @@ try:
     arg.listTamper = result[48]
     arg.skipBasic = result[49]
     arg.batch = result[50]
+    arg.binary = result[51]
+    arg.hexa = result[52]
 except MemoryError:
-    print("Could not allocate memory for the args namepace, exiting...")
+    print("Could not allocate memory for the args namespace, exiting...")
 
 if arg.listTamper:
     _listTamperingFunctions()
@@ -330,12 +338,3 @@ else:
     api.updates = False
 
 
-# conf.dbmsUser = dbms_user or ""
-# conf.dbmsPass = dbms_pass or ""
-# conf.hostname = urlparse(url).hostname
-# conf.port = 3306 if dbms == "mysql" and dbms is not None else ""
-# conf.dbmsDb = dbs or ""
-# conf.dbms = dbms or "mysql"
-# kb.timeout = dbs_timeout
-# conf.timeout = dbs_timeout
-# conf.dbmsHandler = "f"

@@ -82,6 +82,9 @@ import tampers.space2morehash
 import tampers.space2mssqlblank
 import tampers.space2hash
 from src.core.parser.cmdline import tamper as _tamper
+from src.data import arg
+from src.core.converts.bin import str_to_bin
+from src.core.converts.hex import str_to_hex
 
 def apply_tamper(payload):
     if _tamper == "base64":
@@ -202,6 +205,10 @@ def apply_tamper(payload):
         return tampers.space2mssqlblank.tamper(payload)
     elif _tamper == "space2hash":
         return tampers.space2hash.tamper(payload)
+    elif arg.binary:
+        return str_to_bin(payload)
+    elif arg.hexa:
+        return str_to_hex(payload)
     elif _tamper is None:
         return payload
     else:

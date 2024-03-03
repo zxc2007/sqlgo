@@ -51,6 +51,3 @@ def tamper(payload, **kwargs):
             retVal = retVal.replace(match.group(0), result)
 
     return retVal
-
-x = tamper('SELECT 0xdeadbeef')
-print(x)
