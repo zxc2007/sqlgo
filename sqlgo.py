@@ -60,11 +60,6 @@ try:
         from extras.logo import logo
     except:
         logo = """
- ____   ___  _     ____  ___  
-/ ___| / _ \| |   / ___|/ _ \ 
-\___ \| | | | |  | |  _| | | |
- ___) | |_| | |__| |_| | |_| |
-|____/ \__\_\_____\____|\___/ 
         """
     import src.core.setting.setting as settings
     from sqlmap.sqlmap import modulePath
