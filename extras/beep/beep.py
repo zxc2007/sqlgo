@@ -42,4 +42,5 @@ def beep():
     else:
         raise SQLGOBeepSoundException
 
-beep()
+if __name__ != '__main__':
+    beep()
