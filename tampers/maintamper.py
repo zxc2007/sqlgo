@@ -77,6 +77,7 @@ import tampers.modsecurityversioned
 import tampers.modsecurityzeroversioned
 import tampers.versionedkeywords
 import tampers.versionedmorekeywords
+import tampers.space2morehash
 from src.core.parser.cmdline import tamper as _tamper
 
 def apply_tamper(payload):
@@ -192,6 +193,8 @@ def apply_tamper(payload):
         return tampers.versionedkeywords.tamper(payload)
     elif _tamper == "versionedmorekeywords":
         return tampers.versionedmorekeywords.tamper(payload)
+    elif _tamper == "space2morehash":
+        return tampers.space2morehash.tamper(payload)
     elif _tamper is None:
         return payload
     else:
