@@ -41,7 +41,10 @@ def sql_injection_basic_detection(form_soup, form_details):
                 data[input_flag["name"]] = "test%s" % i
     
         if form_details["method"] == "post":
-            res = requests.post(form_details["action"], data=data)
+            try:
+                res = requests.post(form_details["action"], data=data)
+            except:
+                pass
         elif form_details["method"] == "get":
             res = requests.get(form_details["action"], params=data)
         

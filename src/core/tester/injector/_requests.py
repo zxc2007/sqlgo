@@ -715,13 +715,13 @@ def make_set_url_replace(url):
 
     for payload in make_set_sql_payload().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING.format(payload if verbose >= 3 else ""))
 
             _ = update_url(url,payload)
             __url = _
             if verbose > 3:
                 logger.debug(__url)
             _payload = apply_tamper(payload)
+            print(PAYLOAD_SENDING.SENDING.format(_payload if verbose >= 3 else ""))
             response = requests.get(__url)
 
             if verbose > 5:
@@ -757,7 +757,7 @@ def make_set_url_replace(url):
 
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
-                    logger.warning("payload:%s"%payload)
+                    logger.warning("payload:%s"%_payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     sql_injection_basic_detection(form_in_response, form_details)
@@ -777,10 +777,11 @@ def union_based_url_replace(url):
 
     for payload in union_payload().split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
 
             _payload = apply_tamper(payload )
+            print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
+
             _ = update_url(url,_payload)
             __url = _
             if verbose > 3:
@@ -840,11 +841,12 @@ def stack_query(url):
 
     for payload in IOFileReader.payload("stack_q.txt").split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
 
 
             _payload = apply_tamper(payload)
+            print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
+
             _ = update_url(url,_payload)
             __url = _
             if verbose > 3:
@@ -905,14 +907,12 @@ def error_boolean(url):
 
     for payload in IOFileReader.payload("error_boolean.txt").split("\n"):
         try:
+
+            _payload = apply_tamper(payload)
+            _ = update_url(url,_payload)
+            __url = _
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-
-
-
-            _ = update_url(url,payload)
-            __url = _
-            _payload = apply_tamper(payload)
             response = requests.get(__url)
             if verbose > 3:
                 logger.debug(__url)
@@ -971,13 +971,14 @@ def inline(url):
 
     for payload in IOFileReader.payload("inline.txt").split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
 
 
             _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
             if verbose > 3:
                 logger.debug(__url)
             response = requests.get(__url)
@@ -1036,7 +1037,6 @@ def time_based_heavy_q(url):
 
     for payload in IOFileReader.payload("time_based.txt").split("\n"):
         try:
-            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             _ = update_url(url,payload)
             __url = _
@@ -1044,6 +1044,8 @@ def time_based_heavy_q(url):
                 logger.debug(__url)
             _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
+            print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
+
             __url = _
             response = requests.get(__url)
             if verbose > 5:
