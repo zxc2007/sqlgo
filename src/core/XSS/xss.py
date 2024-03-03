@@ -1,5 +1,4 @@
-
-import os
+#!/usr/bin/env python
 """
 # SQLGO License - Version 1.1
 

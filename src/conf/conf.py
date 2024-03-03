@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 # SQLGO License - Version 1.1
 
@@ -33,4 +34,3 @@ def data_to_std_out(text,no_int=True):
     
     return _retval
 
-# print(data_to_std_out("h"))

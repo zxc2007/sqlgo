@@ -1,4 +1,4 @@
-# post_request.py
+#!/usr/bin/env python
 import urllib
 try:
     import urllib2
