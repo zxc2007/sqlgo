@@ -74,4 +74,3 @@ def get_parameter_sections(url):
 
 
 
-# print(get_parameter_sections("http://testfire.net/index.jsp?content=business_deposit.htm"))

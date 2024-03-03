@@ -739,34 +739,7 @@ class Dump(object):
     def registerValue(self, registerData):
         self.string("Registry key value data", registerData, content_type=CONTENT_TYPE.REG_READ, sort=False)
 
-# object to manage how to print the retrieved queries output to
-# standard output and sessions file
-
-
-# Instantiate Dump class
-# dumper = Dump(file_path="/Users/alimirmohammad/sqlgo/future/file.txt")
-# print(dumper.DbTableCount({"table": "hello world!"}))
-# Instantiate Dump class
-# Assuming you've imported the necessary modules and classes
-
-
-
-# Create an instance of the Dump class
 dumper = Dump()
 
-# Set the output file (optional)
-# dumper.setOutputFile()
 
-# Example usage of some methods
-# dumper.banner("Welcome to SQL Injection Testing Tool")
-# dumper.currentUser("admin")
-# dumper.currentDb("test_database")
-# dumper.hostname("localhost")
-# dumper.dba(True)
-# dumper.users(["user1", "user2", "admin"])
-# dumper.statements(["SELECT * FROM users", "INSERT INTO products VALUES (1, 'Product1')"])
-# dumper.dbs(["database1", "database2"])
-# dumper.dbTables({"database1": ["table1", "table2"], "database2": ["table3", "table4"]})
-# dumper.dbTableColumns({"database1": {"table1": {"column1": "VARCHAR", "column2": "INTEGER"}, "table2": {"column3": "TEXT"}}})
-# ... and so on
 

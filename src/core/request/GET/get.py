@@ -67,5 +67,3 @@ class Get:
         except ImportError:
             sys.exit("[!]requests library is not installed,exiting...")
 
-# obj = Get("http://testfire.net/index.jsp?content=business_deposit.htm", 80)
-# obj.using_requests()

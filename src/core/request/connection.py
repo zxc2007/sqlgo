@@ -75,6 +75,5 @@ def test_connection(url=arg.url, port=arg.port):
     except socket.error as e:
         logger.critical("Got error%s"%str(e))
 
-# Example usage
-# test_connection("http://testfire.net/index.jsp?content=business_deposit.htm", 80)
+
         

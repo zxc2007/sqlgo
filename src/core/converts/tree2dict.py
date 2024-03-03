@@ -52,4 +52,3 @@ def tree_to_dict(node:TreeNode):
         result['children'].append(tree_to_dict(child))
     return result
 
-# Crafted Tree

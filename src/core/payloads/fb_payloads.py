@@ -76,10 +76,3 @@ def cmd_execution_alter_shell(separator, cmd, OUTPUT_TEXTFILE):
 
   return payload
 
-# separator = "--"  # Example separator
-# TAG = "Hello, World!"  # Example TAG content
-# OUTPUT_TEXTFILE = "output.txt"  # Example output text file name
-
-# # Call the function to generate the payload
-# payload = decision_alter_shell(separator, TAG, OUTPUT_TEXTFILE)
-# print(payload)
