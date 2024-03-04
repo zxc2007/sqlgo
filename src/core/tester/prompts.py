@@ -31,3 +31,9 @@ def prompt_parameter(url=arg.url):
     logger.info("testing if %s is injectable."%param)
     time.sleep(5)
 
+def get_parameter(url=arg.url):
+    _,param = replace_url_parameter(url,new_value=None)
+    return param
+
+parameter = get_parameter()
+

@@ -85,6 +85,7 @@ from src.core.tester.injector.checks import extract_some_keyword
 from sqlmap.lib.core.data import conf
 from src.core.common.common import IOFileReader
 from extras.error import errors
+from src.core.tester.prompts import parameter
 from src.data import arg
 import re
 
@@ -355,12 +356,6 @@ def union_based_injection(url):
                     
                     return _union_based
                 
-
-
-
-
-                # return form_in_response
-
         except ValueError:
             continue
 
@@ -622,7 +617,7 @@ def error_based_url_replace(url):
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
-
+                    logger.info("%s get parameter is %s injectable"%(parameter,"Error based SQl query"))
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
@@ -694,6 +689,7 @@ def time_based_url_replace(url):
                     sql_injection_basic_detection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    logger.info("%s get parameter is %s injectable"%(parameter,"time based Sql query"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -755,7 +751,7 @@ def make_set_url_replace(url):
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
-
+                    logger.info("%s get parameter is %s injectable"%(parameter,"Make set mysql query"))
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%_payload)
@@ -842,9 +838,6 @@ def stack_query(url):
 
     for payload in IOFileReader.payload("stack_q.txt").split("\n"):
         try:
-
-
-
             _payload = apply_tamper(payload)
             print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
 
@@ -881,6 +874,7 @@ def stack_query(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    logger.info("%s get parameter is %s injectable"%(parameter,"SQl"+stack_query.__name__))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -944,6 +938,7 @@ def error_boolean(url):
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     __import__("extras.beep.beep")
+                    logger.info("%s get parameter is %s injectable"%(parameter,error_boolean.__name__+"SQl query"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -972,9 +967,6 @@ def inline(url):
 
     for payload in IOFileReader.payload("inline.txt").split("\n"):
         try:
-
-
-
             _payload = apply_tamper(payload)
             _ = update_url(url,_payload)
             __url = _
@@ -1011,6 +1003,7 @@ def inline(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    logger.info("%s parameter is %s injectable"%(parameter,inline.__name__+"Sql query"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -1077,6 +1070,7 @@ def time_based_heavy_q(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
