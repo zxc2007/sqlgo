@@ -92,7 +92,7 @@ def main():
         setPaths(modulePath())
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)
-        print("starting @ %s"%settings.formatted_datetime)
+        print("[*]starting @ %s"%settings.formatted_datetime)
         check_version()
         gather_exploit()
     
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     except:
         traceback.print_exc()
     finally:
-        print("ending @ %s"%settings.formatted_datetime)
+        print("[*]ending @ %s"%settings.formatted_datetime)
         if threading.active_count() > 1:
             os._exit(getattr(os, "_exitcode", 0))
         else:
