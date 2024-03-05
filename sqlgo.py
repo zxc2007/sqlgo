@@ -27,9 +27,9 @@ try:
     __import__("src.checker.modules")
 except ImportError:
     import sys
-    sys.exit("[!]wrong installation,(missing thirdparty modules).please run python3 -m pip install -r requirements.txt")
+    sys.exit("[!]wrong installation Detected,(missing thirdparty modules).please run python3 -m pip install -r requirements.txt")
 except KeyboardInterrupt:
-    print("Operation canceled by user.")
+    print("[!]Operation canceled by user.")
     raise SystemExit
 try:
     from six.moves import range
@@ -97,7 +97,7 @@ def main():
         gather_exploit()
     
     except KeyboardInterrupt:
-        logger.error("User exit")
+        logger.error("[!]User exit")
         raise SystemExit
     except Exception as _errmsg:
         errmsg = str(_errmsg)
