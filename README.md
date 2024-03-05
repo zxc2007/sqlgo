@@ -42,7 +42,7 @@ python3 sqlgo.py --help
 python3 sqlgo.py --update
 ```
 
-
+**Launch attack**
 ```
 python3 sqlgo.py -u http://www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --dbms<DBMS> --dump
 ```
