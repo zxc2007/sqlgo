@@ -810,6 +810,7 @@ def union_based_url_replace(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    logger.info("%s get parameter is %s injectable"%(parameter,"Union based(ALL SELECT) query"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
