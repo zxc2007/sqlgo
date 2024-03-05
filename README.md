@@ -31,6 +31,16 @@ python3 -m pip install-r requirements.txt
 https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/af0aca77-f22b-4458-a340-342e98be78da
 
 
+**Show the help menu**
+```
+python3 sqlgo.py --help
+```
+
+**Update the program**
+
+```
+python3 sqlgo.py --update
+```
 
 
 ```
