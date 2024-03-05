@@ -24,18 +24,21 @@ import os
 from src.logger.log import logger
 
 def update_from_git():
-    repository_url = "https://github.com/HeisenbergCipherCracker/sqlgo.git"
-    local_path = os.getcwd()
-    logger.info("Updating to latest version from git...")
-
     try:
-        repo = git.Repo(local_path)
-    except git.NoSuchPathError:
-        repo = git.Repo.clone_from(repository_url, local_path)
+        repository_url = "https://github.com/HeisenbergCipherCracker/sqlgo.git"
+        local_path = os.getcwd()
+        logger.info("Updating to latest version from git...")
 
-    repo.remotes.origin.fetch()
+        try:
+            repo = git.Repo(local_path)
+        except git.NoSuchPathError:
+            repo = git.Repo.clone_from(repository_url, local_path)
 
-    repo.head.reset(index=True, working_tree=True)
+        repo.remotes.origin.fetch()
 
-    repo.remotes.origin.pull()
+        repo.head.reset(index=True, working_tree=True)
+
+        repo.remotes.origin.pull()
+    except:
+        os.system("git pull")
 
