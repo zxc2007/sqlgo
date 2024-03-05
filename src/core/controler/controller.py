@@ -105,7 +105,8 @@ def heuristic_injection_test_union_based(url):
                     print("URLError: %s"%e.reason)
                 except urllib.error.HTTPError as e:
                     print("HTTPError: %s"%e.code)
-    
+    except KeyboardInterrupt:
+        logger.info("User aborted test.continue with next set of payloads.")
     except Exception as e:
         logger.debug(e)
         traceback.print_exc()

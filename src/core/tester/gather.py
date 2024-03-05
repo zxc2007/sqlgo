@@ -93,6 +93,7 @@ def gather_exploit():
     if arg.warning_disable:
         urllib3.disable_warnings()
     try:
+        stack_query(arg.url),
         test_connection()
         extract_cookies()
         prompt_parameter()
@@ -110,10 +111,9 @@ def gather_exploit():
 
  
         for _thread_ in basic_threads:
-            if not arg.skipBasic:
-                _thread_ = threading.Thread(target=_thread_)
-                _thread_.start()
-                _thread_.join()
+            _thread_ = threading.Thread(target=_thread_)
+            _thread_.start()
+            _thread_.join()
         
         if arg.hydra:
             hydra_handler.run_hydra()

@@ -109,8 +109,9 @@ def injection_test_is_vuln_time_based(url=arg.url):
         assert isinstance(_inj,tuple), tuple(_inj)
         logger.debug(settings.TESTING_TIME_BASED_ADVANCED_AGAINST%url)
         logger.debug(settings.TESTING_TIME_BASED_PAYLOAD%payload)
-        requests.post(url, data=_payload, headers=arg.headers)
-        requests.get(url, params=_payload, headers=arg.headers)
+        # Prevent the Error unable to access item 'headers'
+        requests.post(url, data=_payload)
+        requests.get(url, params=_payload)
         requests.get(url)
         logger.info("testing %s"%P_type.TIME_BASED.value)
         if _inj[0] > settings.ADVANCED_TIME_BASED_TRESHOLD:
