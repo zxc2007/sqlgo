@@ -161,15 +161,11 @@ class JsonFileReader(object):
     >>> foo.read_json()
     {'key': 'value'}
     """
-    def __init__(self,file,cwd=False):
+    def __init__(self,file):
         self.file = file
-        self.cwd = cwd
     
     def read_json(self):
-        if self.cwd:
-            self.file = os.path.join(os.getcwd()+self.file)
-
-        with open(self.file,"r") as file:
+        with open(os.getcwd()+"/data/xss/"+self.file,"r") as file:
             return json.load(file)
         
 read_json = JsonFileReader("payloads.json",cwd=True)
