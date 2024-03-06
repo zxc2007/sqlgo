@@ -138,9 +138,6 @@ def gather_exploit():
                 union_based_url_replace(arg.url),
                 
             ]
-            if arg.xss:
-                threads.append(XSS())
-                threads.append(xss_based_payloads(arg.url))
             if not arg.skipBasic:
                 threads.append(
                 union(),
