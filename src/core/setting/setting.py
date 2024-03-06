@@ -53,7 +53,6 @@ of copyright and give proper credit to the original work.
 For more details on the Commix project, visit: https://github.com/commixproject/commix
 """
 
-# Your SQLgo code follows...
 
 
 import re
@@ -106,7 +105,7 @@ APPLICATION_TWITTER = ""
 DEFAULT_USER_AGENT = APPLICATION + "/" + VERSION + " (" + APPLICATION_URL + ")"
 
 # Legal Disclaimer
-LEGAL_DISCLAIMER_MSG = "[!]Usage of " + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
+LEGAL_DISCLAIMER_MSG = "%s(!)%sUsage of "%(Fore.RED, Style.RESET_ALL) + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
                        "It is the end user's responsibility to obey all applicable local, state and federal laws. " + \
                        "Developers assume no liability and are not responsible for any misuse or damage caused by this program.\n"
 
