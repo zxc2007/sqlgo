@@ -27,4 +27,4 @@ jobs:
             python sqlgo.py --update
 
       - name: Run Python script
-        run: python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --port=80 --level=5 --delay-time=1 --tamper=perecentage --dump
+        run: python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --port=80 --level=5 --delay-time=1 --tamper=perecentage --dump --xss
