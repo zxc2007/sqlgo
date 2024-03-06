@@ -168,4 +168,3 @@ class JsonFileReader(object):
         with open(os.getcwd()+"/data/xss/"+self.file,"r") as file:
             return json.load(file)
         
-read_json = JsonFileReader("payloads.json",cwd=True)

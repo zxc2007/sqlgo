@@ -88,7 +88,7 @@ from src.core.common.common import IOFileReader
 from extras.error import errors
 from src.core.tester.prompts import parameter
 from src.data import arg
-from src.core.common.common import read_json,JsonFileReader
+from src.core.common.common import JsonFileReader
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
