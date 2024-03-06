@@ -72,7 +72,6 @@ from src.core.tester.injector._requests import stack_query
 from src.core.tester.injector._requests import inline
 from src.core.tester.injector._requests import error_boolean
 from src.core.tester.injector._requests import time_based_heavy_q
-from src.core.tester.injector._requests import xss_based_payloads
 from src.data import arg
 
 
@@ -111,9 +110,10 @@ def gather_exploit():
 
  
         for _thread_ in basic_threads:
-            _thread_ = threading.Thread(target=_thread_)
-            _thread_.start()
-            _thread_.join()
+            if not arg.skipBasic:
+                _thread_ = threading.Thread(target=_thread_)
+                _thread_.start()
+                _thread_.join()
         
         if arg.hydra:
             hydra_handler.run_hydra()
@@ -195,6 +195,5 @@ def gather_exploit():
             logger.warning("It looks like that the target has been closed the connection due to the harmful requests.please try using the proxy or vpn.")
             logger.critical("This can be a protection of WAF/IPS against harmful requests.")
         
-
 
 
