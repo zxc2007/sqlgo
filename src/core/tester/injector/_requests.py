@@ -80,6 +80,7 @@ from src.core.enums.priority import PRIORITY
 from src.datastruc.injectdict import injeciondict
 from src.core.common.urlreplace import update_url
 from src.core.enums.enums import PAYLOAD_SENDING
+from src.core.enums.enums import XssDataSending
 from src.core.parser.cmdline import delay_time
 from src.core.tester.injector.checks import extract_some_keyword
 from sqlmap.lib.core.data import conf
@@ -87,6 +88,7 @@ from src.core.common.common import IOFileReader
 from extras.error import errors
 from src.core.tester.prompts import parameter
 from src.data import arg
+from src.core.common.common import read_json
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
@@ -232,7 +234,17 @@ def is_sql_injection_vulnerable(response):
     except Exception as e:
         print("Error decoding response: %s"%str(e))
         return False
-
+def xss_vuln_test(response):
+    try:
+        # Decode the response content to string
+        response_text = response.decode('utf-8') if hasattr(response,"decode") else response
+        logger.debug(settings.DECODING_RESPONSE)
+        error_keywords = ["error", "exception", "syntax", "mysql", "sql", "warning","You have an error in your SQL syntax","check the manual that corresponds to you","warning: mysql_","supplied argument is not a valid mysql","to be resource, boolean given in","Warning: mysql_fetch_array()","Error Query", "Error performing query:","Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in /hj/var/www/search.php on line 61","[SqlException]: Invalid column name","Incorrect syntax near the keyword "]
+        error_keywords.extend(errors)
+        return any(keyword in response_text.lower() for keyword in error_keywords)
+    except Exception as e:
+        print("Error decoding response: %s"%str(e))
+        return False
 def make_set_sql_injection(url,random_header=False):
     _retval = None
     _make_set = Tree("make_set")
@@ -1075,6 +1087,73 @@ def time_based_heavy_q(url):
                         __import__("extras.beep.beep")
                     logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%payload)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    if arg.beep:
+                        __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
+
+def xss_based_payloads(url):
+
+    for payload in read_json:
+        try:
+
+            _ = update_url(url,payload)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(payload)
+            _ = update_url(url,_payload)
+            print(XssDataSending.SENDING%payload if verbose >= 3 else "")
+
+            __url = _
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing : json data regarding XSS")
+            logger.debug(response.text if verbose >= 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = payload 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == payload:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if xss_vuln_test(response_content):
+                    logger.warning("Potential XSS injection area detected!!!")
+                    if arg.beep:
+                        __import__("extras.beep.beep")
+                    logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
+                    logger.warning("found potential XSS injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)

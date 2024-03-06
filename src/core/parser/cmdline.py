@@ -95,6 +95,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--batch",help="batch mode,never ask user for any input.",action="store_true",required=False)
         self.add_argument("--bin","--binary",help="Use binary convert while sending the payloads",required=False,action="store_true")
         self.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
+        self.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
 
 
 
@@ -161,6 +162,7 @@ def extract():
     batch = args.batch
     binary = args.bin
     hexa = args.hex
+    xss = args.xss
     return (
         output,
         verbose,
@@ -214,7 +216,8 @@ def extract():
         skip_basic,
         batch,
         binary,
-        hexa
+        hexa,
+        xss
     )
 
 
@@ -324,6 +327,7 @@ try:
     arg.batch = result[50]
     arg.binary = result[51]
     arg.hexa = result[52]
+    arg.xss = result[53]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 
