@@ -94,7 +94,6 @@ def gather_exploit():
     if arg.warning_disable:
         urllib3.disable_warnings()
     try:
-        stack_query(arg.url),
         test_connection()
         extract_cookies()
         prompt_parameter()
