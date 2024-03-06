@@ -154,7 +154,7 @@ def read_input(msg, default=None, boolean=False,options=[]):
 
     return retVal
 
-class JsonFileReader(object):
+class JsonFileReader:
     """
     A class that defines the json reading actions
     >>> foo = JsonFileReader("/path/to/file")
