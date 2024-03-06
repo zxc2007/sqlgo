@@ -1111,7 +1111,7 @@ def time_based_heavy_q(url):
 
 def xss_based_payloads(url):
 
-    for payload in JsonFileReader("xss/payloads.json").read_json():
+    for payload in JsonFileReader("payloads.json").read_json():
         try:
 
             _ = update_url(url,payload)
