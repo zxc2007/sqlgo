@@ -88,7 +88,7 @@ from src.core.common.common import IOFileReader
 from extras.error import errors
 from src.core.tester.prompts import parameter
 from src.data import arg
-from src.core.common.common import read_json
+from src.core.common.common import read_json,JsonFileReader
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
@@ -1111,7 +1111,7 @@ def time_based_heavy_q(url):
 
 def xss_based_payloads(url):
 
-    for payload in read_json:
+    for payload in JsonFileReader.read_json("xss/payloads.json"):
         try:
 
             _ = update_url(url,payload)
