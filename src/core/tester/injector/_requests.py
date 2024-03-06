@@ -96,34 +96,31 @@ __priority__ = PRIORITY.VERY_HIGH
 _responses = []
 
 def host_injection(url,vuln_parameter="", payload="" ):
-    try:
 
-        payload = urlparse(url).netloc + payload
+    payload = urlparse(url).netloc + payload
 
-        def inject_host(url, vuln_parameter, payload):
+    def inject_host(url, vuln_parameter, payload):
 
-            http = urllib3.PoolManager()  
-            logger.debug(settings.SESSION_HANDLER_CREATED%url)
+        http = urllib3.PoolManager()  
+        logger.debug(settings.SESSION_HANDLER_CREATED%url)
 
-            url = url.partition('?')[0]
-            headers = {'Host': payload}
-
-            try:
-                response = http.request('GET', url, headers=headers)
-                logger.debug(settings.RESPONSE_RECIEVED_FROM_HOST%url%response)
-                return response.data.decode('utf-8')  
-            except Exception as err_msg:
-                return str(err_msg)
+        url = url.partition('?')[0]
+        headers = {'Host': payload}
 
         try:
-            response = inject_host(url, vuln_parameter, payload)
-            logger.debug(settings.RESPONSE_SENT_TO_BE_INSPECTED_FOR_SQL_VULN%url)
+            response = http.request('GET', url, headers=headers)
+            logger.debug(settings.RESPONSE_RECIEVED_FROM_HOST%url%response)
+            return response.data.decode('utf-8')  
         except Exception as err_msg:
-            response = str(err_msg)
+            return str(err_msg)
 
-        return response
-    except KeyboardInterrupt:
-        logger.info("Skipped host injections(basic tests).moving to the next set of the injections.")
+    try:
+        response = inject_host(url, vuln_parameter, payload)
+        logger.debug(settings.RESPONSE_SENT_TO_BE_INSPECTED_FOR_SQL_VULN%url)
+    except Exception as err_msg:
+        response = str(err_msg)
+
+    return response
 
 def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True):
     try:
@@ -160,8 +157,7 @@ def error_based_injection(url,param=None,payload=True,isauto=True,addheader=True
                     else:
                         _content = response.read()
                         _error_based.add_child(str(Tree(_content if not isinstance(_content,bytes) else str(bytes.decode()))))
-    except KeyboardInterrupt:
-        logger.info("Skipped error based injections(basic tests).moving to the next set of the injections.")
+    
     except Exception as e:
         logger.debug(str(e))
         
@@ -221,8 +217,6 @@ def time_based_inejction(url,payload=True,isauto=True):
 
     except ValueError:
         pass
-    except KeyboardInterrupt:
-        logger.info("Skipped time based injections(basic tests).moving to the next set of the injections.")
 
     except Exception as e:
         logger.debug(e)
@@ -314,8 +308,7 @@ def make_set_sql_injection(url,random_header=False):
 
                 return form_in_response,_make_set
                     
-    except KeyboardInterrupt:
-        logger.info("Skipped the Make set injections set.moving to the next set of injections")
+    
     except Exception as e:
         logger.error("Error: %s"%str(e))
         return
@@ -377,8 +370,6 @@ def union_based_injection(url):
                 
         except ValueError:
             continue
-        except KeyboardInterrupt:
-            logger.info("Skipped the union based injections.moving to the next set of injections.")
 
         except Exception as e:
             logger.error(e)
@@ -439,8 +430,6 @@ def mysql_blind_based_injection(url):
 
         except ValueError:
             continue
-        except KeyboardInterrupt:
-            logger.info("Skipped the blind based injections.moving to the next set of injections.")
 
         except Exception as e:
             logger.debug(e)
@@ -503,8 +492,6 @@ def postgre_sql_blind_injection(url):
 
         except ValueError:
             continue
-        except KeyboardInterrupt:
-            logger.info("Skipped the postgres SQL injections.moving to the next set of injections.")
 
         except Exception as e:
             logger.error(e)
@@ -656,10 +643,6 @@ def error_based_url_replace(url):
                     time.sleep(delay_time)
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
-        
-
-        except KeyboardInterrupt:
-            logger.info("Skipped advanced error based injections.")
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -729,9 +712,6 @@ def time_based_url_replace(url):
 
 
                     time.sleep(delay_time)
-        
-        except KeyboardInterrupt:
-            logger.info("Skipped advanced time based injections.")
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -797,8 +777,7 @@ def make_set_url_replace(url):
 
 
                     time.sleep(delay_time)
-        except KeyboardInterrupt:
-            logger.info("Skipped advanced make set injections.")
+
         except Exception as e:
             traceback.print_exc()
             logger.error(e)
@@ -857,9 +836,8 @@ def union_based_url_replace(url):
                     sql_injection_basic_detection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
-        
-        except KeyboardInterrupt:
-            logger.info("Skipped union based injections.")
+                
+
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -924,10 +902,8 @@ def stack_query(url):
                         # Call sql_injection_basic_detection with both parameters
                         sql_injection_basic_detection(form_in_response, form_details)
                         __import__("extras.beep.beep")
-            
+                    
 
-            except KeyboardInterrupt:
-                logger.info("Skipped stacked query injections.")
             except Exception as e:
                 count = 0
                 if any(["HTTPConnectionPool" in str(e)]):
@@ -991,9 +967,8 @@ def error_boolean(url):
                     sql_injection_basic_detection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
-        
-        except KeyboardInterrupt:
-            logger.info("Skipped error boolean injections.")
+                
+
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -1057,9 +1032,8 @@ def inline(url):
                     sql_injection_basic_detection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
-        
-        except KeyboardInterrupt:
-            logger.info("Skipped inline injections.")
+                
+
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -1126,8 +1100,7 @@ def time_based_heavy_q(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
-        except KeyboardInterrupt:
-            logger.info("Skipped time based heavy query injections.")
+
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -1138,7 +1111,7 @@ def time_based_heavy_q(url):
 
 def xss_based_payloads(url):
 
-    for payload in JsonFileReader("payloads.json").read_json():
+    for payload in JsonFileReader("xss/payloads.json").read_json():
         try:
 
             _ = update_url(url,payload)
@@ -1194,8 +1167,7 @@ def xss_based_payloads(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
-        except KeyboardInterrupt:
-            logger.info("Skipped xss injections.")
+
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
