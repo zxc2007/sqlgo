@@ -96,6 +96,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--bin","--binary",help="Use binary convert while sending the payloads",required=False,action="store_true")
         self.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
         self.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
+        self.add_argument("--sql-query",help="Execute specific SQL queries",required=False,type=str)
 
 
 
@@ -163,6 +164,7 @@ def extract():
     binary = args.bin
     hexa = args.hex
     xss = args.xss
+    sql_query = args.sql_query
     return (
         output,
         verbose,
@@ -217,7 +219,8 @@ def extract():
         batch,
         binary,
         hexa,
-        xss
+        xss,
+        sql_query
     )
 
 
@@ -328,6 +331,7 @@ try:
     arg.binary = result[51]
     arg.hexa = result[52]
     arg.xss = result[53]
+    arg.sqlQuery = result[54]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 

