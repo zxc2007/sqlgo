@@ -34,6 +34,10 @@ def prompt_parameter(url=arg.url):
 def get_parameter(url=arg.url):
     _,param = replace_url_parameter(url,new_value=None)
     return param
+try:
+    parameter = get_parameter()
+except:
+    logger.critical("No url has been set for sqlgo to test the injection")
+    raise SystemExit
 
-parameter = get_parameter()
 
