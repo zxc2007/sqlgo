@@ -19,6 +19,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
+<<<<<<< HEAD
 _VERSION = "1.3.12.24"
+=======
+_VERSION = "1.3.13.2"
+>>>>>>> 8eb696c0fb4768651936c14406b3734fb41fea14
 VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
 VERSION = _VERSION+VERSION_TYPE

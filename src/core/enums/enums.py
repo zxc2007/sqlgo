@@ -67,3 +67,7 @@ class PAYLOAD_SENDING(object):
     parsed_time = datetime.strptime(timestamp, "[%Y-%m-%d %H:%M:%S.%f]")
     formatted_time = parsed_time.strftime("[%Y-%m-%d %H:%M]")
     SENDING = "%s[%sPAYLOAD%s] code:{}" % (formatted_time, Fore.BLUE, Fore.RESET)
+
+
+class XssDataSending(object):
+    SENDING = "[%sXSS%s]{}"%(Fore.RED,Fore.RESET)

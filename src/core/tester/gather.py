@@ -20,8 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 import threading
-from src.core.tester.maintestcheck import main_exploit
-from src.intruder.intruder import Intruder_substring,MakeSet
 from src.core.request.POSt.post import subber
 from src.core.tester.union import union
 from src.core.tester.substring import substring
@@ -74,6 +72,7 @@ from src.core.tester.injector._requests import stack_query
 from src.core.tester.injector._requests import inline
 from src.core.tester.injector._requests import error_boolean
 from src.core.tester.injector._requests import time_based_heavy_q
+from src.core.tester.injector._requests import xss_based_payloads
 from src.data import arg
 
 
@@ -112,10 +111,9 @@ def gather_exploit():
 
  
         for _thread_ in basic_threads:
-            if not arg.skipBasic:
-                _thread_ = threading.Thread(target=_thread_)
-                _thread_.start()
-                _thread_.join()
+            _thread_ = threading.Thread(target=_thread_)
+            _thread_.start()
+            _thread_.join()
         
         if arg.hydra:
             hydra_handler.run_hydra()

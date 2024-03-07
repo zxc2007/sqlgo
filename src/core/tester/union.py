@@ -47,30 +47,32 @@ def union():
             errmsg = "It looks like the server is not responding to the requests,or the WAF/IPS is dropping the requests.please use proxy for more efficiency while sending requests."
             logger.error(errmsg)
             logger.debug(str(exc)) 
+            break
+        try:
+            if re.search(r"ORDER BY [^ ]+\Z",subber.response):
+                msg = "ORDER BY"
+                msg += "founded in the response"
+                logger.debug(msg)
+                _infomsg = "Some ORDER BY statement weaknesses leaked in the response"
+                logger.info(_infomsg)
+                logger.debug(settings.ORDER_BY_PARAMETER)
             
-
-        if re.search(r"ORDER BY [^ ]+\Z",subber.response):
-            msg = "ORDER BY"
-            msg += "founded in the response"
-            logger.debug(msg)
-            _infomsg = "Some ORDER BY statement weaknesses leaked in the response"
-            logger.info(_infomsg)
-            logger.debug(settings.ORDER_BY_PARAMETER)
-        
-        elif re.search(r"SELECT * [^ ]+\Z",subber.response):
-            msg = "SELECT *"
-            msg += "founded in the response"
-            logger.debug(msg)
-            _infomsg = "Some possible SELECT statement leaks in the response"
-            logger.info(_infomsg)
-            logger.debug(settings.SELECT_PARAMETER_FOUND)
-        
-        elif re.search(r"\bid",subber.response):
-            _pattern = re.search(r"\bid",subber.response)
-            index = _pattern.end()
-            words_after = re.findall(r"\b\w+\b", subber.response[index:index+100])
-            logger.info(words_after)
-            logger.debug(settings.ID_PARAMETER)
+            elif re.search(r"SELECT * [^ ]+\Z",subber.response):
+                msg = "SELECT *"
+                msg += "founded in the response"
+                logger.debug(msg)
+                _infomsg = "Some possible SELECT statement leaks in the response"
+                logger.info(_infomsg)
+                logger.debug(settings.SELECT_PARAMETER_FOUND)
+            
+            elif re.search(r"\bid",subber.response):
+                _pattern = re.search(r"\bid",subber.response)
+                index = _pattern.end()
+                words_after = re.findall(r"\b\w+\b", subber.response[index:index+100])
+                logger.info(words_after)
+                logger.debug(settings.ID_PARAMETER)
+        except KeyboardInterrupt:
+            logger.info("Canceled by user,making the way to the other payloads")
     
 
 def union_man():

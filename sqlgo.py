@@ -85,8 +85,6 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
 
-
-
 def main():
     try:
         setPaths(modulePath())

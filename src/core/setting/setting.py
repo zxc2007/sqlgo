@@ -53,7 +53,6 @@ of copyright and give proper credit to the original work.
 For more details on the Commix project, visit: https://github.com/commixproject/commix
 """
 
-# Your SQLgo code follows...
 
 
 import re
@@ -106,7 +105,7 @@ APPLICATION_TWITTER = ""
 DEFAULT_USER_AGENT = APPLICATION + "/" + VERSION + " (" + APPLICATION_URL + ")"
 
 # Legal Disclaimer
-LEGAL_DISCLAIMER_MSG = "[!]Usage of " + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
+LEGAL_DISCLAIMER_MSG = "%s(!)%sUsage of "%(Fore.RED, Style.RESET_ALL) + APPLICATION + " for attacking targets without prior mutual consent is illegal. " + \
                        "It is the end user's responsibility to obey all applicable local, state and federal laws. " + \
                        "Developers assume no liability and are not responsible for any misuse or damage caused by this program.\n"
 
@@ -1258,6 +1257,69 @@ TREE_PREFIX = "__|"
 current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
+#############################################################################
+MYSQL_STACK_QUERY_MESSAGES = [
+    "MySQL >= 5.0.12 stacked queries (query SLEEP - comment)",
+    "MySQL >= 5.0.12 stacked queries (query SLEEP)",
+    "MySQL < 5.0.12 stacked queries (BENCHMARK - comment)",
+    "MySQL < 5.0.12 stacked queries (BENCHMARK)"
+
+]
+
+POSTGRE_SQL_MESSAGES = [
+  "PostgreSQL > 8.1 stacked queries (comment)",
+  "PostgreSQL > 8.1 stacked queries",
+  "PostgreSQL stacked queries (heavy query - comment)",
+  "PostgreSQL stacked queries (heavy query)",
+  "PostgreSQL < 8.2 stacked queries (Glibc - comment)",
+  "PostgreSQL < 8.2 stacked queries (Glibc)"
+
+]
+
+MICROSOFT_SQL_SERVER_MESSAGES = [
+  "Microsoft SQL Server/Sybase stacked queries (DECLARE - comment)",
+    "Microsoft SQL Server/Sybase stacked queries",
+    "Microsoft SQL Server/Sybase stacked queries",
+    "Microsoft SQL Server/Sybase stacked queries (DECLARE)",
+
+
+]
+
+ORACLE_MESSAGES = [
+  "Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)",
+  "Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE)",
+  "Oracle stacked queries (heavy query - comment)",
+  "Oracle stacked queries (heavy query)",
+  " Oracle stacked queries (DBMS_LOCK.SLEEP - comment)",
+  "Oracle stacked queries (DBMS_LOCK.SLEEP)",
+  "Oracle stacked queries (USER_LOCK.SLEEP - comment)",
+  "Oracle stacked queries (USER_LOCK.SLEEP",
+  
+]
+
+IBM_MESSAGES = [
+  "IBM DB2 stacked queries (heavy query)",
+  "IBM DB2 stacked queries (heavy query - comment)",
+  "IBM DB2 stacked queries (SLEEP)",
+  "IBM DB2 stacked queries (SLEEP - comment)",
+
+]
+
+FIRE_BIRD_MESSAGES = [
+  "Firebird stacked queries (heavy query)",
+  "Firebird stacked queries (heavy query - comment)",
+  "Firebird stacked queries (SLEEP)",
+  "Firebird stacked queries (SLEEP - comment)",
+]
+
+HSQLDB_MESSAGES = [
+  "HSQLDB stacked queries (heavy query)",
+  "HSQLDB stacked queries (heavy query - comment)",
+  "HSQLDB stacked queries (SLEEP)",
+  "HSQLDB stacked queries (SLEEP - comment)",
+]
+
+SENDING_MESSAGES = [*HSQLDB_MESSAGES, *FIRE_BIRD_MESSAGES, *IBM_MESSAGES, *ORACLE_MESSAGES, *MICROSOFT_SQL_SERVER_MESSAGES, *POSTGRE_SQL_MESSAGES, *MYSQL_STACK_QUERY_MESSAGES]
 
 def print_time():
   return datetime.now()

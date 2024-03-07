@@ -26,10 +26,10 @@ import random
 import string
 import glob
 import os
-sys.path.append(os.getcwd())
 import re
 from sqlmap.lib.core.common import setColor
 from src.data import arg
+import json
 
 
 
@@ -153,3 +153,18 @@ def read_input(msg, default=None, boolean=False,options=[]):
             pass
 
     return retVal
+
+class JsonFileReader:
+    """
+    A class that defines the json reading actions
+    >>> foo = JsonFileReader("/path/to/file")
+    >>> foo.read_json()
+    {'key': 'value'}
+    """
+    def __init__(self,file):
+        self.file = file
+    
+    def read_json(self):
+        with open(os.getcwd()+"/data/xss/"+self.file,"r") as file:
+            return json.load(file)
+        

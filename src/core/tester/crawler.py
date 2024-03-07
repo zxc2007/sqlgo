@@ -296,5 +296,4 @@ conf.crawlDepth = 5
 conf.threads = 4
 kb.locks = 3
 conf.locks = ""
-# kb.targets.add("http://testfire.net/index.jsp?content=business_deposit.htm")
-# crawl("http://testfire.net/index.jsp?content=business_deposit.htm")
+
