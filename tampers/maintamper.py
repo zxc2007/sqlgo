@@ -22,6 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
+import random
+
 import tampers.base64
 import tampers.printf2cho
 import tampers.space2comment 
@@ -85,8 +87,12 @@ from src.core.parser.cmdline import tamper as _tamper
 from src.data import arg
 from src.core.converts.bin import str_to_bin
 from src.core.converts.hex import str_to_hex
+from src.data import arg
+from src.data import TAMPER_SCRIPTS
 
-def apply_tamper(payload):
+def apply_tamper(payload,**kwargs):
+    if arg.randomTamper:
+        _tamper = random.choice(TAMPER_SCRIPTS)
     if _tamper == "base64":
         return tampers.base64.tamper(payload)
     elif _tamper == "printf2echo":

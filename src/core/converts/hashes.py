@@ -19,6 +19,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-_VERSION = "1.3.12.27"
-VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
-VERSION = _VERSION+VERSION_TYPE
+import hashlib
+
+class Hash(object):
+    def __init__(self,plainText):
+        self.plainText = plainText
+    
+    def sha256(self):
+        return hashlib.sha256(self.plainText.encode('utf-8')).hexdigest()
+
+    def sha512(self):
+        return hashlib.sha512(self.plainText.encode('utf-8')).hexdigest()
+
+    def md5(self):
+        return hashlib.md5(self.plainText.encode('utf-8')).hexdigest()
+
+    def sha1(self):
+        return hashlib.sha1(self.plainText.encode('utf-8')).hexdigest()
+
+    def sha224(self):
+        return hashlib.sha224(self.plainText.encode('utf-8')).hexdigest()
+
+    def sha384(self):
+        return hashlib.sha384(self.plainText.encode('utf-8')).hexdigest()
+    

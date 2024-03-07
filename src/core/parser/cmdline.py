@@ -44,8 +44,8 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
         self.add_argument("--version",action="version",version="SQLgo version: "+extras.version.VERSION)
-        self.add_argument("--url","-u",help="Give the program url of the target",required=False,default=3306)
-        self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int)
+        self.add_argument("--url","-u",help="Give the program url of the target",required=True)
+        self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int,default=80)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
         self.add_argument("--table","-T",help="Specify the database possible table",required=False)
@@ -97,6 +97,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
         self.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
         self.add_argument("--sql-query",help="Execute specific SQL queries",required=False,type=str)
+        self.add_argument("--random-tamper",help="Use a random tamper script each time",required=False,action="store_true")
 
 
 
@@ -165,6 +166,7 @@ def extract():
     hexa = args.hex
     xss = args.xss
     sql_query = args.sql_query
+    random_tamper = args.random_tamper
     return (
         output,
         verbose,
@@ -220,7 +222,8 @@ def extract():
         binary,
         hexa,
         xss,
-        sql_query
+        sql_query,
+        random_tamper
     )
 
 
@@ -332,6 +335,7 @@ try:
     arg.hexa = result[52]
     arg.xss = result[53]
     arg.sqlQuery = result[54]
+    arg.randomTamper = result[55]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 
