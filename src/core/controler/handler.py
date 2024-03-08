@@ -26,9 +26,9 @@ except:
     
 import os
 import sys
-from _plugins.dbms.mysql.connector import Connector as MysqlConn
-from _plugins.dbms.oracle.connector import Connector as OracleConn
-from _plugins.dbms.sqlite.connector import Connector as SqliteCon
+from plugin.dbms.mysql.connector import Connector as MysqlConn
+from plugin.dbms.oracle.connector import Connector as OracleConn
+from plugin.dbms.sqlite.connector import Connector as SqliteCon
 from src.core.dumper.dump import dumper
 from extras.extracttablenames import read_common_tables as common_tables
 from src.core.parser.cmdline import *
