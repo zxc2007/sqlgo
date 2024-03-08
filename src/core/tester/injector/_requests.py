@@ -618,7 +618,7 @@ def error_based_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"Error based SQl query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
@@ -691,7 +691,7 @@ def time_based_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"time based Sql query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -754,7 +754,7 @@ def make_set_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"Make set mysql query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%_payload)
@@ -814,7 +814,7 @@ def union_based_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"Union based(ALL SELECT) query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -880,7 +880,7 @@ def stack_query(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"SQl"+stack_query.__name__))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -945,7 +945,7 @@ def error_boolean(url):
                     logger.warning("Potential sql injection detected!!!")
                     __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,error_boolean.__name__+"SQl query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -1011,7 +1011,7 @@ def inline(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s parameter is %s injectable"%(parameter,inline.__name__+"Sql query"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
@@ -1079,7 +1079,7 @@ def time_based_heavy_q(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
-                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is None else arg.tamper)
+                    logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
