@@ -44,7 +44,7 @@ class Cmdline(argparse.ArgumentParser):
         self.add_argument("-o", "--output", help="Get output file as result",required=False)
         self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
         self.add_argument("--version",action="version",version="SQLgo version: "+extras.version.VERSION)
-        self.add_argument("--url","-u",help="Give the program url of the target",required=True)
+        self.add_argument("--url","-u",help="Give the program url of the target",required=False)
         self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int,default=80)
         self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         self.add_argument("--column","-C",help="Specify the database possible column",required=False)
