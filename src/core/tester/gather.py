@@ -76,7 +76,6 @@ from src.core.tester.injector._requests import sqlQuery
 from src.data import arg
 
 
-
 import urllib3
 def gather_exploit():
     global xml
