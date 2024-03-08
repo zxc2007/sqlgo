@@ -98,6 +98,7 @@ AUTHOR_TWITTER = ""
 APPLICATION_URL = ""
 APPLICATION_TWITTER = ""
 
+RANDOM_TAMPER = False
 
 
 
@@ -1320,7 +1321,9 @@ HSQLDB_MESSAGES = [
 ]
 
 SENDING_MESSAGES = [*HSQLDB_MESSAGES, *FIRE_BIRD_MESSAGES, *IBM_MESSAGES, *ORACLE_MESSAGES, *MICROSOFT_SQL_SERVER_MESSAGES, *POSTGRE_SQL_MESSAGES, *MYSQL_STACK_QUERY_MESSAGES]
+#############################################################################
 
+#############################################################################
 def print_time():
   return datetime.now()
 
