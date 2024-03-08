@@ -92,130 +92,130 @@ from src.data import TAMPER_SCRIPTS
 
 def apply_tamper(payload,**kwargs):
     if arg.randomTamper:
-        _tamper = random.choice(TAMPER_SCRIPTS)
-    if _tamper == "base64":
+        arg.tamper = random.choice(TAMPER_SCRIPTS)
+    if arg.tamper == "base64":
         return tampers.base64.tamper(payload)
-    elif _tamper == "printf2echo":
+    elif arg.tamper == "printf2echo":
         return tampers.printf2cho.tamper(payload)
-    elif _tamper == "space2comment":
+    elif arg.tamper == "space2comment":
         return tampers.space2comment.tamper(payload)
-    elif _tamper == "space2plus":
+    elif arg.tamper == "space2plus":
         return tampers.space2plus.tamper(payload)
-    elif _tamper == "space2space":
+    elif arg.tamper == "space2space":
         return tampers.space2space.tamper(payload)
-    elif _tamper == "uppercase":
+    elif arg.tamper == "uppercase":
         return tampers.uppercase.tamper(payload)
-    elif _tamper == "lowercase":
+    elif arg.tamper == "lowercase":
         return tampers.lowercase.tamper(payload)
-    elif _tamper == "space2slash":
+    elif arg.tamper == "space2slash":
         return tampers.space2slash.tamper(payload)
-    elif _tamper == "between":
+    elif arg.tamper == "between":
         return tampers.between.tamper(payload)
-    elif _tamper == "binary":
+    elif arg.tamper == "binary":
         return tampers.binary.tamper(payload)
-    elif _tamper == "chardoubleencode":
+    elif arg.tamper == "chardoubleencode":
         return tampers.chardoubleencode.tamper(payload)
-    elif _tamper == "charencode":
+    elif arg.tamper == "charencode":
         return tampers.charencode.tamper(payload)
-    elif _tamper == "charunicodeescape":
+    elif arg.tamper == "charunicodeescape":
         return tampers.charunicodeescape.tamper(payload)
-    elif _tamper == "commentbeforeparanthese":
+    elif arg.tamper == "commentbeforeparanthese":
         return tampers.commentbeforeparanthese.tamper(payload)
-    elif _tamper == "decenties":
+    elif arg.tamper == "decenties":
         return tampers.decenties.tamper(payload)
-    elif _tamper == "equaltolike":
+    elif arg.tamper == "equaltolike":
         return tampers.equaltolike.tamper(payload)
-    elif _tamper == "equaltorlike":
+    elif arg.tamper == "equaltorlike":
         return tampers.equaltorlike.tamper(payload)
-    elif _tamper == "escapequotes":
+    elif arg.tamper == "escapequotes":
         return tampers.escapequotes.tamper(payload)
-    elif _tamper == "hexentities":
+    elif arg.tamper == "hexentities":
         return tampers.hexentities.tamper(payload)
-    elif _tamper == "greatests":
+    elif arg.tamper == "greatests":
         return tampers.greatests.tamper(payload)
-    elif _tamper == "htmlencode":
+    elif arg.tamper == "htmlencode":
         return tampers.htmlencode.tamper(payload)
-    elif _tamper == "ifnull2casewhenisnull":
+    elif arg.tamper == "ifnull2casewhenisnull":
         return tampers.ifnull2casewhenisnull.tamper(payload)
-    elif _tamper == "ifnull2isnull":
+    elif arg.tamper == "ifnull2isnull":
         return tampers.ifnull2isnull.tamper(payload)
-    elif _tamper == "informationschemacomment":
+    elif arg.tamper == "informationschemacomment":
         return tampers.informationschemacomment.tamper(payload)
-    elif _tamper == "least":
+    elif arg.tamper == "least":
         return tampers.least.tamper(payload)
-    elif _tamper == "ord2ascii":
+    elif arg.tamper == "ord2ascii":
         return tampers.ord2ascii.tamper(payload)
-    elif _tamper == "overlongutf8":
+    elif arg.tamper == "overlongutf8":
         return tampers.overlongutf8.tamper(payload)
-    elif _tamper == "overlongutf8more":
+    elif arg.tamper == "overlongutf8more":
         return tampers.overlongutf8more.tamper(payload)
-    elif _tamper == "percentage":
+    elif arg.tamper == "percentage":
         return tampers.percentage.tamper(payload)
-    elif _tamper == "schemasplit":
+    elif arg.tamper == "schemasplit":
         return tampers.schemasplit.tamper(payload)
-    elif _tamper == "scientific":
+    elif arg.tamper == "scientific":
         return tampers.scientific.tamper(payload)
-    elif _tamper == "sp_password":
+    elif arg.tamper == "sp_password":
         return tampers.sp_password.tamper(payload)
-    elif _tamper == "space2dash":
+    elif arg.tamper == "space2dash":
         return tampers.space2dash.tamper(payload)
-    elif _tamper == "space2morecomment":
+    elif arg.tamper == "space2morecomment":
         return tampers.space2morecomment.tamper(payload)
-    elif _tamper == "space2mssqlhash":
+    elif arg.tamper == "space2mssqlhash":
         return tampers.space2mssqlhash.tamper(payload)
-    elif _tamper == "space2randomblank":
+    elif arg.tamper == "space2randomblank":
         return tampers.space2randomblank.tamper(payload)
-    elif _tamper == "substring2leftright":
+    elif arg.tamper == "substring2leftright":
         return tampers.substring2leftright.tamper(payload)
-    elif _tamper == "symboliclogical":
+    elif arg.tamper == "symboliclogical":
         return tampers.symboliclogical.tamper(payload)
-    elif _tamper == "unionalltounion":
+    elif arg.tamper == "unionalltounion":
         return tampers.unionalltounion.tamper(payload)
-    elif _tamper == "unmagicquotes":
+    elif arg.tamper == "unmagicquotes":
         return tampers.unmagicquotes.tamper(payload)
-    elif _tamper == "apostrophemask":
+    elif arg.tamper == "apostrophemask":
         return tampers.apostrophemask.tamper(payload)
-    elif _tamper == "appnednullbyte":
+    elif arg.tamper == "appnednullbyte":
         return tampers.appnednullbyte.tamper(payload)
-    elif _tamper == "bluecoat":
+    elif arg.tamper == "bluecoat":
         return tampers.bluecoat.tamper(payload)
-    elif _tamper == "charunicodeencode" or _tamper == "charuencode":
+    elif arg.tamper == "charunicodeencode" or arg.tamper == "charuencode":
         return tampers.charunicodeencode.tamper(payload)
-    elif _tamper == "commalesslimit":
+    elif arg.tamper == "commalesslimit":
         return tampers.commalesslimit.tamper(payload)
-    elif _tamper == "commalessmid":
+    elif arg.tamper == "commalessmid":
         return tampers.commalessmid.tamper(payload)
-    elif _tamper == "concat2concatws":
+    elif arg.tamper == "concat2concatws":
         return tampers.concat2concatws.tamper(payload)
-    elif _tamper == "dunion":
+    elif arg.tamper == "dunion":
         return tampers.dunion.tamper(payload)
-    elif _tamper == "halfversionedmorekeywords":
+    elif arg.tamper == "halfversionedmorekeywords":
         return tampers.halfversionedmorekeywords.tamper(payload)
-    elif _tamper == "hex2char":
+    elif arg.tamper == "hex2char":
         return tampers.hex2char.tamper(payload)
-    elif _tamper == "if2case":
+    elif arg.tamper == "if2case":
         return tampers.if2case.tamper(payload)
-    elif _tamper == "misunion":
+    elif arg.tamper == "misunion":
         return tampers.misunion.tamper(payload)
-    elif _tamper == "modsecurityversioned":
+    elif arg.tamper == "modsecurityversioned":
         return tampers.modsecurityversioned.tamper(payload)
-    elif _tamper == "modsecurityzeroversioned":
+    elif arg.tamper == "modsecurityzeroversioned":
         return tampers.modsecurityzeroversioned.tamper(payload)
-    elif _tamper == "versionedkeywords":
+    elif arg.tamper == "versionedkeywords":
         return tampers.versionedkeywords.tamper(payload)
-    elif _tamper == "versionedmorekeywords":
+    elif arg.tamper == "versionedmorekeywords":
         return tampers.versionedmorekeywords.tamper(payload)
-    elif _tamper == "space2morehash":
+    elif arg.tamper == "space2morehash":
         return tampers.space2morehash.tamper(payload)
-    elif _tamper == "space2mssqlblank":
+    elif arg.tamper == "space2mssqlblank":
         return tampers.space2mssqlblank.tamper(payload)
-    elif _tamper == "space2hash":
+    elif arg.tamper == "space2hash":
         return tampers.space2hash.tamper(payload)
     elif arg.binary:
         return str_to_bin(payload)
     elif arg.hexa:
         return str_to_hex(payload)
-    elif _tamper is None:
+    elif arg.tamper is None:
         return payload
     else:
         return payload
