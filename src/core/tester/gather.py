@@ -72,14 +72,12 @@ from src.core.tester.injector._requests import stack_query
 from src.core.tester.injector._requests import inline
 from src.core.tester.injector._requests import error_boolean
 from src.core.tester.injector._requests import time_based_heavy_q
+from src.core.tester.injector._requests import sqlQuery
 from src.data import arg
 
 
 
 import urllib3
-
-
-
 def gather_exploit():
     global xml
     if "?" not in arg.url:
@@ -136,6 +134,7 @@ def gather_exploit():
                 time_based_url_replace(arg.url),
                 error_based_url_replace(arg.url),
                 union_based_url_replace(arg.url),
+                sqlQuery()
                 
             ]
             if not arg.skipBasic:
