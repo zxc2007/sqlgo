@@ -116,7 +116,10 @@ def injection_test_is_vuln_time_based(url=arg.url):
         logger.info("testing %s"%P_type.TIME_BASED.value)
         if _inj[0] > settings.ADVANCED_TIME_BASED_TRESHOLD:
             logger.info(settings.ADVANCED_TESTS_SHOWS_THAT_TARGET_MIGHT_BE_INJECTABLE%(url,reset_tested_payload(_payload))+"\n Do you want to skip the further testing for the target %s (Y,n)?"%url)
-            _ = input("")
+            if not arg.batch:
+                _ = input("")
+            else:
+                _ = "y"
             if _.lower() == "y":
                 settings.USER_SKIPPED_ADVANCED_TIME_BASED_TESTS = True
                 return
