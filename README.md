@@ -46,6 +46,12 @@ python3 sqlgo.py --update
 ```
 python3 sqlgo.py -u http://www.target-url?id=1 --port <port number> --level <level> --verbose <verbose> --tamper <tamper> --dbms<DBMS> --dump
 ```
+# Features of sqlgo
+1) Supports SQL Injection attacks against MySQL
+2) Support of sending the different payloads including stack query , time delay and union all payload and other strong payloads.
+3) provides lot of tamper scripts to tamper the payloads to  bypass WAF or Intrusion detection systems (IDS).
+4) Provides various encoding techniques to encode
+5) Automatic sql injection vulnerability detection and scanner 
 
 
 # How do i report the bugs?
