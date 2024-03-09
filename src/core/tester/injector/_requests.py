@@ -1113,10 +1113,11 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                 logger.debug(__url)
             _payload = apply_tamper(sql)
             _ = update_url(url,_payload)
-            print(PAYLOAD_SENDING.SENDING%sql if verbose >= 3 else "")
+            print(PAYLOAD_SENDING.SENDING.format(sql if verbose >= 3 else ""))
 
             __url = _
             response = requests.get(__url)
+            print(response.status_code)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
@@ -1154,6 +1155,7 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
+                
 
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
@@ -1162,6 +1164,8 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                 
 
         except Exception as e:
+            logger.error(e)
+            traceback.print_exc()
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
                 count += 1

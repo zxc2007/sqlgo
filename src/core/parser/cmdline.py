@@ -35,69 +35,76 @@ from src.data import arg
 from src.core.common.common import _listTamperingFunctions
 
 
+#TODO: add table adn column testing 
 
-
-class Cmdline(argparse.ArgumentParser):
-    def __init__(self):
-        super(Cmdline, self).__init__(description="sqlgo")
-
-        self.add_argument("-o", "--output", help="Get output file as result",required=False)
-        self.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
-        self.add_argument("--version",action="version",version="SQLgo version: "+extras.version.VERSION)
-        self.add_argument("--url","-u",help="Give the program url of the target",required=False)
-        self.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int,default=80)
-        self.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
-        self.add_argument("--column","-C",help="Specify the database possible column",required=False)
-        self.add_argument("--table","-T",help="Specify the database possible table",required=False)
-        self.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str,default="mysql")
-        self.add_argument("--db","-d",help="Specify the database name",required=False,action="store_true")
-        self.add_argument("-dbs",help="Enumerate the DBMS databases",required=False,action="store_true")
-        self.add_argument("-tables",help="Enumerate the DBMS tables",required=False,action="store_true")
-        self.add_argument("--columns",help="Enumerate the DBMS columns",required=False,action="store_true")
-        self.add_argument("--random-agent",help="Use random user agents",required=False,action="store_true")
-        self.add_argument("--user-agent",help="Specify the user agent",required=False)
-        self.add_argument("--dump",help="Dump the databases and show user",required=False,action="store_true")
-        self.add_argument("--dump-table",help="Dump the tables and show user",required=False,action="store_true")
-        self.add_argument("--dump-column",help="Dump the columns and show user",required=False,action="store_true")
-        self.add_argument("--dump-user",help="Dump the users",required=False,action="store_true")
-        self.add_argument("--dump-password",help="Dump the passwords",required=False,action="store_true")
-        self.add_argument("--time-out",help="Set timeout amount",type=int,required=False)
-        self.add_argument("--attack",help="Specify the attack type",default="normal",type=str,required=False)
-        self.add_argument("--install-dependent",help="install the required modules for sqlgo to be executed",action="store_true",required=False)
-        self.add_argument("--disable-warning",help="disable the ssl warning",action="store_true",required=False)
-        self.add_argument("--payload",help="send you own payload",required=False,action="store_true")
-        self.add_argument("--proxy-server",help="specify the proxyserver",type=str,required=False)
-        self.add_argument("--proxy-port",help="specify proxy port ",action="store",type=int,required=False)
-        self.add_argument("--proxy",help="use proxy servers",required=False,action="store_true")
-        self.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
-        self.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
-        self.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
-        self.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
-        self.add_argument("--shell", help="execute sqlgo in shell environment", required=False,action="store_true")
-        self.add_argument("--update", help="update sqlgo", required=False,action="store_true")
-        self.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
-        self.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False,action="store_true")
-        self.add_argument("--username",help="Specify the DBMS username",required=False)
-        self.add_argument("--password",help="Specify the DBMS password",required=False)
-        self.add_argument("--username-wordlist",help="use wordlist to specify the brute force attack",required=False)
-        self.add_argument("--password-wordlist",help="use wordlist to specify the brute force attack",required=False)
-        self.add_argument("--dbs-port",help="specify the DBMS port",required=False)
-        self.add_argument("--dbs-timeout",help="specify the timeout amount for the connection to DBMS",default=10)
-        self.add_argument("--dbms-user",help="specify the DBMS possible username",required=False)
-        self.add_argument("--dbms-pass",help="specify the DBMS possible password",required=False)
-        self.add_argument("--hydra",help="use hydra for brute force attack",required=False,action="store_true")
-        self.add_argument("--user-file",help="specify the username file for hydra",required=False)
-        self.add_argument("--pass-file",help="specify the password file for hydra",required=False)
-        self.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
-        self.add_argument("--accept-cookie",help="Accept the cookies by the server by default",action="store_true")
-        self.add_argument("--list-tampers",help="list all available tamper functions",action="store_true")
-        self.add_argument("--skip-basic",help="skip basic tests",action="store_true",required=False)
-        self.add_argument("--batch",help="batch mode,never ask user for any input.",action="store_true",required=False)
-        self.add_argument("--bin","--binary",help="Use binary convert while sending the payloads",required=False,action="store_true")
-        self.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
-        self.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
-        self.add_argument("--sql-query",help="Execute specific SQL queries",required=False,type=str)
-        self.add_argument("--random-tamper",help="Use a random tamper script each time",required=False,action="store_true")
+class Cmdline:
+    @staticmethod
+    def parse():
+        parser = argparse.ArgumentParser(description="sqlgo")
+        Target = parser.add_argument_group("Target")
+        Detection = parser.add_argument_group("Detection")
+        Injection = parser.add_argument_group('Injection')
+        Enumeration = parser.add_argument_group("Enumeration")
+        General = parser.add_argument_group("General")
+        General.add_argument("-o", "--output", help="Get output file as result",required=False)
+        General.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
+        General.add_argument("--version",action="version",version="SQLgo version: "+extras.version.VERSION)
+        Target.add_argument("--url","-u",help="Give the program url of the target",required=False)
+        Target.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int,default=80)
+        Target.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
+        Enumeration.add_argument("--column","-C",help="Specify the database possible column",required=False)
+        Enumeration.add_argument("--table","-T",help="Specify the database possible table",required=False)
+        Enumeration.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str,default="mysql")
+        Enumeration.add_argument("--db","-d",help="Specify the database name",required=False,action="store_true")
+        Enumeration.add_argument("-dbs",help="Enumerate the DBMS databases",required=False,action="store_true")
+        Enumeration.add_argument("-tables",help="Enumerate the DBMS tables",required=False,action="store_true")
+        Enumeration.add_argument("--columns",help="Enumerate the DBMS columns",required=False,action="store_true")
+        Target.add_argument("--random-agent",help="Use random user agents",required=False,action="store_true")
+        Target.add_argument("--user-agent",help="Specify the user agent",required=False)
+        Enumeration.add_argument("--dump",help="Dump the databases and show user",required=False,action="store_true")
+        Enumeration.add_argument("--dump-table",help="Dump the tables and show user",required=False,action="store_true")
+        Enumeration.add_argument("--dump-column",help="Dump the columns and show user",required=False,action="store_true")
+        Enumeration.add_argument("--dump-user",help="Dump the users",required=False,action="store_true")
+        Enumeration.add_argument("--dump-password",help="Dump the passwords",required=False,action="store_true")
+        Target.add_argument("--time-out",help="Set timeout amount",type=int,required=False)
+        Target.add_argument("--attack",help="Specify the attack type",default="normal",type=str,required=False)
+        General.add_argument("--install-dependent",help="install the required modules for sqlgo to be executed",action="store_true",required=False)
+        Target.add_argument("--disable-warning",help="disable the ssl warning",action="store_true",required=False)
+        Target.add_argument("--payload",help="send you own payload",required=False,action="store_true")
+        Target.add_argument("--proxy-server",help="specify the proxyserver",type=str,required=False)
+        Target.add_argument("--proxy-port",help="specify proxy port ",action="store",type=int,required=False)
+        General.add_argument("--proxy",help="use proxy servers",required=False,action="store_true")
+        Detection.add_argument("--level",help="increase the level of performing tests(from range 1-5 default is 1 )",type=int,default=1,required=False)
+        Injection.add_argument("--tamper",help="use tampers for specifying the payloads specific changes,eg: --tamper space2plus",required=False,type=str)
+        Target.add_argument("--time-based-t",help="specify the treshold of the time base injection (only for the time based injection,default = 0.5)",type=float,required=False)
+        Target.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
+        General.add_argument("--shell", help="execute sqlgo in shell environment", required=False,action="store_true")
+        General.add_argument("--update", help="update sqlgo", required=False,action="store_true")
+        General.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
+        General.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False,action="store_true")
+        Enumeration.add_argument("--username",help="Specify the DBMS username",required=False)
+        Enumeration.add_argument("--password",help="Specify the DBMS password",required=False)
+        General.add_argument("--username-wordlist",help="use wordlist to specify the brute force attack",required=False)
+        General.add_argument("--password-wordlist",help="use wordlist to specify the brute force attack",required=False)
+        Enumeration.add_argument("--dbs-port",help="specify the DBMS port",required=False)
+        Enumeration.add_argument("--dbs-timeout",help="specify the timeout amount for the connection to DBMS",default=10)
+        Enumeration.add_argument("--dbms-user",help="specify the DBMS possible username",required=False)
+        Enumeration.add_argument("--dbms-pass",help="specify the DBMS possible password",required=False)
+        Target.add_argument("--hydra",help="use hydra for brute force attack",required=False,action="store_true")
+        Target.add_argument("--user-file",help="specify the username file for hydra",required=False)
+        Target.add_argument("--pass-file",help="specify the password file for hydra",required=False)
+        Target.add_argument("--delay-time",help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
+        Target.add_argument("--accept-cookie",help="Accept the cookies by the server by default",action="store_true")
+        Target.add_argument("--list-tampers",help="list all available tamper functions",action="store_true")
+        Target.add_argument("--skip-basic",help="skip basic tests",action="store_true",required=False)
+        General.add_argument("--batch",help="batch mode,never ask user for any input.",action="store_true",required=False)
+        Target.add_argument("--bin","--binary",help="Use binary convert while sending the payloads",required=False,action="store_true")
+        Target.add_argument("--hex",help="Use hex convert while sending the payloads",required=False,action="store_true")
+        Target.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
+        Enumeration.add_argument("--sql-query",help="Execute specific SQL queries",required=False,type=str)
+        Detection.add_argument("--random-tamper",help="Use a random tamper script each time",required=False,action="store_true")
+        args = parser.parse_args()
+        return args
 
 
 
@@ -109,8 +116,7 @@ class Cmdline(argparse.ArgumentParser):
 
 
 def extract():
-    obj = Cmdline()
-    args = obj.parse_args()
+    args = Cmdline.parse()
     output = args.output
     verbose = args.verbose
     url = args.url
@@ -341,6 +347,10 @@ except MemoryError:
 
 if arg.listTamper:
     _listTamperingFunctions()
+    raise SystemExit
+
+if "--port" in sys.argv:
+    print("[!] -p/--port is obsolete.")
     raise SystemExit
 
 
