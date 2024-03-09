@@ -57,4 +57,4 @@ python3 sqlgo.py -u http://www.target-url?id=1 --port <port number> --level <lev
 # How do i report the bugs?
 bugs will be accepted if they exists and you can report it from the github page of sqlgo. you can go to the issues tab in the github and report the bug in the clear sentence.
 
-**persain : https://github.com/HeisenbergCipherCracker/sqlgo/blob/main/doc/translations/farsi.md**
+**Persain Translation : https://github.com/HeisenbergCipherCracker/sqlgo/blob/main/doc/translations/farsi.md**
