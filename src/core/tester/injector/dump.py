@@ -432,10 +432,19 @@ def get_databases():
 	print()
 	temp_clear()
 	if not arg.batch:
+		if arg.tables:
+			get_tables(input(prefix + "Insert database id to continue: "))
+			return
 		get_tables(input(prefix + "Insert database id to continue: "))
+		return
 	else:
+		if arg.tables:
+			_ = iter(database_list.keys())
+			get_tables(next(_))
+			return
 		_ = iter(database_list.keys())
 		get_tables(next(_))
+		
 
 def get_tables(database_id):
 
@@ -443,6 +452,9 @@ def get_tables(database_id):
 		get_databases()
 		return
 	else:
+		if arg.dbs:
+			database_id = int(database_id)
+			return
 		database_id = int(database_id)
 		
 	database = database_list[database_id]
@@ -591,7 +603,8 @@ def get_columns(database_id):
 	print()
 	temp_clear()
 	if not arg.batch:
-		column_ids = input(prefix + "Insert column id's to dump: ")
+		column_ids = input(prefix + "Insert column id to dump: ")
+			
 	else:
 		column_ids = iter(column_list[table_id].keys())
 		column_ids = str(next(column_ids))
@@ -643,9 +656,11 @@ def dump(column_names,table_name,database_name,database_id):
 			clear()
 			if not arg.batch:
 				input(prefix + "No rows to dump, press enter to return .. ")
+				return
 			get_tables(database_id)
 			return
 		print(prefix + "[i] Dumping row: " + str(len(dump_array)) + "/" + str(count))
+		return
 	else:
 		print(prefix + "[-] Could not get rows, exiting .. ")
 		print()
@@ -686,7 +701,8 @@ def dump(column_names,table_name,database_name,database_id):
 		print(prefix + item)
 
 	save(table_name)
-	input(prefix + "Press enter to continue .. ")
+	if not arg.batch:
+		input(prefix + "Press enter to continue .. ")
 	del dump_array[:]
 	get_databases()
 	
