@@ -57,6 +57,7 @@ class Cmdline:
         Enumeration.add_argument("--dbms",help="Specify the DBMS of the server",required=False,type=str,default="mysql")
         Enumeration.add_argument("--db","-d",help="Specify the database name",required=False,action="store_true")
         Enumeration.add_argument("-dbs","--dbs",help="Enumerate the DBMS databases",required=False,action="store_true")
+        Enumeration.add_argument("--schema",help="Enumerate the DBMS schemas",required=False,action="store_true")
         Enumeration.add_argument("--tables",help="Enumerate the DBMS tables",required=False,action="store_true")
         Enumeration.add_argument("--columns",help="Enumerate the DBMS columns",required=False,action="store_true")
         Target.add_argument("--random-agent",help="Use random user agents",required=False,action="store_true")
@@ -173,6 +174,7 @@ def extract():
     xss = args.xss
     sql_query = args.sql_query
     random_tamper = args.random_tamper
+    schema = args.schema
     return (
         output,
         verbose,
@@ -229,7 +231,8 @@ def extract():
         hexa,
         xss,
         sql_query,
-        random_tamper
+        random_tamper,
+        schema
     )
 
 
@@ -342,6 +345,7 @@ try:
     arg.xss = result[53]
     arg.sqlQuery = result[54]
     arg.randomTamper = result[55]
+    arg.schema = result[56]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 

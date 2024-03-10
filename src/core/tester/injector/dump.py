@@ -370,8 +370,12 @@ def get_info():
 	
 	if re.search("~~(.*?)~~",temp_array[5]):
 		print(prefix + "[i] Tables:    " + re.search("~~(.*?)~~", temp_array[5]).groups()[0])
+		if arg.schema:
+			raise SystemExit
 	else:
 		print(prefix + "[-] Tables:    Failed")
+		if arg.schema:
+			raise SystemExit
 	
 	temp_clear()
 	
