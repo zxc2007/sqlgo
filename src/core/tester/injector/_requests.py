@@ -824,13 +824,12 @@ def union_based_url_replace(url):
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
                 form_details = get_form_details(form_in_response)
-
-                sql_injection_basic_detection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
                     logger.info(dbmsMsg%config.possibleDbms)
                     time.sleep(delay_time)
+                sql_injection_basic_detection(form_in_response, form_details)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
