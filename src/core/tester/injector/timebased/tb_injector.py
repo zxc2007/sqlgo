@@ -46,7 +46,7 @@ try:
 except:
     import urlparse
 
-from tampers.maintamper import apply_tamper
+from tampers.maintamper import applyTamper
 
 def injection_test(payload, url, http_request_method="POST"):
 
@@ -104,7 +104,7 @@ def injection_test_is_vuln_time_based(url=arg.url):
         logger.info(_imsg)
         return
     for _payload in time_based_payload().split("\n"):
-        payload = apply_tamper(_payload)
+        payload = applyTamper(_payload)
         _inj = injection_test(payload=_payload,url=url)
         assert isinstance(_inj,tuple), tuple(_inj)
         logger.debug(settings.TESTING_TIME_BASED_ADVANCED_AGAINST%url)

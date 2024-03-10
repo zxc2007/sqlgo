@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from bs4 import BeautifulSoup
 
-def get_form_from_response(response_content):
+def getFormFromResponse(response_content):
     # Create a BeautifulSoup object from the response content
     soup = BeautifulSoup(response_content, 'html.parser')
 

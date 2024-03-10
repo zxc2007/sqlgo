@@ -34,10 +34,10 @@ import urllib.request
 import urllib.parse
 import lib.core.setting.setting as settings
 from lib.logger.log import logger
-from lib.core.tester.detector import sql_injection_basic_detection
+from lib.core.tester.detector import sqlInjectionBasicDetection
 from extra.bs4funs import get_form_from_response
 from extra.bs4funs import *  # Import the missing function
-from lib.core.tester.XSSfuns import get_all_forms, get_form_details
+from lib.core.tester.XSSfuns import getAllForms, 
 import random
 from extra.useragents import useragents
 from thirdparty.colorama import Fore,init

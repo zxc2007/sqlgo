@@ -52,12 +52,12 @@ from src.core.payloads.makesetsqlpayload import make_set_sql_payload
 from src.core.payloads.timebased import time_based_payload
 from src.core.payloads.unionpayload import union_payload
 from src.logger.log import logger
-from src.core.tester.XSSfuns import get_form_details
-from src.core.tester.detector import sql_injection_basic_detection 
+from src.core.tester.XSSfuns import getFormDetails
+from src.core.tester.detector import sqlInjectionBasicDetection 
 import traceback
-from src.core.tester.XSSfuns import get_all_forms
-from src.core.tester.XSSfuns import get_form_details,submit_form
-from extras.bs4funs import get_form_from_response
+from src.core.tester.XSSfuns import getAllForms
+from src.core.tester.XSSfuns import getFormDetails,submitForm
+from extras.bs4funs import getFormFromResponse
 from src.core.request.parameters import get_url_part
 from src.core.request.agent import header
 from src.core.request.proxy.proxy import use_proxy,set_proxy
@@ -66,7 +66,7 @@ from src.core.parser.cmdline import proxy_server
 from src.core.enums.payloads import Payload
 from src.core.parser.cmdline import user_proxy
 from src.core.payloads.blindbased import BlindBased
-from tampers.maintamper import apply_tamper
+from tampers.maintamper import applyTamper
 from src.core.parser.cmdline import tamper
 from src.core.tester.injector.checks import newline_fixation
 from src.core.tester.injector.parameters import get_url_part
@@ -168,7 +168,7 @@ def time_based_inejction(url,payload=True,isauto=True):
     _time_based = Tree("time_based")
 
     try:
-        forms = get_all_forms(url)
+        forms = getAllForms(url)
 
         for form in forms:
             form_data = {}
@@ -178,7 +178,7 @@ def time_based_inejction(url,payload=True,isauto=True):
 
             for _payload in time_based_payload().split("\n"):
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                    _payload = apply_tamper(_payload)
+                    _payload = applyTamper(_payload)
  
 
                     logger.debug(settings.TESTING_INJECTABLE_AREAS_ON_HTML_FORM%line)
@@ -197,18 +197,18 @@ def time_based_inejction(url,payload=True,isauto=True):
                     _time_based.add_child(Tree(response),Tree(response_content))
 
 
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                    form_in_response = getFormFromResponse(response_content)
+                    form_details = getFormDetails(form_in_response)
                     logger.debug(settings.READING_FORM_OF_HTML)
 
                     if is_sql_injection_vulnerable(response_content):
                         logger.warning("Potential sql injection detected!!!")
-                        sql_injection_basic_detection(form_in_response, form_details)
+                        sqlInjectionBasicDetection(form_in_response, form_details)
                         logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION%url)
                     else:
                         if _ < 1:
                             logger.critical("No injectable areas found on the target")
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                             _ += 1
 
 
@@ -241,7 +241,7 @@ def make_set_sql_injection(url,random_header=False):
     _ = 0
     try:
         url = get_url_part(url=url)
-        forms = get_all_forms(url)
+        forms = getAllForms(url)
         logger.debug(settings.CTREATED_FROM_FOR_INJECTION%forms)
 
         for form in forms:
@@ -251,7 +251,7 @@ def make_set_sql_injection(url,random_header=False):
                 logger.debug(settings.GOT_INPUT_FIELD%input_field)
 
             for _payload in make_set_sql_payload().split("\n"):
-                _payload = apply_tamper(_payload)
+                _payload = applyTamper(_payload)
                 logger.info("testing : %s"%Payload.MAKE_SET.value)
                 for line in settings.INJECTABLE_ARES_ON_THE_FORM:
                     form_data_copy = form_data.copy()
@@ -282,13 +282,13 @@ def make_set_sql_injection(url,random_header=False):
                     response_content = response.read()
                     _make_set.add_child(Tree(response))
 
-                    form_in_response = get_form_from_response(response_content)
-                    form_details = get_form_details(form_in_response)
+                    form_in_response = getFormFromResponse(response_content)
+                    form_details = getFormDetails(form_in_response)
                     logger.debug(settings.READING_FORM_OF_HTML+settings.CRAFTING_FORM_IN_DETAILS)
 
                     if is_sql_injection_vulnerable(response_content):
                         logger.warning("Potential SQL injection detected!!!")
-                        sql_injection_basic_detection(form_in_response, form_details)
+                        sqlInjectionBasicDetection(form_in_response, form_details)
                         logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION+"sql injection vulnerability already exists in the url %s"%url)
                     else:
                         if _ < 1:
@@ -313,7 +313,7 @@ def union_based_injection(url):
     _union_based = Tree("union_based")
     for __ in union_payload().split("\n"):
         try:
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             logger.debug(settings.CTREATED_FROM_FOR_INJECTION%""+"testing : possible parameters on the received form.")
             for form in forms:
                 form_data = {}
@@ -322,7 +322,7 @@ def union_based_injection(url):
                 for _payload in union_payload().split("\n"):
 
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        _payload = apply_tamper(_payload)
+                        _payload = applyTamper(_payload)
 
                         logger.info("testing : %s"%Payload.UNION_ALL_SELECT.value)
                         form_data_copy = form_data.copy()
@@ -342,19 +342,19 @@ def union_based_injection(url):
                         response_content = response.read()
                         _union_based.add_child(Tree(response_content),Tree(response))
 
-                        form_in_response = get_form_from_response(response_content)
-                        form_details = get_form_details(form_in_response)
-                        sql_injection_basic_detection(form_in_response, form_details)
+                        form_in_response = getFormFromResponse(response_content)
+                        form_details = getFormDetails(form_in_response)
+                        sqlInjectionBasicDetection(form_in_response, form_details)
 
                         if is_sql_injection_vulnerable(response_content):
                             if beep:
                                 __import__("extra.beep.beep")
                             logger.warning("Potential sql injection detected!!!")
-                            # Call sql_injection_basic_detection with both parameters
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            # Call sqlInjectionBasicDetection with both parameters
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                     
                     return _union_based
                 
@@ -372,7 +372,7 @@ def mysql_blind_based_injection(url):
     _blind_based = Tree("blind_based")
     for __ in BlindBased.mysql_version_query().split("\n"):
         try:
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             logger.debug(settings.CRAFTING_FORM_IN_DETAILS+"created form of html from target %s"%url)
             for form in forms:
                 logger.debug(settings.INCLUDING_FORMS%form)
@@ -400,19 +400,19 @@ def mysql_blind_based_injection(url):
                         _blind_based.add_child(Tree(response_content))
 
 
-                        form_in_response = get_form_from_response(response_content)
-                        form_details = get_form_details(form_in_response)
-                        sql_injection_basic_detection(form_in_response, form_details)
+                        form_in_response = getFormFromResponse(response_content)
+                        form_details = getFormDetails(form_in_response)
+                        sqlInjectionBasicDetection(form_in_response, form_details)
 
                         if is_sql_injection_vulnerable(response_content):
                             if beep:
                                 __import__("extra.beep.beep")
                             logger.debug(settings.PERFORMING_SQL_INJECTION_DETECTION%url)
                             logger.warning("Potential sql injection detected!!!")
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                     
                     return _blind_based
 
@@ -430,7 +430,7 @@ def postgre_sql_blind_injection(url):
     _postgre = Tree("postgre")
     for __ in BlindBased.postgre_sql_payload_version_query().split("\n"):
         try:
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
 
             for form in forms:
                 form_data = {}
@@ -438,7 +438,7 @@ def postgre_sql_blind_injection(url):
                     form_data[input_field.get('name')] = input_field.get('value', '')
                 for _payload in BlindBased.postgre_sql_payload_version_query().split("\n"):
                     for line in settings.INJECTABLE_ARES_ON_THE_FORM:
-                        _payload = apply_tamper(_payload)
+                        _payload = applyTamper(_payload)
 
                         logger.info("testing : %s"%Payload.POSTGRE_SQL_VERSION_QUERY_BLIND_BASED.value)
                         form_data_copy = form_data.copy()
@@ -458,19 +458,19 @@ def postgre_sql_blind_injection(url):
                         _postgre.add_child(Tree(response_content))
                         logger.debug(settings.SENT_POST_REQUEST%url)
 
-                        form_in_response = get_form_from_response(response_content)
-                        form_details = get_form_details(form_in_response)
-                        sql_injection_basic_detection(form_in_response, form_details)
+                        form_in_response = getFormFromResponse(response_content)
+                        form_details = getFormDetails(form_in_response)
+                        sqlInjectionBasicDetection(form_in_response, form_details)
                         logger.debug("inspecting injection on %s"%form_details)
                         if is_sql_injection_vulnerable(response_content):
                             if beep:
                                 __import__("extra.beep.beep")
                             logger.warning("Potential sql injection detected!!!")
-                            # Call sql_injection_basic_detection with both parameters
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            # Call sqlInjectionBasicDetection with both parameters
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                         else:
                             logger.debug("No injectable areas found on the target via payload%s"%_payload)
-                            sql_injection_basic_detection(form_in_response, form_details)
+                            sqlInjectionBasicDetection(form_in_response, form_details)
                     
                     return _postgre
                 
@@ -582,7 +582,7 @@ def error_based_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             _ = update_url(url,_payload)
             __url = _
             if "http" not in __url:
@@ -596,7 +596,7 @@ def error_based_url_replace(url):
             logger.debug(response.text if verbose >= 5 else "")
             logger.info("testing :%s"%Payload.ERROR_BASED.value+"\033[1mReplacing the url\033[0m")
 
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -612,10 +612,10 @@ def error_based_url_replace(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -637,8 +637,8 @@ def error_based_url_replace(url):
 
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
                     time.sleep(delay_time)
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
         except Exception as e:
             count = 0
             if any(["HTTPConnectionPool" in str(e)]):
@@ -656,7 +656,7 @@ def time_based_url_replace(url):
 
 
 
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             _ = update_url(url,_payload)
 
             __url = _
@@ -668,7 +668,7 @@ def time_based_url_replace(url):
             logger.info("testing :%s"%Payload.TIME_BASED.value+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -684,17 +684,17 @@ def time_based_url_replace(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
 
                     logger.warning("Potential sql injection detected!!!")
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     config.possibleDbms = whatDbms(response_content)
                     if config.possibleDbms is not None:
                         dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -731,7 +731,7 @@ def make_set_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             print(PAYLOAD_SENDING.SENDING.format(_payload if verbose >= 3 else ""))
             response = requests.get(__url)
 
@@ -740,7 +740,7 @@ def make_set_url_replace(url):
             logger.info("testing :%s"%Payload.MAKE_SET.value+"\033[1mReplacing the url\033[0m")
 
             logger.debug(response.text)
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -756,15 +756,15 @@ def make_set_url_replace(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
                     logger.info(dbmsMsg%config.possibleDbms)
                     time.sleep(delay_time)
                 try:
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                 except requests.exceptions.MissingSchema as exc:
                     logger.debug("missing schema %s"%exc)
                 if is_sql_injection_vulnerable(response_content):
@@ -777,7 +777,7 @@ def make_set_url_replace(url):
                     logger.warning("payload:%s"%_payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                     conf.keyword = extract_some_keyword(__url)
@@ -796,7 +796,7 @@ def union_based_url_replace(url):
         try:
 
 
-            _payload = apply_tamper(payload )
+            _payload = applyTamper(payload )
             print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
 
             _ = update_url(url,_payload)
@@ -808,7 +808,7 @@ def union_based_url_replace(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT.value+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -822,10 +822,10 @@ def union_based_url_replace(url):
                         break
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -846,8 +846,8 @@ def union_based_url_replace(url):
                     conf.vuln = True
                     time.sleep(delay_time)
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
@@ -865,7 +865,7 @@ def stack_query(url):
 
     for payload in IOFileReader.payload("stack_q.txt").split("\n"):
         try:
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
 
             _ = update_url(url,_payload)
@@ -877,7 +877,7 @@ def stack_query(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.STACK_Q.value+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -893,10 +893,10 @@ def stack_query(url):
                 if response.status_code == 500:
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -917,8 +917,8 @@ def stack_query(url):
                     conf.vuln = True
                     time.sleep(delay_time)
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     __import__("extras.beep.beep")
                 
 
@@ -936,7 +936,7 @@ def error_boolean(url):
     for payload in IOFileReader.payload("error_boolean.txt").split("\n"):
         try:
 
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             _ = update_url(url,_payload)
             __url = _
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
@@ -948,7 +948,7 @@ def error_boolean(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.ERROR_BOOL.value+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -964,10 +964,10 @@ def error_boolean(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
                 config.possibleDbms = whatDbms(response_content)
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
                     logger.info(dbmsMsg%config.possibleDbms)
@@ -986,8 +986,8 @@ def error_boolean(url):
                     conf.vuln = True
                     time.sleep(delay_time)
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
@@ -1005,7 +1005,7 @@ def inline(url):
 
     for payload in IOFileReader.payload("inline.txt").split("\n"):
         try:
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             _ = update_url(url,_payload)
             __url = _
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
@@ -1017,7 +1017,7 @@ def inline(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.INLINE_Q.value+"\033[1mReplacing the url\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -1033,10 +1033,10 @@ def inline(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -1057,8 +1057,8 @@ def inline(url):
                     conf.vuln = True
                     time.sleep(delay_time)
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
@@ -1080,7 +1080,7 @@ def time_based_heavy_q(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(payload)
+            _payload = applyTamper(payload)
             _ = update_url(url,_payload)
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
@@ -1090,7 +1090,7 @@ def time_based_heavy_q(url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -1106,10 +1106,10 @@ def time_based_heavy_q(url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -1130,8 +1130,8 @@ def time_based_heavy_q(url):
                     conf.vuln = True
                     time.sleep(delay_time)
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                 
@@ -1152,7 +1152,7 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            _payload = apply_tamper(sql)
+            _payload = applyTamper(sql)
             _ = update_url(url,_payload)
             print(PAYLOAD_SENDING.SENDING.format(sql if verbose >= 3 else ""))
 
@@ -1163,7 +1163,7 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
             logger.debug(response.text if verbose >= 5 else "")
-            forms = get_all_forms(url)
+            forms = getAllForms(url)
             for form in forms:
                 form_data = {}
                 for input_field in form.find_all('input'):
@@ -1179,10 +1179,10 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                     logger.warning("The server has encountered status code error 500.this might be a sql injection vulnerability on %s,this can also occur due to the server erros.if you believe that this is a WAF/IPS protection, you can use advacned tools or use proxy chains."%url)
 
                 response_content = response.text
-                form_in_response = get_form_from_response(response_content)
-                form_details = get_form_details(form_in_response)
+                form_in_response = getFormFromResponse(response_content)
+                form_details = getFormDetails(form_in_response)
 
-                sql_injection_basic_detection(form_in_response, form_details)
+                sqlInjectionBasicDetection(form_in_response, form_details)
                 config.possibleDbms = whatDbms(response_content)
                 if config.possibleDbms is not None:
                     dbmsMsg = "it looks like the back-end DBMS is %s"
@@ -1203,8 +1203,8 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                     time.sleep(delay_time)
                 
 
-                    # Call sql_injection_basic_detection with both parameters
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    # Call sqlInjectionBasicDetection with both parameters
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
                 

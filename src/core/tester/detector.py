@@ -31,7 +31,7 @@ res = None
 
 from src.core.tester.vuln import *
 from src.logger.log import logger
-def sql_injection_basic_detection(form_soup, form_details):
+def sqlInjectionBasicDetection(form_soup, form_details):
     global res
     for i in "\"'":
         data = {}
