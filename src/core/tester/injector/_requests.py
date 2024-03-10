@@ -86,7 +86,9 @@ from sqlmap.lib.core.data import conf
 from src.core.common.common import IOFileReader
 from extras.error import errors
 from src.core.tester.prompts import parameter
-from src.data import arg
+from src.data import arg,config
+from src.core.enums.enums import DBMS
+from src.core.common.common import whatDbms
 import re
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
@@ -614,6 +616,11 @@ def error_based_url_replace(url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    time.sleep(delay_time)
+                    logger.info(dbmsMsg%config.possibleDbms)
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
@@ -688,6 +695,11 @@ def time_based_url_replace(url):
                     logger.warning("Potential sql injection detected!!!")
                     # Call sql_injection_basic_detection with both parameters
                     sql_injection_basic_detection(form_in_response, form_details)
+                    config.possibleDbms = whatDbms(response_content)
+                    if config.possibleDbms is not None:
+                        dbmsMsg = "it looks like the back-end DBMS is %s"
+                        logger.info(dbmsMsg%config.possibleDbms)
+                        time.sleep(delay_time)
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s get parameter is %s injectable"%(parameter,"time based Sql query"))
@@ -746,6 +758,11 @@ def make_set_url_replace(url):
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
                 form_details = get_form_details(form_in_response)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 try:
                     sql_injection_basic_detection(form_in_response, form_details)
                 except requests.exceptions.MissingSchema as exc:
@@ -809,6 +826,11 @@ def union_based_url_replace(url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
@@ -875,6 +897,11 @@ def stack_query(url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
@@ -939,8 +966,12 @@ def error_boolean(url):
                 response_content = response.text
                 form_in_response = get_form_from_response(response_content)
                 form_details = get_form_details(form_in_response)
-
+                config.possibleDbms = whatDbms(response_content)
                 sql_injection_basic_detection(form_in_response, form_details)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     __import__("extras.beep.beep")
@@ -1006,6 +1037,11 @@ def inline(url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
@@ -1074,6 +1110,11 @@ def time_based_heavy_q(url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
@@ -1142,6 +1183,11 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                 form_details = get_form_details(form_in_response)
 
                 sql_injection_basic_detection(form_in_response, form_details)
+                config.possibleDbms = whatDbms(response_content)
+                if config.possibleDbms is not None:
+                    dbmsMsg = "it looks like the back-end DBMS is %s"
+                    logger.info(dbmsMsg%config.possibleDbms)
+                    time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:

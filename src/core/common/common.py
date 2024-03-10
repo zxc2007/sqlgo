@@ -27,8 +27,10 @@ import string
 import glob
 import os
 import re
+sys.path.append(os.getcwd())
 from sqlmap.lib.core.common import setColor
-from src.data import arg
+from src.data import arg,config
+from src.core.enums.enums import DBMS
 import json
 
 
@@ -153,4 +155,15 @@ def read_input(msg, default=None, boolean=False,options=[]):
             pass
 
     return retVal
+
+def whatDbms(response):
+    try:
+        dbmsVars = vars(DBMS)
+        for dbmsVar in dbmsVars.values():
+            if re.search(dbmsVar, response, re.IGNORECASE):
+                return dbmsVar
+    
+    except TypeError:
+        return
+        
 

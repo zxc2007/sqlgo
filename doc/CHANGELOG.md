@@ -30,3 +30,6 @@
 # 1.3.13.5
 
 *Upgraded some dumping actions and tamper scripts*
+
+# 1.3.14.0
+*Added auto DBMS detection*
