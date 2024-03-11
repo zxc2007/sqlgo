@@ -27,10 +27,11 @@ import string
 import glob
 import os
 import re
+from src.logger.log import logger
+
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
-from src.logger.log import logger
 import json
 
 
