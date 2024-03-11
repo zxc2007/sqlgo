@@ -29,7 +29,7 @@ except ImportError:
     import sys
     sys.exit("[!]wrong installation Detected,(missing thirdparty modules).please run python3 -m pip install -r requirements.txt")
 except KeyboardInterrupt:
-    print("[!]Operation canceled by user.")
+    print("[CRITICAL] user aborted")
     raise SystemExit
 try:
     from six.moves import range
@@ -45,7 +45,7 @@ try:
     from extras.update import update_from_git
     from src.core.parser.cmdline import api
 except KeyboardInterrupt:
-    print("Operation canceled by user.")
+    print("[CRITICAL] user aborted")
     raise SystemExit
 
 if api.updates:
@@ -72,7 +72,7 @@ try:
     import warnings
     from src.core.controler.checker import start
 except KeyboardInterrupt:
-    print("Operation canceled by user.")
+    print("[CRITICAL] user aborted")
     raise SystemExit
 
 try:
@@ -95,7 +95,7 @@ def main():
         gather_exploit()
     
     except KeyboardInterrupt:
-        logger.error("[!]User exit")
+        logger.error("[CRITICAL] user aborted")
         raise SystemExit
     except Exception as _errmsg:
         errmsg = str(_errmsg)
