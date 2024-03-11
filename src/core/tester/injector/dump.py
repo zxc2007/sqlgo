@@ -446,7 +446,7 @@ def get_databases():
 		if arg.tables:
 			_ = iter(database_list.keys())
 			get_tables(next(_))
-			return
+			raise SystemExit
 		_ = iter(database_list.keys())
 		get_tables(next(_))
 		
