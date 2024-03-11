@@ -22,9 +22,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import time
 import os
 import sys
+from src.core.Exceptions.exceptions import SQLGOBeepSoundException
 
-import soundfile as sf
-import sounddevice as sd
+import pygame
 
 def find_beep_wav():
     module_directory = os.path.dirname(os.path.abspath(__file__))
@@ -32,14 +32,15 @@ def find_beep_wav():
     return beep_wav_path if os.path.exists(beep_wav_path) else None
 
 def beep():
+    pygame.mixer.init()
+    beep_wav_path = find_beep_wav()
 
-    def play_sound(file_path):
-        data, fs = sf.read(file_path, dtype='float32')
-        sd.play(data, fs)
-        sd.wait()
-
-    # Replace 'your_sound_file.wav' with the path to your .wav file
-    play_sound(find_beep_wav())
+    if beep_wav_path:
+        sound = pygame.mixer.Sound(beep_wav_path)
+        sound.play()
+        time.sleep(0.5)  # Adjust the sleep time as needed
+    else:
+        raise SQLGOBeepSoundException
 
 if __name__ != '__main__':
     beep()
