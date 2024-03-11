@@ -104,6 +104,7 @@ class Cmdline:
         Target.add_argument("--xss",help="Use xss attack payloads while sending the requests",required=False,action="store_true")
         Enumeration.add_argument("--sql-query",help="Execute specific SQL queries",required=False,type=str)
         Detection.add_argument("--random-tamper",help="Use a random tamper script each time",required=False,action="store_true")
+        Enumeration.add_argument("--no-dump-again",help="Do not dump the databases again after the first try,exit immediately",required=False,action="store_true")
         args = parser.parse_args()
         return args
 
@@ -175,6 +176,7 @@ def extract():
     sql_query = args.sql_query
     random_tamper = args.random_tamper
     schema = args.schema
+    no_try_again = args.no_dump_again
     return (
         output,
         verbose,
@@ -232,7 +234,8 @@ def extract():
         xss,
         sql_query,
         random_tamper,
-        schema
+        schema,
+        no_try_again
     )
 
 
@@ -346,6 +349,7 @@ try:
     arg.sqlQuery = result[54]
     arg.randomTamper = result[55]
     arg.schema = result[56]
+    arg.noDumpAgain = result[57]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 
