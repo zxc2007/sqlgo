@@ -85,13 +85,13 @@ def save(table = ""):
 			for data in dump_array:
 				handler.write(data + "\n")
 			handler.close()
-			print(prefix + "Dump saved to: " + path)
+			print("Dump saved to: " + path)
 			print()
 			return
 		except:
-			print(prefix + "[-] Error while saving dump .. ")
+			print("[-] Error while saving dump .. ")
 			if not arg.batch:
-				path = input(prefix + "Enter other path to save dump: ")
+				path = input("Enter other path to save dump: ")
 			else:
 				path = "dumps"
 def debug(text,filename):
@@ -107,7 +107,7 @@ def get_ip():
 			ip_address = urllib.request.urlopen("http://canihazip.com/s").read()
 		else:
 			ip_address = "127.0.0.1"
-		print(prefix + "Your IP Address: " + ip_address)
+		print("Your IP Address: " + ip_address)
 	except Exception as e:
 		print(str(e))
 
@@ -117,7 +117,7 @@ def confirm_proxy():
 		result = s.connect_ex((socks5_host, socks5_port))
 		s.close()
 		if result > 0:
-			print(prefix + "Could not connect to proxy!")
+			print("Could not connect to proxy!")
 			exit()
 			
 def get_link():
@@ -313,16 +313,16 @@ def check_type():
 	#Test Union
 	if check_union():
 		types += "1"
-		logger.info(prefix + "Vulnerable: Union-Based Injection (" + str(column_vulnerable) + "/" + str(column_count) + ")")
+		logger.info("Vulnerable: Union-Based Injection (" + str(column_vulnerable) + "/" + str(column_count) + ")")
 	else:
-		logger.critical(prefix + "Failed: Union-Based Injection")
+		logger.critical("Failed: Union-Based Injection")
 	
 	#Test Error
 	if check_error():
 		types += "2"
-		logger.info(prefix + "[+] Vulnerable: Error-Based Injection")
+		logger.info("[+] Vulnerable: Error-Based Injection")
 	else:
-		logger.critical(prefix + "[-] Failed: Error-Based Injection")
+		logger.critical("[-] Failed: Error-Based Injection")
 
 def temp_clear():
 	temp_array.clear()
@@ -349,31 +349,31 @@ def get_info():
 	print()
 	
 	if re.search("~~(.*?)~~",temp_array[1]):
-		print(prefix + "[i] DB Name:   " + re.search("~~(.*?)~~", temp_array[1]).groups()[0])
+		print("[i] DB Name:   " + re.search("~~(.*?)~~", temp_array[1]).groups()[0])
 	else:
-		print(prefix + "[-] DB Name:   Failed")
+		print("[-] DB Name:   Failed")
 		
 	if re.search("~~(.*?)~~",temp_array[2]):
-		print(prefix + "[i] Version:   " + re.search("~~(.*?)~~", temp_array[2]).groups()[0])
+		print("[i] Version:   " + re.search("~~(.*?)~~", temp_array[2]).groups()[0])
 	else:
-		print(prefix + "[-] Version:   Failed")
+		print("[-] Version:   Failed")
 	
 	if re.search("~~(.*?)~~",temp_array[3]):
-		print(prefix + "[i] Username:  " + re.search("~~(.*?)~~", temp_array[3]).groups()[0])
+		print("[i] Username:  " + re.search("~~(.*?)~~", temp_array[3]).groups()[0])
 	else:
-		print(prefix + "[-] Username:  Failed")
+		print("[-] Username:  Failed")
 	
 	if re.search("~~(.*?)~~",temp_array[4]):
-		print(prefix + "[i] File_Priv: " + re.search("~~(.*?)~~", temp_array[4]).groups()[0])
+		print("[i] File_Priv: " + re.search("~~(.*?)~~", temp_array[4]).groups()[0])
 	else:
-		print(prefix + "[-] File_Priv: Failed")
+		print("[-] File_Priv: Failed")
 	
 	if re.search("~~(.*?)~~",temp_array[5]):
-		print(prefix + "[i] Tables:    " + re.search("~~(.*?)~~", temp_array[5]).groups()[0])
+		print("[i] Tables:    " + re.search("~~(.*?)~~", temp_array[5]).groups()[0])
 		if arg.schema:
 			raise SystemExit
 	else:
-		print(prefix + "[-] Tables:    Failed")
+		print("[-] Tables:    Failed")
 		if arg.schema:
 			raise SystemExit
 	
@@ -390,9 +390,9 @@ def get_databases():
 		count = 0
 		if re.search("~~(.*?)~~", temp):
 			count = int(re.search("~~(.*?)~~", temp).groups()[0])
-			logger.info(prefix + "retrieved databases: (" +  str(len(temp_array)) + "/" + str(count) + ")")
+			logger.info("retrieved databases: (" +  str(len(temp_array)) + "/" + str(count) + ")")
 		else:
-			logger.error(prefix + "Could not get databases, exiting .. ")
+			logger.error("Could not get databases, exiting .. ")
 			print()
 			exit()
 		print()
@@ -414,7 +414,7 @@ def get_databases():
 					if running_thread.is_alive():
 						running_thread.join()
 				clear()
-				logger.info(prefix + "[i] retrieving database: (" +  str(len(temp_array)) + "/" + str(count) + ")")
+				logger.info("[i] retrieving database: (" +  str(len(temp_array)) + "/" + str(count) + ")")
 				thread.start()
 				threads_running = 1
 				
@@ -433,14 +433,14 @@ def get_databases():
 				count += 1
 	else:
 		for key, value in database_list.items() :
-			logger.info(prefix + str(key) + "\t" + value)
+			logger.info(str(key) + "\t" + value)
 	print()
 	temp_clear()
 	if not arg.batch:
 		if arg.tables:
-			get_tables(input(prefix + "Insert database id to continue: "))
+			get_tables(input("Insert database id to continue: "))
 			return
-		get_tables(input(prefix + "Insert database id to continue: "))
+		get_tables(input("Insert database id to continue: "))
 		return
 	else:
 		if arg.tables:
@@ -477,13 +477,13 @@ def get_tables(database_id):
 			if count == 0:
 				clear()
 				if not arg.batch:
-					input(prefix + "No tables found, press enter to return .. ")
+					input("No tables found, press enter to return .. ")
 				get_databases()
 				return
 			
-			logger.info(prefix + "Retrieved table: (" +  str(len(temp_array)) + "/" + str(count) + ")")
+			logger.info("Retrieved table: (" +  str(len(temp_array)) + "/" + str(count) + ")")
 		else:
-			print(prefix + "[-] Could not get tables, exiting .. ")
+			print("[-] Could not get tables, exiting .. ")
 			print()
 			exit()
 		print()
@@ -505,7 +505,7 @@ def get_tables(database_id):
 					if running_thread.is_alive():
 						running_thread.join()
 				clear()
-				logger.info(prefix + "[i] retrieved table: (" +  str(len(temp_array)) + "/" + str(count) + ")")
+				logger.info("[i] retrieved table: (" +  str(len(temp_array)) + "/" + str(count) + ")")
 				thread.start()
 				threads_running = 1
 				
@@ -520,12 +520,12 @@ def get_tables(database_id):
 				if re.search("~~(.*?)~~", value):
 					table = re.search("~~(.*?)~~", value).groups()[0]
 					table_list[database_id][count] = table
-					logger.info(prefix +"retrieved"+ str(count) + "\t" + table_list[database_id][count])
+					logger.info("retrieved"+ str(count) + "\t" + table_list[database_id][count])
 				count += 1
 	else:
 		tables = table_list[database_id]
 		for key, value in tables.items():
-			logger.info(prefix + "retrieved:"+str(key) + "\t" + value)
+			logger.info("retrieved:"+str(key) + "\t" + value)
 
 	print()
 	temp_clear()
@@ -533,7 +533,7 @@ def get_tables(database_id):
 	
 def get_columns(database_id):
 	if not arg.batch:
-		table_id = input(prefix + "Insert table id to continue: ")
+		table_id = input("Insert table id to continue: ")
 	else:
 		table_id = iter(table_list[database_id].keys())
 		table_id = next(table_id)
@@ -556,12 +556,12 @@ def get_columns(database_id):
 			count = int(re.search("~~(.*?)~~", temp).groups()[0])
 			if count == 0:
 				clear()
-				input(prefix + "No columns found, press enter to return .. ")
+				input("No columns found, press enter to return .. ")
 				get_databases(database_id)
 				return
-			print(prefix + "[i] Gathering column names (" +  str(len(temp_array)) + "/" + str(count) + ")")
+			print("[i] Gathering column names (" +  str(len(temp_array)) + "/" + str(count) + ")")
 		else:
-			print(prefix + "[-] Could not get columns, exiting .. ")
+			print("[-] Could not get columns, exiting .. ")
 			print()
 			exit()
 		print()
@@ -583,7 +583,7 @@ def get_columns(database_id):
 					if running_thread.is_alive():
 						running_thread.join()
 				clear()
-				logger.info(prefix + "Gathering column names (" +  str(len(temp_array)) + "/" + str(count) + ")")
+				logger.info("Gathering column names (" +  str(len(temp_array)) + "/" + str(count) + ")")
 				thread.start()
 				threads_running = 1
 				
@@ -598,17 +598,17 @@ def get_columns(database_id):
 				if re.search("~~(.*?)~~", value):
 					column = re.search("~~(.*?)~~", value).groups()[0]
 					column_list[table_id][count] = column
-					print(prefix + str(count) + "\t" + column_list[table_id][count])
+					print(str(count) + "\t" + column_list[table_id][count])
 				count += 1
 	else:
 		columns = column_list[table_id]
 		for key, value in columns.items():
-			print(prefix + str(key) + "\t" + value)
+			print(str(key) + "\t" + value)
 
 	print()
 	temp_clear()
 	if not arg.batch:
-		column_ids = input(prefix + "Insert column id to dump: ")
+		column_ids = input("Insert column id to dump: ")
 			
 	else:
 		column_ids = iter(column_list[table_id].keys())
@@ -660,14 +660,14 @@ def dump(column_names,table_name,database_name,database_id):
 		if count == 0:
 			clear()
 			if not arg.batch:
-				input(prefix + "No rows to dump, press enter to return .. ")
+				input("No rows to dump, press enter to return .. ")
 				return
 			get_tables(database_id)
 			return
-		logger.info(prefix + "Retrieving: " + str(len(dump_array)) + "/" + str(count))
+		logger.info("Retrieving: " + str(len(dump_array)) + "/" + str(count))
 		
 	else:
-		logger.warning(prefix + " Could not get rows, exiting .. ")
+		logger.warning(" Could not get rows, exiting .. ")
 		print()
 		exit()
 	print()
@@ -692,7 +692,7 @@ def dump(column_names,table_name,database_name,database_id):
 			for item in dump_array:
 				print(prefix + item)
 			print()
-			print(prefix + "[i] Retrieving: " + str(len(dump_array)) + "/" + str(count))
+			print("[i] Retrieving: " + str(len(dump_array)) + "/" + str(count))
 			
 			thread.start()
 			threads_running = 1
@@ -719,18 +719,18 @@ def main():
 	get_ip()
 	get_link()
 	clear()
-	logger.info(prefix + "Starting dumping process .. ")
+	logger.info("Starting dumping process .. ")
 	is_int = check_int()
-	logger.info(prefix + "[i] Integer: " + str(is_int))
+	logger.info("[i] Integer: " + str(is_int))
 	check_type()
 	if types:
 		get_info()
 	else:
-		logger.critical(prefix + "Could not find vulnerabilities while dumping databases, exiting .. ")
+		logger.critical("Could not find vulnerabilities while dumping databases, exiting .. ")
 		print()
 		exit()
 	if not arg.batch:
-		input(prefix + "Press enter to get databases .. ")
+		input("Press enter to get databases .. ")
 	else:
 		get_databases()
 
