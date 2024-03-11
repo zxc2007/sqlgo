@@ -79,6 +79,13 @@ class _IOFileReader(object):
 
 
 class IOFileReader(object):
+    """
+    Reads the payloads file and returns the content of the payloads file
+    Usage:
+    >>> with open(IOFileReader("error_boolean.txt")) as file:
+        ... 'AND 1=1'
+        
+    """
     
     @classmethod
     def payload(cls,_file):   
