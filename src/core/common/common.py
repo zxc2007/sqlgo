@@ -27,7 +27,6 @@ import string
 import glob
 import os
 import re
-sys.path.append(os.getcwd())
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS

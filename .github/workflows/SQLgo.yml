@@ -8,6 +8,9 @@ on:
 jobs:
   run_python:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11','3.12']
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -15,16 +18,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Change this to the Python version you're using
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # If you have any requirements
-      
-      - name : Try update sqlgo
+
+      - name: Try updating sqlgo
         run: |
-            python sqlgo.py --update
+          python sqlgo.py --update
 
       - name: Run Python script
-        run: python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query  --level=5 --delay-time=1 --random-tamper --dump --batch --tables
+        run: |
+          python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --level=5 --delay-time=1 --random-tamper --dump --batch --tables --skip-basic
