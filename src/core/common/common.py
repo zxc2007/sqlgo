@@ -27,7 +27,6 @@ import string
 import glob
 import os
 import re
-from src.logger.log import logger
 
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
@@ -185,7 +184,7 @@ def _wizardInterfaceSetup():
     """
     Setup wizard interface
     """
-    logger.info("starting wizard interface")
+    print("starting wizard interface")
     inputMsg = "Please enter full target url(-u/--url)"
     url = readInput(inputMsg, default=arg.url)
     if url is not None:
