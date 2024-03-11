@@ -140,10 +140,11 @@ if __name__ == "__main__":
         raise
     except KeyboardInterrupt:
         pass
-
     except ModuleNotFoundError:
         pass
     except SyntaxError:
+        pass
+    except ConnectionRefusedError:
         pass
 
     except:
