@@ -30,6 +30,7 @@ import re
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
+from src.logger.log import logger
 import json
 
 
@@ -84,7 +85,7 @@ class IOFileReader(object):
     Usage:
     >>> with open(IOFileReader("error_boolean.txt")) as file:
         ... 'AND 1=1'
-        
+
     """
     
     @classmethod
@@ -122,7 +123,7 @@ def _listTamperingFunctions():
                 comment = match.group(1).strip()
                 print("* %s - %s\n" % (setColor(os.path.basename(script), "yellow"), re.sub(r" *\n *", " ", comment.split("\n\n")[0].strip())))
 
-def read_input(msg, default=None, boolean=False,options=[]):
+def readInput(msg, default=None, boolean=False,options=[]):
     """
     A function to read input from the stream.
     *Note:first option of the list the the default value 
@@ -179,4 +180,33 @@ def whatDbms(response):
         return
         
 
+def _wizardInterfaceSetup():
+    """
+    Setup wizard interface
+    """
+    logger.info("starting wizard interface")
+    inputMsg = "Please enter full target url(-u/--url)"
+    url = readInput(inputMsg, default=arg.url)
+    if url is not None:
+        arg.url = url
+    difMsg = "Injection difficulty (--level). Please choose:"
+    level = readInput(difMsg, default=arg.level)
+    if level is not None:
+        arg.level = level
+    
+    enumerationMsg = "Enumeration (--banner/--current-user/etc). Please choose:"
+    enumeration = readInput(enumerationMsg, default="tables")
+    if enumeration is not None:
+        if enumeration == "tables":
+            arg.tables = True
+        elif enumeration == "columns":
+            arg.columns = True
+        elif enumeration == "dbs":
+            arg.dbs = True
+        elif enumeration == "schema":
+            arg.schema = True
+        elif enumeration == "dump":
+            arg.dump = True
+            
 
+    
