@@ -156,6 +156,12 @@ def read_input(msg, default=None, boolean=False,options=[]):
     return retVal
 
 def whatDbms(response):
+    """
+    Tries to guess the DBMS by checking the response headers
+    Usage:
+    >>> whatDbms(response)
+    'MySQL'
+    """
     try:
         dbmsVars = vars(DBMS)
         for dbmsVar in dbmsVars.values():
@@ -165,4 +171,5 @@ def whatDbms(response):
     except TypeError:
         return
         
+
 
