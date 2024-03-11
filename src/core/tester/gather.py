@@ -77,7 +77,7 @@ from src.data import arg
 
 
 import urllib3
-def gather_exploit():
+def mainExploit():
     if "?" not in arg.url:
         cr_msg = "No get parameters has been set for injection test.\n example: https://test.php?id=1"
         logger.critical(cr_msg)

@@ -53,7 +53,7 @@ if api.updates:
     raise SystemExit
 try:
     from src.logger.log import logger
-    from src.core.tester.gather import gather_exploit
+    from src.core.tester.gather import mainExploit
     from src.checker.checks import check_version
     from extras.disclaimer import disclaimer
     try:
@@ -92,7 +92,7 @@ def main():
         print(settings.LEGAL_DISCLAIMER_MSG)
         print("[*]starting @ %s"%settings.formatted_datetime)
         check_version()
-        gather_exploit()
+        mainExploit()
     
     except KeyboardInterrupt:
         logger.error("[CRITICAL] user aborted")
