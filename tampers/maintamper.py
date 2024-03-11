@@ -90,7 +90,7 @@ from src.core.converts.hex import str_to_hex
 from src.data import arg
 from src.data import TAMPER_SCRIPTS
 
-def apply_tamper(payload,**kwargs):
+def applyTamper(payload,**kwargs):
     if arg.randomTamper:
         arg.tamper = random.choice(TAMPER_SCRIPTS)
     if arg.tamper == "base64":

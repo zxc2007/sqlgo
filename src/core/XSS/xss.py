@@ -34,13 +34,13 @@ except:
 
 from src.data import arg
 
-def get_all_forms(url):
+def getAllForms(url):
     """Given a `url`, it returns all forms from the HTML content"""
     soup = bs(requests.get(url).content,"html.parser")
     #NOTE : wemight need to use "html.parser"
     return soup.find_all("form")
 
-def get_form_details(form):
+def getFormDetails(form):
     """
     This function extracts all possible useful information about an HTML `form`
     """
@@ -61,7 +61,7 @@ def get_form_details(form):
     details["inputs"] = inputs
     return details
 
-def submit_form(form_details, url, value):
+def submitForm(form_details, url, value):
     """
     Submits a form given in `form_details`
     Params:
@@ -103,15 +103,15 @@ def scan_xss(url):
     returns True if any is vulnerable, False otherwise
     """
     # get all the forms from the URL
-    forms = get_all_forms(url)
+    forms = getAllForms(url)
     logger.info("[+] Detected %d forms on %s."%(len(forms),url))
     js_script = "<Script>alert('hi')</scripT>"
     # returning value
     is_vulnerable = False
     # iterate over all forms
     for form in forms:
-        form_details = get_form_details(form)
-        content = submit_form(form_details, url, js_script).content.decode()
+        form_details = getFormDetails(form)
+        content = submitForm(form_details, url, js_script).content.decode()
         if js_script in content:
             if arg.beep:
                 __import__("extra.beep.beep")

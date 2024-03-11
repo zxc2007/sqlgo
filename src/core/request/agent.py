@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import random
 import string
 
-def generate_user_agent():
+def generateUserAgent():
     browser = random.choice(["Chrome", "Firefox", "Safari", "Edge"])
     version = ".".join([str(random.randint(1, 15)) for _ in range(3)])
     platform = random.choice(["Windows", "Macintosh", "Linux"])
@@ -37,7 +37,7 @@ def generate_random_string(length):
 def generate_user_agent_headers(num_headers):
     user_agent_headers = []
     for _ in range(num_headers):
-        user_agent =  generate_user_agent()
+        user_agent =  generateUserAgent()
         user_agent_headers.append({"User-Agent": user_agent})
     return user_agent_headers
 

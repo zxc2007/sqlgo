@@ -37,12 +37,12 @@ from src.core.tester.vuln import vulnerable
 import re
 s = requests.session()
 
-def get_all_forms(url):
+def getAllForms(url):
     """Given a `url`, it returns all forms from the HTML content"""
     soup = bs(requests.get(url).content, "html.parser")
     return soup.find_all("form")
 
-def get_form_details(form):
+def getFormDetails(form):
     """
     This function extracts all possible useful information about an HTML `form`
     """
@@ -60,7 +60,7 @@ def get_form_details(form):
     details["inputs"] = inputs
     return details
 
-def submit_form(form_details, url, value):
+def submitForm(form_details, url, value):
     if "http" not in arg.url:
         url = re.sub(r'^(?!http)(.+)', r'http://\1', url)
     
@@ -92,13 +92,13 @@ def submit_form(form_details, url, value):
         return requests.get(target_url, params=data)
 
 def scan_xss(url):
-    forms = get_all_forms(url)
+    forms = getAllForms(url)
     logger.info("[+] Detected %d forms on %s."%(len(forms),url))
     js_script = "<script>alert('hi')</script>"
     is_vulnerable = False
     for form in forms:
-        form_details = get_form_details(form)
-        content = submit_form(form_details, url, js_script).content.decode()
+        form_details = getFormDetails(form)
+        content = submitForm(form_details, url, js_script).content.decode()
         if js_script in content:
             logger.warning("[+] XSS Detected on %s"%url)
             logger.info("[*] Form details:")
@@ -107,12 +107,12 @@ def scan_xss(url):
     return is_vulnerable
 
 res = None
-def sql_injection_basic_detection(url):
+def sqlInjectionBasicDetection(url):
     global res
-    forms = get_all_forms(url)
+    forms = getAllForms(url)
     print(len(forms))
     for form in forms:
-        form_details = get_form_details(form)
+        form_details = getFormDetails(form)
     
     for i in "\"'":
         data = {}

@@ -32,10 +32,10 @@ except:
 
 import src.core.setting.setting as settings
 from src.logger.log import logger
-from src.core.tester.detector import sql_injection_basic_detection
-from extras.bs4funs import get_form_from_response
+from src.core.tester.detector import sqlInjectionBasicDetection
+from extras.bs4funs import getFormFromResponse
 from extras.bs4funs import *  # Import the missing function
-from src.core.tester.XSSfuns import get_all_forms, get_form_details
+from src.core.tester.XSSfuns import getAllForms, getFormDetails
 import random
 from extras.useragents import useragents
 
@@ -67,9 +67,9 @@ class Crawler:
             return modified_url
 
     def user_agent_injection(self):
-        form_in_response = get_form_from_response(self._user_agent_injection())
-        form_details = get_form_details(form_in_response)
-        _ = sql_injection_basic_detection(form_details=form_details,form_soup="")
+        form_in_response = getFormFromResponse(self._user_agent_injection())
+        form_details = getFormDetails(form_in_response)
+        _ = sqlInjectionBasicDetection(form_details=form_details,form_soup="")
         if _ is False:
             logger.warning(settings.CRAWLING_TESTS_SHOWS_THAT_PARAMETER_MIGHT_NOT_BE_INJECTABLE%settings.HTTP_HEADERS[0])
             return False

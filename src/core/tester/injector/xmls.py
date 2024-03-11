@@ -30,9 +30,9 @@ except:
 from src.logger.log import logger
 from src.core.payloadgen import loadPayloads
 import src.core.setting.setting as settings
-from extras.bs4funs import get_form_from_response
-from src.core.tester.XSSfuns import get_all_forms,get_form_details
-from src.core.tester.detector import sql_injection_basic_detection
+from extras.bs4funs import getFormFromResponse
+from src.core.tester.XSSfuns import getAllForms,getFormDetails
+from src.core.tester.detector import sqlInjectionBasicDetection
 from src.core.tester.injector._requests import is_sql_injection_vulnerable
 from src.core.parser.cmdline import level
 
@@ -67,12 +67,12 @@ class XML:
 
                 if response.status_code == 200:
                     logger.info(settings.SUBMITTING_XML_INF_MSG%payload)
-                    form_in_response = get_form_from_response(response.text)
-                    form_details = get_form_details(form_in_response)
-                    sql_injection_basic_detection(form_in_response, form_details)
+                    form_in_response = getFormFromResponse(response.text)
+                    form_details = getFormDetails(form_in_response)
+                    sqlInjectionBasicDetection(form_in_response, form_details)
                     logger.info("Successfully sent XML payload to the website.")
                     logger.debug("Response:%s"% response.text)  
-                    if sql_injection_basic_detection(form_in_response, form_details) or level > 4:
+                    if sqlInjectionBasicDetection(form_in_response, form_details) or level > 4:
                         logger.info("sql injections might exists in response")
                         if is_sql_injection_vulnerable(form_in_response, form_details):
                             logger.warning("sql injection vulnerability probably exists")
