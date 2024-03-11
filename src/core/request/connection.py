@@ -73,7 +73,7 @@ def test_connection(url=arg.url, port=arg.port):
         logger.debug("Closing the test connection socket...")
         
     except socket.error as e:
-        logger.critical("Got error%s"%str(e))
+        logger.debug("Got error%s"%str(e))
 
 
         
