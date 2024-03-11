@@ -1,6 +1,7 @@
 bs4 
 termcolor
-pygame
+sounddevice
+soundfile
 urllib3
 charset_normalizer
 idna
