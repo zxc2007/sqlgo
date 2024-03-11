@@ -24,8 +24,7 @@ import sys
 
 import bs4 
 import termcolor
-import soundfile
-import sounddevice
+import pygame
 import urllib3
 if sys.version_info[0] > 2:
     import charset_normalizer
