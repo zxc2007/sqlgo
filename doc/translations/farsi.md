@@ -25,7 +25,7 @@ python -m pip install -r requires.txt
 python3 -m pip install-r requires.txt
 **برای سیستم های مبتنی بر یونیکس**
 
-https://github.com/HeisenbergCipherCracker/sqlgo/assets/97875042/af0aca77-f22b-4458-a340-342e98be78da
+
 
 **نمایش منوی راهنما**
 ```

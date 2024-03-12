@@ -42,20 +42,19 @@ try:
 
 
 
-    from extras.update import update_from_git
+    from extras.update import updateFromGit
     from src.core.parser.cmdline import api
 except KeyboardInterrupt:
     print("[CRITICAL] user aborted")
     raise SystemExit
 
 if api.updates:
-    update_from_git()
+    updateFromGit()
     raise SystemExit
 try:
     from src.logger.log import logger
-    from src.core.tester.gather import gather_exploit
+    from src.core.tester.gather import mainExploit
     from src.checker.checks import check_version
-    from extras.disclaimer import disclaimer
     try:
         from extras.logo import logo
     except:
@@ -92,7 +91,7 @@ def main():
         print(settings.LEGAL_DISCLAIMER_MSG)
         print("[*]starting @ %s"%settings.formatted_datetime)
         check_version()
-        gather_exploit()
+        mainExploit()
     
     except KeyboardInterrupt:
         logger.error("[CRITICAL] user aborted")

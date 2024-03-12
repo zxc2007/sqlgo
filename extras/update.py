@@ -23,7 +23,7 @@ import git
 import os
 from src.logger.log import logger
 
-def update_from_git():
+def updateFromGit():
     try:
         repository_url = "https://github.com/HeisenbergCipherCracker/sqlgo.git"
         local_path = os.getcwd()
