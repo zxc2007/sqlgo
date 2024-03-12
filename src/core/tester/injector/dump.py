@@ -40,6 +40,7 @@ except:
 	pass
 from src.data import arg
 from src.logger.log import logger
+from src.core.common.common import isHash
 #Reference: https://github.com/GreySec/MySQL-Injector/blob/master/mysql-injector.py
 ip = 1
 dump_array = []
@@ -526,6 +527,10 @@ def get_tables(database_id):
 		tables = table_list[database_id]
 		for key, value in tables.items():
 			logger.info("retrieved:"+str(key) + "\t" + value)
+			hashed,hashType = isHash(value)
+			if hashed:
+				logger.info("Value has been hashed Hashed: " + value + " (" + hashType + ")")
+
 
 	print()
 	temp_clear()
@@ -623,11 +628,11 @@ def get_columns(database_id):
 			column_id = int(column_id)
 			column_names.append(column_list[table_id][column_id])
 		
-		column_names = column_names
-		table_name = table
-		database_name = database_list[database_id]
+		column_names = iter(column_names)
+		table_name = iter(table)
+		database_name = iter(database_list[database_id])
 		
-		dump(column_names,table_name,database_name,database_id)	
+		dump(next(column_names),next(table_name),next(database_name),database_id)	
 
 def dumper(column_names,database_name,table_name,x):
 	

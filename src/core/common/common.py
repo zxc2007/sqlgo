@@ -27,12 +27,10 @@ import string
 import glob
 import os
 import re
-
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
-import json
-
+from src.core.enums.enums import Hashes
 
 
 class _IOFileReader(object):
@@ -209,4 +207,13 @@ def _wizardInterfaceSetup():
             arg.dump = True
             
 
-    
+def isHash(string):
+    """
+    A function determines whether the string retrieved from database is hashed or not
+    """
+    for hashType, length in Hashes.__members__.items():
+        if len(string) == length.value:
+            if re.match(r'^[a-fA-F0-9]+$', string):
+                return True, hashType
+    return False, ""
+

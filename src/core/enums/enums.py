@@ -71,3 +71,12 @@ class PAYLOAD_SENDING(object):
 
 class XssDataSending(object):
     SENDING = "[%sXSS%s]{}"%(Fore.RED,Fore.RESET)
+
+class Hashes(Enum):
+    MD5 = 32
+    SHA1 = 40
+    SHA224 = 56
+    SHA256 = 64
+    SHA384 = 96
+    SHA512 = 128
+    
