@@ -82,7 +82,7 @@ class Cmdline:
         Target.add_argument("--crawl",help="add crawling tests",action="store_true",required=False)
         General.add_argument("--shell", help="execute sqlgo in shell environment", required=False,action="store_true")
         General.add_argument("--update", help="update sqlgo", required=False,action="store_true")
-        General.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
+        Miscellaneous.add_argument("--beep", help="beep when vulnerability info appeared.", required=False,action="store_true")
         General.add_argument("--no-prompt", help="do not show user any prompt unless found important info.", required=False,action="store_true")
         Enumeration.add_argument("--username",help="Specify the DBMS username",required=False)
         Enumeration.add_argument("--password",help="Specify the DBMS password",required=False)
