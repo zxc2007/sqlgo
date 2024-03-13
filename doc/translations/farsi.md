@@ -40,7 +40,7 @@ python3 sqlgo.py --update
 
 **راه اندازی حمله**
 ```
-python3 sqlgo.py -u http://www.target-url?id=1 --پورت <شماره پورت> --سطح <سطح> --verbose <verbose> --tamper <tamper> --dbms<DBMS> --زباله
+python3 sqlgo.py -u http://www.target-url?id=1 --level <level> --verbose <verbose> --tamper <tamper> --dbms<DBMS> --dump
 ```
 # ویژگی های sqlgo
 1) از حملات SQL Injection علیه MySQL پشتیبانی می کند
