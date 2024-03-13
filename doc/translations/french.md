@@ -40,7 +40,7 @@ python3 sqlgo.py --update
 
 **Lancer une attaque**
 ```
-python3 sqlgo.py -u http://www.target-url?id=1 --port <numéro de port> --level <niveau> --verbose <verbose> --tamper <tamper> --dbms<SGBD> --décharge
+python3 sqlgo.py -u http://www.target-url?id=1 --port <numéro de port> --level <niveau> --verbose <verbose> --tamper <tamper> --dbms<SGBD> --dump
 ```
 # Fonctionnalités de sqlgo
 1) Prend en charge les attaques par injection SQL contre MySQL
