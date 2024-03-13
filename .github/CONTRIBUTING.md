@@ -12,4 +12,4 @@ Before you  report an issue, please search for similar issues (both closed and o
 
 
 # Submitting code changes
-If you wish to contribute, please DO NOT MAKE ANY CHANGES INTO THE REQUIREMENTS.TXT FILE UNLESS YOU HAVE AN EXTERNAL LIBRARIES USAGE INVOLVED WITHIN THE COMMIT.
+If you wish to contribute, please DO NOT MAKE ANY CHANGES INTO THE REQUIREMENTS.TXT FILE UNLESS YOU HAVE AN EXTERNAL LIBRARIES USAGE INVOLVED WITHIN THE COMMIT.Please do not make any changes to VERSION.PY and let the owner takeover it!
