@@ -88,4 +88,4 @@ TAMPER_SCRIPTS = [
 arg = AttrDict()
 config = AttrDict()
 datas = AttrDict()
-
+gen = AttrDict()

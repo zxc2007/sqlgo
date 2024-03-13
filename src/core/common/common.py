@@ -31,6 +31,7 @@ from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
 from src.core.enums.enums import Hashes
+from src.data import gen
 
 
 class _IOFileReader(object):
@@ -217,3 +218,39 @@ def isHash(string):
                 return True, hashType
     return False, ""
 
+def genDataInit():
+    """
+    Function that initiates the knowledge based attributes
+    """
+    gen.basePath = os.getcwd() + "/data"
+    gen.hashDir = gen.basePath + glob.glob("/txt/%s.txt" % gen.hashType)
+    gen.originHash = gen.basePath + "/txt/plainpassword.txt"
+
+
+def isListLike(value):
+    """
+    Checks if the value is list like
+    >>> isListLike([1, 2, 3])
+    True
+    """
+    return isinstance(value, (list, tuple, set))
+
+def findPlainPassword(hashed, hashType="md5"):
+    """
+    A function to perform rainbow attack on the hashed database passwords
+    >>> foo = findPlainPassword("5f4dcc3b5aa765d61d8327deb882cf99")
+    >>> foo
+    'password'
+    """
+    originFile = gen.hashDir
+    path = gen.hashDir
+
+    with open(path[0] if isListLike(path) else path, "r") as hashedFile:
+        with open(originFile, "r") as originFile:
+            for hashed_password in hashedFile:
+                hashed_password = hashed_password.strip()
+                plain_password = next(originFile).strip()
+                if hashed_password == hashed:
+                    return plain_password
+
+    return
