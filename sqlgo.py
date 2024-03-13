@@ -27,7 +27,8 @@ try:
     __import__("src.checker.modules")
 except ImportError:
     import sys
-    sys.exit("[!]wrong installation Detected,(missing thirdparty modules).please run python3 -m pip install -r requirements.txt")
+    import os
+    sys.exit("[!]wrong installation Detected,(missing thirdparty modules).please run {} -m pip install -r requirements.txt".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
 except KeyboardInterrupt:
     print("[CRITICAL] user aborted")
     raise SystemExit
