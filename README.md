@@ -60,3 +60,4 @@ bugs will be accepted if they exists and you can report it from the github page 
 **Persian Translation : https://github.com/HeisenbergCipherCracker/sqlgo/blob/main/doc/translations/farsi.md**
 
 **French translation : https://github.com/HeisenbergCipherCracker/sqlgo/blob/main/doc/translations/french.md**
+**Chinese Translation : https://github.com/HeisenbergCipherCracker/sqlgo/blob/main/doc/translations/chinese.md**
