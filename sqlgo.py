@@ -28,7 +28,7 @@ try:
 except ImportError:
     import sys
     import os
-    sys.exit("[!]wrong installation Detected,(missing thirdparty modules).please run {} -m pip install -r requirements.txt".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
+    sys.exit("[!]wrong installation Detected(missing thirdParty modules),please run \n{} -m pip install -r requirements.txt\n to install dependencies.".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
 except KeyboardInterrupt:
     print("[CRITICAL] user aborted")
     raise SystemExit
