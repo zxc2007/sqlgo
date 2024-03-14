@@ -115,6 +115,8 @@ def _listTamperingFunctions():
     print(infoMsg)
 
     for script in sorted(glob.glob(os.path.join(os.getcwd(), "tampers", "*.py"))):
+        if os.path.basename(script) == 'maintamper.py':
+            continue
         with open(script, "r") as file:
             content = file.read()
             match = re.search(r'(?s).+"""(.+)"""', content)
