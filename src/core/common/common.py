@@ -115,7 +115,7 @@ def _listTamperingFunctions():
     print(infoMsg)
 
     for script in sorted(glob.glob(os.path.join(os.getcwd(), "tampers", "*.py"))):
-        if os.path.basename(script) == 'maintamper.py':
+        if os.path.basename(script) == 'maintamper.py' or os.path.basename(script) == '__init__.py':
             continue
         with open(script, "r") as file:
             content = file.read()

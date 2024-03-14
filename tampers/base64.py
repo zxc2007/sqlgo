@@ -25,11 +25,15 @@ import src.core.setting.setting as settings
 from src.core.converts.base64 import b64encode
 
 def tamper(payload,**kwargs):
+    """
+    Converts payload to base64
+
+    >>> tamper("hello world")
+    b'aGVsbG8gd29ybGQ='
+    """
     if isinstance(payload,bytes):
         _payload = b64encode(payload)
         return _payload
     payload = payload.encode()
     _payload = b64encode(payload)
     return _payload
-
-# print(tamper("hello world"))
