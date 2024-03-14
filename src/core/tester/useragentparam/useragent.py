@@ -87,13 +87,7 @@ class Crawler:
         logger.warning(settings.CRAWLING_TESTS_SHOWS_THAT_PARAMETER_MIGHT_NOT_BE_INJECTABLE%settings.HTTP_HEADERS[1])
         logger.critical("Parameter was not found in the response.")
         return False
-    
-    
-    
-# Assuming the missing functions are defined somewhere in your project
 
-# obj = Crawler("http://altoro.testfire.net/index.jsp?content=jobs/20061023.htm")
-# obj.referer_parameter()
 
 try:
     _req = requests.get(arg.url)

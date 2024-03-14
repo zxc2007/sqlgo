@@ -75,11 +75,6 @@ except KeyboardInterrupt:
     print("[CRITICAL] user aborted")
     raise SystemExit
 
-try:
-    pass
-except:
-    pass
-
 warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
@@ -155,8 +150,3 @@ if __name__ == "__main__":
             os._exit(getattr(os, "_exitcode", 0))
         else:
             sys.exit(getattr(os, "_exitcode", 0))
-        
-            
-
-
-        
