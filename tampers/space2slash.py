@@ -24,6 +24,13 @@ import re
 
 
 def tamper(payload,**kwargs):
+    """
+    Replaces spaces with slashes
+
+    >>> tamper("SELECT * FROM users WHERE id = 1")
+    'SELECT/*/FROM/users/WHERE/id/1'
+
+    """
     _retval = None
     _pattern = re.compile(r"\s")
     payload = re.sub(_pattern,"/",payload)

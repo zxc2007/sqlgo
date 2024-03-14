@@ -25,6 +25,13 @@ import re
 import src.core.setting.setting as settings
 
 def tamper(payload,**kwargs):
+    """
+    Replaces spaces with spaces
+
+    >>> tamper("SELECT * FROM users WHERE id = 1")
+    'SELECT  *  FROM  users  WHERE  id  =  1'
+    """
+    _payload = None
     _payload = re.sub(r"\s", "      ", payload)
     return _payload
 
