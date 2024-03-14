@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-# SQLGO License - Version 1.1
+# SQLGO License - Version 1.3
 
 Copyright (C) 2023-2024 Heisenberg
 
