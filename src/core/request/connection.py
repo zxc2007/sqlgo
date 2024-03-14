@@ -40,7 +40,7 @@ except:
 
 def test_connection(url=arg.url, port=arg.port):
     logger.warning("Testing connection to the target URL: %s"%url)
-    req = requests.get(url)
+    req = requests.get(url,verify=False if arg.warningDisable else True)
     _ = req.status_code if hasattr(req, "status_code") else 200
     logger.debug("current status code of the response code is:|%s|"%_)
 

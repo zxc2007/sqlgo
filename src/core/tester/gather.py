@@ -86,7 +86,7 @@ def mainExploit():
     if arg.install_dep:
         install_dependent()
         raise SystemExit
-    if arg.warning_disable:
+    if arg.warningDisable:
         urllib3.disable_warnings()
     try:
         test_connection()

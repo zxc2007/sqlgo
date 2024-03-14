@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import socket
 import sys
 import time
-
+from src.data import arg
 class Get:
     def __init__(self, host, port):
         self.host = host
@@ -63,7 +63,7 @@ class Get:
     def using_requests(self):
         try:
             import requests
-            res = requests.get(self.host)
+            res = requests.get(self.host,verify=False if arg.warningDisable else True)
         except ImportError:
             sys.exit("[!]requests library is not installed,exiting...")
 

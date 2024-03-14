@@ -39,7 +39,7 @@ s = requests.session()
 
 def getAllForms(url):
     """Given a `url`, it returns all forms from the HTML content"""
-    soup = bs(requests.get(url).content, "html.parser")
+    soup = bs(requests.get(url,verify=False if arg.warningDisable else True).content, "html.parser")
     return soup.find_all("form")
 
 def getFormDetails(form):
@@ -82,14 +82,14 @@ def submitForm(form_details, url, value):
         
         if "https" not  in arg.url:
             target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
-        return requests.post(target_url, data=data)
+        return requests.post(target_url, data=data,verify=False if arg.warningDisable else True)
     else:
         if "http" not in arg.url:
             target_url = re.sub(r'^(?!http)(.+)', r'http://\1', target_url)
         
         if "https" not in arg.url:
             target_url = re.sub(r'^(?!https)(.+)', r'https://\1', target_url)
-        return requests.get(target_url, params=data)
+        return requests.get(target_url, params=data,verify=False if arg.warningDisable else True)
 
 def scan_xss(url):
     forms = getAllForms(url)

@@ -26,7 +26,7 @@ except:
 from bs4 import BeautifulSoup
 import os
 import sys
-
+from src.data import arg
 res = None
 
 from src.core.tester.vuln import *
@@ -43,11 +43,11 @@ def sqlInjectionBasicDetection(form_soup, form_details):
     
         if form_details["method"] == "post":
             try:
-                res = requests.post(form_details["action"], data=data)
+                res = requests.post(form_details["action"], data=data,verify=False if arg.warningDisable else True)
             except:
                 pass
         elif form_details["method"] == "get":
-            res = requests.get(form_details["action"], params=data)
+            res = requests.get(form_details["action"], params=data,verify=False if arg.warningDisable else True)
         
         if vulnerable(res):
             logger.warning("Basic tests show that the target might be injectable to SQL injection.")

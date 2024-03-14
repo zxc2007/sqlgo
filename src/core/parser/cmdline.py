@@ -315,7 +315,7 @@ try:
     arg.time_out = result[19]
     arg.attack = result[20]
     arg.install_dep = result[21]
-    arg.warning_disable = result[22]
+    arg.warningDisable = result[22]
     arg.payload = result[23]
     arg.proxy_server = result[24]
     arg.proxy_port = result[25]

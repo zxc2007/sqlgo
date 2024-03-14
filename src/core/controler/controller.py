@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
+import urllib3
 try:
     import urllib.request
 except:
@@ -68,6 +69,7 @@ def heuristic_injection_test_union_based(url):
     
     try:
         for _payload in union_payload().split("\n"):
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
             logger.info("testing %s"%Payload.UNION_ALL_SELECT.value)
             if not IDENTIFIED_COMMAND_INJECTION or MULTI_TARGETS:
                 payload = urllib.parse.quote(_payload)

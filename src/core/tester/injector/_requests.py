@@ -590,7 +590,7 @@ def error_based_url_replace(url):
     
             if "https" not  in _url:
                 _url = re.sub(r'^(?!https)(.+)', r'https://\1',url)
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.debug(response.text if verbose >= 5 else "")
@@ -660,7 +660,7 @@ def time_based_url_replace(url):
             _ = update_url(url,_payload)
 
             __url = _
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 3:
                 logger.debug(__url)
             if verbose > 5:
@@ -733,7 +733,7 @@ def make_set_url_replace(url):
                 logger.debug(__url)
             _payload = applyTamper(payload)
             print(PAYLOAD_SENDING.SENDING.format(_payload if verbose >= 3 else ""))
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
 
             if verbose > 5:
                 logger.debug("status code:%d"%response.status_code if verbose >= 5 else "")
@@ -803,7 +803,7 @@ def union_based_url_replace(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.UNION_ALL_SELECT.value+"\033[1mReplacing the url\033[0m")
@@ -874,7 +874,7 @@ def stack_query(url):
             __url = _
             if verbose > 3:
                 logger.debug(__url)
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.STACK_Q.value+"\033[1mReplacing the url\033[0m")
@@ -943,7 +943,7 @@ def error_boolean(url):
             __url = _
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 3:
                 logger.debug(__url)
             if verbose > 5:
@@ -1014,7 +1014,7 @@ def inline(url):
 
             if verbose > 3:
                 logger.debug(__url)
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.INLINE_Q.value+"\033[1mReplacing the url\033[0m")
@@ -1087,7 +1087,7 @@ def time_based_heavy_q(url):
             print(PAYLOAD_SENDING.SENDING%payload if verbose >= 3 else "")
 
             __url = _
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)
             logger.info("testing :%s"%Payload.TIME_BASED_HEAVY_Q.value+"\033[1m\033[0m")
@@ -1159,7 +1159,7 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
             print(PAYLOAD_SENDING.SENDING.format(sql if verbose >= 3 else ""))
 
             __url = _
-            response = requests.get(__url)
+            response = requests.get(__url,verify=False if arg.warningDisable else True)
             print(response.status_code)
             if verbose > 5:
                 logger.debug("status code %d"%response.status_code)

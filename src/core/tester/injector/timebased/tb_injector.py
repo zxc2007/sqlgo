@@ -110,9 +110,9 @@ def injection_test_is_vuln_time_based(url=arg.url):
         logger.debug(settings.TESTING_TIME_BASED_ADVANCED_AGAINST%url)
         logger.debug(settings.TESTING_TIME_BASED_PAYLOAD%payload)
         # Prevent the Error unable to access item 'headers'
-        requests.post(url, data=_payload)
-        requests.get(url, params=_payload)
-        requests.get(url)
+        requests.post(url, data=_payload,verify=False if arg.warningDisable else True)
+        requests.get(url, params=_payload,verify=False if arg.warningDisable else True)
+        requests.get(url,verify=False if arg.warningDisable else True)
         logger.info("testing %s"%P_type.TIME_BASED.value)
         if _inj[0] > settings.ADVANCED_TIME_BASED_TRESHOLD:
             logger.info(settings.ADVANCED_TESTS_SHOWS_THAT_TARGET_MIGHT_BE_INJECTABLE%(url,reset_tested_payload(_payload))+"\n Do you want to skip the further testing for the target %s (Y,n)?"%url)

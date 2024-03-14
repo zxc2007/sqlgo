@@ -68,9 +68,12 @@ try:
     import traceback
     import threading
     import os
+    import urllib3
     import sys
     import warnings
     from src.core.controler.checker import start
+    from src.data import arg
+
 except KeyboardInterrupt:
     print("[\033[91mCRITICAL\033[0m] user aborted")
     raise SystemExit
@@ -82,6 +85,8 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 def main():
     try:
+        if arg.warningDisable:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         setPaths(modulePath())
         print(logo)
         print(settings.LEGAL_DISCLAIMER_MSG)

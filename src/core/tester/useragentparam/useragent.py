@@ -90,7 +90,7 @@ class Crawler:
 
 
 try:
-    _req = requests.get(arg.url)
+    _req = requests.get(arg.url,verify=False if arg.warningDisable else True)
     if arg.url is not None:
         crawler = Crawler(arg.url)
     else:

@@ -30,6 +30,7 @@ except:
 
 from src.core.enums.devstatus import DevStatus
 from src.core.enums.priority import PRIORITY
+from src.data import arg
 
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.NORMAL
@@ -68,7 +69,7 @@ def extract_sentence_with_error(html_content, error_word):
 
 def extract_some_keyword(url):
 # Make a request to a website (replace the URL with your target URL)
-    response = requests.get(url)
+    response = requests.get(url,verify=False if arg.warningDisable else True)
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200 or True:
