@@ -30,7 +30,7 @@ except ImportError:
     import os
     sys.exit("[!]wrong installation Detected(missing thirdParty modules),please run: \n{} -m pip install -r requirements.txt\n to install dependencies.".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
 except KeyboardInterrupt:
-    print("[CRITICAL] user aborted")
+    print("[\033[91mCRITICAL\033[0m] user aborted")
     raise SystemExit
 try:
     from six.moves import range
@@ -46,7 +46,7 @@ try:
     from extras.update import updateFromGit
     from src.core.parser.cmdline import api
 except KeyboardInterrupt:
-    print("[CRITICAL] user aborted")
+    print("[\033[91mCRITICAL\033[0m]] user aborted")
     raise SystemExit
 
 if api.updates:
@@ -72,7 +72,7 @@ try:
     import warnings
     from src.core.controler.checker import start
 except KeyboardInterrupt:
-    print("[CRITICAL] user aborted")
+    print("[\033[91mCRITICAL\033[0m] user aborted")
     raise SystemExit
 
 warnings.filterwarnings("ignore", category=SyntaxWarning)
