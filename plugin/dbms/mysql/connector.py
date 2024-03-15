@@ -165,14 +165,3 @@ class Connector(GenericConnector):
 
         return retVal
 
-# conf.dbmsUser = ""
-# conf.dbmsPass = ""
-# conf.hostname = "testfire.net"
-# conf.port = 3306
-# conf.dbmsDb = ""
-# kb.timeout = 4
-
-# from sqlmap.lib.core.data import conf,kb
-
-# x = Connector()
-# x.connect()
