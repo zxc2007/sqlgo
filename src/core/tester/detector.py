@@ -55,5 +55,4 @@ def sqlInjectionBasicDetection(form_soup, form_details):
     
     return False
 
-# Example usage
 
