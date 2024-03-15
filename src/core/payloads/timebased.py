@@ -21,7 +21,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 def time_based_payload():
     payload = """
-# from wapiti
 sleep(5)#
 1 or sleep(5)#
 " or sleep(5)#
