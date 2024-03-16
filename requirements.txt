@@ -1,7 +1,7 @@
 bs4 
 termcolor
-pygame
 urllib3
+pydub
 charset_normalizer
 idna
 six

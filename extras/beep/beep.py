@@ -22,25 +22,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import time
 import os
 import sys
-from src.core.Exceptions.exceptions import SQLGOBeepSoundException
+import simpleaudio as sa
+import os
+import sys
+import platform
+from pydub import AudioSegment
+from pydub.playback import play
 
-import pygame
+
 
 def find_beep_wav():
     module_directory = os.path.dirname(os.path.abspath(__file__))
     beep_wav_path = os.path.join(module_directory, 'beep.wav')
     return beep_wav_path if os.path.exists(beep_wav_path) else None
 
-def beep():
-    pygame.mixer.init()
-    beep_wav_path = find_beep_wav()
 
-    if beep_wav_path:
-        sound = pygame.mixer.Sound(beep_wav_path)
-        sound.play()
-        time.sleep(0.5)  # Adjust the sleep time as needed
-    else:
-        raise SQLGOBeepSoundException
+def beep():
+    song = AudioSegment.from_wav(find_beep_wav())
+    play(song)
 
 if __name__ != '__main__':
     beep()
