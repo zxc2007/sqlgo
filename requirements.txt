@@ -1,13 +1,10 @@
 bs4 
 termcolor
 urllib3
-pydub
 charset_normalizer
 idna
-six
 requests
 GitPython>=3.1.26
 sqlmap>=1.8.0
-prettytable>=3.9.9
 colorama>=0.4.5
 six>=1.15.9
