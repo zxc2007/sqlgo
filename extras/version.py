@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-# SQLGO License - Version 1.3
+# SQLGO License - Version 1.4
 
 Copyright (C) 2023-2024 Heisenberg
 
@@ -19,6 +19,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-_VERSION = "1.3.19"
+_VERSION = "1.4.0"
 VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
 VERSION = _VERSION+VERSION_TYPE
