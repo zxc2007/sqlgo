@@ -33,5 +33,4 @@ import idna
 import six
 import git
 import sqlmap
-import prettytable
 import colorama
