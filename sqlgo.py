@@ -30,10 +30,13 @@ except ImportError:
     import os
     sys.exit("[!]wrong installation Detected(missing thirdParty modules),please run: \n{} -m pip install -r requirements.txt\n to install dependencies.".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
 except KeyboardInterrupt:
-    print("[\033[91mCRITICAL\033[0m] user aborted")
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
     raise SystemExit
 try:
     from six.moves import range
+except KeyboardInterrupt:
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
+    raise SystemExit
 except:
     pass
 try:
@@ -46,11 +49,14 @@ try:
     from extras.update import updateFromGit
     from src.core.parser.cmdline import api
 except KeyboardInterrupt:
-    print("[\033[91mCRITICAL\033[0m]] user aborted")
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
     raise SystemExit
-
-if api.updates:
-    updateFromGit()
+try:
+    if api.updates:
+        updateFromGit()
+        raise SystemExit
+except KeyboardInterrupt:
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
     raise SystemExit
 try:
     from src.logger.log import logger
@@ -75,10 +81,14 @@ try:
     from src.data import arg
 
 except KeyboardInterrupt:
-    print("[\033[91mCRITICAL\033[0m] user aborted")
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
     raise SystemExit
 
-warnings.filterwarnings("ignore", category=SyntaxWarning)
+try:
+    warnings.filterwarnings("ignore", category=SyntaxWarning)
+except KeyboardInterrupt:
+    print("[\033[48;5;124mCRITICAL\033[0m] user aborted")
+    raise SystemExit
 
 
 
@@ -98,7 +108,7 @@ def main():
         mainExploit()
     
     except KeyboardInterrupt:
-        logger.error("[CRITICAL] user aborted")
+        logger.critical("user aborted")
         raise SystemExit
     except Exception as _errmsg:
         errmsg = str(_errmsg)
