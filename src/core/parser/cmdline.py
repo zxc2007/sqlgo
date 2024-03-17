@@ -361,6 +361,9 @@ if arg.listTamper:
 if "--port" in sys.argv:
     print("[!] -p/--port is obsolete.")
     raise SystemExit
+if "--install-dependent" in sys.argv:
+    print("[!] --install-dependent is obsolete.")
+    raise SystemExit
 
 
 if update:
