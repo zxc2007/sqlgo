@@ -38,7 +38,7 @@ try:
     parameter = get_parameter()
 except:
     print("Usage: {} sqlgo.py [options]".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
-    logger.error("Missing mandatory arguments (-u/--url,--list-tamper,--update)")
+    logger.error("Missing mandatory arguments (-u/--url,--list-tamper,--update)\nExample usage: {} sqlgo.py -u http:/vulnweb.php?id=1 [other options]".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
     raise SystemExit
 
 
