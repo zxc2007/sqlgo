@@ -25,6 +25,7 @@ import time
 from utilis._regex.extractparam import replace_url_parameter
 from src.logger.log import logger
 from src.data import arg
+from extras.logo import logo
 
 def prompt_parameter(url=arg.url):
     _,param = replace_url_parameter(url,new_value=None)
@@ -37,6 +38,7 @@ def get_parameter(url=arg.url):
 try:
     parameter = get_parameter()
 except:
+    print(logo)
     print("Usage: {} sqlgo.py [options]".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
     logger.error("Missing mandatory arguments (-u/--url,--list-tamper,--update)\nExample usage: {} sqlgo.py -u http:/vulnweb.php?id=1 [other options]".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
     raise SystemExit
