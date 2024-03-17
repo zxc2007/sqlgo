@@ -24,6 +24,12 @@ import re
 
 
 def tamper(payload,**kwargs):
+    """
+    Replaces lowercase with uppercase
+
+    >>> tamper("SELECT * FROM users WHERE id = 1")
+    'SELECT * FROM users WHERE id = 1'
+    """
     _retval = None
     _pattern = re.compile(r"[a-z]")
     payload = re.sub(_pattern,lambda x: x.group().upper(),payload)
