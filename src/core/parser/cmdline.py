@@ -51,7 +51,7 @@ class Cmdline:
         General.add_argument("--verbose", action="store", help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
         General.add_argument("--version",action="version",version="SQLgo version: "+extras.version.VERSION)
         Target.add_argument("--url","-u",help="Give the program url of the target",required=False)
-        Target.add_argument("--port","-p",help="Specify the port for the injection",required=False,type=int,default=80)
+        Target.add_argument("--port","-p",help="Specify the port for the injection[This option has been obsolete]",required=False,type=int,default=80)
         Target.add_argument("--inspect","-insp",help="Inspect the target response",required=False)
         Enumeration.add_argument("--column","-C",help="Specify the database possible column",required=False)
         Enumeration.add_argument("--table","-T",help="Specify the database possible table",required=False)
