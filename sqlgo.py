@@ -84,6 +84,9 @@ warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 
 def main():
+    """
+    Main function and user side of SQLGO when calling the program from command line.
+    """
     try:
         if arg.warningDisable:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
