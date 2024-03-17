@@ -37,7 +37,8 @@ def get_parameter(url=arg.url):
 try:
     parameter = get_parameter()
 except:
-    logger.critical("No url has been set for sqlgo to test the injection")
+    print("Usage: {} sqlgo.py [options]".format("python"+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
+    logger.error("Missing mandatory arguments (-u/--url,--list-tamper,--update)")
     raise SystemExit
 
 
