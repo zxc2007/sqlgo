@@ -22,9 +22,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import git
 import os
 from src.logger.log import logger
+from extras.logo import logo
 
 def updateFromGit():
     try:
+        print(logo)
         repository_url = "https://github.com/HeisenbergCipherCracker/sqlgo.git"
         local_path = os.getcwd()
         logger.info("Updating to latest version from git...")
