@@ -78,9 +78,15 @@ def hex(input):
 	return codecs.encode(input.encode(), 'hex').decode()
 	
 def md5(xstr):
+	"""
+	A function that converts a string to md5 representation.
+	"""
 	return hashlib.md5(str(xstr).encode()).hexdigest()
 
 def save(table = ""):
+	"""
+	A function that saves the dump to a file.
+	"""
 	path = os.path.expanduser('~') + "/Desktop/" + table + ".txt"
 	while 1:
 		print()
@@ -99,6 +105,9 @@ def save(table = ""):
 			else:
 				path = "dumps"
 def debug(text,filename):
+	"""
+	A function that saves the dump to a file.
+	"""
 	return
 	path = os.path.expanduser('~') + "/Desktop/" + filename
 	handler = open(path, "a")
@@ -106,6 +115,9 @@ def debug(text,filename):
 	handler.close()
 
 def get_ip():
+	"""
+	A function that gets your ip address.
+	"""
 	try:
 		if ip:
 			ip_address = urllib.request.urlopen("http://canihazip.com/s").read()
@@ -116,6 +128,9 @@ def get_ip():
 		print(str(e))
 
 def confirm_proxy():
+	"""
+	A function that confirms if you have a proxy.
+	"""
 	if proxy:
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		result = s.connect_ex((socks5_host, socks5_port))
@@ -125,6 +140,9 @@ def confirm_proxy():
 			exit()
 			
 def get_link():
+	"""
+	A function that gets the link.
+	"""
 	global link
 	tmp = arg.url
 	if not tmp:
@@ -135,6 +153,9 @@ def get_link():
 	link = tmp
 			
 def obfuscate(xstr):
+	"""
+	A function that obfuscates the query.
+	"""
 	output = ""
 	xstr = xstr.replace(" ","%20")
 	return xstr
@@ -155,6 +176,9 @@ def webrequest(link, wait=30):
         return str(e)
 
 def xcolumns(cols, vuln = 0,query = "x", nullcolumn = 0):
+	"""
+	A function that enumerates the database columns.
+	"""
 	if vuln == 1:
 		payload = query
 	else:
@@ -207,6 +231,9 @@ def scan_column(payload,offset = 0):
 	return
 
 def inject(payload1,payload2 = "",itype = 0,save = 0):
+	"""
+	A function that injects the payload for dumping the databases.
+	"""
 
 	html = ""
 	
