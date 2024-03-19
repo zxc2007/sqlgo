@@ -22,6 +22,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import hashlib
 
 class Hash(object):
+    """
+    A class that defines hashing methods for string in order to bypass WAF/IPS and other security mechanisms.
+    Usage:
+    >>> foo = Hash("foo")
+    >>> foo.sha256()
+    'acbd18db4cc2f85cedef654fccc4a4d8'
+    >>> foo.md5()
+    '37b51d13a48edebd814e87b6b855b6f6'
+    >>> foo.sha1()
+    '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed'
+    >>> foo.sha224()
+    '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7'
+    >>> foo.sha384()
+    '9d0e1809716474cb086e2aa9ed0e91e80cfaf1cb771a4b1ae4ce2d951e0a7a8a413aa107ab7281a6c3d23e11ebcdb1cd4b8c0fc44b70e057f97cd982efe419'
+    """
     def __init__(self,plainText):
         self.plainText = plainText
     
