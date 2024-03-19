@@ -21,6 +21,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 class PRIORITY:
+    """
+    PRIORITY of the codes 
+    """
     VERY_LOW = -5
     LOW = -1
     NORMAL = 0
