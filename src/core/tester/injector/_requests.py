@@ -490,7 +490,7 @@ def postgre_sql_blind_injection(url):
 def user_agent_injection(url, vuln_parameter, payload):
     _responses = []
     def inject_user_agent(url, vuln_parameter, payload):
-        global _responses
+        nonlocal _responses
         logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"User-agent")
 
         request = urllib.request.Request(url)
@@ -534,7 +534,7 @@ def referer_injection(url, vuln_parameter, payload):
         logger.info(settings.REFERER_INJECTION)
     _responses = []
     def inject(url, vuln_parameter, payload):
-        global _responses
+        nonlocal _responses
         logger.info(settings.TESTING_IF_CRAWLING_PARAMETER_IS_INJECTABLE%"Referer")
 
         request = urllib.request.Request(url)
