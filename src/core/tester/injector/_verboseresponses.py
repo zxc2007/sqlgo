@@ -38,6 +38,9 @@ __priority__ = PRIORITY.NORMAL
 
 
 class Verbose:
+    """
+    This class and its unique method will define the verbose response handling, if the verbose response is enabled.
+    """
     @staticmethod
     def verbose_response():
         _verboses = Magiclist()

@@ -71,6 +71,9 @@ if proxy:
 	socket.socket = socks.socksocket
 
 def hex(input):
+	"""
+	A function that converts a string to hexadecimal representation.
+	"""
 	input = str(input)
 	return codecs.encode(input.encode(), 'hex').decode()
 	
