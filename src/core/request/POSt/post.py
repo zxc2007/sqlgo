@@ -31,6 +31,9 @@ from src.core.Exceptions.exceptions import SQLgoWrongUrlException
 from src.data import arg
 
 class SubData:
+    """
+    A class that defines the POST request crafting and sending.
+    """
     def __init__(self, host=arg.url, port=arg.port,timeout=arg.time_out):
         self.host = host
         self.port = port
