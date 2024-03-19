@@ -474,7 +474,6 @@ def postgre_sql_blind_injection(url):
 
 
 
-                # return form_in_response
 
         except ValueError:
             continue
