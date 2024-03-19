@@ -21,5 +21,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 def str_to_hex(hex_str):
+    """
+    A function that defines conversion from string to hex
+    >>> foo = str_to_hex("foo")
+    >>> foo
+    '666F6F'
+    """
     hex_representation = hex_str.encode().hex()
     return hex_representation
