@@ -78,6 +78,9 @@ from src.data import arg
 
 import urllib3
 def mainExploit():
+    """
+    Main exploit function for injection when calling the SQL injection techniques
+    """
     if "?" not in arg.url:
         cr_msg = "No get parameters has been set for injection test.\n example: https://test.php?id=1"
         logger.critical(cr_msg)
