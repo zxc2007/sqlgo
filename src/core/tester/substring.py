@@ -31,6 +31,9 @@ from src.core.enums.payloads import Payload
 from src.datastruc.keygendict import Keygendict
 
 def substring():
+    """
+    A function that stores the substring payloads in a dictionary and sends them
+    """
     try:
         _caps = Keygendict()
         _dmdg = None
