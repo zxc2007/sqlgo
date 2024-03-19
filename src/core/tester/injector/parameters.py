@@ -31,6 +31,11 @@ from src.core.enums.priority import PRIORITY
 __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
 def get_url_part(url):
+    """
+    A function that will find the URL part (scheme:[//host[:port]][/]path)
+    :param url:
+    :return: tuple containing scheme, host, port and path from the given URL
+    """
     # Find the URL part (scheme:[//host[:port]][/]path)
     o = urllib.parse.urlparse(url)
     url_part = o.scheme + "://" + o.netloc + o.path
