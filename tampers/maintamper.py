@@ -91,6 +91,9 @@ from src.data import arg
 from src.data import TAMPER_SCRIPTS
 
 def applyTamper(payload,**kwargs):
+    """
+    Apply tamper script, if any tamper called from cmdline will be executed here.
+    """
     if arg.randomTamper:
         arg.tamper = random.choice(TAMPER_SCRIPTS)
     if arg.tamper == "base64":
