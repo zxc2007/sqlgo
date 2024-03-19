@@ -60,6 +60,9 @@ from src.core.enums.enums import PAYLOAD_SENDING
 from src.core.payloads.errorb import error_based
 
 def heuristic_injection_test_union_based(url):
+    """
+    A function that defines the heuristic (basic) based test for union based sql injection detection.
+    """
     _verbose = 0
     payload = None
     _msg = None
@@ -114,6 +117,9 @@ def heuristic_injection_test_union_based(url):
         traceback.print_exc()
 
 def error_based_heuristic_tests(url):
+    """
+    A function that defines the heuristic (basic) based test for error based sql injection detection.
+    """
     _verbose = 0
     payload = None
     _msg = None
@@ -167,6 +173,9 @@ def error_based_heuristic_tests(url):
 
 
 def heuristic_time_based_tests(url):
+    """
+    A function that defines the heuristic (basic) based test for time based sql injection detection.
+    """
     _verbose = 0
     payload = None
     _msg = None
@@ -220,6 +229,9 @@ def heuristic_time_based_tests(url):
 
 
 def substring_heuristic_basic_injections(url):
+    """
+    A function that defines the heuristic (basic) based test for union based sql injection detection.
+    """
     _verbose = 0
     payload = None
     _msg = None
@@ -272,4 +284,3 @@ def substring_heuristic_basic_injections(url):
         traceback.print_exc()
 
 
-# heuristic_injection_test_union_based("http://testfire.net/index.jsp?content=business_deposit.htm")
