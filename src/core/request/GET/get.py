@@ -24,6 +24,9 @@ import sys
 import time
 from src.data import arg
 class Get:
+    """
+    A class that defines the GET request crafting and sending.
+    """
     def __init__(self, host, port):
         self.host = host
         self.port = port
