@@ -63,7 +63,7 @@ def substring():
                 _demerite +=1
             
             elif re.search(r"HAVING[^ ]+\Z",subber.response):
-                _dmdg = "Found HAVING for some values in html response."
+                _dmdg = "Found HAVING claus as response for some values in html response."
                 logger.debug(_dmdg)
                 _caps.add_cap(key="HAVINGcap%s%d"%(random.choice(string.ascii_letters),random.randint(0,100)))
                 _demerite +=1

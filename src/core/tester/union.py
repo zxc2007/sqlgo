@@ -33,6 +33,9 @@ import src.core.setting.setting as settings
 
 
 def union():
+    """
+    A function that defines basic union ALL SQL injection
+    """
     for payload in union_payload().split("\n"):
         try:
             _infomsg = None
