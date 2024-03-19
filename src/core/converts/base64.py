@@ -22,5 +22,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import binascii
 
 def b64encode(s):
+    """
+    A function that converts the string to base64
+    >>> foo = b64encode("foo")
+    >>> foo
+    'Zm9v'
+    """
     return binascii.b2a_base64(s)
 

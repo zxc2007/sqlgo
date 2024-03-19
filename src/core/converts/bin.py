@@ -20,5 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 def str_to_bin(string):
+    """
+    A function that converts the string to binary
+    >>> foo = str_to_bin("foo")
+    >>> foo
+    '01100100'
+    """
     binary_representation = ''.join(format(ord(char), '08b') for char in string)
     return binary_representation
