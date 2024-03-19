@@ -32,6 +32,14 @@ import re
 
 
 def update_url(url,value):
+    """
+    A function that updates the url with the new given query parameters for the SQL injection test
+    Usage:
+    >>> foo = update_url("http://example.com", "OR 1=1")
+    >>> foo
+    'http://example.com?OR 1=1'
+    
+    """
     try:
         parsed_url = urllib.parse.urlparse(url)
         query_params = urllib.parse.parse_qs(parsed_url.query)
