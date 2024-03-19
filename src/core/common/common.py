@@ -35,6 +35,9 @@ from src.data import gen
 
 
 class _IOFileReader(object):
+    """
+    A class that defines Basic setups for IOFileReader
+    """
     def __init__(self, to_write, to_read):
         self.__os = os
         self.__sys = sys
