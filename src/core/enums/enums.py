@@ -27,6 +27,9 @@ init()
 
 
 class DBMS(object):
+    """
+    Data base management systems
+    """
     ACCESS = "Microsoft Access"
     DB2 = "IBM DB2"
     FIREBIRD = "Firebird"
@@ -57,22 +60,30 @@ class DBMS(object):
     VIRTUOSO = "Virtuoso"
 
 class AUTOCOMPLETE_TYPE(object):
+    """
+    Auto-complete type
+    """
     SQL = 0
     OS = 1
     SQLMAP = 2
     API = 3
 
 class PAYLOAD_SENDING(object):
+    """
+    Payload sending message for payloads logging.
+    """
     timestamp = "[2024-02-03 11:52:14.337308]"
     parsed_time = datetime.strptime(timestamp, "[%Y-%m-%d %H:%M:%S.%f]")
     formatted_time = parsed_time.strftime("[%Y-%m-%d %H:%M]")
     SENDING = "%s[%sPAYLOAD%s] code:{}" % (formatted_time, Fore.BLUE, Fore.RESET)
 
 
-class XssDataSending(object):
-    SENDING = "[%sXSS%s]{}"%(Fore.RED,Fore.RESET)
+
 
 class Hashes(Enum):
+    """
+    Hash types
+    """
     MD5 = 32
     SHA1 = 40
     SHA224 = 56
