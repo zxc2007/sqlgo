@@ -413,7 +413,6 @@ def mysql_blind_based_injection(url):
                     
                     return _blind_based
 
-                # return form_in_response
 
         except ValueError:
             continue
