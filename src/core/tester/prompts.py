@@ -36,6 +36,9 @@ def prompt_parameter(url=arg.url):
     time.sleep(5)
 
 def get_parameter(url=arg.url):
+    """
+    A function that gets the parameter of the given url.
+    """
     _,param = replace_url_parameter(url,new_value=None)
     return param
 try:
