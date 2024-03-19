@@ -35,9 +35,11 @@ from src.data import arg
 from src.core.common.common import _listTamperingFunctions
 
 
-#TODO: add table adn column testing 
 
 class Cmdline:
+    """
+    A class that defines parsing cmdline options
+    """
     @staticmethod
     def parse():
         parser = argparse.ArgumentParser(description="sqlgo")
