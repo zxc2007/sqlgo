@@ -28,6 +28,9 @@ from src.data import arg
 from extras.logo import logo
 
 def prompt_parameter(url=arg.url):
+    """
+    A function that gets the parameter of the given url.
+    """
     _,param = replace_url_parameter(url,new_value=None)
     logger.info("testing if %s is injectable."%param)
     time.sleep(5)
