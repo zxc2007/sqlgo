@@ -307,9 +307,6 @@ def make_set_sql_injection(url,random_header=False):
 
 def union_based_injection(url):
     _ = 0
-    _tamreq = None
-    _tresponse = None
-    _retval = None
     _union_based = Tree("union_based")
     for __ in union_payload().split("\n"):
         try:
