@@ -47,10 +47,11 @@ class Cmdline:
         Detection = parser.add_argument_group("Detection")
         Injection = parser.add_argument_group('Injection')
         Enumeration = parser.add_argument_group("Enumeration")
-        Miscellaneous = parser.add_argument_group("Miscellaneous")
         General = parser.add_argument_group("General")
         BruteForce = parser.add_argument_group("BruteForce")
-        General.add_argument("-o", "--output", 
+        Miscellaneous = parser.add_argument_group("Miscellaneous")
+
+        Miscellaneous.add_argument("-o", "--output", 
                              help="Get output file as result",required=False)
         General.add_argument("--verbose", action="store",
                               help="Enable verbose mode and set the range of(default is 1)",type=int,required=False,default=1)
@@ -164,7 +165,7 @@ class Cmdline:
                             help="Use xss attack payloads while sending the requests",required=False,action="store_true")
         Enumeration.add_argument("--sql-query",
                                  help="Execute specific SQL queries",required=False,type=str)
-        Detection.add_argument("--random-tamper",
+        Injection.add_argument("--random-tamper",
                                help="Use a random tamper script each time",required=False,action="store_true")
         Miscellaneous.add_argument("--wizard",
                                    help="Use simple wizard interface for beginner users",required=False,action="store_true")
