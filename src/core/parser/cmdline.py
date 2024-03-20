@@ -49,6 +49,7 @@ class Cmdline:
         Enumeration = parser.add_argument_group("Enumeration")
         Miscellaneous = parser.add_argument_group("Miscellaneous")
         General = parser.add_argument_group("General")
+        BruteForce = parser.add_argument_group("BruteForce")
         General.add_argument("-o", "--output", 
                              help="Get output file as result",required=False)
         General.add_argument("--verbose", action="store",
@@ -139,11 +140,11 @@ class Cmdline:
                                  help="specify the DBMS possible username",required=False)
         Enumeration.add_argument("--dbms-pass",
                                  help="specify the DBMS possible password",required=False)
-        Target.add_argument("--hydra",
+        BruteForce.add_argument("--hydra",
                             help="use hydra for brute force attack",required=False,action="store_true")
-        Target.add_argument("--user-file",
+        BruteForce.add_argument("--user-file",
                             help="specify the username file for hydra",required=False)
-        Target.add_argument("--pass-file",
+        BruteForce.add_argument("--pass-file",
                             help="specify the password file for hydra",required=False)
         Target.add_argument("--delay-time",
                             help="specify the time of delay whenever found potential SQL injection vulnerability",required=False,type=int,default=10)
