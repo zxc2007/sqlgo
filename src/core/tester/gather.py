@@ -141,8 +141,8 @@ def mainExploit():
                 
             ]
             if arg.osExploit:
-                threads.append(cmdShellExploit())
-                threads.append(desAlterExploit())
+                cmdShellExploit(url=arg.url)
+                desAlterExploit(url=arg.url)
             if not arg.skipBasic:
                 threads.append(
                 union(),
