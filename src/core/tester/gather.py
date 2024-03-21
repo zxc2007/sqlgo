@@ -73,6 +73,8 @@ from src.core.tester.injector._requests import inline
 from src.core.tester.injector._requests import error_boolean
 from src.core.tester.injector._requests import time_based_heavy_q
 from src.core.tester.injector._requests import sqlQuery
+from src.core.tester.injector._requests import cmdShellExploit
+from src.core.tester.injector._requests import desAlterExploit
 from src.data import arg
 
 
@@ -138,6 +140,9 @@ def mainExploit():
                 sqlQuery()
                 
             ]
+            if arg.osExploit:
+                threads.append(cmdShellExploit())
+                threads.append(desAlterExploit())
             if not arg.skipBasic:
                 threads.append(
                 union(),

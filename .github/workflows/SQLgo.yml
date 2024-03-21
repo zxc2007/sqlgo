@@ -32,4 +32,4 @@ jobs:
 
       - name: Run Python script
         run: |
-          python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --level=5 --delay-time=1 --random-tamper --dump --batch --tables --skip-basic
+          python sqlgo.py -u http://testphp.vulnweb.com/search.php?test=query --level=5 --delay-time=1 --random-tamper --dump --batch --tables --skip-basic --os-exploit
