@@ -49,7 +49,10 @@ except:
 from tampers.maintamper import applyTamper
 
 def injection_test(payload, url, http_request_method="POST"):
-
+    """
+    A function that used to test if the target is vulnerable to time based injection
+    Usage : mainExploit function @ gather.py file
+    """
     start = 0
     end = 0
     start = time.monotonic()
@@ -96,6 +99,10 @@ def injection_test(payload, url, http_request_method="POST"):
 
 
 def injection_test_is_vuln_time_based(url=arg.url):
+    """
+    A function that used to test if the target is vulnerable to time based injection
+    Usage : mainExploit function @ gather.py file
+    """
     _retval = None
     _inj = None
     _imsg = None
@@ -130,6 +137,4 @@ def injection_test_is_vuln_time_based(url=arg.url):
                 pass
 
 
-# "http://testphp.vulnweb.com/artists.php?artist=1"
     
-# print(injection_test_is_vuln_time_based("http://testphp.vulnweb.com/artists.php?artist=1"))
