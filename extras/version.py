@@ -20,6 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 #Version: (Major,Minor,Monthly Patch,Patch count)
-_VERSION = "1.4.3.24"
+_VERSION = "1.4.3.25"
 VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
 VERSION = _VERSION+VERSION_TYPE

@@ -32,34 +32,66 @@ __status__ = DevStatus.READY_FOR_PRODUCTION_AND_USE
 __priority__ = PRIORITY.VERY_HIGH
 
 def make_set_injection_func():
+    """
+    A function that used to gather all MAKE SET injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = make_set_sql_injection(arg.url)
     return _
 
 def time_based_injection_func():
+    """
+    A function that used to gather all time based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = time_based_inejction(arg.url)
     return _
 
 def host_injection_func():
+    """
+    A function that used to gather all host based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = host_injection(arg.url)
     return _
 
 def error_based_INJECTION():
+    """
+    A function that used to gather all error based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = error_based_injection(arg.url)
     return _
 
 def union_based_injection_function():
+    """
+    A function that used to gather all union based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = union_based_injection(arg.url)
     return _
 
 def mysql_blind_based_function():
+    """
+    A function that used to gather all mysql blind based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = mysql_blind_based_injection(url=arg.url)
     return _
 
 def postgre_sql_function():
+    """
+    A function that used to gather all postgre blind based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     _ = postgre_sql_blind_injection(url=arg.url)
     return _
 
 def crawler_threads():
+    """
+    A function that used to gather all crawler based injection attacks
+    Usage: mainExploit function @ gather.py file
+    """
     for payload in time_based_payload().split("\n"):
         for line in settings.INJECTABLE_ARES_ON_THE_FORM:
             referer_injection(url=arg.url,payload=payload,vuln_parameter=line),
