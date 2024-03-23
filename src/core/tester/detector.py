@@ -32,6 +32,13 @@ res = None
 from src.core.tester.vuln import *
 from src.logger.log import logger
 def sqlInjectionBasicDetection(form_soup, form_details):
+    """
+    A function that performs basic tests to check if the target is vulnerable to SQL injection.
+    
+    :param form_soup: BeautifulSoup object containing the form.
+    :param form_details: Dictionary containing the form details.
+    :return: Boolean value indicating if the target is vulnerable to SQL injection.
+    """
     global res
     for i in "\"'":
         data = {}
