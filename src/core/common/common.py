@@ -37,6 +37,7 @@ from src.data import gen
 from colorama import Fore
 from colorama import init
 from colorama import Style
+import setting.setting as settings
 
 init()
 
@@ -273,9 +274,9 @@ def getWebPageEncoding(url):
         soup = BeautifulSoup(response.content, 'html.parser')
         meta_encoding = soup.find('meta', charset=True)
         if meta_encoding:
-            print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,meta_encoding['charset']))
+            print("[%s][%sINFO%s]Basic tests shows that Web page encoding: %s" % (settings.formatted_datetime,Fore.GREEN,Fore.RESET,meta_encoding['charset']))
             return meta_encoding['charset']
-        print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,response.encoding))
+        print("[%s][%sINFO%s]Basic tests shows that Web page encoding: %s" % (settings.formatted_datetime,Fore.GREEN,Fore.RESET,response.encoding))
         return response.encoding
     except requests.exceptions.RequestException as e:
         print(e)
