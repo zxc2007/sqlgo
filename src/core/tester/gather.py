@@ -75,6 +75,7 @@ from src.core.tester.injector._requests import time_based_heavy_q
 from src.core.tester.injector._requests import sqlQuery
 from src.core.tester.injector._requests import cmdShellExploit
 from src.core.tester.injector._requests import desAlterExploit
+from src.core.common.common import getWebPageEncoding
 from src.data import arg
 
 
@@ -97,6 +98,7 @@ def mainExploit():
         test_connection()
         extract_cookies()
         prompt_parameter()
+        getWebPageEncoding(arg.url)
         basic_threads = [
             heuristic_injection_test_union_based(arg.url),
             heuristic_time_based_tests(arg.url),
