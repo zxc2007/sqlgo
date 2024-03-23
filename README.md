@@ -28,7 +28,7 @@ python3 -m pip install-r requirements.txt
 **for unix based systems**
 
 # Usage of --beep option
-Note: python3.13 alpha will not support this feature!
+Note: python3.13 alpha will not support this feature! and we have been acknowledged that this options was not working peoperly on some devieces.
 if you wish to you use --beep option, you have to install the follwing libraries:
 
 simpleaudio
