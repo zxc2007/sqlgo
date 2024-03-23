@@ -37,6 +37,9 @@ except:
     from termcolor import colored
 
 class CustomColoredFormatter(logging.Formatter):
+    """
+    A class that defines custom colored formatter
+    """
     COLORS = {
         'DEBUG': 'cyan',
         'INFO': 'green',
