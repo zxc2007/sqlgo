@@ -267,6 +267,11 @@ def findPlainPassword(hashed, hashType="md5"):
     return
 
 def getWebPageEncoding(url):
+    """
+    A function to get the web page encoding
+    Usage:
+    >>> getWebPageEncoding(url)
+    """
     try:
         response = requests.get(url)
         response.raise_for_status()  
