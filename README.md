@@ -35,8 +35,10 @@ simpleaudio
 pydub
 
 you can run : 
+```
 python3 -m pip install -r extrarequirements.txt
-
+```
+# Options
 
 **Show the help menu**
 ```
