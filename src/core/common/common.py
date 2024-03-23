@@ -27,11 +27,14 @@ import string
 import glob
 import os
 import re
+from bs4 import BeautifulSoup
+import requests
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
 from src.core.enums.enums import Hashes
 from src.data import gen
+from src.logger.log import logger
 
 
 class _IOFileReader(object):
@@ -259,3 +262,16 @@ def findPlainPassword(hashed, hashType="md5"):
                     return plain_password
 
     return
+
+def getWebPageEncoding(url=arg.url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  
+        soup = BeautifulSoup(response.content, 'html.parser')
+        meta_encoding = soup.find('meta', charset=True)
+        if meta_encoding:
+            return meta_encoding['charset']
+        return response.encoding
+    except requests.exceptions.RequestException as e:
+        logger.error(e)
+        return 
