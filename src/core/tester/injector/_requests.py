@@ -622,7 +622,7 @@ def error_based_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"Error based SQl query"))
-                    logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "Nlo tamper usage")
+                    logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper usage")
                     logger.warning("Potential sql injection detected!!!")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
@@ -700,7 +700,7 @@ def time_based_url_replace(url):
                     if arg.beep:
                         __import__("extras.beep.beep")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"time based Sql query"))
-                    logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "Nlo tamper usage")
+                    logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper usage")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
