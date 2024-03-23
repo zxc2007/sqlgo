@@ -273,9 +273,9 @@ def getWebPageEncoding(url):
         soup = BeautifulSoup(response.content, 'html.parser')
         meta_encoding = soup.find('meta', charset=True)
         if meta_encoding:
-            print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,meta_encoding['charset']))
+            print("[%sINFO%s]Basic tests shows that Web page encoding is %s" % (Fore.GREEN,Fore.RESET,meta_encoding['charset']))
             return meta_encoding['charset']
-        print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,response.encoding))
+        print("[%sINFO%s]Basic tests shows that Web page encoding is %s" % (Fore.GREEN,Fore.RESET,response.encoding))
         return response.encoding
     except requests.exceptions.RequestException as e:
         print(e)
