@@ -34,8 +34,11 @@ from src.data import arg,config
 from src.core.enums.enums import DBMS
 from src.core.enums.enums import Hashes
 from src.data import gen
-from src.logger.log import logger
+from colorama import Fore
+from colorama import init
+from colorama import Style
 
+init()
 
 class _IOFileReader(object):
     """
@@ -263,15 +266,17 @@ def findPlainPassword(hashed, hashType="md5"):
 
     return
 
-def getWebPageEncoding(url=arg.url):
+def getWebPageEncoding(url):
     try:
         response = requests.get(url)
         response.raise_for_status()  
         soup = BeautifulSoup(response.content, 'html.parser')
         meta_encoding = soup.find('meta', charset=True)
         if meta_encoding:
+            print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,meta_encoding['charset']))
             return meta_encoding['charset']
+        print("[%sINFO%s]Basic tests shows that Web page encoding: %s" % (Fore.GREEN,Fore.RESET,response.encoding))
         return response.encoding
     except requests.exceptions.RequestException as e:
-        logger.error(e)
+        print(e)
         return 
