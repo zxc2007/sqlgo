@@ -1,5 +1,7 @@
 # sqlgo
 
+# Unlocking Data Safely with SQLGO: Your Shield Against Vulnerabilities!
+
 # What is sqlgo project?
 sqlgo is a tool which designed for SQL injection test for the educational targets,not illegal.remember: FOR ETHICAL USE ONLY!!!
 
