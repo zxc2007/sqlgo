@@ -27,7 +27,7 @@ python -m pip install -r requirements.txt
 python3 -m pip install-r requirements.txt
 **for unix based systems**
 
-**Usage of --beep option**
+# Usage of --beep option
 Note: python3.13 alpha will not support this feature!
 if you wish to you use --beep option, you have to install the follwing libraries:
 
