@@ -53,7 +53,7 @@ def tamper(payload, **kwargs):
     blanks = ("%09", "%0A", "%0C", "%0D")
     retVal = payload
 
-    if payload:
+    if payload and isinstance(payload, str):
         retVal = ""
         quote, doublequote, firstspace = False, False, False
 

@@ -37,7 +37,7 @@ def tamper(payload, **kwargs):
 
     retVal = ""
 
-    if payload:
+    if payload and isinstance(payload,str):
         for i in range(len(payload)):
             if payload[i].isspace():
                 retVal += "%23%0A"

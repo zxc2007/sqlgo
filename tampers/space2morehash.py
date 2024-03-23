@@ -1696,7 +1696,7 @@ def tamper(payload, **kwargs):
 
     retVal = ""
 
-    if payload:
+    if payload and isinstance(payload,str):
         payload = re.sub(r"(?<=\W)(?P<word>[A-Za-z_]+)(?=\W|\Z)", process, payload)
 
         for i in range(len(payload)):

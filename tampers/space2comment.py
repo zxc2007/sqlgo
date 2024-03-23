@@ -50,7 +50,7 @@ def tamper(payload):
 
     retVal = payload
 
-    if payload:
+    if payload and isinstance(payload,str):
         retVal = ""
         quote, doublequote, firstspace = False, False, False
 

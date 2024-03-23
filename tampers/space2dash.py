@@ -45,7 +45,7 @@ def tamper(payload, **kwargs):
 
     retVal = ""
 
-    if payload:
+    if payload and isinstance(payload,str):
         for i in range(len(payload)):
             if payload[i].isspace():
                 randomStr = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(random.randint(6, 12)))
