@@ -82,7 +82,12 @@ TAMPER_SCRIPTS = [
     "versionedmorekeywords",
     "space2morehash",
     "space2mssqlblank",
-    "space2hash"
+    "space2hash",
+    "caret",
+    "dollaratsigns",
+    "reverse",
+    "slash2env",
+    "sleep2timeout"
 ]
 
 arg = AttrDict()

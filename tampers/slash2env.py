@@ -19,7 +19,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-#Version: (Major,Minor,Monthly Patch,Patch count)
-_VERSION = "1.4.3.29"
-VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
-VERSION = _VERSION+VERSION_TYPE
+import re
+
+def tamper(payload,**kwargs):
+    """
+    Replaces / with ${PATH%%u*}
+
+    >>> tamper("SELECT * FROM users WHERE id = /")
+    'SELECT * FROM users WHERE id = ${PATH%%u*}'
+    """
+    retVal = payload
+    if re.search(r"/",payload):
+        return re.sub(r"/", "${PATH%%u*}", payload)
+
+    return retVal
+

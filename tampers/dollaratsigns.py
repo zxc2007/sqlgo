@@ -19,7 +19,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 """
-#Version: (Major,Minor,Monthly Patch,Patch count)
-_VERSION = "1.4.3.29"
-VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
-VERSION = _VERSION+VERSION_TYPE
+
+import re
+def tamper(payload):
+    """
+    Replaces $ signs with @ signs
+
+    >>> tamper("SELECT * FROM users WHERE id = $1")
+    'SELECT * FROM users WHERE id = @1'
+    """
+
+    return re.sub(r"\$", "@", payload)

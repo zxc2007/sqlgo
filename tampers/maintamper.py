@@ -83,6 +83,11 @@ import tampers.versionedmorekeywords
 import tampers.space2morehash
 import tampers.space2mssqlblank
 import tampers.space2hash
+import tampers.caret
+import tampers.dollaratsigns
+import tampers.reverse
+import tampers.slash2env
+import tampers.sleep2timeout
 from src.core.parser.cmdline import tamper as _tamper
 from src.data import arg
 from src.core.converts.bin import str_to_bin
@@ -214,6 +219,16 @@ def applyTamper(payload,**kwargs):
         return tampers.space2mssqlblank.tamper(payload)
     elif arg.tamper == "space2hash":
         return tampers.space2hash.tamper(payload)
+    elif arg.tamper == "reverse":
+        return tampers.reverse.tamper(payload)
+    elif arg.tamper == "slash2env":
+        return tampers.slash2env.tamper(payload)
+    elif arg.tamper == "sleep2timeout":
+        return tampers.sleep2timeout.tamper(payload)
+    elif arg.tamper == "caret":
+        return tampers.caret.tamper(payload)
+    elif arg.tamper == "dollaratsigns":
+        return tampers.dollaratsigns.tamper(payload)
     elif arg.binary:
         return str_to_bin(payload)
     elif arg.hexa:
