@@ -621,6 +621,7 @@ def error_based_url_replace(url):
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"Error based SQl query"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper usage")
                     logger.warning("Potential sql injection detected!!!")
@@ -628,6 +629,7 @@ def error_based_url_replace(url):
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
 
@@ -699,6 +701,7 @@ def time_based_url_replace(url):
                         time.sleep(delay_time)
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"time based Sql query"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper usage")
                     logger.warning("found potential sql injection on %s"%url)
@@ -706,6 +709,7 @@ def time_based_url_replace(url):
                     logger.warning("url: %s"%__url)
                     logger.debug("response : %s"%response_content)
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
 
@@ -767,6 +771,7 @@ def make_set_url_replace(url):
                 if is_sql_injection_vulnerable(response_content):
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"Make set mysql query"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper usage")
                     logger.warning("Potential sql injection detected!!!")
@@ -774,6 +779,7 @@ def make_set_url_replace(url):
                     logger.warning("payload:%s"%_payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds."%delay_time)
+                    print("-------------------------------------------------------------------------------------------")
                     sqlInjectionBasicDetection(form_in_response, form_details)
                     if arg.beep:
                         __import__("extras.beep.beep")
@@ -834,12 +840,14 @@ def union_based_url_replace(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"Union based(ALL SELECT) query"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "no tamper used")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
+                    print("-------------------------------------------------------------------------------------------")
                     logger.debug("response: %s"%response_content)
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
@@ -905,6 +913,7 @@ def stack_query(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,"SQl"+stack_query.__name__))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper was used")
                     logger.warning("found potential sql injection on %s"%url)
@@ -913,6 +922,7 @@ def stack_query(url):
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
                     conf.keyword = extract_some_keyword(__url)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.vuln = True
                     time.sleep(delay_time)
 
@@ -973,7 +983,9 @@ def error_boolean(url):
                     time.sleep(delay_time)
                 if is_sql_injection_vulnerable(response_content):
                     logger.warning("Potential sql injection detected!!!")
-                    __import__("extras.beep.beep")
+                    if arg.beep:
+                        __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s (GET) parameter is %s injectable"%(parameter,error_boolean.__name__+"SQl query"))
                     logger.warning("tamper : %s"%"No tamper used" if arg.tamper is not None else arg.tamper)
                     logger.warning("found potential sql injection on %s"%url)
@@ -981,6 +993,7 @@ def error_boolean(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
@@ -1045,6 +1058,7 @@ def inline(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s parameter is %s injectable"%(parameter,inline.__name__+"Sql query"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper used")
                     logger.warning("found potential sql injection on %s"%url)
@@ -1052,6 +1066,7 @@ def inline(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
@@ -1118,6 +1133,7 @@ def time_based_heavy_q(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper used")
                     logger.warning("found potential sql injection on %s"%url)
@@ -1125,6 +1141,7 @@ def time_based_heavy_q(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
@@ -1191,12 +1208,14 @@ def sqlQuery(sql=arg.sqlQuery,url=arg.url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%sql)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
@@ -1269,6 +1288,7 @@ def cmdShellExploit(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
+                    print("-------------------------------------------------------------------------------------------")
                     logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper used")
                     logger.warning("found potential sql injection on %s"%url)
@@ -1276,6 +1296,7 @@ def cmdShellExploit(url):
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
@@ -1346,13 +1367,15 @@ def desAlterExploit(url):
                     logger.warning("Potential sql injection detected!!!")
                     if arg.beep:
                         __import__("extras.beep.beep")
-                    logger.info("%s parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
+                    print("-------------------------------------------------------------------------------------------")
+                    logger.info("%s (GET) parameter is %s injectable"%(parameter,time_based_heavy_q.__name__+"eury"))
                     logger.warning("tamper : %s"%arg.tamper if arg.tamper is not None else "No tamper used")
                     logger.warning("found potential sql injection on %s"%url)
                     logger.warning("payload:%s"%payload)
                     logger.warning("url: %s"%__url)
                     logger.warning("program will be resume the injection after %d seconds"%delay_time)
                     logger.debug("response: %s"%response_content)
+                    print("-------------------------------------------------------------------------------------------")
                     conf.keyword = extract_some_keyword(__url)
                     conf.vuln = True
                     time.sleep(delay_time)
