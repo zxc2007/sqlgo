@@ -55,6 +55,3 @@ def tamper(payload, **kwargs):
         _retval = payload
         return _retval
     
-# test = "hello world this is ali talking to you all!"
-# print(f"Before tampering:{test}")
-# print ()
