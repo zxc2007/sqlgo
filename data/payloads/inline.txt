@@ -6,7 +6,6 @@
 
 (SELECT CONCAT('Fd7zGLnCk2JKcH9gJ',(ELT(2=8,1)),'UNION'))
 Jp9P8dvjU4Te2WVLg(?P<result>.*?)UNION
-dbms MySQL
 title PostgreSQL inline queries
 (SELECT 't9hRZpf7ay0XLKsAq'||(LWYbYlX)::text||'UNION')
 
