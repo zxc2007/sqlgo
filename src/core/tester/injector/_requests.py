@@ -800,8 +800,8 @@ def union_based_url_replace(url):
 
     for payload in union_payload().split("\n"):
         try:
-
-
+            if payload == "":
+                continue
             _payload = applyTamper(payload )
             print(PAYLOAD_SENDING.SENDING%_payload if verbose >= 3 else "")
 
