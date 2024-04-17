@@ -29,6 +29,8 @@ import os
 import re
 from bs4 import BeautifulSoup
 import requests
+import importlib.util as util
+
 from sqlmap.lib.core.common import setColor
 from src.data import arg,config
 from src.core.enums.enums import DBMS
@@ -285,3 +287,16 @@ def getWebPageEncoding(url):
     except requests.exceptions.RequestException as e:
         print(e)
         return 
+
+def checkForMissingDependencies():
+    """
+    A function that will check for optional missing dependencies.
+    """
+    optionalDependencies = {"simpleaudio":"Playing beep sound","pydub":"Playing beep sound"}
+    # NOTE: This list are made for the extra requirements, however it is not a common way to do that and this is done because there are not much optional dependencies 
+    for dependency,usage in optionalDependencies.items():
+        try:
+            __import__(dependency)
+        except ImportError:
+            print("Missing optional dependency: %s \n [USAGE] %s \n------------------>Installation: python %s" % (dependency,usage,+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
+            exit()
