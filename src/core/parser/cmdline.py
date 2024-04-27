@@ -32,7 +32,7 @@ import sys
 import extras.version
 from src.datastruc.attrdict import api
 from src.data import arg
-from src.core.common.common import _listTamperingFunctions
+from src.core.common.common import _listTamperingFunctions, checkForMissingDependencies
 
 
 
@@ -427,6 +427,11 @@ try:
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 
+
+if arg.dependencies:
+    checkForMissingDependencies()
+    raise SystemExit
+
 if arg.listTamper:
     _listTamperingFunctions()
     raise SystemExit
@@ -437,6 +442,8 @@ if "--port" in sys.argv:
 if "--install-dependent" in sys.argv:
     print("[!] --install-dependent is obsolete.")
     raise SystemExit
+
+
 
 
 if update:
