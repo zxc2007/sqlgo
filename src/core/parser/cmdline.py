@@ -32,7 +32,7 @@ import sys
 import extras.version
 from src.datastruc.attrdict import api
 from src.data import arg
-from src.core.common.common import _listTamperingFunctions
+from src.core.common.common import _listTamperingFunctions, checkForMissingDependencies
 
 
 
@@ -155,6 +155,8 @@ class Cmdline:
                             help="list all available tamper functions",action="store_true")
         Target.add_argument("--skip-basic",
                             help="skip basic tests",action="store_true",required=False)
+        General.add_argument("--dependencies",help="Check for the missing dependencies" 
+                             ,required=False,action="store_true")
         General.add_argument("--batch",
                              help="batch mode,never ask user for any input.",action="store_true",required=False)
         Target.add_argument("--bin",
@@ -244,6 +246,7 @@ def extract():
     schema = args.schema
     wizard = args.wizard
     os_exploit = args.os_exploit
+    dependencies = args.dependencies
     return (
         output,
         verbose,
@@ -303,7 +306,8 @@ def extract():
         random_tamper,
         schema,
         wizard,
-        os_exploit
+        os_exploit,
+        dependencies
     )
 
 
@@ -419,8 +423,14 @@ try:
     arg.schema = result[56]
     arg.wizard = result[57]
     arg.osExploit = result[58]
+    arg.dependencies = result[59]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
+
+
+if arg.dependencies:
+    checkForMissingDependencies()
+    raise SystemExit
 
 if arg.listTamper:
     _listTamperingFunctions()
@@ -432,6 +442,8 @@ if "--port" in sys.argv:
 if "--install-dependent" in sys.argv:
     print("[!] --install-dependent is obsolete.")
     raise SystemExit
+
+
 
 
 if update:

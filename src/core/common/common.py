@@ -298,5 +298,5 @@ def checkForMissingDependencies():
         try:
             __import__(dependency)
         except ImportError:
-            print("Missing optional dependency: %s \n [USAGE] %s \n------------------>Installation: python %s" % (dependency,usage,+str(sys.version_info.major)+"."+str(sys.version_info.minor)))
-            exit()
+            print(Fore.YELLOW+"Missing optional dependency: %s \n [USAGE] %s \n------------------>Installation: python3 -m pip install %s" % (dependency, usage, dependency))
+            raise SystemExit
