@@ -42,6 +42,8 @@ from colorama import Style
 
 init()
 
+#NOTE: You should not import src.log.logger here.(It will cause circular import)
+
 class _IOFileReader(object):
     """
     A class that defines Basic setups for IOFileReader
