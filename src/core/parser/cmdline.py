@@ -155,6 +155,8 @@ class Cmdline:
                             help="list all available tamper functions",action="store_true")
         Target.add_argument("--skip-basic",
                             help="skip basic tests",action="store_true",required=False)
+        General.add_argument("--dependencies",help="Check for the missing dependencies" 
+                             ,required=False,action="store_true")
         General.add_argument("--batch",
                              help="batch mode,never ask user for any input.",action="store_true",required=False)
         Target.add_argument("--bin",
