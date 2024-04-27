@@ -2,7 +2,7 @@
 """
 # SQLGO License - Version 1.4
 
-Copyright (C) 2023-2024 Heisenberg
+Copyright (C) 2023-2024 AliMirmohammad
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -47,12 +47,8 @@ def use_proxy(request, ignore_proxy=False, tor=False, tor_proxy=None, proxy=None
         return str(err_msg)
 
 
-# proxy_ip = "180.183.157.159"
-# proxy_port = 8080
+
 
 def set_proxy(ip,port):
     proxy_url = "http://%s:%d"%(ip,port)
     return proxy_url
-# result_use_general_proxy = use_proxy(your_request_object, proxy=proxy_url)
-# print("Result (Use General Proxy):", result_use_general_proxy)
-

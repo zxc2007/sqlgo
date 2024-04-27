@@ -2,7 +2,7 @@
 """
 # SQLGO License - Version 1.4
 
-Copyright (C) 2023-2024 Heisenberg
+Copyright (C) 2023-2024 AliMirmohammad
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -41,6 +41,8 @@ from colorama import init
 from colorama import Style
 
 init()
+
+#NOTE: You should not import src.log.logger here.(It will cause circular import)
 
 class _IOFileReader(object):
     """

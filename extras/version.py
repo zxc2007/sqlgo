@@ -2,7 +2,7 @@
 """
 # SQLGO License - Version 1.4
 
-Copyright (C) 2023-2024 Heisenberg
+Copyright (C) 2023-2024 AliMirmohammad
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,6 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
 #Version: (Major,Minor,Monthly Patch,Patch count)
-_VERSION = "1.4.4"
+_VERSION = "1.4.5"
 VERSION_TYPE = "#dev" if _VERSION.count('.') > 2 and _VERSION.split('.')[-1] != '0' else "#stable"
 VERSION = _VERSION+VERSION_TYPE
