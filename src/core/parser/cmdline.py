@@ -246,6 +246,7 @@ def extract():
     schema = args.schema
     wizard = args.wizard
     os_exploit = args.os_exploit
+    dependencies = args.dependencies
     return (
         output,
         verbose,
@@ -305,7 +306,8 @@ def extract():
         random_tamper,
         schema,
         wizard,
-        os_exploit
+        os_exploit,
+        dependencies
     )
 
 
@@ -421,6 +423,7 @@ try:
     arg.schema = result[56]
     arg.wizard = result[57]
     arg.osExploit = result[58]
+    arg.dependencies = result[59]
 except MemoryError:
     print("Could not allocate memory for the args namespace, exiting...")
 
