@@ -1,7 +1,7 @@
 """
 # SQLGO License - Version 1.3
 
-Copyright (C) 2023-2024 Heisenberg
+Copyright (C) 2023-2024 AliMirmohammad
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
